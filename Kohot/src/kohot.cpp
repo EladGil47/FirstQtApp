@@ -5,13 +5,9 @@
 
 #include <iostream>
 
-void Kohot::process() {
-	std::cout << WELCOME_MSG << std::endl << std::endl;
-	loadGroups();
-	GroupsManagerMenu groups_manager_menu(m_groups_collection);
-	groups_manager_menu.handle();
-	saveGroups();
-	std::cout << GOODBYE_MSG << std::endl;
+std::shared_ptr<GroupsCollection> Kohot::getGroupsCollection()
+{
+	return m_groups_collection;
 }
 
 void Kohot::loadGroups()

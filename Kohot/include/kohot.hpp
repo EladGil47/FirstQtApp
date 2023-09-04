@@ -2,25 +2,25 @@
 #define KOHOT_HPP
 
 #include "groups_collection.hpp"
-
 class Kohot
 {
 public:
-	void process();
-	std::string getWelcomeMsg()
-	{
-		return WELCOME_MSG;
-	}
 
+	std::shared_ptr<GroupsCollection> getGroupsCollection();
+
+	/**
+	 * @brief Load groups from GROUPS_FILE_PATH to m_groups_collection
+	 */
+	void loadGroups();
+
+	/**
+	 * @brief save m_groups_collection on GROUPS_FILE_PATH
+	 */
+	void saveGroups();
 
 private:
 	 const char* GROUPS_FILE_PATH = "Data/groups.json";
 	std::shared_ptr<GroupsCollection> m_groups_collection = std::make_shared<GroupsCollection>();
-	const std::string  WELCOME_MSG = " Welcome to Kohot : - ) ";
-    const std::string  GOODBYE_MSG = " Good bye : - ) ";
-     
-	 void loadGroups();
-	 void saveGroups();
 };
 
 #endif //KOHOT_HPP
