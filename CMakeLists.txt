@@ -21,7 +21,7 @@ find_package(Qt6 REQUIRED COMPONENTS Widgets)
 set(PROJECT_SOURCES
         main.cpp
         mainwindow.cpp
-        mainwindow.h
+        include/mainwindow.h
         QtFiles/mainwindow.ui
 )
 
@@ -33,7 +33,7 @@ Qt6::Widgets
 )
 target_include_directories(FirstQtApp PUBLIC 
 ${CMAKE_SOURCE_DIR}/QtFiles
-${CMAKE_SOURCE_DIR}
+${CMAKE_SOURCE_DIR}/include
 )
 
 set_target_properties(FirstQtApp PROPERTIES
