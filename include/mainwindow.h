@@ -3,7 +3,6 @@
 
 #include <QMainWindow>
 
-
 #include <QLabel>
 #include <QPushButton>
 #include <QVBoxLayout>
@@ -27,23 +26,20 @@ public:
 
     Kohot m_kohot;
     
-    QVBoxLayout *createMainLayout()
+    QVBoxLayout *createMainLayout();
+    void updateGroupListWidget()
     {
-        QVBoxLayout *mainLayout = new QVBoxLayout;
+         for (int i = 0; i < 50; ++i)
+        {
+            QPushButton *button = new QPushButton("Button " + QString::number(i + 1));
+            // Set text alignment to left
+            button->setStyleSheet("text-align: left;");
 
-        // Create the welcome label
-        QLabel *welcomeLabel = createWelcomeLabel();
-        mainLayout->addWidget(welcomeLabel);
+            QListWidgetItem *item = new QListWidgetItem(m_groupsListWidget);
+            m_groupsListWidget->addItem(item);
+            m_groupsListWidget->setItemWidget(item, button);
+        }
 
-        // Create the groups layout (Groups: label and QListWidget)
-        QVBoxLayout *groupsLayout = createGroupsLayout();
-        mainLayout->addLayout(groupsLayout);
-
-        // Create an horizontal layout for the button section (4 horizontal layouts)
-        QHBoxLayout *buttonSectionLayout = createButtonSectionLayout();
-        mainLayout->addLayout(buttonSectionLayout);
-
-        return mainLayout;
     }
 
     QVBoxLayout *createGroupsLayout()
@@ -51,12 +47,18 @@ public:
         QVBoxLayout *groupsLayout = new QVBoxLayout;
 
         // Create a QLabel for "Groups:"
-        QLabel *groupsLabel = new QLabel("Groups:", this);
+        QLabel *groupsLabel = new QLabel("Groups :", this);
         groupsLayout->addWidget(groupsLabel);
 
         // Create a QListWidget to hold the list of groups
-        QListWidget *groupsListWidget = new QListWidget(this);
-        groupsLayout->addWidget(groupsListWidget);
+        // QListWidget *m_groupsListWidget = new QListWidget(this);
+        groupsLayout->addWidget(m_groupsListWidget);
+
+        // *****************************************
+        // ON RUN TIME, I WANT IT FROM OUTSIDE
+        // Create and add QPushButton items to the QListWidget
+        updateGroupListWidget();
+        // *****************************************
 
         return groupsLayout;
     }
@@ -97,6 +99,8 @@ public:
 private:
     Ui::MainWindow *ui;
     QLabel *createWelcomeLabel();
+    QListWidget *m_groupsListWidget = new QListWidget(this);
+
 
 };
 #endif // MAINWINDOW_H

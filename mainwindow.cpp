@@ -23,17 +23,34 @@ MainWindow::MainWindow(QWidget *parent)
     setWindowTitle("Kohot");
     resize(800, 400);
 
-    // Create the main layout for the central widget
-    QVBoxLayout *mainLayout = createMainLayout();
-
     // Create a central widget to hold your layout
     QWidget *   centralWidget = new QWidget(this);
     setCentralWidget(centralWidget);
 
+    // Create the main layout for the central widget
+    QVBoxLayout *mainLayout = createMainLayout();
     // Add the main layout to the central widget
     centralWidget->setLayout(mainLayout);
 }
 
+QVBoxLayout *MainWindow::createMainLayout()
+{
+    QVBoxLayout *mainLayout = new QVBoxLayout;
+
+    // Create the welcome label
+    QLabel *welcomeLabel = createWelcomeLabel();
+    mainLayout->addWidget(welcomeLabel);
+
+    // Create the groups layout (Groups: label and QListWidget)
+    QVBoxLayout *groupsLayout = createGroupsLayout();
+    mainLayout->addLayout(groupsLayout);
+
+    // Create an horizontal layout for the button section (4 horizontal layouts)
+    QHBoxLayout *buttonSectionLayout = createButtonSectionLayout();
+    mainLayout->addLayout(buttonSectionLayout);
+
+    return mainLayout;
+}
 
 MainWindow::~MainWindow()
 {
