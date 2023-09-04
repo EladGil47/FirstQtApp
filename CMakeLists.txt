@@ -2,6 +2,9 @@ cmake_minimum_required(VERSION 3.5)
 
 project(FirstQtApp VERSION 0.1 LANGUAGES CXX)
 
+add_subdirectory(Kohot)
+
+
 # Determine the target architecture (32-bit or 64-bit)
 if (CMAKE_SIZEOF_VOID_P EQUAL 8)
     set(TARGET_ARCH "x64")  # 64-bit
@@ -28,8 +31,12 @@ set(PROJECT_SOURCES
 add_executable(FirstQtApp
         ${PROJECT_SOURCES})
 
+link_directories(
+    ${CMAKE_SOURCE_DIR}/Kohot)
+ 
 target_link_libraries(FirstQtApp PRIVATE 
 Qt6::Widgets
+KOHOT_LIB
 )
 target_include_directories(FirstQtApp PUBLIC 
 ${CMAKE_SOURCE_DIR}/QtFiles

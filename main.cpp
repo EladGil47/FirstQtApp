@@ -2,6 +2,8 @@
 
 #include <QApplication>
 
+// #include "kohot.hpp"
+
 
 int main(int argc, char *argv[])
 {
