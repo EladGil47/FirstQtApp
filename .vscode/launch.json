@@ -35,7 +35,7 @@
                 }
             ],
             // "preLaunchTask": "build",
-            "miDebuggerPath": "C:/TDM-GCC-64/bin/gdb.exe",
+            "miDebuggerPath": "c:/TDM-GCC-64/bin/gdb.exe",
             "serverLaunchTimeout": 5000,
             "visualizerFile": "c:\\Users\\madoritur\\AppData\\Roaming\\Code\\User\\workspaceStorage\\f51c50ec9b083d632c0b630bd9229ed2\\tonka3000.qtvsctools\\qt.natvis.xml"
         }
