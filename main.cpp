@@ -11,11 +11,14 @@ int main(int argc, char *argv[])
     std::shared_ptr<GroupsCollection> groups_collection = m_kohot.getGroupsCollection();
 
     QApplication a(argc, argv);
+
     MainWindow main_window(nullptr,groups_collection);
+    QObject::connect(&main_window, &QObject::destroyed, [&]() {
+    m_kohot.saveGroups();});
+
+
     main_window.show();
-
-
-    m_kohot.saveGroups();
+    
 
     return a.exec();
 }

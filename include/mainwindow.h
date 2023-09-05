@@ -46,9 +46,6 @@ private:
 public slots:
     void onCreateGroupButton();
     void onRemoveGroupButton(size_t id);
-
-
-   
-
+    void onEnterGroupButton(size_t id);
 };
 #endif // MAINWINDOW_H

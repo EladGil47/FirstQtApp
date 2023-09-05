@@ -25,6 +25,7 @@ set(PROJECT_SOURCES
         main.cpp
         mainwindow.cpp
         include/mainwindow.h
+        include/group_menu_window.h
         QtFiles/mainwindow.ui
 )
 

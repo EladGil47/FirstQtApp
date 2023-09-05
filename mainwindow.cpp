@@ -8,6 +8,8 @@
 
 #include <QInputDialog>
 
+#include "group_menu_window.h"
+
 MainWindow::MainWindow(QWidget *parent,std::shared_ptr<GroupsCollection> groups_collection): QMainWindow(parent), ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
@@ -29,18 +31,20 @@ void MainWindow::addGroupItemToList(std::shared_ptr<Group> group)
     listItemLayout->addWidget(group_name_label);
 
     // Create the enter group button
-    QPushButton *enter_button = new QPushButton("Enter");
-    enter_button->setStyleSheet("text-align: center;"
+    QPushButton *enter_group_button = new QPushButton("Enter");
+    enter_group_button->setStyleSheet("text-align: center;"
                                 "background-color: green;");
-    listItemLayout->addWidget(enter_button);
+    listItemLayout->addWidget(enter_group_button);
+    onEnterGroupButton(group->getId());
+
 
     listItemLayout->addSpacing(1);
 
     // Create the remove group button
-    QPushButton *remove_button = new QPushButton("Remove");
-    remove_button->setStyleSheet("text-align: center;""background-color: red;");
-    listItemLayout->addWidget(remove_button);
-    connect(remove_button, &QPushButton::clicked, this, [=]() {
+    QPushButton *remove_group_button = new QPushButton("Remove");
+    remove_group_button->setStyleSheet("text-align: center;""background-color: red;");
+    listItemLayout->addWidget(remove_group_button);
+    connect(remove_group_button, &QPushButton::clicked, this, [=]() {
     onRemoveGroupButton(group->getId());
 });
 
@@ -144,6 +148,17 @@ void MainWindow::onRemoveGroupButton(size_t id)
     {
         m_groups_collection->getItem(index)->setId(static_cast<uint16_t>(index));
     }
+}
+
+void MainWindow::onEnterGroupButton(size_t id)
+{
+
+    // Create and open the new window (assuming MyNewWindow is the name of your new window class)
+    // GroupMenuWindow *newWindow = new GroupMenuWindow;
+    // newWindow->show();
+    // hide();
+    // close();
+
 }
 
 QHBoxLayout *MainWindow::createButtonSectionLayout()
