@@ -35,7 +35,9 @@ void MainWindow::addGroupItemToList(std::shared_ptr<Group> group)
     enter_group_button->setStyleSheet("text-align: center;"
                                 "background-color: green;");
     listItemLayout->addWidget(enter_group_button);
-    onEnterGroupButton(group->getId());
+    connect(enter_group_button, &QPushButton::clicked, this, [=]() {
+     onEnterGroupButton(group->getId());
+});
 
 
     listItemLayout->addSpacing(1);
@@ -65,14 +67,26 @@ void MainWindow::createGroupListWidget()
 
 void MainWindow::setWindowContent()
 {
+    stackedWidget = new QStackedWidget(this);
+
+    // Create and set up MainWindow widget
+    QWidget *mainWindowWidget = new QWidget(this);
+    // Create and set up SecondWindow widget
+    GroupMenuWindow *secondWindowWidget = new GroupMenuWindow(this);
+
+    stackedWidget->addWidget(mainWindowWidget);
+
+
+    stackedWidget->addWidget(secondWindowWidget);
+
     // Create a central widget to hold your layout
-    QWidget *centralWidget = new QWidget(this);
-    setCentralWidget(centralWidget);
+    // QWidget *centralWidget = new QWidget(this);
+    setCentralWidget(stackedWidget);
 
     // Create the main layout for the central widget
     QVBoxLayout *mainLayout = createMainLayout();
     // Add the main layout to the central widget
-    centralWidget->setLayout(mainLayout);
+    mainWindowWidget->setLayout(mainLayout);
 }
 
 QVBoxLayout *MainWindow::createGroupsLayout()
@@ -152,7 +166,7 @@ void MainWindow::onRemoveGroupButton(size_t id)
 
 void MainWindow::onEnterGroupButton(size_t id)
 {
-
+     stackedWidget->setCurrentIndex(1);
     // Create and open the new window (assuming MyNewWindow is the name of your new window class)
     // GroupMenuWindow *newWindow = new GroupMenuWindow;
     // newWindow->show();

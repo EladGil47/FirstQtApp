@@ -8,6 +8,8 @@
 #include <QHBoxLayout>
 #include <QFont>
 #include <QListWidget>
+#include <QStackedWidget>
+
 
 #include <vector>
 #include <string>
@@ -42,6 +44,8 @@ private:
 
     void setWindowContent();
     std::shared_ptr<GroupsCollection> m_groups_collection;
+
+    QStackedWidget *stackedWidget;
 
 public slots:
     void onCreateGroupButton();
