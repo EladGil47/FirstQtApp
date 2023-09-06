@@ -3,23 +3,11 @@
 
 #include <QMainWindow>
 #include <QLabel>
-#include <QPushButton>
 #include <QVBoxLayout>
 #include <QHBoxLayout>
-#include <QFont>
 #include <QListWidget>
-#include <QStackedWidget>
 
-
-#include <vector>
-#include <string>
 #include "groups_collection.hpp"
-
-
-QT_BEGIN_NAMESPACE
-namespace Ui { class MainWindow; }
-QT_END_NAMESPACE
-
 class MainWindow : public QMainWindow
 {
     Q_OBJECT
@@ -29,31 +17,22 @@ public:
     ~MainWindow();
 
 private:
-    // Ui::MainWindow *ui;
+    void setWindowContent();
     void createMainLayout();
     void createWelcomeLabel();
     void createGroupsVerLayout();
-    QHBoxLayout *createButtonSectionLayout();
-    void createGroupListWidget();
-
+    void createButtonHorLayout();
     void addGroupItemToList(std::shared_ptr<Group> group);
 
-
-    QListWidget *m_groupsListWidget = new QListWidget(this);
-
-
-    void setWindowContent();
-    std::shared_ptr<GroupsCollection> m_groups_collection;
-
-    QStackedWidget * m_stacked_widget = new QStackedWidget(this);
     QWidget *m_main_window_widget = new QWidget(this);
     QVBoxLayout *m_main_layout = new QVBoxLayout;
-
-    QVBoxLayout *m_groups_ver_layout = new QVBoxLayout;
-
-
-
     QLabel *m_welcome_label = new QLabel("Welcome to kohot", this);
+    QVBoxLayout *m_groups_ver_layout = new QVBoxLayout;
+    QLabel *m_groups_label = new QLabel("Groups :", this);
+    QListWidget *m_groups_list_widget = new QListWidget(this);
+    QHBoxLayout *m_button_hor_layout = new QHBoxLayout;
+
+    std::shared_ptr<GroupsCollection> m_groups_collection;
 
 public slots:
     void onCreateGroupButton();
