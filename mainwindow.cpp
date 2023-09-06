@@ -10,8 +10,8 @@
 MainWindow::MainWindow(QWidget *parent,std::shared_ptr<GroupsCollection> groups_collection): QMainWindow(parent)
 {
     m_groups_collection = groups_collection;
-    setWindowTitle("Kohot");
-    resize(800, 400);
+    setWindowTitle(WINDOW_TITLE);
+    resize(WINDOW_WIDTH, WINDOW_HEIGHT);
     setWindowContent();
 }
 

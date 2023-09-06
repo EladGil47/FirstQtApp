@@ -8,6 +8,12 @@
 #include <QListWidget>
 
 #include "groups_collection.hpp"
+
+constexpr int WINDOW_WIDTH = 800;
+constexpr int WINDOW_HEIGHT = 400;
+const QString WINDOW_TITLE = "Kohot";
+
+
 class MainWindow : public QMainWindow
 {
     Q_OBJECT
@@ -33,6 +39,8 @@ private:
     QHBoxLayout *m_button_hor_layout = new QHBoxLayout;
 
     std::shared_ptr<GroupsCollection> m_groups_collection;
+
+
 
 public slots:
     void onCreateGroupButton();
