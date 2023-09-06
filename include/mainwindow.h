@@ -1,5 +1,5 @@
-#ifndef MAINWINDOW_H
-#define MAINWINDOW_H
+#ifndef FIRST_QT_APP_INCLUDE_MAINWINDOW_H
+#define FIRST_QT_APP_INCLUDE_MAINWINDOW_H
 
 #include <QMainWindow>
 #include <QLabel>
@@ -39,4 +39,4 @@ public slots:
     void onRemoveGroupButton(size_t id);
     void onEnterGroupButton(size_t id);
 };
-#endif // MAINWINDOW_H
+#endif // FIRST_QT_APP_INCLUDE_MAINWINDOW_H

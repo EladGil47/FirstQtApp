@@ -5,11 +5,10 @@
     "version": "0.2.0",
     "configurations": [
         {
-            "name": "AAA",
+            "name": "Run WithoutDebug",
             "type": "cppvsdbg",
             "request": "launch",
-            "program": "${workspaceFolder}/build/FirstQtApp.exe",
-            "args": [],
+            "program": "${workspaceFolder}/build/KohotQtApp.exe",
             "stopAtEntry": false,
             "cwd": "${workspaceFolder}",
             "environment": [],
@@ -17,27 +16,63 @@
             "visualizerFile": "c:\\Users\\madoritur\\AppData\\Roaming\\Code\\User\\workspaceStorage\\f51c50ec9b083d632c0b630bd9229ed2\\tonka3000.qtvsctools\\qt.natvis.xml"
         },
         {
-            "name": "Debug Qt Application",
+            "name": "Qt6 Debug",
             "type": "cppdbg",
             "request": "launch",
-            "program": "${workspaceFolder}/build/FirstQtApp.exe",
+            "program": "${workspaceFolder}/build/KohotQtApp.exe",
             "args": [],
-            "stopAtEntry": true,
+            "stopAtEntry": false,
             "cwd": "${workspaceFolder}",
             "environment": [],
-            "externalConsole": true,
+            "externalConsole": false,
             "MIMode": "gdb",
             "setupCommands": [
                 {
                     "description": "Enable pretty-printing for gdb",
                     "text": "-enable-pretty-printing",
                     "ignoreFailures": true
+                },
+                {
+                    "description": "Set Disassembly Flavor to Intel",
+                    "text": "-gdb-set disassembly-flavor intel",
+                    "ignoreFailures": true
                 }
             ],
-            // "preLaunchTask": "build",
-            "miDebuggerPath": "c:/TDM-GCC-64/bin/gdb.exe",
-            "serverLaunchTimeout": 5000,
             "visualizerFile": "c:\\Users\\madoritur\\AppData\\Roaming\\Code\\User\\workspaceStorage\\f51c50ec9b083d632c0b630bd9229ed2\\tonka3000.qtvsctools\\qt.natvis.xml"
-        }
+        },
+        // {
+        //     "name": "AAA",
+        //     "type": "cppvsdbg",
+        //     "request": "launch",
+        //     "program": "${workspaceFolder}/build/FirstQtApp.exe",
+        //     "args": [],
+        //     "stopAtEntry": false,
+        //     "cwd": "${workspaceFolder}",
+        //     "environment": [],
+        //     "console": "externalTerminal",
+        //     "visualizerFile": "c:\\Users\\madoritur\\AppData\\Roaming\\Code\\User\\workspaceStorage\\f51c50ec9b083d632c0b630bd9229ed2\\tonka3000.qtvsctools\\qt.natvis.xml"
+        // },
+        // {
+        //     "name": "Debug Qt Application",
+        //     "type": "cppdbg",
+        //     "request": "launch",
+        //     "program": "${workspaceFolder}/build/FirstQtApp.exe",
+        //     "args": [],
+        //     "stopAtEntry": true,
+        //     "cwd": "${workspaceFolder}",
+        //     "environment": [],
+        //     "externalConsole": true,
+        //     "MIMode": "gdb",
+        //     "setupCommands": [
+        //         {
+        //             "description": "Enable pretty-printing for gdb",
+        //             "text": "-enable-pretty-printing",
+        //             "ignoreFailures": true
+        //         }
+        //     ],
+        //     "miDebuggerPath": "c:/TDM-GCC-64/bin/gdb.exe",
+        //     "serverLaunchTimeout": 5000,
+        //     "visualizerFile": "c:\\Users\\madoritur\\AppData\\Roaming\\Code\\User\\workspaceStorage\\f51c50ec9b083d632c0b630bd9229ed2\\tonka3000.qtvsctools\\qt.natvis.xml"
+        // },
     ]
 }
