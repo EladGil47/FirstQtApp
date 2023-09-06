@@ -1,18 +1,13 @@
 #include "mainwindow.h"
-#include "QtFiles/ui_mainwindow.h"
-
-#include "kohot.hpp"
 
 #include <QLabel>
 #include <QVBoxLayout>
-
 #include <QInputDialog>
 
 #include "group_menu_window.h"
 
-MainWindow::MainWindow(QWidget *parent,std::shared_ptr<GroupsCollection> groups_collection): QMainWindow(parent), ui(new Ui::MainWindow)
+MainWindow::MainWindow(QWidget *parent,std::shared_ptr<GroupsCollection> groups_collection): QMainWindow(parent)
 {
-    ui->setupUi(this);
     m_groups_collection = groups_collection;
     setWindowTitle("Kohot");
     resize(800, 400);
@@ -68,25 +63,16 @@ void MainWindow::createGroupListWidget()
 void MainWindow::setWindowContent()
 {
     stackedWidget = new QStackedWidget(this);
+    setCentralWidget(stackedWidget);
 
-    // Create and set up MainWindow widget
     QWidget *mainWindowWidget = new QWidget(this);
-    // Create and set up SecondWindow widget
-    GroupMenuWindow *secondWindowWidget = new GroupMenuWindow(this);
-
+    QVBoxLayout *mainLayout = createMainLayout();
+    mainWindowWidget->setLayout(mainLayout);
     stackedWidget->addWidget(mainWindowWidget);
 
 
+    GroupMenuWindow *secondWindowWidget = new GroupMenuWindow(this);
     stackedWidget->addWidget(secondWindowWidget);
-
-    // Create a central widget to hold your layout
-    // QWidget *centralWidget = new QWidget(this);
-    setCentralWidget(stackedWidget);
-
-    // Create the main layout for the central widget
-    QVBoxLayout *mainLayout = createMainLayout();
-    // Add the main layout to the central widget
-    mainWindowWidget->setLayout(mainLayout);
 }
 
 QVBoxLayout *MainWindow::createGroupsLayout()
@@ -126,7 +112,7 @@ QVBoxLayout *MainWindow::createMainLayout()
 
 MainWindow::~MainWindow()
 {
-    delete ui;
+    // delete ui;
 }
 
 QLabel *MainWindow::createWelcomeLabel()

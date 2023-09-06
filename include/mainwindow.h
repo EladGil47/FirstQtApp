@@ -29,7 +29,7 @@ public:
     ~MainWindow();
 
 private:
-    Ui::MainWindow *ui;
+    // Ui::MainWindow *ui;
     QVBoxLayout *createMainLayout();
     QLabel *createWelcomeLabel();
     QVBoxLayout *createGroupsLayout();
