@@ -30,9 +30,9 @@ public:
 
 private:
     // Ui::MainWindow *ui;
-    QVBoxLayout *createMainLayout();
-    QLabel *createWelcomeLabel();
-    QVBoxLayout *createGroupsLayout();
+    void createMainLayout();
+    void createWelcomeLabel();
+    void createGroupsVerLayout();
     QHBoxLayout *createButtonSectionLayout();
     void createGroupListWidget();
 
@@ -45,7 +45,15 @@ private:
     void setWindowContent();
     std::shared_ptr<GroupsCollection> m_groups_collection;
 
-    QStackedWidget *stackedWidget;
+    QStackedWidget * m_stacked_widget = new QStackedWidget(this);
+    QWidget *m_main_window_widget = new QWidget(this);
+    QVBoxLayout *m_main_layout = new QVBoxLayout;
+
+    QVBoxLayout *m_groups_ver_layout = new QVBoxLayout;
+
+
+
+    QLabel *m_welcome_label = new QLabel("Welcome to kohot", this);
 
 public slots:
     void onCreateGroupButton();

@@ -62,66 +62,49 @@ void MainWindow::createGroupListWidget()
 
 void MainWindow::setWindowContent()
 {
-    stackedWidget = new QStackedWidget(this);
-    setCentralWidget(stackedWidget);
+    setCentralWidget(m_stacked_widget);
+    createMainLayout();
+    m_main_window_widget->setLayout(m_main_layout);
+    m_stacked_widget->addWidget(m_main_window_widget);
 
-    QWidget *mainWindowWidget = new QWidget(this);
-    QVBoxLayout *mainLayout = createMainLayout();
-    mainWindowWidget->setLayout(mainLayout);
-    stackedWidget->addWidget(mainWindowWidget);
-
-
-    GroupMenuWindow *secondWindowWidget = new GroupMenuWindow(this);
-    stackedWidget->addWidget(secondWindowWidget);
+    // GroupMenuWindow *secondWindowWidget = new GroupMenuWindow(this);
+    // m_stacked_widget->addWidget(secondWindowWidget);
 }
 
-QVBoxLayout *MainWindow::createGroupsLayout()
+void MainWindow::createGroupsVerLayout()
 {
-    QVBoxLayout *groupsLayout = new QVBoxLayout;
-
     // Create a QLabel for "Groups:"
     QLabel *groupsLabel = new QLabel("Groups :", this);
-    groupsLayout->addWidget(groupsLabel);
+    m_groups_ver_layout->addWidget(groupsLabel);
 
     // Create a QListWidget to hold the list of groups
-    groupsLayout->addWidget(m_groupsListWidget);
+    m_groups_ver_layout->addWidget(m_groupsListWidget);
 
     createGroupListWidget();
 
-    return groupsLayout;
 }
 
-QVBoxLayout *MainWindow::createMainLayout()
+void MainWindow::createMainLayout()
 {
-    QVBoxLayout *mainLayout = new QVBoxLayout;
+    createWelcomeLabel();
+    m_main_layout->addWidget(m_welcome_label);
 
-    // Create the welcome label
-    QLabel *welcomeLabel = createWelcomeLabel();
-    mainLayout->addWidget(welcomeLabel);
+    createGroupsVerLayout();
+    m_main_layout->addLayout(m_groups_ver_layout);
 
-    // Create the groups layout (Groups: label and QListWidget)
-    QVBoxLayout *groupsLayout = createGroupsLayout();
-    mainLayout->addLayout(groupsLayout);
-
-    // Create an horizontal layout for the button section (4 horizontal layouts)
     QHBoxLayout *buttonSectionLayout = createButtonSectionLayout();
-    mainLayout->addLayout(buttonSectionLayout);
+    m_main_layout->addLayout(buttonSectionLayout);
 
-    return mainLayout;
 }
 
 MainWindow::~MainWindow()
 {
-    // delete ui;
 }
 
-QLabel *MainWindow::createWelcomeLabel()
+void MainWindow::createWelcomeLabel()
 {
-    const QString WELCOME_TEXT = "Welcome to kohot";
-    QLabel *welcomeLabel = new QLabel(WELCOME_TEXT, this);
-    welcomeLabel->setAlignment(Qt::AlignHCenter);
-    welcomeLabel->setFont(QFont("Arial", 24, QFont::Bold));
-    return welcomeLabel;
+    m_welcome_label->setAlignment(Qt::AlignHCenter);
+    m_welcome_label->setFont(QFont("Arial", 24, QFont::Bold));
 }
 
 void MainWindow::onCreateGroupButton()
@@ -152,7 +135,7 @@ void MainWindow::onRemoveGroupButton(size_t id)
 
 void MainWindow::onEnterGroupButton(size_t id)
 {
-     stackedWidget->setCurrentIndex(1);
+     m_stacked_widget->setCurrentIndex(1);
     // Create and open the new window (assuming MyNewWindow is the name of your new window class)
     // GroupMenuWindow *newWindow = new GroupMenuWindow;
     // newWindow->show();

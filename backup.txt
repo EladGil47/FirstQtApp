@@ -72,8 +72,8 @@ public:
         mainLayout->addLayout(welcomeLayout.get());
 
         // // Create the groups layout (Groups: label and QListWidget)
-        // QVBoxLayout *groupsLayout = createGroupsLayout();
-        // mainLayout->addLayout(groupsLayout,4);
+        // QVBoxLayout *m_groups_ver_layout = createGroupsLayout();
+        // mainLayout->addLayout(m_groups_ver_layout,4);
 
         // // Create a vertical layout for the button section (4 horizontal layouts)
         // QVBoxLayout *buttonSectionLayout = createButtonSectionLayout();
@@ -84,34 +84,34 @@ public:
 
     std::shared_ptr<QLabel> createWelcomeLabel()
     {
-        std::shared_ptr welcomeLabel = std::make_shared<QLabel>("Welcome to My App!", this);
-        welcomeLabel->setAlignment(Qt::AlignHCenter);
-        welcomeLabel->setFont(QFont("Arial", 24, QFont::Bold)); // Set font and size
-        return welcomeLabel;
+        std::shared_ptr m_welcome_label = std::make_shared<QLabel>("Welcome to My App!", this);
+        m_welcome_label->setAlignment(Qt::AlignHCenter);
+        m_welcome_label->setFont(QFont("Arial", 24, QFont::Bold)); // Set font and size
+        return m_welcome_label;
 
     }
 
     std::shared_ptr<QVBoxLayout> createWelcomeLayout()
     {
         std::shared_ptr <QVBoxLayout> welcomeLayout = std::make_shared<QVBoxLayout>();
-        std::shared_ptr <QLabel> welcomeLabel = createWelcomeLabel();
-        welcomeLayout->addWidget(welcomeLabel.get());
+        std::shared_ptr <QLabel> m_welcome_label = createWelcomeLabel();
+        welcomeLayout->addWidget(m_welcome_label.get());
         return welcomeLayout;
     }
 
     QVBoxLayout *createGroupsLayout()
     {
-        QVBoxLayout *groupsLayout = new QVBoxLayout;
+        QVBoxLayout *m_groups_ver_layout = new QVBoxLayout;
 
         // Create a QLabel for "Groups:"
         QLabel *groupsLabel = new QLabel("Groups:", this);
-        groupsLayout->addWidget(groupsLabel);
+        m_groups_ver_layout->addWidget(groupsLabel);
 
         // Create a QListWidget to hold the list of groups
         QListWidget *groupsListWidget = new QListWidget(this);
-        groupsLayout->addWidget(groupsListWidget);
+        m_groups_ver_layout->addWidget(groupsListWidget);
 
-        return groupsLayout;
+        return m_groups_ver_layout;
     }
 
     QVBoxLayout *createButtonSectionLayout()
