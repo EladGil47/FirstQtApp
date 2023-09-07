@@ -58,7 +58,7 @@ void MainWindow::setWindowContent()
 {
     setCentralWidget(m_main_window_widget);
     createMainLayout();
-    m_main_window_widget->setLayout(m_main_layout);
+    m_main_window_widget->setLayout(m_main_window_layout);
 }
 
 void MainWindow::createGroupsVerLayout()
@@ -74,11 +74,11 @@ void MainWindow::createGroupsVerLayout()
 void MainWindow::createMainLayout()
 {
     createWelcomeLabel();
-    m_main_layout->addWidget(m_welcome_label);
+    m_main_window_layout->addWidget(m_welcome_label);
     createGroupsVerLayout();
-    m_main_layout->addLayout(m_groups_ver_layout);
+    m_main_window_layout->addLayout(m_groups_ver_layout);
     createButtonHorLayout();
-    m_main_layout->addLayout(m_button_hor_layout);
+    m_main_window_layout->addLayout(m_button_hor_layout);
 }
 
 void MainWindow::createWelcomeLabel()
@@ -125,6 +125,7 @@ void MainWindow::onRemoveGroupButton(size_t id)
 void MainWindow::onEnterGroupButton(size_t id)
 {
     hide();
-    GroupMenuWindow *m_group_menu_window = new GroupMenuWindow();
+    std::shared_ptr<Group> group = m_groups_collection->getItem(id);
+    GroupMenuWindow *m_group_menu_window = new GroupMenuWindow(this,group);
     m_group_menu_window->show();
 }

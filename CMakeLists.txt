@@ -15,6 +15,7 @@ find_package(Qt6 REQUIRED COMPONENTS Widgets)
 set(PROJECT_SOURCES
     main.cpp
     mainwindow.cpp
+    group_menu_window.cpp
     include/mainwindow.h
     include/group_menu_window.h
 )

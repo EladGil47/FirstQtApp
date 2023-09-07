@@ -9,9 +9,7 @@
 
 #include "groups_collection.hpp"
 
-constexpr int WINDOW_WIDTH = 800;
-constexpr int WINDOW_HEIGHT = 400;
-const QString WINDOW_TITLE = "Kohot";
+
 
 
 class MainWindow : public QMainWindow
@@ -21,6 +19,9 @@ class MainWindow : public QMainWindow
 public:
     MainWindow(QWidget *parent = nullptr,std::shared_ptr<GroupsCollection> groups_collection = nullptr);
     ~MainWindow();
+    const int WINDOW_WIDTH = 800;
+    const int WINDOW_HEIGHT = 400;
+    const QString WINDOW_TITLE = "Kohot";
 
 private:
     void setWindowContent();
@@ -31,7 +32,7 @@ private:
     void addGroupItemToList(std::shared_ptr<Group> group);
 
     QWidget *m_main_window_widget = new QWidget(this);
-    QVBoxLayout *m_main_layout = new QVBoxLayout;
+    QVBoxLayout *m_main_window_layout = new QVBoxLayout;
     QLabel *m_welcome_label = new QLabel("Welcome to kohot", this);
     QVBoxLayout *m_groups_ver_layout = new QVBoxLayout;
     QLabel *m_groups_label = new QLabel("Groups :", this);
@@ -46,5 +47,6 @@ public slots:
     void onCreateGroupButton();
     void onRemoveGroupButton(size_t id);
     void onEnterGroupButton(size_t id);
+
 };
 #endif // FIRST_QT_APP_INCLUDE_MAINWINDOW_H

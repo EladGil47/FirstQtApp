@@ -1,19 +1,40 @@
+#ifndef FIRST_QT_APP_INCLUDE_GROUP_MENU_WINDOW_H
+#define FIRST_QT_APP_INCLUDE_GROUP_MENU_WINDOW_H
+
 #include <QMainWindow>
 #include <QWidget>
 
-class GroupMenuWindow : public QMainWindow {
+#include "group.hpp"
+#include <memory>
+#include <iostream>
+
+#include "mainwindow.h"
+
+
+class GroupMenuWindow : public QMainWindow
+{
     Q_OBJECT
 
 public:
-    GroupMenuWindow(QWidget *parent = nullptr)
+    GroupMenuWindow(MainWindow *parent = nullptr, std::shared_ptr<Group> group = nullptr)
         : QMainWindow(parent)
     {
-        // Set window properties
-        setWindowTitle("My New Window");
-        resize(400, 300); // Set the initial size of the window
-
-        // Create a central widget to hold the contents of the window
-        QWidget *centralWidget = new QWidget(this);
-        setCentralWidget(centralWidget);
+        m_group = group;
+        setWindowTitle(parent->WINDOW_TITLE);
+        resize(parent->WINDOW_WIDTH, parent->WINDOW_HEIGHT);
+        setWindowContent();
     }
+
+private:
+    std::shared_ptr<Group> m_group;
+    QWidget *m_group_menu_window_widget = new QWidget(this);
+    QVBoxLayout *m_group_menu_ver_layout = new QVBoxLayout;
+
+
+    void createGroupMenuLayout();
+    // void createGroupNameLabel();
+
+    void setWindowContent();
 };
+
+#endif // FIRST_QT_APP_INCLUDE_GROUP_MENU_WINDOW_H
