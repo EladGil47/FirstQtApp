@@ -1,6 +1,6 @@
 #include "teams_creator.hpp"
 #include "players_sorter.hpp"
-#include "Team.hpp"
+#include "team.hpp"
 
 #include <iostream>
 
