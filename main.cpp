@@ -12,11 +12,11 @@ int main(int argc, char *argv[]) {
   kohot.loadGroups();
   std::shared_ptr<GroupsCollection> groups_collection = kohot.getGroupsCollection();
 
-  bool isConsoleApp = true;
+  bool isConsoleApp = false;
   if (isConsoleApp) 
   {
-    GroupsManagerMenu xxx(groups_collection);
-    xxx.handle();
+    GroupsManagerMenu groups_manager_menu(groups_collection);
+    ret_val = groups_manager_menu.handle() ? EXIT_SUCCESS : EXIT_FAILURE;
   }
   else 
   {
