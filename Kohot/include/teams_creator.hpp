@@ -4,7 +4,7 @@
 #include <vector>
 #include <memory>
 
-#include "Player.hpp"
+#include "player.hpp"
 
 class TeamsCreator 
 {
