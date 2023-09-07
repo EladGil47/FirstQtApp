@@ -136,7 +136,7 @@ bool GroupMenu::handle()
 		default:
 			break;
 		}
-		system("cls");
+		system("clear");
 	}
 	return m_exit_menus;
 }
