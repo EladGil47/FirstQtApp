@@ -35,7 +35,7 @@ uint16_t Menu::getChoiceFromUser()
 	displayMenu();
 
 	uint16_t ret_val = UserInteraction::getUint16FromUser("your choice", 1, static_cast<uint16_t>( m_options.size()));
-	system("cls");
+	system("clear");
 
 	return ret_val;
 
