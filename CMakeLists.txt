@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 3.5)
+cmake_minimum_required(VERSION 3.2)
 
 project(KohotQtApp VERSION 0.1 LANGUAGES CXX)
 
@@ -10,7 +10,12 @@ set(CMAKE_AUTORCC ON)
 
 set(CMAKE_CXX_STANDARD 17)
 
-find_package(Qt6 REQUIRED COMPONENTS Widgets)
+# Detect Qt 5 and Qt 6
+find_package(QT NAMES Qt6 Qt5 REQUIRED COMPONENTS Widgets)
+find_package(Qt${QT_VERSION_MAJOR} REQUIRED COMPONENTS Widgets)
+if(TARGET Qt${QT_VERSION_MAJOR}::Widgets)
+    message(STATUS "Qt 5 found at: ${Qt5_DIR}")
+endif()
 
 set(PROJECT_SOURCES
     main.cpp
@@ -25,7 +30,7 @@ add_executable(${PROJECT_NAME} ${PROJECT_SOURCES})
 link_directories(${CMAKE_SOURCE_DIR}/Kohot)
 
 target_link_libraries(${PROJECT_NAME} PRIVATE
-    Qt6::Widgets
+    Qt${QT_VERSION_MAJOR}::Widgets
     KOHOT_LIB
 )
 target_include_directories(${PROJECT_NAME} PUBLIC

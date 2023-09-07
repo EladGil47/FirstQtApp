@@ -39,7 +39,6 @@ include/user_interaction.hpp
 include/utility_functions.hpp)
 
 target_include_directories(KOHOT_LIB PUBLIC
-    D:/Packages/json-develop/include
     ${PROJECT_SOURCE_DIR}/include
 )
 
