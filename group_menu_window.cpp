@@ -1,7 +1,6 @@
 #include "group_menu_window.h"
 
 #include <QDebug>
-#include <QPushButton>
 
 
 void GroupMenuWindow::init() 

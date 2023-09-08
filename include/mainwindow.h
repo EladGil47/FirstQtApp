@@ -1,50 +1,34 @@
 #ifndef FIRST_QT_APP_INCLUDE_MAINWINDOW_H
 #define FIRST_QT_APP_INCLUDE_MAINWINDOW_H
 
-#include <QMainWindow>
-#include <QLabel>
-#include <QVBoxLayout>
-#include <QHBoxLayout>
-#include <QListWidget>
+#include <QPushButton>
 
 #include "groups_collection.hpp"
+#include "base_list_manager_window.h"
 
-
-
-
-class MainWindow : public QMainWindow
+class MainWindow : public BaseListManagerWindow
 {
     Q_OBJECT
 
 public:
     MainWindow(QWidget *parent = nullptr,std::shared_ptr<GroupsCollection> groups_collection = nullptr);
     ~MainWindow();
-    const int WINDOW_WIDTH = 800;
-    const int WINDOW_HEIGHT = 400;
-    const QString WINDOW_TITLE = "Kohot";
+
+    void init() override ;
 
 private:
-    void setWindowContent();
-    void createMainLayout();
-    void createWelcomeLabel();
-    void createGroupsVerLayout();
-    void createButtonHorLayout();
+    void setHeaderLabelText() override  ;
+    void setListViewerLabelText() override ;
+    void createButtonsHorLayout() override;
+
     void addGroupItemToList(std::shared_ptr<Group> group);
 
-    QWidget *m_main_window_widget = new QWidget(this);
-    QVBoxLayout *m_main_window_layout = new QVBoxLayout;
-    QLabel *m_welcome_label = new QLabel("Welcome to kohot", this);
-    QVBoxLayout *m_groups_ver_layout = new QVBoxLayout;
-    QLabel *m_groups_label = new QLabel("Groups :", this);
-    QListWidget *m_groups_list_widget = new QListWidget(this);
-    QHBoxLayout *m_button_hor_layout = new QHBoxLayout;
+    QPushButton *create_new_group_button = new QPushButton("Create new group",this);
 
     std::shared_ptr<GroupsCollection> m_groups_collection;
 
-
-
 public slots:
-    void onCreateGroupButton();
+    void onCreateNewGroupButton();
     void onRemoveGroupButton(size_t id);
     void onEnterGroupButton(size_t id);
 

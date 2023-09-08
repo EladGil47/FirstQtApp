@@ -2,24 +2,47 @@
 
 #include <QInputDialog>
 #include <QFont>
-#include <QPushButton>
 
 #include "group_menu_window.h"
 
-#include "base_list_manager_window.h"
-
-
-
-MainWindow::MainWindow(QWidget *parent,std::shared_ptr<GroupsCollection> groups_collection): QMainWindow(parent)
+MainWindow::MainWindow(QWidget *parent,std::shared_ptr<GroupsCollection> groups_collection):BaseListManagerWindow(parent)
 {
     m_groups_collection = groups_collection;
-    setWindowTitle(WINDOW_TITLE);
-    resize(WINDOW_WIDTH, WINDOW_HEIGHT);
-    setWindowContent();
 }
 
 MainWindow::~MainWindow()
 {
+}
+
+void MainWindow::init() 
+{
+    setHeaderLabelText();
+    setListViewerLabelText();
+    createButtonsHorLayout();
+    for (std::shared_ptr<Group> group : m_groups_collection->getCollectionRef())
+    {
+        addGroupItemToList(group);
+    }
+
+}
+
+void MainWindow::setHeaderLabelText() 
+{
+    QString text = QString::fromStdString("Welcome To Kohot"); 
+    m_header_label->setText(text);
+}
+
+void MainWindow::setListViewerLabelText()
+{
+    m_list_viewer_label->setText("Groups :");
+}
+
+void MainWindow::createButtonsHorLayout()
+{
+    m_buttons_hor_layout->addStretch(1);
+    m_buttons_hor_layout->addWidget(create_new_group_button, 2);
+    connect(create_new_group_button, &QPushButton::clicked, this, &MainWindow::onCreateNewGroupButton);
+    m_buttons_hor_layout->addStretch(1);
 }
 
 void MainWindow::addGroupItemToList(std::shared_ptr<Group> group)
@@ -52,54 +75,12 @@ void MainWindow::addGroupItemToList(std::shared_ptr<Group> group)
     connect(remove_group_button, &QPushButton::clicked, this, [=]()
             { onRemoveGroupButton(group->getId()); });
 
-    QListWidgetItem *item = new QListWidgetItem(m_groups_list_widget);
+    QListWidgetItem *item = new QListWidgetItem(m_list_viewer_widget);
     item->setSizeHint(list_item_widget->sizeHint());
-    m_groups_list_widget->setItemWidget(item, list_item_widget);
+    m_list_viewer_widget->setItemWidget(item, list_item_widget);
 }
 
-void MainWindow::setWindowContent()
-{
-    setCentralWidget(m_main_window_widget);
-    createMainLayout();
-    m_main_window_widget->setLayout(m_main_window_layout);
-}
-
-void MainWindow::createGroupsVerLayout()
-{
-    m_groups_ver_layout->addWidget(m_groups_label);
-    m_groups_ver_layout->addWidget(m_groups_list_widget);
-    for (std::shared_ptr<Group> group : m_groups_collection->getCollectionRef())
-    {
-        addGroupItemToList(group);
-    }
-}
-
-void MainWindow::createMainLayout()
-{
-    createWelcomeLabel();
-    m_main_window_layout->addWidget(m_welcome_label);
-    createGroupsVerLayout();
-    m_main_window_layout->addLayout(m_groups_ver_layout);
-    createButtonHorLayout();
-    m_main_window_layout->addLayout(m_button_hor_layout);
-}
-
-void MainWindow::createWelcomeLabel()
-{
-    m_welcome_label->setAlignment(Qt::AlignHCenter);
-    m_welcome_label->setFont(QFont("Arial", 24, QFont::Bold));
-}
-
-void MainWindow::createButtonHorLayout()
-{
-    m_button_hor_layout->addStretch(1);
-    QPushButton *create_new_group_button = new QPushButton("Create new group",this);
-    m_button_hor_layout->addWidget(create_new_group_button, 2);
-    connect(create_new_group_button, &QPushButton::clicked, this, &MainWindow::onCreateGroupButton);
-    m_button_hor_layout->addStretch(1);
-}
-
-void MainWindow::onCreateGroupButton()
+void MainWindow::onCreateNewGroupButton()
 {
     bool ok;
     QString userInput = QInputDialog::getText(this, "Create new group", "Enter group name:", QLineEdit::Normal, "", &ok);
@@ -117,7 +98,7 @@ void MainWindow::onCreateGroupButton()
 void MainWindow::onRemoveGroupButton(size_t id)
 {
     m_groups_collection->deleteItem(id);
-    QListWidgetItem *itemToRemove = m_groups_list_widget->takeItem(id);
+    QListWidgetItem *itemToRemove = m_list_viewer_widget->takeItem(id);
     delete itemToRemove;
     for (size_t index = id; index <  m_groups_collection->getSize(); index++)
     {
