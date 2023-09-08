@@ -6,6 +6,9 @@
 
 #include "group_menu_window.h"
 
+#include "base_list_manager_window.h"
+
+
 
 MainWindow::MainWindow(QWidget *parent,std::shared_ptr<GroupsCollection> groups_collection): QMainWindow(parent)
 {
@@ -127,5 +130,12 @@ void MainWindow::onEnterGroupButton(size_t id)
     hide();
     std::shared_ptr<Group> group = m_groups_collection->getItem(id);
     GroupMenuWindow *m_group_menu_window = new GroupMenuWindow(this,group);
+    m_group_menu_window->init();
+    // m_group_menu_window->setHeaderLabelText();
     m_group_menu_window->show();
+
+    // BaseListManagerWindow *m_group_menu_window = new BaseListManagerWindow(this);
+    // m_group_menu_window->show();
+
+    
 }

@@ -14,7 +14,7 @@ set(CMAKE_CXX_STANDARD 17)
 find_package(QT NAMES Qt6 Qt5 REQUIRED COMPONENTS Widgets)
 find_package(Qt${QT_VERSION_MAJOR} REQUIRED COMPONENTS Widgets)
 if(TARGET Qt${QT_VERSION_MAJOR}::Widgets)
-    message(STATUS "Qt 5 found at: ${Qt5_DIR}")
+    message(STATUS "Qt found at: ${Qt${QT_VERSION_MAJOR}_DIR}")
 endif()
 
 set(PROJECT_SOURCES
@@ -23,6 +23,9 @@ set(PROJECT_SOURCES
     group_menu_window.cpp
     include/mainwindow.h
     include/group_menu_window.h
+
+    base_list_manager_window.cpp
+    include/base_list_manager_window.h
 )
 
 add_executable(${PROJECT_NAME} ${PROJECT_SOURCES})
