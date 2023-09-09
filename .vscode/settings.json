@@ -67,6 +67,8 @@
         "typeinfo": "cpp",
         "valarray": "cpp",
         "variant": "cpp",
-        "qmainwindow": "cpp"
+        "qmainwindow": "cpp",
+        "source_location": "cpp",
+        "cinttypes": "cpp"
     }
 }

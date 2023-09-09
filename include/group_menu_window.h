@@ -19,7 +19,8 @@ public:
     GroupMenuWindow(MainWindow *parent = nullptr, std::shared_ptr<Group> group = nullptr)
         : BaseListManagerWindow(parent), m_group{group}
     {
-        resize(parent->width(),parent->height());
+        resize(parent->size());
+        move(parent->pos());
     }
     
     void init() override  ;

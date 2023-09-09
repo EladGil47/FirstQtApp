@@ -26,6 +26,9 @@ set(PROJECT_SOURCES
 
     base_list_manager_window.cpp
     include/base_list_manager_window.h
+
+    group_item_widget.cpp
+    include/group_item_widget.h
 )
 
 add_executable(${PROJECT_NAME} ${PROJECT_SOURCES})

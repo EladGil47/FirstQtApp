@@ -48,6 +48,8 @@ void GroupMenuWindow::onCreateNewPlayerButton()
 }
 void GroupMenuWindow::onGoBackButton()
 {
+    m_parent->resize(this->size());
+    m_parent->move(this->pos());
     hide();
     m_parent->show();
 }
