@@ -62,6 +62,8 @@ void BaseListManagerWindow::setListViewerVerLayout()
     QPalette palette;
     palette.setBrush(QPalette::Base, scaledBackground);
     m_list_viewer_widget->setPalette(palette);
+    m_list_viewer_widget->setStyleSheet("border: 2px solid black;");
+
 }
 
 

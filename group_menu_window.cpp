@@ -1,5 +1,8 @@
 #include "group_menu_window.h"
 
+#include "player_item_widget.h"
+
+
 #include <QDebug>
 
 GroupMenuWindow::GroupMenuWindow(std::shared_ptr<Group> group, MainWindow *parent)
@@ -70,37 +73,10 @@ void GroupMenuWindow::onGoBackButton()
 
 void GroupMenuWindow::addItemToList(std::shared_ptr<Player> player)
 {
-    QWidget *list_item_widget = new QWidget;
-    QHBoxLayout *player_list_item_layout = new QHBoxLayout(list_item_widget);
-
-    // Create the player_name label
-    QString player_name = QString::fromStdString(player->getName());
-    QLabel *player_name_label = new QLabel(player_name, this);
-    player_name_label->setAlignment(Qt::AlignLeft);
-    player_name_label->setFont(QFont("Arial", 16, QFont::Bold));
-    player_list_item_layout->addWidget(player_name_label);
-
-    // Create the enter player button
-    QPushButton *enter_button = new QPushButton("Enter");
-    enter_button->setStyleSheet("text-align: center;"
-                                      "background-color: green;");
-    player_list_item_layout->addWidget(enter_button);
-    connect(enter_button, &QPushButton::clicked, this, [=]()
-            { onEnterButton(player->getId()); });
-
-    player_list_item_layout->addSpacing(1);
-
-    // Create the remove player button
-    QPushButton *remove_button = new QPushButton("Remove");
-    remove_button->setStyleSheet("text-align: center;"
-                                       "background-color: red;");
-    player_list_item_layout->addWidget(remove_button);
-    connect(remove_button, &QPushButton::clicked, this, [=]()
-            { onRemoveButton(player->getId()); });
-
+    PlayerItemWidget * player_item_widget = new PlayerItemWidget(player,this);
     QListWidgetItem *item = new QListWidgetItem(m_list_viewer_widget);
-    item->setSizeHint(list_item_widget->sizeHint());
-    m_list_viewer_widget->setItemWidget(item, list_item_widget);
+    item->setSizeHint(player_item_widget->sizeHint());
+    m_list_viewer_widget->setItemWidget(item, player_item_widget);
 }
 
 void GroupMenuWindow::onRemoveButton(size_t id)

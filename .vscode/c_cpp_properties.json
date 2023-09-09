@@ -1,26 +1,27 @@
 {
     "configurations": [
-        {
-            "name": "Win32",
-            "includePath": [
-                "${workspaceFolder}/**"
-            ],
-            "defines": [
-                "_DEBUG",
-                "UNICODE",
-                "_UNICODE"
-            ],
-            "windowsSdkVersion": "10.0.19041.0",
-            "compilerPath": "cl.exe",
-            "cStandard": "c17",
-            "cppStandard": "c++17",
-            "intelliSenseMode": "windows-msvc-x64",
-            "configurationProvider": "ms-vscode.cmake-tools"
-        },
+        // {
+        //     "name": "Win32",
+        //     "includePath": [
+        //         "${workspaceFolder}/**"
+        //     ],
+        //     "defines": [
+        //         "_DEBUG",
+        //         "UNICODE",
+        //         "_UNICODE"
+        //     ],
+        //     "windowsSdkVersion": "10.0.19041.0",
+        //     "compilerPath": "cl.exe",
+        //     "cStandard": "c17",
+        //     "cppStandard": "c++17",
+        //     "intelliSenseMode": "windows-msvc-x64",
+        //     "configurationProvider": "ms-vscode.cmake-tools"
+        // },
         {
             "name": "cmake",
             "includePath": [
-                "${workspaceFolder}/**"
+                "${workspaceFolder}/**",
+                "C:/Qt/6.5.2/msvc2019_64/include"
             ],
             "defines": [
                 "_DEBUG",
@@ -32,6 +33,28 @@
             "cStandard": "c17",
             "cppStandard": "c++17",
             "intelliSenseMode": "windows-msvc-x64"
+        },
+        {
+            "name": "Win32",
+            "includePath": [
+                "${workspaceFolder}/**", // Include all project files
+                "C:/Qt/6.5.2/msvc2019_64/include" // Path to Qt include files
+                // Add any other include paths you need here
+            ],
+            "defines": [],
+            "compilerPath": "C:/MinGW/bin/make.exe", // Path to your C++ compiler (e.g., MinGW or MSVC)
+            "cStandard": "c11",
+            "cppStandard": "c++17",
+            "intelliSenseMode": "gcc-x64",
+            "browse": {
+                "path": [
+                    "${workspaceFolder}",
+                    "C:/Qt/6.5.2/msvc2019_64/include" // Qt include files for IntelliSense
+                    // Add any other paths you need for IntelliSense here
+                ],
+                "limitSymbolsToIncludedHeaders": true,
+                "databaseFilename": ""
+            }
         }
     ],
     "version": 4

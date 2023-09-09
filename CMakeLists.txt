@@ -29,6 +29,9 @@ set(PROJECT_SOURCES
 
     group_item_widget.cpp
     include/group_item_widget.h
+
+    player_item_widget.cpp
+     include/player_item_widget.h
 )
 
 add_executable(${PROJECT_NAME} ${PROJECT_SOURCES})

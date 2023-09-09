@@ -6,6 +6,7 @@
 #include "groups_collection.hpp"
 #include "base_list_manager_window.h"
 
+
 class MainWindow : public BaseListManagerWindow
 {
     Q_OBJECT
@@ -26,6 +27,7 @@ private:
     QPushButton *m_create_new_group_button = new QPushButton("Create new group",this);
 
     std::shared_ptr<GroupsCollection> m_groups_collection;
+
 
 public slots:
     void onCreateNewGroupButton();

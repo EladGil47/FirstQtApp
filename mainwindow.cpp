@@ -48,8 +48,12 @@ void MainWindow::createButtonsHorLayout()
 }
 
 void MainWindow::addGroupItemToList(std::shared_ptr<Group> group)
-{
+{   
     GroupItemWidget * group_item_widget = new GroupItemWidget(group,this);
+
+    // QWidget *xxx = new QWidget (group_item_widget);
+    // xxx->setStyleSheet("border: 3px solid black;");
+
     QListWidgetItem *item = new QListWidgetItem(m_list_viewer_widget);
     item->setSizeHint(group_item_widget->sizeHint());
     m_list_viewer_widget->setItemWidget(item, group_item_widget);

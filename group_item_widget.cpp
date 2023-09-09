@@ -1,16 +1,18 @@
 
 #include "group_item_widget.h"
-#include <QHBoxLayout>
 
 GroupItemWidget::GroupItemWidget(std::shared_ptr<Group> group, MainWindow *parent)
-    : QWidget(parent), m_group(group) , m_main_window(parent)
+    :  m_group(group) , m_main_window(parent)
 {
-    setStyleSheet("border: 2px solid black;");
-    setNameLabel();
-    setSizeLabel();
-    setEnterButton();
-    setRemoveButton();
-    setupLayout();
+    if (group != nullptr)
+    {
+        setNameLabel();
+        setSizeLabel();
+        setEnterButton();
+        setRemoveButton();
+        setItemHorLayout();
+    }
+
 }
 
 void GroupItemWidget::setNameLabel()
@@ -55,11 +57,11 @@ void GroupItemWidget::setRemoveButton()
             { m_main_window->onRemoveGroupButton(group_id); });
 }
 
-void GroupItemWidget::setupLayout()
+void GroupItemWidget::setItemHorLayout()
 {
-    QHBoxLayout *layout = new QHBoxLayout(this);
-    layout->addWidget(m_name_label, 1);
-    layout->addWidget(m_size_label, 4);
-    layout->addWidget(m_enter_button, 1);
-    layout->addWidget(m_remove_button, 1);
+    m_item_hor_layout = new QHBoxLayout(this);
+    m_item_hor_layout->addWidget(m_name_label, 1);
+    m_item_hor_layout->addWidget(m_size_label, 4);
+    m_item_hor_layout->addWidget(m_enter_button, 1);
+    m_item_hor_layout->addWidget(m_remove_button, 1);
 }
