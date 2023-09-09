@@ -16,12 +16,8 @@ class GroupMenuWindow : public BaseListManagerWindow
     Q_OBJECT
 
 public:
-    GroupMenuWindow(MainWindow *parent = nullptr, std::shared_ptr<Group> group = nullptr)
-        : BaseListManagerWindow(parent), m_group{group}
-    {
-        resize(parent->size());
-        move(parent->pos());
-    }
+    GroupMenuWindow(std::shared_ptr<Group> group = nullptr,MainWindow *parent = nullptr);
+    
     
     void init() override  ;
 

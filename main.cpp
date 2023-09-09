@@ -22,8 +22,7 @@ int main(int argc, char *argv[]) {
   {
     QApplication a(argc, argv);
 
-    MainWindow main_window(nullptr, groups_collection);
-    // main_window.init();
+    MainWindow main_window(groups_collection);
     QObject::connect(&main_window, &QObject::destroyed,
                      [&]() { kohot.saveGroups(); });
     main_window.show();

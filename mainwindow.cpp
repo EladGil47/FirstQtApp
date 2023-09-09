@@ -7,7 +7,7 @@
 #include "group_item_widget.h"
 
 
-MainWindow::MainWindow(QWidget *parent,std::shared_ptr<GroupsCollection> groups_collection):BaseListManagerWindow(parent)
+MainWindow::MainWindow(std::shared_ptr<GroupsCollection> groups_collection,QWidget *parent):BaseListManagerWindow(parent)
 {
     m_groups_collection = groups_collection;
     init();
@@ -86,7 +86,7 @@ void MainWindow::onRemoveGroupButton(size_t id)
 void MainWindow::onEnterGroupButton(size_t id)
 {
     std::shared_ptr<Group> group = m_groups_collection->getItem(id);
-    GroupMenuWindow *m_group_menu_window = new GroupMenuWindow(this,group);
+    GroupMenuWindow *m_group_menu_window = new GroupMenuWindow(group,this);
     m_group_menu_window->init();
     hide();
     m_group_menu_window->show();

@@ -11,7 +11,7 @@ class MainWindow : public BaseListManagerWindow
     Q_OBJECT
 
 public:
-    MainWindow(QWidget *parent = nullptr,std::shared_ptr<GroupsCollection> groups_collection = nullptr);
+    MainWindow(std::shared_ptr<GroupsCollection> groups_collection = nullptr,QWidget *parent = nullptr);
     ~MainWindow();
 
     void init() override ;
