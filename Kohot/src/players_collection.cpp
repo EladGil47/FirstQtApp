@@ -37,11 +37,11 @@ void PlayersCollection::display()
 {
 	PlayersSorter::sortBySortOption(getCollectionRef(), PlayersSorter::SortOptions::NAME);
 
-	std::cout << GREY_BG << BLACK << std::left << "Players:" << std::endl;
+	std::cout << GREEN << std::left << "Players:" << std::endl;
 
 	if (!m_collection.empty())
 	{
-		std::cout <<GREY_BG <<  BLUE << std::left
+		std::cout  <<  YELLOW << std::left
 			<< std::setw(5) << "#"
 			<< std::setw(20) << "Name"
 			<< std::setw(10) << "Rate"
@@ -53,7 +53,7 @@ void PlayersCollection::display()
 		uint16_t iteration_number = 1;
 		for (std::shared_ptr <Player> p : m_collection)
 		{
-			std::cout << GREY_BG << RED << std::left
+			std::cout << RED << std::left
 				<< std::setw(5) << iteration_number
 				<< std::setw(20) << p->getName()
 				<< std::fixed << std::setprecision(2) << std::setw(10) << p->getRate()
@@ -66,6 +66,6 @@ void PlayersCollection::display()
 	}
 	else
 	{
-		std::cout << GREY_BG << "There is no players";
+		std::cout  << "There is no players";
 	}
 }

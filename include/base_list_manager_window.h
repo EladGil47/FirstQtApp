@@ -8,34 +8,32 @@
 #include <QListWidget>
 #include <QPushButton>
 
-
 class BaseListManagerWindow : public QMainWindow
 {
     Q_OBJECT
 
 private:
 
-    void createWindowWidget();
-    QWidget *m_window_widget = new QWidget(this);
+    void setWindowWidget();
+    QWidget *m_window_widget;
 
-    void createWindowLayout() ;
-    QVBoxLayout *m_window_layout = new QVBoxLayout;
+    void setWindowLayout() ;
+    QVBoxLayout *m_window_layout;
 
     void setHeaderLabelCommons();
 
-    void createListViewerVerLayout();
-    QVBoxLayout *m_list_viewer_ver_layout = new QVBoxLayout;
+    void setListViewerVerLayout();
+    QVBoxLayout *m_list_viewer_ver_layout;
 
     protected :
     BaseListManagerWindow(QWidget *parent = nullptr);
     ~BaseListManagerWindow();
     QWidget *m_parent ;
 
-
     virtual void init()  = 0;
 
     virtual void setHeaderLabelText() = 0;
-    QLabel *m_header_label = new QLabel(this);
+    QLabel *m_header_label ;
 
     virtual void setListViewerLabelText() = 0;
     QLabel *m_list_viewer_label = new QLabel(this);

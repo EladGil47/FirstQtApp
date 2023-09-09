@@ -31,7 +31,8 @@ private:
     void createButtonsHorLayout() override;
 
     QPushButton *m_create_new_player_button = new QPushButton("Create new player", this);
-    QPushButton *m_back_button = new QPushButton("Go Back", this);
+    QPushButton *m_create_teams_button = new QPushButton("Create teams", this);
+    QPushButton *m_back_button = new QPushButton("Go back", this);
 
     
     std::shared_ptr<Group> m_group;
@@ -47,6 +48,7 @@ private:
 
 public slots:
     void onCreateNewPlayerButton();
+    void onCreateTeamsClicked();
     void onGoBackButton();
     void onRemoveButton(size_t id);
     void onEnterButton(size_t id);

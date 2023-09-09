@@ -26,7 +26,7 @@ bool FinalMenu::handle()
 		default:
 			break;
 		}
-		system("clear");
+		system("cls");
 	}
 	return m_exit_menus;
 }

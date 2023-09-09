@@ -30,6 +30,7 @@ void GroupMenuWindow::createButtonsHorLayout()
 {
     m_buttons_hor_layout->addStretch(1);
     addButtonToButtonsHorLayout(m_create_new_player_button,&GroupMenuWindow::onCreateNewPlayerButton);
+    addButtonToButtonsHorLayout(m_create_teams_button,&GroupMenuWindow::onCreateTeamsClicked);
     addButtonToButtonsHorLayout(m_back_button,&GroupMenuWindow::onGoBackButton);
     m_buttons_hor_layout->addStretch(1);
 }
@@ -46,6 +47,13 @@ void GroupMenuWindow::onCreateNewPlayerButton()
 {
     qDebug() << " Create player window";
 }
+
+void GroupMenuWindow::onCreateTeamsClicked()
+{
+    /// Open a window to choose players
+    /// Calls team creator
+}
+
 void GroupMenuWindow::onGoBackButton()
 {
     m_parent->resize(this->size());

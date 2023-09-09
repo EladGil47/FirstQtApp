@@ -17,46 +17,51 @@ BaseListManagerWindow::BaseListManagerWindow(QWidget *parent): QMainWindow(paren
     const int WINDOW_WIDTH = 800;
     const int WINDOW_HEIGHT = 400;
     resize(WINDOW_WIDTH, WINDOW_HEIGHT);
-    createWindowWidget();
+    setWindowWidget();
+
+    setHeaderLabelCommons();
+    setListViewerVerLayout();
+
+    setWindowLayout();
+
 }
 
 BaseListManagerWindow::~BaseListManagerWindow()
 {
 }
 
-void BaseListManagerWindow::createWindowWidget()
+void BaseListManagerWindow::setWindowWidget()
 {
+    m_window_widget = new QWidget(this);
     setCentralWidget(m_window_widget);
-    createWindowLayout();
-    m_window_widget->setLayout(m_window_layout);
 }
 
-void BaseListManagerWindow::createWindowLayout()
+void BaseListManagerWindow::setWindowLayout()
 {
-    setHeaderLabelCommons();
+    m_window_layout = new QVBoxLayout(m_window_widget);
     m_window_layout->addWidget(m_header_label);
-    createListViewerVerLayout();
     m_window_layout->addLayout(m_list_viewer_ver_layout);
     m_window_layout->addLayout(m_buttons_hor_layout);
 }
 
 void BaseListManagerWindow::setHeaderLabelCommons()
 {
+    m_header_label = new QLabel(this);
     m_header_label->setAlignment(Qt::AlignHCenter);
     m_header_label->setFont(QFont("Arial", 24, QFont::Bold));
 }
 
-void BaseListManagerWindow::createListViewerVerLayout()
+void BaseListManagerWindow::setListViewerVerLayout()
 {
+    m_list_viewer_ver_layout = new QVBoxLayout();
     m_list_viewer_ver_layout->addWidget(m_list_viewer_label);
     m_list_viewer_ver_layout->addWidget(m_list_viewer_widget);
 
-    QPixmap backgroundImage("Data/field.jpg");
-    QPixmap scaledBackground = backgroundImage.scaled(m_list_viewer_widget->size(), Qt::IgnoreAspectRatio, Qt::SmoothTransformation);
+    QPixmap background_image("Data/field.jpg");
+    QPixmap scaledBackground = background_image.scaled(m_list_viewer_widget->size(), Qt::KeepAspectRatio, Qt::SmoothTransformation);
     QPalette palette;
     palette.setBrush(QPalette::Base, scaledBackground);
     m_list_viewer_widget->setPalette(palette);
 }
-
 
 
