@@ -23,7 +23,7 @@ private:
 
     void addGroupItemToList(std::shared_ptr<Group> group);
 
-    QPushButton *create_new_group_button = new QPushButton("Create new group",this);
+    QPushButton *m_create_new_group_button = new QPushButton("Create new group",this);
 
     std::shared_ptr<GroupsCollection> m_groups_collection;
 

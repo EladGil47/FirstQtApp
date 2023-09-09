@@ -6,19 +6,15 @@
 #include <QVBoxLayout>
 #include <QHBoxLayout>
 #include <QListWidget>
+#include <QPushButton>
+
 
 class BaseListManagerWindow : public QMainWindow
 {
     Q_OBJECT
 
-public:
-    BaseListManagerWindow(QWidget *parent = nullptr);
-    ~BaseListManagerWindow();
-    const int WINDOW_WIDTH = 800;
-    const int WINDOW_HEIGHT = 400;
-    const QString WINDOW_TITLE = "Kohot";
-
 private:
+
     void createWindowWidget();
     QWidget *m_window_widget = new QWidget(this);
 
@@ -31,6 +27,11 @@ private:
     QVBoxLayout *m_list_viewer_ver_layout = new QVBoxLayout;
 
     protected :
+    BaseListManagerWindow(QWidget *parent = nullptr);
+    ~BaseListManagerWindow();
+    QWidget *m_parent ;
+
+
     virtual void init()  = 0;
 
     virtual void setHeaderLabelText() = 0;

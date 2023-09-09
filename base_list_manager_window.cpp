@@ -3,12 +3,19 @@
 #include <QInputDialog>
 #include <QFont>
 #include <QPushButton>
+#include <QtWidgets>
+#include <QPixmap>
+
 
 #include "base_list_manager_window.h"
 
 BaseListManagerWindow::BaseListManagerWindow(QWidget *parent): QMainWindow(parent)
 {
+    m_parent = parent;
+    const QString WINDOW_TITLE = "Kohot";
     setWindowTitle(WINDOW_TITLE);
+    const int WINDOW_WIDTH = 800;
+    const int WINDOW_HEIGHT = 400;
     resize(WINDOW_WIDTH, WINDOW_HEIGHT);
     createWindowWidget();
 }
@@ -43,4 +50,13 @@ void BaseListManagerWindow::createListViewerVerLayout()
 {
     m_list_viewer_ver_layout->addWidget(m_list_viewer_label);
     m_list_viewer_ver_layout->addWidget(m_list_viewer_widget);
+
+    QPixmap backgroundImage("Data/field.jpg");
+    QPixmap scaledBackground = backgroundImage.scaled(m_list_viewer_widget->size(), Qt::IgnoreAspectRatio, Qt::SmoothTransformation);
+    QPalette palette;
+    palette.setBrush(QPalette::Base, scaledBackground);
+    m_list_viewer_widget->setPalette(palette);
 }
+
+
+
