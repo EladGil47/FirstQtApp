@@ -2,7 +2,7 @@
 
 #include "player_item_widget.h"
 
-
+#include <QInputDialog>
 #include <QDebug>
 
 GroupMenuWindow::GroupMenuWindow(std::shared_ptr<Group> group, MainWindow *parent)
@@ -54,7 +54,25 @@ void GroupMenuWindow::addButtonToButtonsHorLayout(
 
 void GroupMenuWindow::onCreateNewPlayerButton()
 {
-    qDebug() << " Create player window";
+    Player::Config config;
+
+    bool name_user_input_is_ok;
+    QString name_user_input = QInputDialog::getText(this, "Create new player", "Enter player name:", QLineEdit::Normal, "", &name_user_input_is_ok);
+    if (name_user_input_is_ok && !name_user_input.isEmpty()) {
+        config.name = name_user_input.toStdString();
+
+        bool rate_user_input_is_ok;
+        double  rate_user_input = QInputDialog::getDouble(this, "Create new player", "Enter player rate:",0,0,7,1,&rate_user_input_is_ok);
+        if(rate_user_input_is_ok && rate_user_input >=0)
+        {
+            config.rate = rate_user_input;
+
+            config.id = static_cast<uint16_t>(m_group->getNumOfPlayers());
+            std::shared_ptr<Player> new_player = std::make_shared<Player>(config);
+            m_group->getPlayersCollectionRef().addItem(new_player);
+            addItemToList(new_player);
+        }
+    } 
 }
 
 void GroupMenuWindow::onCreateTeamsClicked()
