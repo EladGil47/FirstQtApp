@@ -26,9 +26,11 @@ private:
     void setListViewerLabelText() override ;
     void createButtonsHorLayout() override;
 
+    MainWindow * m_main_window;
+
     QPushButton *m_create_new_player_button = new QPushButton("Create new player", this);
     QPushButton *m_create_teams_button = new QPushButton("Create teams", this);
-    QPushButton *m_back_button = new QPushButton("Go back", this);
+    QPushButton *m_go_back_button = new QPushButton("Go back", this);
 
     
     std::shared_ptr<Group> m_group;

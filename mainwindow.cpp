@@ -21,11 +21,66 @@ void MainWindow::init()
 {
     setHeaderLabelText();
     setListViewerLabelText();
+    setCreateNewGroupButton();
     createButtonsHorLayout();
+    initList();
+}
+
+void MainWindow::setCreateNewGroupButton()
+{
+    QString text = "Create new group";
+    m_create_new_group_button = new QPushButton(text, this);
+    m_create_new_group_button->setStyleSheet(
+        "QPushButton {"
+        "    background-color: #4CAF50;"     // Green background color
+        "    border: 2px solid #4CAF50;"     // Green border
+        "    color: white;"                  // White text color
+        "    padding: 10px 20px;"            // Padding around the text
+        "    font-size: 18px;"              // Font size
+        "    font-weight: bold;"            // Bold text
+        "}"
+        "QPushButton:hover {"
+        "    background-color: #45a049;"    // Darker green on hover
+        "    border: 2px solid #45a049;"    // Darker green border on hover
+        "}"
+    );
+
+    // Set the button's size policy (optional)
+    m_create_new_group_button->setSizePolicy(QSizePolicy::Preferred, QSizePolicy::Fixed);
+    m_create_new_group_button->setToolTip("Click here to create a new group");
+
+
+
+
+    connect(m_create_new_group_button, &QPushButton::clicked, this, &MainWindow::onCreateNewGroupButton);
+
+}
+
+void MainWindow::removeAllGroupsFromList()
+{
+    int item_count = m_list_viewer_widget->count();
+    for (int i = 0; i < item_count; ++i)
+    {
+        QListWidgetItem *item = m_list_viewer_widget->item(0); // Get the first item
+        QWidget *widget = m_list_viewer_widget->itemWidget(item);
+        m_list_viewer_widget->removeItemWidget(item); // Remove the widget from the item
+        delete item;                                  // Delete the item
+        delete widget;                                // Delete the widget
+    }
+}
+
+void MainWindow::initList()
+{
     for (std::shared_ptr<Group> group : m_groups_collection->getCollectionRef())
     {
         addGroupItemToList(group);
     }
+}
+
+void MainWindow::updateGroupsList()
+{
+    removeAllGroupsFromList();
+    initList();
 }
 
 void MainWindow::setHeaderLabelText() 
@@ -43,7 +98,6 @@ void MainWindow::createButtonsHorLayout()
 {
     m_buttons_hor_layout->addStretch(1);
     m_buttons_hor_layout->addWidget(m_create_new_group_button, 2);
-    connect(m_create_new_group_button, &QPushButton::clicked, this, &MainWindow::onCreateNewGroupButton);
     m_buttons_hor_layout->addStretch(1);
 }
 

@@ -22,6 +22,8 @@ private:
 
     void setHeaderLabelCommons();
 
+    void setListViewerListWidget();
+
     void setListViewerVerLayout();
     QVBoxLayout *m_list_viewer_ver_layout;
 
@@ -36,8 +38,8 @@ private:
     QLabel *m_header_label ;
 
     virtual void setListViewerLabelText() = 0;
-    QLabel *m_list_viewer_label = new QLabel(this);
-    QListWidget *m_list_viewer_widget = new QListWidget(this);
+    QLabel *m_list_viewer_label;
+    QListWidget *m_list_viewer_widget;
 
     virtual void createButtonsHorLayout() = 0;
     QHBoxLayout *m_buttons_hor_layout = new QHBoxLayout; 

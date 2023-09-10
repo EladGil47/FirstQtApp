@@ -39,9 +39,20 @@ void GroupItemWidget::setEnterButton()
     size_t group_id = m_group->getId();
 
     m_enter_button = new QPushButton("Enter");
-    m_enter_button->setStyleSheet("text-align: center;"
-                                  "background-color: green;"
-                                  "border: none;");
+    m_enter_button->setStyleSheet(
+   "QPushButton {"
+    "    background-color: #0074CC;"    /* Blue background color */
+    "    border: 2px solid #0074CC;"    /* Blue border */
+    "    color: white;"                  /* White text color */
+    "    padding: 5px 20px;"             /* Reduced vertical padding, same horizontal padding */
+    "    font-size: 18px;"               /* Font size */
+    "    font-weight: bold;"             /* Bold text */
+    "}"
+    "QPushButton:hover {"
+    "    background-color: #005FAA;"    /* Darker blue on hover */
+    "    border: 2px solid #005FAA;"    /* Darker blue border on hover */
+    "}"
+                                  );
     connect(m_enter_button, &QPushButton::clicked, m_main_window, [=]()
             { m_main_window->onEnterGroupButton(group_id); });
 }
@@ -50,9 +61,21 @@ void GroupItemWidget::setRemoveButton()
     size_t group_id = m_group->getId();
 
     m_remove_button = new QPushButton("Remove");
-    m_remove_button->setStyleSheet("text-align: center;"
-                                   "background-color: red;"
-                                   "border: none;");
+    m_remove_button->setStyleSheet(
+        "QPushButton {"
+    "    background-color: #FF0000;"   /* Red background color */
+    "    border: 2px solid #FF0000;"   /* Red border */
+    "    color: white;"                /* White text color */
+    "    padding: 3px 20px;"          /* Padding around the text */
+    "    font-size: 18px;"             /* Font size */
+    "    font-weight: bold;"           /* Bold text */
+    "}"
+
+    "QPushButton:hover {"
+    "    background-color: #FF3333;"   /* Darker red on hover */
+    "    border: 2px solid #FF3333;"   /* Darker red border on hover */
+    "}"
+    );
     connect(m_remove_button, &QPushButton::clicked, m_main_window, [=]()
             { m_main_window->onRemoveGroupButton(group_id); });
 }

@@ -24,15 +24,20 @@ private:
 
     void addGroupItemToList(std::shared_ptr<Group> group);
 
-    QPushButton *m_create_new_group_button = new QPushButton("Create new group",this);
+void setCreateNewGroupButton();
+    QPushButton *m_create_new_group_button; 
 
     std::shared_ptr<GroupsCollection> m_groups_collection;
+
+    void removeAllGroupsFromList();
+    void initList();
 
 
 public slots:
     void onCreateNewGroupButton();
     void onRemoveGroupButton(size_t id);
     void onEnterGroupButton(size_t id);
+    void updateGroupsList();
 
 };
 #endif // FIRST_QT_APP_INCLUDE_MAINWINDOW_H
