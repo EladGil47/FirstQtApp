@@ -38,6 +38,10 @@ add_executable(${PROJECT_NAME} ${PROJECT_SOURCES})
 
 link_directories(${CMAKE_SOURCE_DIR}/Kohot)
 
+target_compile_options(${PROJECT_NAME} PRIVATE
+		-Wall
+		)
+
 target_link_libraries(${PROJECT_NAME} PRIVATE
     Qt${QT_VERSION_MAJOR}::Widgets
     KOHOT_LIB
