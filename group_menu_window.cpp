@@ -6,7 +6,7 @@
 #include <QDebug>
 
 GroupMenuWindow::GroupMenuWindow(std::shared_ptr<Group> group, MainWindow *parent)
-    : BaseListManagerWindow(parent), m_group(group), m_main_window(parent)
+    : BaseListManagerWindow(parent), m_main_window(parent), m_group(group)
 {
     resize(parent->size());
     move(parent->pos());
