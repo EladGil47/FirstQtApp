@@ -44,7 +44,7 @@ void GroupItemWidget::setEnterButton()
     "    background-color: #0074CC;"    /* Blue background color */
     "    border: 2px solid #0074CC;"    /* Blue border */
     "    color: white;"                  /* White text color */
-    "    padding: 5px 20px;"             /* Reduced vertical padding, same horizontal padding */
+    "    padding: 3px 20px;"             /* Reduced vertical padding, same horizontal padding */
     "    font-size: 18px;"               /* Font size */
     "    font-weight: bold;"             /* Bold text */
     "}"

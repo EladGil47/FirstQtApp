@@ -18,14 +18,17 @@ BaseListManagerWindow::BaseListManagerWindow(QWidget *parent): QMainWindow(paren
     const int WINDOW_HEIGHT = 400;
     resize(WINDOW_WIDTH, WINDOW_HEIGHT);
     setWindowWidget();
+    
+
 
     setHeaderLabelCommons();
 
+    setListViewerLabel();
     setListViewerListWidget();
-
     setListViewerVerLayout();
 
     setWindowLayout();
+
 
 }
 
@@ -37,36 +40,56 @@ void BaseListManagerWindow::setWindowWidget()
 {
     m_window_widget = new QWidget(this);
     setCentralWidget(m_window_widget);
+
+    // QString window_widget_stylesheet =
+    //     ""
+    //     "    background-color: white;" /* Black background color */
+    //     "    color: red;"            /* White text color */
+    //     "    padding: 10px 20px;"      /* Padding around the text */
+    //     "    font-size: 24px;"         /* Font size */
+    //     "    font-weight: bold;"       /* Bold text */
+    //     "";
+    // m_window_widget->setStyleSheet(window_widget_stylesheet);
+
 }
 
 void BaseListManagerWindow::setHeaderLabelCommons()
 {
-    m_header_label = new QLabel(this);
+    m_header_label = new QLabel(m_window_widget);
     m_header_label->setAlignment(Qt::AlignHCenter);
-    m_header_label->setFont(QFont("Arial", 24, QFont::Bold));
     QString header_label_stylesheet =
     "QLabel {"
-    "    background-color: white;"     /* Black background color */
-    "    color: black;"                /* White text color */
-    "    padding: 10px 20px;"          /* Padding around the text */
-    "    font-size: 24px;"             /* Font size */
-    "    font-weight: bold;"           /* Bold text */
+    "    color: black;"              
+    "    font-size: 24px;"           
+    "    font-weight: bold;"         
     "}";
     m_header_label->setStyleSheet(header_label_stylesheet);
 }
 
+void BaseListManagerWindow::setListViewerLabel()
+{
+    m_list_viewer_label = new QLabel(m_window_widget);
+    QString list_viewer_label_stylesheet =
+    "QLabel {"
+    "    color: black;"                
+    "    font-size: 20px;"            
+    "    font-weight: bold;"          
+    "}";
+
+    m_list_viewer_label->setStyleSheet(list_viewer_label_stylesheet);
+   
+}
+
 void BaseListManagerWindow::setListViewerVerLayout()
 {
-    m_list_viewer_ver_layout = new QVBoxLayout();
-
-    m_list_viewer_label = new QLabel(this);
+    m_list_viewer_ver_layout = new QVBoxLayout;
     m_list_viewer_ver_layout->addWidget(m_list_viewer_label);
     m_list_viewer_ver_layout->addWidget(m_list_viewer_widget);
 }
 
 void BaseListManagerWindow::setListViewerListWidget()
 {
-    m_list_viewer_widget = new QListWidget(this);
+    m_list_viewer_widget = new QListWidget(m_window_widget);
     QPixmap background_image("Data/field.jpg");
     QPixmap scaledBackground = background_image.scaled(m_list_viewer_widget->size(), Qt::KeepAspectRatio, Qt::SmoothTransformation);
     QPalette palette;

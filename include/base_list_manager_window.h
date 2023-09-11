@@ -24,6 +24,9 @@ private:
 
     void setListViewerListWidget();
 
+void setListViewerLabel();
+
+
     void setListViewerVerLayout();
     QVBoxLayout *m_list_viewer_ver_layout;
 
