@@ -38,19 +38,13 @@ BaseListManagerWindow::~BaseListManagerWindow()
 
 void BaseListManagerWindow::setWindowWidget()
 {
-    m_window_widget = new QWidget(this);
-    setCentralWidget(m_window_widget);
+  m_window_widget = new QWidget(this);
+  setCentralWidget(m_window_widget);
 
-    // QString window_widget_stylesheet =
-    //     ""
-    //     "    background-color: white;" /* Black background color */
-    //     "    color: red;"            /* White text color */
-    //     "    padding: 10px 20px;"      /* Padding around the text */
-    //     "    font-size: 24px;"         /* Font size */
-    //     "    font-weight: bold;"       /* Bold text */
-    //     "";
-    // m_window_widget->setStyleSheet(window_widget_stylesheet);
-
+  m_window_widget->setObjectName("MainWindowWidget");
+  QString window_widget_stylesheet =
+      "QWidget#MainWindowWidget { background-color : #FFFFBF}";
+  m_window_widget->setStyleSheet(window_widget_stylesheet);
 }
 
 void BaseListManagerWindow::setHeaderLabelCommons()
