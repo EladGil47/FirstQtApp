@@ -1,7 +1,9 @@
 #include "include/mainwindow.h"
 
 #include <QApplication>
-#include <QDesktopWidget>
+
+#include <QGuiApplication>
+#include <QScreen>
 
 #include "groups_manager_menu.hpp"
 #include "kohot.hpp"
@@ -27,17 +29,14 @@ int main(int argc, char *argv[]) {
     QObject::connect(&main_window, &QObject::destroyed,
                      [&]() { kohot.saveGroups(); });
     
-    // Open the screen on center
-    QRect screenGeometry = QApplication::desktop()->screenGeometry();
-    int x = (screenGeometry.width()-main_window.width()) / 2;
-    int y = (screenGeometry.height()-main_window.height()) / 2;
-    main_window.move(x, y);
+    QScreen *primaryScreen = QGuiApplication::primaryScreen();
 
+    QRect screenGeometry = primaryScreen->geometry();
+    int x = (screenGeometry.width() - main_window.size().width()) / 2;
+    int y = (screenGeometry.height() - main_window.size().height()) / 2;
+    main_window.move(x, y);
     main_window.show();
 
-
-
-   
 
     ret_val = a.exec();
   }
