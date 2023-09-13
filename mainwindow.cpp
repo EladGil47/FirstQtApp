@@ -19,6 +19,7 @@ MainWindow::~MainWindow()
 void MainWindow::init() 
 {
     setHeaderLabelText(QString::fromStdString("Welcome To Kohot"));
+    setHeaderLabelEditability(false);
     setListViewerLabelText();
     setCreateNewGroupButton();
     createButtonsHorLayout();

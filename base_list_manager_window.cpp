@@ -1,5 +1,8 @@
 #include "base_list_manager_window.h"
 
+#include "editable_label.h"
+
+
 BaseListManagerWindow::BaseListManagerWindow(QMainWindow *parent): QWidget(parent)
 {
     m_parent = parent;
@@ -17,15 +20,15 @@ BaseListManagerWindow::~BaseListManagerWindow()
 
 void BaseListManagerWindow::setHeaderLabelCommons()
 {
-    m_header_label = new QLabel(this);
-    m_header_label->setAlignment(Qt::AlignHCenter);
-    QString header_label_stylesheet =
-    "QLabel {"
-    "    color: black;"              
-    "    font-size: 24px;"           
-    "    font-weight: bold;"         
-    "}";
-    m_header_label->setStyleSheet(header_label_stylesheet);
+    m_header_label = new EditableLabel(this);
+    // m_header_label->setAlignment(Qt::AlignHCenter);
+    // QString header_label_stylesheet =
+    // "QLabel {"
+    // "    color: black;"              
+    // "    font-size: 24px;"           
+    // "    font-weight: bold;"         
+    // "}";
+    // m_header_label->setStyleSheet(header_label_stylesheet);
 }
 
 void BaseListManagerWindow::setListViewerLabel()
@@ -63,6 +66,13 @@ void BaseListManagerWindow::setListViewerListWidget()
 void BaseListManagerWindow::setWindowLayout()
 {
     m_window_layout = new QVBoxLayout(this);
+    /////////////////////////////////
+    // EditableLabel *xx = new EditableLabel(this);
+    // m_window_layout->addWidget(xx);
+
+    /////////////////////////////////
+
+    
     m_window_layout->addWidget(m_header_label);
     m_window_layout->addLayout(m_list_viewer_ver_layout);
     m_window_layout->addLayout(m_buttons_hor_layout);
@@ -91,5 +101,16 @@ void BaseListManagerWindow::updateList()
 
 void BaseListManagerWindow::setHeaderLabelText(QString text) 
 {
-    m_header_label->setText(text);
+    // m_header_label->setText(text);
+    m_header_label->setLabelText(text);
+
 }
+
+void BaseListManagerWindow::setHeaderLabelEditability(bool state) 
+{
+    // m_header_label->setText(text);
+    m_header_label->setEditablity(state);
+}
+
+
+

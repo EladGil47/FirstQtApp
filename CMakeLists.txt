@@ -35,6 +35,9 @@ set(PROJECT_SOURCES
 
      include/custom_window.h
 
+     include/editable_label.h
+     editable_label.cpp
+
 )
 
 add_executable(${PROJECT_NAME} ${PROJECT_SOURCES})

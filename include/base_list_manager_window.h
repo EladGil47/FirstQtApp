@@ -7,6 +7,9 @@
 #include <QHBoxLayout>
 #include <QListWidget>
 
+#include "editable_label.h"
+
+
 class BaseListManagerWindow : public QWidget
 {
     Q_OBJECT
@@ -40,7 +43,8 @@ protected :
     virtual void updateList() ;
 
     void setHeaderLabelText(QString text) ;
-    QLabel *m_header_label ;
+    void setHeaderLabelEditability(bool state) ;
+    EditableLabel *m_header_label ;
 
     virtual void setListViewerLabelText() = 0;
     QLabel *m_list_viewer_label;

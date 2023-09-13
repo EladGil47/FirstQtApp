@@ -70,6 +70,7 @@
         "qmainwindow": "cpp",
         "source_location": "cpp",
         "cinttypes": "cpp",
-        "qhboxlayout": "cpp"
+        "qhboxlayout": "cpp",
+        "qwidget": "cpp"
     }
 }
