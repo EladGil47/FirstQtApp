@@ -3,13 +3,12 @@
 #include <QInputDialog>
 #include <QFont>
 
-#include "group_menu_window.h"
 #include "group_item_widget.h"
 
-
-MainWindow::MainWindow(std::shared_ptr<GroupsCollection> groups_collection,QMainWindow *parent):BaseListManagerWindow(parent)
+MainWindow::MainWindow(std::shared_ptr<GroupsCollection> groups_collection,QMainWindow *parent):
+BaseListManagerWindow(parent),
+m_groups_collection(groups_collection)
 {
-    m_groups_collection = groups_collection;
     init();
 }
 
@@ -51,19 +50,6 @@ void MainWindow::setCreateNewGroupButton()
     connect(m_create_new_group_button, &QPushButton::clicked, this, &MainWindow::onCreateNewGroupButton);
 }
 
-void MainWindow::removeAllGroupsFromList()
-{
-    int item_count = m_list_viewer_widget->count();
-    for (int i = 0; i < item_count; ++i)
-    {
-        QListWidgetItem *item = m_list_viewer_widget->item(0); // Get the first item
-        QWidget *widget = m_list_viewer_widget->itemWidget(item);
-        m_list_viewer_widget->removeItemWidget(item); // Remove the widget from the item
-        delete item;                                  // Delete the item
-        delete widget;                                // Delete the widget
-    }
-}
-
 void MainWindow::initList()
 {
     for (std::shared_ptr<Group> group : m_groups_collection->getCollectionRef())
@@ -74,7 +60,7 @@ void MainWindow::initList()
 
 void MainWindow::updateGroupsList()
 {
-    removeAllGroupsFromList();
+    removeAllItemsFromList();
     initList();
 }
 
@@ -135,6 +121,5 @@ void MainWindow::onRemoveGroupButton(size_t id)
 
 void MainWindow::onEnterGroupButton(size_t id)
 {
-    qDebug() << "Enter Group ID: " <<id ;
     emit switchToGroupMenuWidgetSignal(id);
 }

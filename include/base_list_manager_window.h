@@ -48,7 +48,10 @@ void setListViewerLabel();
     QListWidget *m_list_viewer_widget;
 
     virtual void createButtonsHorLayout() = 0;
-    QHBoxLayout *m_buttons_hor_layout = new QHBoxLayout; 
+    QHBoxLayout *m_buttons_hor_layout = new QHBoxLayout;
+
+    
+    void removeAllItemsFromList() ;
 
 };
 #endif // FIRST_QT_APP_INCLUDE_BASE_LIST_MANAGER_WINDOW_H

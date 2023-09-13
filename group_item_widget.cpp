@@ -25,8 +25,14 @@ void GroupItemWidget::setNameLabel()
 {
     QString name = QString::fromStdString(m_group->getName());
     m_name_label = new QLabel(name, this);
-    m_name_label->setFont(QFont("Arial", 16, QFont::Bold));
-    m_name_label->setStyleSheet("border: none;");
+    // m_name_label->setFont(QFont("Arial", 16, QFont::Bold));
+    m_name_label->setStyleSheet(
+        "QLabel {"
+    "    color: black;"                  /* White text color */
+    "    font-size: 18px;"               /* Font size */
+    "    font-weight: bold;"             /* Bold text */
+        "}"
+    );
     m_name_label->setAlignment(Qt::AlignLeft);
 }
 

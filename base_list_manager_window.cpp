@@ -66,7 +66,7 @@ void BaseListManagerWindow::setListViewerListWidget()
     QPalette palette;
     palette.setBrush(QPalette::Base, scaledBackground);
     m_list_viewer_widget->setPalette(palette);
-    m_list_viewer_widget->setStyleSheet("QListWidget {border: 3px solid black;} QListWidget::item { border: 1px solid border;} QListWidget::item:selected { background: rgba(0, 0, 255, 50%); } ");
+    m_list_viewer_widget->setStyleSheet("QListWidget {border: 3px solid black;} QListWidget::item { border: 1px solid border;} QListWidget::item:selected { background: rgba(0, 0, 255, 30%); } ");
 }
 
 void BaseListManagerWindow::setWindowLayout()
@@ -77,6 +77,19 @@ void BaseListManagerWindow::setWindowLayout()
     m_window_layout->addLayout(m_buttons_hor_layout);
     setLayout(m_window_layout);
 
+}
+
+void BaseListManagerWindow::removeAllItemsFromList()
+{
+    int item_count = m_list_viewer_widget->count();
+    for (int i = 0; i < item_count; ++i)
+    {
+        QListWidgetItem *item = m_list_viewer_widget->item(0); // Get the first item
+        QWidget *widget = m_list_viewer_widget->itemWidget(item);
+        m_list_viewer_widget->removeItemWidget(item); // Remove the widget from the item
+        delete item;                                  // Delete the item
+        delete widget;                                // Delete the widget
+    }
 }
 
 

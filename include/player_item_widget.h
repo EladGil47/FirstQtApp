@@ -19,6 +19,10 @@ public:
     PlayerItemWidget(std::shared_ptr<Player> player, GroupMenuWindow* parent);
 
 private:
+
+size_t m_player_index;
+void setPlayerIndex(size_t index);
+
 void setNameLabel();
 void setRateLabel();
 void setEnterButton();
@@ -33,6 +37,11 @@ QLabel* m_name_label;
 QLabel* m_rate_label;
 QPushButton* m_enter_button;
 QPushButton* m_remove_button;
+
+
+public slots:
+void onEnterButtonClicked(bool is_clicked);
+void onRemoveButtonClicked(bool is_clicked);
 
 };
 #endif // PLAYER_ITEM_WIDGET_H

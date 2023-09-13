@@ -16,28 +16,16 @@ void GroupMenuWindow::init()
     setHeaderLabelText();
     setListViewerLabelText();
     createButtonsHorLayout();
+    initList();
+
+}
+void GroupMenuWindow::initList()
+{
     for (std::shared_ptr<Player> player : m_group->getPlayersCollectionRef().getCollectionRef())
     {
         addItemToList(player);
     }
-
 }
-// void GroupMenuWindow::updatePlayersList()
-// {
-//     int itemCount = m_list_viewer_widget->count();
-//     for (int i = 0; i < itemCount; ++i)
-//     {
-//         QListWidgetItem *item = m_list_viewer_widget->item(0); // Get the first item
-//         QWidget *widget = m_list_viewer_widget->itemWidget(item);
-//         m_list_viewer_widget->removeItemWidget(item); // Remove the widget from the item
-//         delete item;                                  // Delete the item
-//         delete widget;                                // Delete the widget
-//     }
-//     for (std::shared_ptr<Player> player : m_group->getPlayersCollectionRef().getCollectionRef())
-//     {
-//         addItemToList(player);
-//     }
-// }
 
 void GroupMenuWindow::setHeaderLabelText() 
 {
@@ -56,8 +44,6 @@ void GroupMenuWindow::createButtonsHorLayout()
     addButtonToButtonsHorLayout(m_create_new_player_button,&GroupMenuWindow::onCreateNewPlayerButton);
     addButtonToButtonsHorLayout(m_create_teams_button,&GroupMenuWindow::onCreateTeamsClicked);
     addButtonToButtonsHorLayout(m_go_back_button,&GroupMenuWindow::onGoBackButton);
-    // connect(m_go_back_button,&QPushButton::clicked,m_main_window,&MainWindow::updateGroupsList);
-
     m_buttons_hor_layout->addStretch(1);
 }
 
@@ -120,6 +106,15 @@ void GroupMenuWindow::onRemoveButton(size_t id)
     {
         m_group->getPlayersCollectionRef().getItem(index)->setId(static_cast<uint16_t>(index));
     }
+    updateList();
+}
+
+
+
+void GroupMenuWindow::updateList()
+{
+    removeAllItemsFromList();
+    initList();
 }
 
 void GroupMenuWindow::onEnterButton(size_t id)
