@@ -58,12 +58,6 @@ void MainWindow::initList()
     }
 }
 
-void MainWindow::updateGroupsList()
-{
-    removeAllItemsFromList();
-    initList();
-}
-
 void MainWindow::setHeaderLabelText() 
 {
     QString text = QString::fromStdString("Welcome To Kohot"); 
@@ -116,7 +110,7 @@ void MainWindow::onRemoveGroupButton(size_t id)
     {
         m_groups_collection->getItem(index)->setId(static_cast<uint16_t>(index));
     }
-    updateGroupsList();
+    updateList();
 }
 
 void MainWindow::onEnterGroupButton(size_t id)

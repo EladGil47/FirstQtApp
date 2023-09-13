@@ -15,7 +15,6 @@ public:
     MainWindow(std::shared_ptr<GroupsCollection> groups_collection = nullptr,QMainWindow *parent = nullptr);
     ~MainWindow();
 
-    void init() override ;
 
 private:
     void setHeaderLabelText() override  ;
@@ -29,14 +28,14 @@ void setCreateNewGroupButton();
 
     std::shared_ptr<GroupsCollection> m_groups_collection;
 
-    void initList();
+    void init() override ;
+    void initList() override;
 
 
 public slots:
     void onCreateNewGroupButton();
     void onRemoveGroupButton(size_t id);
     void onEnterGroupButton(size_t id);
-    void updateGroupsList();
 
 signals:
     void switchToGroupMenuWidgetSignal(size_t id);

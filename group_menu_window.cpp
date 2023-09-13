@@ -19,6 +19,7 @@ void GroupMenuWindow::init()
     initList();
 
 }
+
 void GroupMenuWindow::initList()
 {
     for (std::shared_ptr<Player> player : m_group->getPlayersCollectionRef().getCollectionRef())
@@ -26,6 +27,12 @@ void GroupMenuWindow::initList()
         addItemToList(player);
     }
 }
+
+// void GroupMenuWindow::updateList()
+// {
+//     removeAllItemsFromList();
+//     initList();
+// }
 
 void GroupMenuWindow::setHeaderLabelText() 
 {
@@ -84,10 +91,7 @@ void GroupMenuWindow::onCreateTeamsClicked()
     /// Calls team creator
 }
 
-void GroupMenuWindow::onGoBackButton()
-{
-    emit onGoBackButtonClickedSignal();
-}
+
 
 void GroupMenuWindow::addItemToList(std::shared_ptr<Player> player)
 {
@@ -109,20 +113,16 @@ void GroupMenuWindow::onRemoveButton(size_t id)
     updateList();
 }
 
-
-
-void GroupMenuWindow::updateList()
-{
-    removeAllItemsFromList();
-    initList();
-}
-
 void GroupMenuWindow::onEnterButton(size_t id)
 {
  /// Open a window with player attributes
     /// Calls team creator
 }
 
+void GroupMenuWindow::onGoBackButton()
+{
+    emit onGoBackButtonClickedSignal();
+}
 
 
 // TODO Update this class like I did in mainwindow.cpp

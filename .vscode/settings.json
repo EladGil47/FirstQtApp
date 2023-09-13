@@ -69,6 +69,7 @@
         "variant": "cpp",
         "qmainwindow": "cpp",
         "source_location": "cpp",
-        "cinttypes": "cpp"
+        "cinttypes": "cpp",
+        "qhboxlayout": "cpp"
     }
 }

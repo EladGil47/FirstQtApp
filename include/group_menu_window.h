@@ -17,13 +17,10 @@ class GroupMenuWindow : public BaseListManagerWindow
 
 public:
     GroupMenuWindow(std::shared_ptr<Group> group = nullptr,QMainWindow *parent = nullptr);
-    
-    
-    void init() override  ;
 
 private:
-    void updateList();
-    void initList();
+    void init() override  ;
+    void initList() override;
 
     void setHeaderLabelText() override  ;
     void setListViewerLabelText() override ;

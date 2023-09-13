@@ -6,7 +6,6 @@
 #include <QVBoxLayout>
 #include <QHBoxLayout>
 #include <QListWidget>
-#include <QPushButton>
 
 class BaseListManagerWindow : public QWidget
 {
@@ -16,11 +15,8 @@ public:
     QMainWindow *m_parent ;
 
     void setWindowWidget();
-    // QWidget *m_window_widget;
 
 private:
-
-
     void setWindowLayout() ;
     QVBoxLayout *m_window_layout;
 
@@ -39,6 +35,9 @@ void setListViewerLabel();
     ~BaseListManagerWindow();
 
     virtual void init()  = 0;
+    virtual void initList()  = 0;
+    virtual void updateList() ;
+
 
     virtual void setHeaderLabelText() = 0;
     QLabel *m_header_label ;
@@ -50,7 +49,6 @@ void setListViewerLabel();
     virtual void createButtonsHorLayout() = 0;
     QHBoxLayout *m_buttons_hor_layout = new QHBoxLayout;
 
-    
     void removeAllItemsFromList() ;
 
 };

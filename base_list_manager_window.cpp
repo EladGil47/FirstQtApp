@@ -1,12 +1,3 @@
-#include "mainwindow.h"
-
-#include <QInputDialog>
-#include <QFont>
-#include <QPushButton>
-#include <QtWidgets>
-#include <QPixmap>
-
-
 #include "base_list_manager_window.h"
 
 BaseListManagerWindow::BaseListManagerWindow(QMainWindow *parent): QWidget(parent)
@@ -92,6 +83,8 @@ void BaseListManagerWindow::removeAllItemsFromList()
     }
 }
 
-
-
-
+void BaseListManagerWindow::updateList()
+{
+    removeAllItemsFromList();
+    initList();
+}

@@ -30,6 +30,9 @@ QLabel* m_name_label;
 QLabel* m_size_label;
 QPushButton* m_enter_button;
 QPushButton* m_remove_button;
+
+
+
 QHBoxLayout * m_item_hor_layout;
 
 public slots:
