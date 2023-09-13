@@ -18,7 +18,7 @@ MainWindow::~MainWindow()
 
 void MainWindow::init() 
 {
-    setHeaderLabelText();
+    setHeaderLabelText(QString::fromStdString("Welcome To Kohot"));
     setListViewerLabelText();
     setCreateNewGroupButton();
     createButtonsHorLayout();
@@ -58,11 +58,7 @@ void MainWindow::initList()
     }
 }
 
-void MainWindow::setHeaderLabelText() 
-{
-    QString text = QString::fromStdString("Welcome To Kohot"); 
-    m_header_label->setText(text);
-}
+
 
 void MainWindow::setListViewerLabelText()
 {

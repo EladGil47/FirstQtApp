@@ -88,3 +88,8 @@ void BaseListManagerWindow::updateList()
     removeAllItemsFromList();
     initList();
 }
+
+void BaseListManagerWindow::setHeaderLabelText(QString text) 
+{
+    m_header_label->setText(text);
+}

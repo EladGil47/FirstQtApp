@@ -17,7 +17,6 @@ public:
 
 
 private:
-    void setHeaderLabelText() override  ;
     void setListViewerLabelText() override ;
     void createButtonsHorLayout() override;
 

@@ -13,8 +13,11 @@ GroupMenuWindow::GroupMenuWindow(std::shared_ptr<Group> group, QMainWindow *pare
 
 void GroupMenuWindow::init() 
 {
-    setHeaderLabelText();
+    setHeaderLabelText(QString::fromStdString(m_group->getName()));
     setListViewerLabelText();
+    setCreateNewPlayerButton();
+    setCreateTeamsButton();
+    setGoBackButton();
     createButtonsHorLayout();
     initList();
 
@@ -28,16 +31,22 @@ void GroupMenuWindow::initList()
     }
 }
 
-// void GroupMenuWindow::updateList()
-// {
-//     removeAllItemsFromList();
-//     initList();
-// }
-
-void GroupMenuWindow::setHeaderLabelText() 
+void GroupMenuWindow::setCreateNewPlayerButton()
 {
-    QString group_name = QString::fromStdString(m_group->getName()); 
-    m_header_label->setText(group_name);
+    m_create_new_player_button = new QPushButton("Create new player", this);
+    connect(m_create_new_player_button, &QPushButton::clicked, this, &GroupMenuWindow::onCreateNewPlayerButton);
+}
+
+void GroupMenuWindow::setCreateTeamsButton()
+{
+    m_create_teams_button = new QPushButton("Create teams", this);
+    connect(m_create_teams_button, &QPushButton::clicked, this, &GroupMenuWindow::onCreateTeamsClicked);
+}
+
+void GroupMenuWindow::setGoBackButton()
+{
+    m_go_back_button = new QPushButton("Go back", this);
+    connect(m_go_back_button, &QPushButton::clicked, this, &GroupMenuWindow::onGoBackButton);
 }
 
 void GroupMenuWindow::setListViewerLabelText()
@@ -48,18 +57,15 @@ void GroupMenuWindow::setListViewerLabelText()
 void GroupMenuWindow::createButtonsHorLayout()
 {
     m_buttons_hor_layout->addStretch(1);
-    addButtonToButtonsHorLayout(m_create_new_player_button,&GroupMenuWindow::onCreateNewPlayerButton);
-    addButtonToButtonsHorLayout(m_create_teams_button,&GroupMenuWindow::onCreateTeamsClicked);
-    addButtonToButtonsHorLayout(m_go_back_button,&GroupMenuWindow::onGoBackButton);
+    addButtonToButtonsHorLayout(m_create_new_player_button);
+    addButtonToButtonsHorLayout(m_create_teams_button);
+    addButtonToButtonsHorLayout(m_go_back_button);
     m_buttons_hor_layout->addStretch(1);
 }
 
-void GroupMenuWindow::addButtonToButtonsHorLayout(
-    QPushButton * button,
-    void (GroupMenuWindow::*slot)())
+void GroupMenuWindow::addButtonToButtonsHorLayout(QPushButton * button)
 {
     m_buttons_hor_layout->addWidget(button, 2,  Qt::AlignVCenter);
-    connect(button, &QPushButton::clicked, this, slot);
 }
 
 void GroupMenuWindow::onCreateNewPlayerButton()
@@ -90,8 +96,6 @@ void GroupMenuWindow::onCreateTeamsClicked()
     /// Open a window to choose players
     /// Calls team creator
 }
-
-
 
 void GroupMenuWindow::addItemToList(std::shared_ptr<Player> player)
 {

@@ -21,20 +21,21 @@ public:
 private:
     void init() override  ;
     void initList() override;
-
-    void setHeaderLabelText() override  ;
     void setListViewerLabelText() override ;
     void createButtonsHorLayout() override;
 
-    QPushButton *m_create_new_player_button = new QPushButton("Create new player", this);
-    QPushButton *m_create_teams_button = new QPushButton("Create teams", this);
-    QPushButton *m_go_back_button = new QPushButton("Go back", this);
+    void setCreateNewPlayerButton();
+    void setCreateTeamsButton();
+    void setGoBackButton();
+
+
+    QPushButton *m_create_new_player_button;
+    QPushButton *m_create_teams_button; 
+    QPushButton *m_go_back_button;
 
     std::shared_ptr<Group> m_group;
 
-    void addButtonToButtonsHorLayout(
-    QPushButton * button,
-    void (GroupMenuWindow::*slot)());
+    void addButtonToButtonsHorLayout(QPushButton * button);
 
     void addItemToList(std::shared_ptr<Player> player);
 

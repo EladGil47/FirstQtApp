@@ -30,16 +30,16 @@ void setListViewerLabel();
     void setListViewerVerLayout();
     QVBoxLayout *m_list_viewer_ver_layout;
 
-    protected :
+protected :
     BaseListManagerWindow(QMainWindow *parent = nullptr);
     ~BaseListManagerWindow();
+
 
     virtual void init()  = 0;
     virtual void initList()  = 0;
     virtual void updateList() ;
 
-
-    virtual void setHeaderLabelText() = 0;
+    void setHeaderLabelText(QString text) ;
     QLabel *m_header_label ;
 
     virtual void setListViewerLabelText() = 0;
