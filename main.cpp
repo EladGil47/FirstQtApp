@@ -1,4 +1,6 @@
 #include "include/mainwindow.h"
+#include "include/group_menu_window.h"
+
 
 #include <QApplication>
 
@@ -7,6 +9,10 @@
 
 #include "groups_manager_menu.hpp"
 #include "kohot.hpp"
+
+#include "custom_window.h"
+
+
 
 int main(int argc, char *argv[]) {
 
@@ -24,18 +30,34 @@ int main(int argc, char *argv[]) {
   else 
   {
     QApplication a(argc, argv);
+    CustomWindow window(groups_collection);
+    QObject::connect(&window, &QObject::destroyed,[&kohot]()
+    {
+      kohot.saveGroups();
+    } ) ;
 
-    MainWindow main_window(groups_collection);
-    QObject::connect(&main_window, &QObject::destroyed,
-                     [&]() { kohot.saveGroups(); });
-    
-    QScreen *primaryScreen = QGuiApplication::primaryScreen();
+    // MainWindow * main_window = new MainWindow(groups_collection,&window);
+    // window.setCentralWidget(main_window);
+    // window.show();
 
-    QRect screenGeometry = primaryScreen->geometry();
-    int x = (screenGeometry.width() - main_window.size().width()) / 2;
-    int y = (screenGeometry.height() - main_window.size().height()) / 2;
-    main_window.move(x, y);
-    main_window.show();
+    // window.setMainWindowAsCentralWidget();
+
+    // QObject::connect(main_window, MainWindow::switchToGroupMenuWidget,
+    //                  [&window, &groups_collection](size_t id)
+    //                  {
+    //                    qDebug() << " Hello from Main";
+    //                    std::shared_ptr<Group> group = groups_collection->getItem(id);
+    //                    GroupMenuWindow *group_menu_window = new GroupMenuWindow(group, &window);
+    //                    group_menu_window->init();
+    //                    window.setCentralWidget(group_menu_window);
+    //                  });
+
+
+                
+
+    // This is How to switch QWidget on window
+    // QWidget * ss = new QWidget(&window);
+    // window.setCentralWidget(ss);
 
 
     ret_val = a.exec();

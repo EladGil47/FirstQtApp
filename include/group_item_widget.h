@@ -12,6 +12,11 @@ public:
     GroupItemWidget(std::shared_ptr<Group> group= nullptr, MainWindow* parent = nullptr);
 
 private:
+
+size_t m_group_index ; 
+void setGroupIndex(size_t group_index);
+
+
 void setNameLabel();
 void setSizeLabel();
 void setEnterButton();
@@ -26,6 +31,10 @@ QLabel* m_size_label;
 QPushButton* m_enter_button;
 QPushButton* m_remove_button;
 QHBoxLayout * m_item_hor_layout;
+
+public slots:
+void onEnterButtonClicked(bool a);
+void onRemoveButtonClicked(bool a);
 
 };
 #endif // GROUP_ITEM_WIDGET_H

@@ -9,47 +9,24 @@
 
 #include "base_list_manager_window.h"
 
-BaseListManagerWindow::BaseListManagerWindow(QWidget *parent): QMainWindow(parent)
+BaseListManagerWindow::BaseListManagerWindow(QMainWindow *parent): QWidget(parent)
 {
     m_parent = parent;
-    const QString WINDOW_TITLE = "Kohot";
-    setWindowTitle(WINDOW_TITLE);
-    const int WINDOW_WIDTH = 800;
-    const int WINDOW_HEIGHT = 400;
-    resize(WINDOW_WIDTH, WINDOW_HEIGHT);
-    setWindowWidget();
-    
-
-
     setHeaderLabelCommons();
-
     setListViewerLabel();
     setListViewerListWidget();
     setListViewerVerLayout();
-
     setWindowLayout();
-
-
 }
 
 BaseListManagerWindow::~BaseListManagerWindow()
 {
 }
 
-void BaseListManagerWindow::setWindowWidget()
-{
-  m_window_widget = new QWidget(this);
-  setCentralWidget(m_window_widget);
-
-  m_window_widget->setObjectName("MainWindowWidget");
-  QString window_widget_stylesheet =
-      "QWidget#MainWindowWidget { background-color : #FFFFBF}";
-  m_window_widget->setStyleSheet(window_widget_stylesheet);
-}
 
 void BaseListManagerWindow::setHeaderLabelCommons()
 {
-    m_header_label = new QLabel(m_window_widget);
+    m_header_label = new QLabel(this);
     m_header_label->setAlignment(Qt::AlignHCenter);
     QString header_label_stylesheet =
     "QLabel {"
@@ -62,7 +39,7 @@ void BaseListManagerWindow::setHeaderLabelCommons()
 
 void BaseListManagerWindow::setListViewerLabel()
 {
-    m_list_viewer_label = new QLabel(m_window_widget);
+    m_list_viewer_label = new QLabel(this);
     QString list_viewer_label_stylesheet =
     "QLabel {"
     "    color: black;"                
@@ -83,21 +60,25 @@ void BaseListManagerWindow::setListViewerVerLayout()
 
 void BaseListManagerWindow::setListViewerListWidget()
 {
-    m_list_viewer_widget = new QListWidget(m_window_widget);
+    m_list_viewer_widget = new QListWidget(this);
     QPixmap background_image("Data/field.jpg");
     QPixmap scaledBackground = background_image.scaled(m_list_viewer_widget->size(), Qt::KeepAspectRatio, Qt::SmoothTransformation);
     QPalette palette;
     palette.setBrush(QPalette::Base, scaledBackground);
     m_list_viewer_widget->setPalette(palette);
-    m_list_viewer_widget->setStyleSheet("border: 2px solid black;");
+    m_list_viewer_widget->setStyleSheet("QListWidget {border: 3px solid black;} QListWidget::item { border: 1px solid border;} QListWidget::item:selected { background: rgba(0, 0, 255, 50%); } ");
 }
 
 void BaseListManagerWindow::setWindowLayout()
 {
-    m_window_layout = new QVBoxLayout(m_window_widget);
+    m_window_layout = new QVBoxLayout(this);
     m_window_layout->addWidget(m_header_label);
     m_window_layout->addLayout(m_list_viewer_ver_layout);
     m_window_layout->addLayout(m_buttons_hor_layout);
+    setLayout(m_window_layout);
+
 }
+
+
 
 

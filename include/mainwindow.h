@@ -12,7 +12,7 @@ class MainWindow : public BaseListManagerWindow
     Q_OBJECT
 
 public:
-    MainWindow(std::shared_ptr<GroupsCollection> groups_collection = nullptr,QWidget *parent = nullptr);
+    MainWindow(std::shared_ptr<GroupsCollection> groups_collection = nullptr,QMainWindow *parent = nullptr);
     ~MainWindow();
 
     void init() override ;
@@ -38,6 +38,9 @@ public slots:
     void onRemoveGroupButton(size_t id);
     void onEnterGroupButton(size_t id);
     void updateGroupsList();
+
+signals:
+    void switchToGroupMenuWidgetSignal(size_t id);
 
 };
 #endif // FIRST_QT_APP_INCLUDE_MAINWINDOW_H

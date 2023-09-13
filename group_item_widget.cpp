@@ -6,6 +6,7 @@ GroupItemWidget::GroupItemWidget(std::shared_ptr<Group> group, MainWindow *paren
 {
     if (group != nullptr)
     {
+        setGroupIndex(static_cast<size_t>(m_group->getId()));
         setNameLabel();
         setSizeLabel();
         setEnterButton();
@@ -13,6 +14,11 @@ GroupItemWidget::GroupItemWidget(std::shared_ptr<Group> group, MainWindow *paren
         setItemHorLayout();
     }
 
+}
+
+void GroupItemWidget::setGroupIndex(size_t group_index)
+{
+    m_group_index = group_index;
 }
 
 void GroupItemWidget::setNameLabel()
@@ -36,8 +42,6 @@ void GroupItemWidget::setSizeLabel()
 
 void GroupItemWidget::setEnterButton()
 {
-    size_t group_id = m_group->getId();
-
     m_enter_button = new QPushButton("Enter");
     m_enter_button->setStyleSheet(
    "QPushButton {"
@@ -53,13 +57,11 @@ void GroupItemWidget::setEnterButton()
     "    border: 2px solid #005FAA;"    /* Darker blue border on hover */
     "}"
                                   );
-    connect(m_enter_button, &QPushButton::clicked, m_main_window, [=]()
-            { m_main_window->onEnterGroupButton(group_id); });
+    connect(m_enter_button, &QPushButton::clicked, this,onEnterButtonClicked);
 }
+
 void GroupItemWidget::setRemoveButton()
 {
-    size_t group_id = m_group->getId();
-
     m_remove_button = new QPushButton("Remove");
     m_remove_button->setStyleSheet(
         "QPushButton {"
@@ -76,8 +78,7 @@ void GroupItemWidget::setRemoveButton()
     "    border: 2px solid #FF3333;"   /* Darker red border on hover */
     "}"
     );
-    connect(m_remove_button, &QPushButton::clicked, m_main_window, [=]()
-            { m_main_window->onRemoveGroupButton(group_id); });
+    connect(m_remove_button, &QPushButton::clicked, this,onRemoveButtonClicked);
 }
 
 void GroupItemWidget::setItemHorLayout()
@@ -88,3 +89,16 @@ void GroupItemWidget::setItemHorLayout()
     m_item_hor_layout->addWidget(m_enter_button, 1);
     m_item_hor_layout->addWidget(m_remove_button, 1);
 }
+
+// Slots : 
+
+void GroupItemWidget::onEnterButtonClicked(bool a)
+{
+ m_main_window->onEnterGroupButton(m_group_index);
+}
+void GroupItemWidget::onRemoveButtonClicked(bool a)
+{
+ m_main_window->onRemoveGroupButton(m_group_index);
+}
+
+

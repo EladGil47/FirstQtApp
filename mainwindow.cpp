@@ -7,7 +7,7 @@
 #include "group_item_widget.h"
 
 
-MainWindow::MainWindow(std::shared_ptr<GroupsCollection> groups_collection,QWidget *parent):BaseListManagerWindow(parent)
+MainWindow::MainWindow(std::shared_ptr<GroupsCollection> groups_collection,QMainWindow *parent):BaseListManagerWindow(parent)
 {
     m_groups_collection = groups_collection;
     init();
@@ -48,12 +48,7 @@ void MainWindow::setCreateNewGroupButton()
     // Set the button's size policy (optional)
     m_create_new_group_button->setSizePolicy(QSizePolicy::Preferred, QSizePolicy::Fixed);
     m_create_new_group_button->setToolTip("Click here to create a new group");
-
-
-
-
     connect(m_create_new_group_button, &QPushButton::clicked, this, &MainWindow::onCreateNewGroupButton);
-
 }
 
 void MainWindow::removeAllGroupsFromList()
@@ -104,10 +99,6 @@ void MainWindow::createButtonsHorLayout()
 void MainWindow::addGroupItemToList(std::shared_ptr<Group> group)
 {   
     GroupItemWidget * group_item_widget = new GroupItemWidget(group,this);
-
-    // QWidget *xxx = new QWidget (group_item_widget);
-    // xxx->setStyleSheet("border: 3px solid black;");
-
     QListWidgetItem *item = new QListWidgetItem(m_list_viewer_widget);
     item->setSizeHint(group_item_widget->sizeHint());
     m_list_viewer_widget->setItemWidget(item, group_item_widget);
@@ -132,20 +123,18 @@ void MainWindow::onCreateNewGroupButton()
 
 void MainWindow::onRemoveGroupButton(size_t id)
 {
-    m_groups_collection->deleteItem(id);
     QListWidgetItem *itemToRemove = m_list_viewer_widget->takeItem(id);
     delete itemToRemove;
+    m_groups_collection->deleteItem(id);
     for (size_t index = id; index <  m_groups_collection->getSize(); index++)
     {
         m_groups_collection->getItem(index)->setId(static_cast<uint16_t>(index));
     }
+    updateGroupsList();
 }
 
 void MainWindow::onEnterGroupButton(size_t id)
 {
-    std::shared_ptr<Group> group = m_groups_collection->getItem(id);
-    GroupMenuWindow *m_group_menu_window = new GroupMenuWindow(group,this);
-    m_group_menu_window->init();
-    hide();
-    m_group_menu_window->show();
+    qDebug() << "Enter Group ID: " <<id ;
+    emit switchToGroupMenuWidgetSignal(id);
 }

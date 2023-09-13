@@ -16,7 +16,7 @@ class GroupMenuWindow : public BaseListManagerWindow
     Q_OBJECT
 
 public:
-    GroupMenuWindow(std::shared_ptr<Group> group = nullptr,MainWindow *parent = nullptr);
+    GroupMenuWindow(std::shared_ptr<Group> group = nullptr,QMainWindow *parent = nullptr);
     
     
     void init() override  ;
@@ -26,7 +26,7 @@ private:
     void setListViewerLabelText() override ;
     void createButtonsHorLayout() override;
 
-    MainWindow * m_main_window;
+    // MainWindow * m_main_window;
 
     QPushButton *m_create_new_player_button = new QPushButton("Create new player", this);
     QPushButton *m_create_teams_button = new QPushButton("Create teams", this);
@@ -50,6 +50,9 @@ public slots:
     void onGoBackButton();
     void onRemoveButton(size_t id);
     void onEnterButton(size_t id);
+
+signals:
+    void onGoBackButtonClickedSignal();
 
 
 };

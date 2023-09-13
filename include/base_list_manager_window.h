@@ -8,14 +8,18 @@
 #include <QListWidget>
 #include <QPushButton>
 
-class BaseListManagerWindow : public QMainWindow
+class BaseListManagerWindow : public QWidget
 {
     Q_OBJECT
 
-private:
+public: 
+    QMainWindow *m_parent ;
 
     void setWindowWidget();
-    QWidget *m_window_widget;
+    // QWidget *m_window_widget;
+
+private:
+
 
     void setWindowLayout() ;
     QVBoxLayout *m_window_layout;
@@ -31,9 +35,8 @@ void setListViewerLabel();
     QVBoxLayout *m_list_viewer_ver_layout;
 
     protected :
-    BaseListManagerWindow(QWidget *parent = nullptr);
+    BaseListManagerWindow(QMainWindow *parent = nullptr);
     ~BaseListManagerWindow();
-    QWidget *m_parent ;
 
     virtual void init()  = 0;
 

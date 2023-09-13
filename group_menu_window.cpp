@@ -5,11 +5,10 @@
 #include <QInputDialog>
 #include <QDebug>
 
-GroupMenuWindow::GroupMenuWindow(std::shared_ptr<Group> group, MainWindow *parent)
-    : BaseListManagerWindow(parent), m_main_window(parent), m_group(group)
+GroupMenuWindow::GroupMenuWindow(std::shared_ptr<Group> group, QMainWindow *parent)
+    : BaseListManagerWindow(parent), m_group(group)
 {
-    resize(parent->size());
-    move(parent->pos());
+      init();
 }
 
 void GroupMenuWindow::init() 
@@ -57,7 +56,7 @@ void GroupMenuWindow::createButtonsHorLayout()
     addButtonToButtonsHorLayout(m_create_new_player_button,&GroupMenuWindow::onCreateNewPlayerButton);
     addButtonToButtonsHorLayout(m_create_teams_button,&GroupMenuWindow::onCreateTeamsClicked);
     addButtonToButtonsHorLayout(m_go_back_button,&GroupMenuWindow::onGoBackButton);
-    connect(m_go_back_button,&QPushButton::clicked,m_main_window,&MainWindow::updateGroupsList);
+    // connect(m_go_back_button,&QPushButton::clicked,m_main_window,&MainWindow::updateGroupsList);
 
     m_buttons_hor_layout->addStretch(1);
 }
@@ -101,10 +100,7 @@ void GroupMenuWindow::onCreateTeamsClicked()
 
 void GroupMenuWindow::onGoBackButton()
 {
-    m_parent->resize(this->size());
-    m_parent->move(this->pos());
-    hide();
-    m_parent->show();
+    emit onGoBackButtonClickedSignal();
 }
 
 void GroupMenuWindow::addItemToList(std::shared_ptr<Player> player)
@@ -128,5 +124,10 @@ void GroupMenuWindow::onRemoveButton(size_t id)
 
 void GroupMenuWindow::onEnterButton(size_t id)
 {
-
+ /// Open a window with player attributes
+    /// Calls team creator
 }
+
+
+
+// TODO Update this class like I did in mainwindow.cpp

@@ -32,6 +32,9 @@ set(PROJECT_SOURCES
 
     player_item_widget.cpp
      include/player_item_widget.h
+
+     include/custom_window.h
+
 )
 
 add_executable(${PROJECT_NAME} ${PROJECT_SOURCES})
