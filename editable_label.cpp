@@ -35,6 +35,7 @@ void EditableLabel::finishEditing()
     m_label->setText(newText);
     m_label->setVisible(true);
     m_editLine->setVisible(false);
+    emit finishEditingSig(newText);
 }
 
 void EditableLabel::setLabelText(QString text)

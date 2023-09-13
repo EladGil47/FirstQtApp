@@ -21,6 +21,13 @@ void GroupMenuWindow::init()
     createButtonsHorLayout();
     initList();
 
+    connect(m_header_label,EditableLabel::finishEditingSig,this,setGroupName);
+
+}
+
+void GroupMenuWindow::setGroupName(const QString & text)
+{
+    m_group->setName(text.toStdString());
 }
 
 void GroupMenuWindow::initList()

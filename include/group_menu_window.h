@@ -45,9 +45,11 @@ public slots:
     void onGoBackButton();
     void onRemoveButton(size_t id);
     void onEnterButton(size_t id);
+    void setGroupName(const QString & text);
 
 signals:
     void onGoBackButtonClickedSignal();
+    
 
 
 };
