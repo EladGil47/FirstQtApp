@@ -41,18 +41,21 @@ void GroupMenuWindow::initList()
 void GroupMenuWindow::setCreateNewPlayerButton()
 {
     m_create_new_player_button = new QPushButton("Create new player", this);
+    m_create_new_player_button->setStyleSheet(BUTTONS_HOR_LAYOUT_STYLE_SHEET);
     connect(m_create_new_player_button, &QPushButton::clicked, this, &GroupMenuWindow::onCreateNewPlayerButton);
 }
 
 void GroupMenuWindow::setCreateTeamsButton()
 {
     m_create_teams_button = new QPushButton("Create teams", this);
+    m_create_teams_button->setStyleSheet(BUTTONS_HOR_LAYOUT_STYLE_SHEET);
     connect(m_create_teams_button, &QPushButton::clicked, this, &GroupMenuWindow::onCreateTeamsClicked);
 }
 
 void GroupMenuWindow::setGoBackButton()
 {
     m_go_back_button = new QPushButton("Go back", this);
+    m_go_back_button->setStyleSheet(BUTTONS_HOR_LAYOUT_STYLE_SHEET);
     connect(m_go_back_button, &QPushButton::clicked, this, &GroupMenuWindow::onGoBackButton);
 }
 

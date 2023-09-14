@@ -35,7 +35,7 @@ void MainWindow::setCreateNewGroupButton()
         "    background-color: #4CAF50;"     // Green background color
         "    border: 2px solid #4CAF50;"     // Green border
         "    color: white;"                  // White text color
-        "    padding: 10px 20px;"            // Padding around the text
+        "    padding: 3px 15px;"              // Padding around the text
         "    font-size: 18px;"              // Font size
         "    font-weight: bold;"            // Bold text
         "}"
