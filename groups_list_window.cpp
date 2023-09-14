@@ -9,15 +9,6 @@ GroupsListWindow::GroupsListWindow(std::shared_ptr<GroupsCollection> groups_coll
 BaseListManagerWindow(parent),
 m_groups_collection(groups_collection)
 {
-    init();
-}
-
-GroupsListWindow::~GroupsListWindow()
-{
-}
-
-void GroupsListWindow::init() 
-{
     setHeaderLabelText(QString::fromStdString("Welcome To Kohot"));
     setHeaderLabelEditability(false);
     setListViewerLabelText();
@@ -25,6 +16,11 @@ void GroupsListWindow::init()
     createButtonsHorLayout();
     initList();
 }
+
+GroupsListWindow::~GroupsListWindow()
+{
+}
+
 
 void GroupsListWindow::setCreateNewGroupButton()
 {

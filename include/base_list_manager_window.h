@@ -37,8 +37,6 @@ protected :
     BaseListManagerWindow(QMainWindow *parent = nullptr);
     ~BaseListManagerWindow();
 
-
-    virtual void init()  = 0;
     virtual void initList()  = 0;
     virtual void updateList() ;
 

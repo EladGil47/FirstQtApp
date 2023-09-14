@@ -29,7 +29,6 @@ void setCreateNewGroupButton();
 
     std::shared_ptr<GroupsCollection> m_groups_collection;
 
-    void init() override ;
     void initList() override;
 
 

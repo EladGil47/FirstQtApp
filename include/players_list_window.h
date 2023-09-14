@@ -21,7 +21,6 @@ public:
     
 
 private:
-    void init() override  ;
     void initList() override;
     void setListViewerLabelText() override ;
     void createButtonsHorLayout() override;

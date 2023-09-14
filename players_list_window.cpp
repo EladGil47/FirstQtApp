@@ -8,11 +8,6 @@
 PlayersListWindow::PlayersListWindow(std::shared_ptr<Group> group, QMainWindow *parent)
     : BaseListManagerWindow(parent), m_group(group)
 {
-      init();
-}
-
-void PlayersListWindow::init() 
-{
     setHeaderLabelText(QString::fromStdString(m_group->getName()));
     setListViewerLabelText();
     setCreateNewPlayerButton();
@@ -22,14 +17,12 @@ void PlayersListWindow::init()
     initList();
 
     connect(m_header_label,EditableLabel::finishEditingSig,this,setGroupName);
-
 }
 
 void PlayersListWindow::changePlayerName(uint16_t id ,const std::string & name)
 {
     m_group->getPlayersCollectionRef().getItem(static_cast<size_t>(id))->setName(name);
 }
-
 
 void PlayersListWindow::setGroupName(const QString & text)
 {
