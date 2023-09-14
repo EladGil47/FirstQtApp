@@ -21,23 +21,17 @@ set(PROJECT_SOURCES
     main.cpp
     mainwindow.cpp
     group_menu_window.cpp
+    base_list_manager_window.cpp
+    group_item_widget.cpp
+    player_item_widget.cpp
+    editable_label.cpp
     include/mainwindow.h
     include/group_menu_window.h
-
-    base_list_manager_window.cpp
     include/base_list_manager_window.h
-
-    group_item_widget.cpp
     include/group_item_widget.h
-
-    player_item_widget.cpp
     include/player_item_widget.h
-
-    include/custom_window.h
-
     include/editable_label.h
-    editable_label.cpp
-
+    include/custom_window.h
     include/app_common.hpp
 )
 
@@ -55,4 +49,5 @@ target_link_libraries(${PROJECT_NAME} PRIVATE
 )
 target_include_directories(${PROJECT_NAME} PUBLIC
     ${CMAKE_SOURCE_DIR}/include
+    ${Qt6Widgets_INCLUDE_DIRS}
 )

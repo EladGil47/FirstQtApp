@@ -1,6 +1,4 @@
 #include "base_list_manager_window.h"
-
-#include "editable_label.h"
 #include "app_common.hpp"
 
 BaseListManagerWindow::BaseListManagerWindow(QMainWindow *parent): QWidget(parent)
