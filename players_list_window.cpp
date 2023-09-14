@@ -1,17 +1,17 @@
-#include "group_menu_window.h"
+#include "players_list_window.h"
 
 #include "player_item_widget.h"
 
 #include <QInputDialog>
 #include <QDebug>
 
-GroupMenuWindow::GroupMenuWindow(std::shared_ptr<Group> group, QMainWindow *parent)
+PlayersListWindow::PlayersListWindow(std::shared_ptr<Group> group, QMainWindow *parent)
     : BaseListManagerWindow(parent), m_group(group)
 {
       init();
 }
 
-void GroupMenuWindow::init() 
+void PlayersListWindow::init() 
 {
     setHeaderLabelText(QString::fromStdString(m_group->getName()));
     setListViewerLabelText();
@@ -25,18 +25,18 @@ void GroupMenuWindow::init()
 
 }
 
-void GroupMenuWindow::changePlayerName(uint16_t id ,const std::string & name)
+void PlayersListWindow::changePlayerName(uint16_t id ,const std::string & name)
 {
     m_group->getPlayersCollectionRef().getItem(static_cast<size_t>(id))->setName(name);
 }
 
 
-void GroupMenuWindow::setGroupName(const QString & text)
+void PlayersListWindow::setGroupName(const QString & text)
 {
     m_group->setName(text.toStdString());
 }
 
-void GroupMenuWindow::initList()
+void PlayersListWindow::initList()
 {
     for (std::shared_ptr<Player> player : m_group->getPlayersCollectionRef().getCollectionRef())
     {
@@ -44,33 +44,33 @@ void GroupMenuWindow::initList()
     }
 }
 
-void GroupMenuWindow::setCreateNewPlayerButton()
+void PlayersListWindow::setCreateNewPlayerButton()
 {
     m_create_new_player_button = new QPushButton("Create new player", this);
     m_create_new_player_button->setStyleSheet(BUTTONS_HOR_LAYOUT_STYLE_SHEET);
-    connect(m_create_new_player_button, &QPushButton::clicked, this, &GroupMenuWindow::onCreateNewPlayerButton);
+    connect(m_create_new_player_button, &QPushButton::clicked, this, &PlayersListWindow::onCreateNewPlayerButton);
 }
 
-void GroupMenuWindow::setCreateTeamsButton()
+void PlayersListWindow::setCreateTeamsButton()
 {
     m_create_teams_button = new QPushButton("Create teams", this);
     m_create_teams_button->setStyleSheet(BUTTONS_HOR_LAYOUT_STYLE_SHEET);
-    connect(m_create_teams_button, &QPushButton::clicked, this, &GroupMenuWindow::onCreateTeamsClicked);
+    connect(m_create_teams_button, &QPushButton::clicked, this, &PlayersListWindow::onCreateTeamsClicked);
 }
 
-void GroupMenuWindow::setGoBackButton()
+void PlayersListWindow::setGoBackButton()
 {
     m_go_back_button = new QPushButton("Go back", this);
     m_go_back_button->setStyleSheet(BUTTONS_HOR_LAYOUT_STYLE_SHEET);
-    connect(m_go_back_button, &QPushButton::clicked, this, &GroupMenuWindow::onGoBackButton);
+    connect(m_go_back_button, &QPushButton::clicked, this, &PlayersListWindow::onGoBackButton);
 }
 
-void GroupMenuWindow::setListViewerLabelText()
+void PlayersListWindow::setListViewerLabelText()
 {
     m_list_viewer_label->setText("Players :");
 }
 
-void GroupMenuWindow::createButtonsHorLayout()
+void PlayersListWindow::createButtonsHorLayout()
 {
     m_buttons_hor_layout->addStretch(1);
     addButtonToButtonsHorLayout(m_create_new_player_button);
@@ -79,12 +79,12 @@ void GroupMenuWindow::createButtonsHorLayout()
     m_buttons_hor_layout->addStretch(1);
 }
 
-void GroupMenuWindow::addButtonToButtonsHorLayout(QPushButton * button)
+void PlayersListWindow::addButtonToButtonsHorLayout(QPushButton * button)
 {
     m_buttons_hor_layout->addWidget(button, 2,  Qt::AlignVCenter);
 }
 
-void GroupMenuWindow::onCreateNewPlayerButton()
+void PlayersListWindow::onCreateNewPlayerButton()
 {
     Player::Config config;
 
@@ -107,13 +107,13 @@ void GroupMenuWindow::onCreateNewPlayerButton()
     } 
 }
 
-void GroupMenuWindow::onCreateTeamsClicked()
+void PlayersListWindow::onCreateTeamsClicked()
 {
     /// Open a window to choose players
     /// Calls team creator
 }
 
-void GroupMenuWindow::addItemToList(std::shared_ptr<Player> player)
+void PlayersListWindow::addItemToList(std::shared_ptr<Player> player)
 {
     PlayerItemWidget * player_item_widget = new PlayerItemWidget(player,this);
     QListWidgetItem *item = new QListWidgetItem(m_list_viewer_widget);
@@ -121,7 +121,7 @@ void GroupMenuWindow::addItemToList(std::shared_ptr<Player> player)
     m_list_viewer_widget->setItemWidget(item, player_item_widget);
 }
 
-void GroupMenuWindow::onRemoveButton(size_t id)
+void PlayersListWindow::onRemoveButton(size_t id)
 {
     m_group->getPlayersCollectionRef().deleteItem(id);
     QListWidgetItem *itemToRemove = m_list_viewer_widget->takeItem(id);
@@ -133,13 +133,13 @@ void GroupMenuWindow::onRemoveButton(size_t id)
     updateList();
 }
 
-void GroupMenuWindow::onEnterButton(size_t id)
+void PlayersListWindow::onEnterButton(size_t id)
 {
  /// Open a window with player attributes
     /// Calls team creator
 }
 
-void GroupMenuWindow::onGoBackButton()
+void PlayersListWindow::onGoBackButton()
 {
     emit onGoBackButtonClickedSignal();
 }

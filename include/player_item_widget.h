@@ -8,7 +8,7 @@
 #include <memory>
 
 #include "player.hpp"
-#include "group_menu_window.h"
+#include "players_list_window.h"
 
 
 class PlayerItemWidget : public QWidget
@@ -16,7 +16,7 @@ class PlayerItemWidget : public QWidget
     Q_OBJECT
 
 public:
-    PlayerItemWidget(std::shared_ptr<Player> player, GroupMenuWindow* parent);
+    PlayerItemWidget(std::shared_ptr<Player> player, PlayersListWindow* parent);
 
 private:
 
@@ -31,7 +31,7 @@ void setupLayout();
 
 
 std::shared_ptr<Player> m_player;
-GroupMenuWindow * m_group_menu_window;
+PlayersListWindow * m_players_list_window;
 
 EditableLabel* m_name_label;
 QLabel* m_rate_label;

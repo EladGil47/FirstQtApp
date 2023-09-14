@@ -4,8 +4,8 @@
 
 #include <QHBoxLayout>
 
-PlayerItemWidget::PlayerItemWidget(std::shared_ptr<Player> player, GroupMenuWindow *parent)
-    : QWidget(parent), m_player(player), m_group_menu_window(parent)
+PlayerItemWidget::PlayerItemWidget(std::shared_ptr<Player> player, PlayersListWindow *parent)
+    : QWidget(parent), m_player(player), m_players_list_window(parent)
 {
     if (player != nullptr)
     {
@@ -94,14 +94,14 @@ void PlayerItemWidget::setupLayout()
 
 void PlayerItemWidget::onEnterButtonClicked(bool a)
 {
-    m_group_menu_window->onEnterButton(m_player_index);
+    m_players_list_window->onEnterButton(m_player_index);
 }
 void PlayerItemWidget::onRemoveButtonClicked(bool a)
 {
-    m_group_menu_window->onRemoveButton(m_player_index);
+    m_players_list_window->onRemoveButton(m_player_index);
 }
 
 void PlayerItemWidget::onChangePlayerName(const QString &name)
 {
-    m_group_menu_window->changePlayerName(m_player_index, name.toStdString());
+    m_players_list_window->changePlayerName(m_player_index, name.toStdString());
 }

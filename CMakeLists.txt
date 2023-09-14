@@ -20,13 +20,13 @@ endif()
 set(PROJECT_SOURCES
     main.cpp
     mainwindow.cpp
-    group_menu_window.cpp
+    players_list_window.cpp
     base_list_manager_window.cpp
     group_item_widget.cpp
     player_item_widget.cpp
     editable_label.cpp
     include/mainwindow.h
-    include/group_menu_window.h
+    include/players_list_window.h
     include/base_list_manager_window.h
     include/group_item_widget.h
     include/player_item_widget.h

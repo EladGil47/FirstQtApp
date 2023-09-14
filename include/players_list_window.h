@@ -1,5 +1,5 @@
-#ifndef FIRST_QT_APP_INCLUDE_GROUP_MENU_WINDOW_H
-#define FIRST_QT_APP_INCLUDE_GROUP_MENU_WINDOW_H
+#ifndef FIRST_QT_APP_INCLUDE_players_list_window_H
+#define FIRST_QT_APP_INCLUDE_players_list_window_H
 
 #include <QWidget>
 
@@ -11,12 +11,12 @@
 
 #include "base_list_manager_window.h"
 
-class GroupMenuWindow : public BaseListManagerWindow
+class PlayersListWindow : public BaseListManagerWindow
 {
     Q_OBJECT
 
 public:
-    GroupMenuWindow(std::shared_ptr<Group> group = nullptr,QMainWindow *parent = nullptr);
+    PlayersListWindow(std::shared_ptr<Group> group = nullptr,QMainWindow *parent = nullptr);
     void changePlayerName(uint16_t id ,const std::string & name);
     
 
@@ -70,4 +70,4 @@ signals:
 
 };
 
-#endif // FIRST_QT_APP_INCLUDE_GROUP_MENU_WINDOW_H
+#endif // FIRST_QT_APP_INCLUDE_players_list_window_H
