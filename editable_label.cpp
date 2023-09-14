@@ -38,9 +38,9 @@ void EditableLabel::finishEditing()
     emit finishEditingSig(newText);
 }
 
-void EditableLabel::setLabelText(QString text)
+QLabel * EditableLabel::getLabel()
 {
-    m_label->setText(text);
+    return m_label;
 }
 
 void EditableLabel::setEditablity(bool state)

@@ -12,15 +12,11 @@ class EditableLabel : public QWidget
 
 public:
     EditableLabel(QWidget* parent = nullptr);
-    void setLabelText(QString text) ;
     void setEditablity(bool state);
-    void getEditLineText() ;
-
+    QLabel * getLabel() ;
 
 protected:
     void mouseDoubleClickEvent(QMouseEvent* event) override;
-
-
 
 private:
     void setLabel() ;

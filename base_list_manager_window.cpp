@@ -101,16 +101,10 @@ void BaseListManagerWindow::updateList()
 
 void BaseListManagerWindow::setHeaderLabelText(QString text) 
 {
-    // m_header_label->setText(text);
-    m_header_label->setLabelText(text);
-
+    m_header_label->getLabel()->setText(text);
 }
 
 void BaseListManagerWindow::setHeaderLabelEditability(bool state) 
 {
-    // m_header_label->setText(text);
     m_header_label->setEditablity(state);
 }
-
-
-
