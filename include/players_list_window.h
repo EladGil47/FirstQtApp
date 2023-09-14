@@ -7,7 +7,7 @@
 #include <memory>
 #include <iostream>
 
-#include "mainwindow.h"
+#include "groups_list_window.h"
 
 #include "base_list_manager_window.h"
 

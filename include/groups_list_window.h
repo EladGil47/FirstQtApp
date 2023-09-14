@@ -7,13 +7,13 @@
 #include "base_list_manager_window.h"
 
 
-class MainWindow : public BaseListManagerWindow
+class GroupsListWindow : public BaseListManagerWindow
 {
     Q_OBJECT
 
 public:
-    MainWindow(std::shared_ptr<GroupsCollection> groups_collection = nullptr,QMainWindow *parent = nullptr);
-    ~MainWindow();
+    GroupsListWindow(std::shared_ptr<GroupsCollection> groups_collection = nullptr,QMainWindow *parent = nullptr);
+    ~GroupsListWindow();
     void changeGroupName(uint16_t id ,const std::string & name);
 
 

@@ -6,7 +6,7 @@
 #include <QGuiApplication>
 #include <QScreen>
 
-#include "mainwindow.h"
+#include "groups_list_window.h"
 #include "players_list_window.h"
 #include "groups_collection.hpp"
 #include "app_common.hpp"
@@ -17,7 +17,7 @@ class WindowsManager : public QMainWindow
 {
     Q_OBJECT
 public:
-    MainWindow *m_main_window;
+    GroupsListWindow *m_groups_list_window;
     PlayersListWindow *m_players_list_window;
     std::shared_ptr<GroupsCollection> m_groups_collection;
 
@@ -30,8 +30,8 @@ public:
 
     void setMainWindow()
     {
-        m_main_window = new MainWindow(m_groups_collection, this);
-        QObject::connect(m_main_window, MainWindow::switchToGroupMenuWidgetSignal, this, switchToGroupMenuWidget);
+        m_groups_list_window = new GroupsListWindow(m_groups_collection, this);
+        QObject::connect(m_groups_list_window, GroupsListWindow::switchToGroupMenuWidgetSignal, this, switchToGroupMenuWidget);
     }
 
     void initWindowLocation()
@@ -64,7 +64,7 @@ public slots:
     void switchToMainWindowWidget()
     {
         setMainWindow();
-        setCentralWidget(m_main_window);
+        setCentralWidget(m_groups_list_window);
     }
 
     void switchToGroupMenuWidget(size_t id)

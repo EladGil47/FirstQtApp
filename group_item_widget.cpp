@@ -2,8 +2,8 @@
 #include "group_item_widget.h"
 #include "app_common.hpp"
 
-GroupItemWidget::GroupItemWidget(std::shared_ptr<Group> group, MainWindow *parent)
-    :  m_group(group) , m_main_window(parent)
+GroupItemWidget::GroupItemWidget(std::shared_ptr<Group> group, GroupsListWindow *parent)
+    :  m_group(group) , m_groups_list_window(parent)
 {
     if (group != nullptr)
     {
@@ -97,16 +97,16 @@ void GroupItemWidget::setItemHorLayout()
 
 void GroupItemWidget::onEnterButtonClicked(bool a)
 {
- m_main_window->onEnterGroupButton(m_group_index);
+ m_groups_list_window->onEnterGroupButton(m_group_index);
 }
 void GroupItemWidget::onRemoveButtonClicked(bool a)
 {
- m_main_window->onRemoveGroupButton(m_group_index);
+ m_groups_list_window->onRemoveGroupButton(m_group_index);
 }
 
 void GroupItemWidget::onChangeGroupName(const QString& name)
 {
-    m_main_window->changeGroupName(m_group_index,name.toStdString());
+    m_groups_list_window->changeGroupName(m_group_index,name.toStdString());
 }
 
 

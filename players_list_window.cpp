@@ -144,5 +144,3 @@ void PlayersListWindow::onGoBackButton()
     emit onGoBackButtonClickedSignal();
 }
 
-
-// TODO Update this class like I did in mainwindow.cpp
