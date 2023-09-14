@@ -31,7 +31,7 @@ set(PROJECT_SOURCES
     include/group_item_widget.h
     include/player_item_widget.h
     include/editable_label.h
-    include/custom_window.h
+    include/windows_manager.h
     include/app_common.hpp
 )
 

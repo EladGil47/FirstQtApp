@@ -3,7 +3,7 @@
 #include "groups_manager_menu.hpp"
 #include "kohot.hpp"
 
-#include "custom_window.h"
+#include "windows_manager.h"
 
 
 
@@ -23,7 +23,7 @@ int main(int argc, char *argv[]) {
   else 
   {
     QApplication a(argc, argv);
-    CustomWindow window(groups_collection);
+    WindowsManager window(groups_collection);
     QObject::connect(&window, &QObject::destroyed,[&kohot]()
     {
       kohot.saveGroups();

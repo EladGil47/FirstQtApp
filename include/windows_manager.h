@@ -13,7 +13,7 @@
 
 
 
-class CustomWindow : public QMainWindow
+class WindowsManager : public QMainWindow
 {
     Q_OBJECT
 public:
@@ -52,7 +52,7 @@ public:
         setStyleSheet(Settings::BACKGROUND_COLOR);
     }
 
-    CustomWindow(std::shared_ptr<GroupsCollection> groups_collection = nullptr, QWidget *parent = nullptr) : QMainWindow(parent)
+    WindowsManager(std::shared_ptr<GroupsCollection> groups_collection = nullptr, QWidget *parent = nullptr) : QMainWindow(parent)
     {
         m_groups_collection = groups_collection;
         initWindowLocation();
