@@ -14,6 +14,8 @@ class MainWindow : public BaseListManagerWindow
 public:
     MainWindow(std::shared_ptr<GroupsCollection> groups_collection = nullptr,QMainWindow *parent = nullptr);
     ~MainWindow();
+    void changeGroupName(uint16_t id ,const std::string & name);
+
 
 
 private:
@@ -35,6 +37,7 @@ public slots:
     void onCreateNewGroupButton();
     void onRemoveGroupButton(size_t id);
     void onEnterGroupButton(size_t id);
+
 
 signals:
     void switchToGroupMenuWidgetSignal(size_t id);
