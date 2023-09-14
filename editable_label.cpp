@@ -14,6 +14,56 @@ EditableLabel::EditableLabel(QWidget *parent) : QWidget(parent)
     }
 }
 
+QLabel * EditableLabel::getLabel()
+{
+    return m_label;
+}
+
+QLineEdit * EditableLabel::getLineEdit()
+{
+    return m_editLine;
+}
+
+void EditableLabel::setEditablity(bool state)
+{
+    m_editability = state;
+}
+
+void EditableLabel::setLabel()
+{
+    m_label = new QLabel(this);
+    m_label->setToolTip("Double-click me to edit");
+}
+
+void EditableLabel::setAlignment(Qt::Alignment alignment)
+{
+    m_label->setAlignment(alignment);
+    m_editLine->setAlignment(alignment);
+}
+
+void EditableLabel::setFont (const QFont & font)
+{
+    m_label->setFont(font);
+    m_editLine->setFont(font);
+}
+
+void EditableLabel::setEditLine()
+{
+    m_editLine = new QLineEdit(this);
+    const QString TRANSPARENT_LINE_EDIT_STYLESHEET =  
+        "QLineEdit {"
+        "    border: transparent;"
+        "    background-color : transparent"
+        "}"
+        ;
+    m_editLine->setStyleSheet(TRANSPARENT_LINE_EDIT_STYLESHEET);
+    m_editLine->size() = m_label->size();
+    m_editLine->setFont(m_label->font());
+    m_editLine->setAlignment(m_label->alignment());
+    m_editLine->setVisible(false);
+    connect(m_editLine, &QLineEdit::editingFinished, this, &EditableLabel::finishEditing);
+}
+
 void EditableLabel::mouseDoubleClickEvent(QMouseEvent *event)
 {
     if (m_editability)
@@ -36,47 +86,4 @@ void EditableLabel::finishEditing()
     m_label->setVisible(true);
     m_editLine->setVisible(false);
     emit finishEditingSig(newText);
-}
-
-QLabel * EditableLabel::getLabel()
-{
-    return m_label;
-}
-
-void EditableLabel::setEditablity(bool state)
-{
-    m_editability = state;
-}
-
-void EditableLabel::setLabel()
-{
-    m_label = new QLabel(this);
-    QString header_label_stylesheet =
-        "QLabel {"
-        "    color: black;"
-        "    font-size: 24px;"
-        "    font-weight: bold;"
-        "}";
-    m_label->setStyleSheet(header_label_stylesheet);
-    m_label->setAlignment(Qt::AlignHCenter);
-    m_label->setToolTip("Double-click me to edit");
-}
-
-void EditableLabel::setEditLine()
-{
-    m_editLine = new QLineEdit(this);
-
-    m_editLine->size() = m_label->size();
-    QString edit_line_stylesheet =
-        "QLineEdit {"
-        "    color: black;"
-        "    font-size: 24px;"
-        "    font-weight: bold;"
-        "    border: transparent;"
-        "    background-color : #FFFFBF"
-        "}";
-    m_editLine->setStyleSheet(edit_line_stylesheet);
-    m_editLine->setAlignment(Qt::AlignHCenter);
-    m_editLine->setVisible(false);
-    connect(m_editLine, &QLineEdit::editingFinished, this, &EditableLabel::finishEditing);
 }

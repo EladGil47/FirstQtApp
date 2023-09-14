@@ -26,7 +26,8 @@ void GroupItemWidget::setNameLabel()
     QString name = QString::fromStdString(m_group->getName());
     m_name_label = new EditableLabel(this);
     m_name_label->getLabel()->setText(name);
-    m_name_label->getLabel()->setAlignment(Qt::AlignLeft);
+    m_name_label->setAlignment(Qt::AlignLeft);
+    m_name_label->setFont(QFont("Arial", 14, QFont::Bold));
     // TODO connecit to slot that transfer the new namd and the index of this item
     // connect(m_name_label,EditableLabel::finishEditingSig, m_main_window, MainWindow::updateList);
 }

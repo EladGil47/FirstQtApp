@@ -14,13 +14,19 @@ public:
     EditableLabel(QWidget* parent = nullptr);
     void setEditablity(bool state);
     QLabel * getLabel() ;
+    QLineEdit * getLineEdit() ;
+    void setFont(const QFont & font) ;
+    void setAlignment(Qt::Alignment alignment) ; 
+
+
+    void setEditLine() ;
+
 
 protected:
     void mouseDoubleClickEvent(QMouseEvent* event) override;
 
 private:
     void setLabel() ;
-    void setEditLine() ;
 
     QLabel* m_label;
     QLineEdit* m_editLine;

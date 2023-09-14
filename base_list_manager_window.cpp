@@ -21,14 +21,8 @@ BaseListManagerWindow::~BaseListManagerWindow()
 void BaseListManagerWindow::setHeaderLabelCommons()
 {
     m_header_label = new EditableLabel(this);
-    // m_header_label->setAlignment(Qt::AlignHCenter);
-    // QString header_label_stylesheet =
-    // "QLabel {"
-    // "    color: black;"              
-    // "    font-size: 24px;"           
-    // "    font-weight: bold;"         
-    // "}";
-    // m_header_label->setStyleSheet(header_label_stylesheet);
+    m_header_label->setFont(QFont("Arial", 30, QFont::Bold));
+    m_header_label->setAlignment(Qt::AlignHCenter);
 }
 
 void BaseListManagerWindow::setListViewerLabel()
@@ -66,13 +60,6 @@ void BaseListManagerWindow::setListViewerListWidget()
 void BaseListManagerWindow::setWindowLayout()
 {
     m_window_layout = new QVBoxLayout(this);
-    /////////////////////////////////
-    // EditableLabel *xx = new EditableLabel(this);
-    // m_window_layout->addWidget(xx);
-
-    /////////////////////////////////
-
-    
     m_window_layout->addWidget(m_header_label);
     m_window_layout->addLayout(m_list_viewer_ver_layout);
     m_window_layout->addLayout(m_buttons_hor_layout);
