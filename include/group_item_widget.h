@@ -1,5 +1,5 @@
-#ifndef GROUP_ITEM_WIDGET_H
-#define GROUP_ITEM_WIDGET_H
+#ifndef FIRST_QT_APP_INCLUDE_GROUP_ITEM_WIDGET_H
+#define FIRST_QT_APP_INCLUDE_GROUP_ITEM_WIDGET_H
 
 #include "group.hpp"
 #include "mainwindow.h"
@@ -46,4 +46,4 @@ void onChangeGroupName(const QString& name);
 
 
 };
-#endif // GROUP_ITEM_WIDGET_H
+#endif // FIRST_QT_APP_INCLUDE_GROUP_ITEM_WIDGET_H

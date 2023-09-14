@@ -1,5 +1,5 @@
-#ifndef EDITABLELABEL_HPP
-#define EDITABLELABEL_HPP
+#ifndef FIRST_QT_APP_INCLUDE_EDITABLE_LABEL_H
+#define FIRST_QT_APP_INCLUDE_EDITABLE_LABEL_H
 
 #include <QWidget>
 #include <QLabel>
@@ -40,4 +40,4 @@ signals:
     void finishEditingSig(const QString &text);
 };
 
-#endif // EDITABLELABEL_HPP
+#endif // FIRST_QT_APP_INCLUDE_EDITABLE_LABEL_H

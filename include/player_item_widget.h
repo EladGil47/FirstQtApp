@@ -1,5 +1,5 @@
-#ifndef PLAYER_ITEM_WIDGET_H
-#define PLAYER_ITEM_WIDGET_H
+#ifndef FIRST_QT_APP_INCLUDE_PLAYER_ITEM_WIDGET_H
+#define FIRST_QT_APP_INCLUDE_PLAYER_ITEM_WIDGET_H
 
 #include <QWidget>
 #include <QPushButton>
@@ -46,4 +46,4 @@ void onChangePlayerName(const QString& name);
 
 
 };
-#endif // PLAYER_ITEM_WIDGET_H
+#endif // FIRST_QT_APP_INCLUDE_PLAYER_ITEM_WIDGET_H

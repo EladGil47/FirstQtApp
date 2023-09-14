@@ -1,3 +1,5 @@
+#ifndef FIRST_QT_APP_INCLUDE_APP_COMMON_H
+#define FIRST_QT_APP_INCLUDE_APP_COMMON_H
 
 #include <QString>
 
@@ -23,5 +25,4 @@ namespace MaxValues
       
 }
 
-
-    
+#endif //FIRST_QT_APP_INCLUDE_APP_COMMON_H
