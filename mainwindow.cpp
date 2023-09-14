@@ -61,10 +61,7 @@ void MainWindow::initList()
 void MainWindow::changeGroupName(uint16_t id ,const std::string & name)
 {
     m_groups_collection->getItem(static_cast<size_t>(id))->setName(name);
-    updateList();
 }
-
-
 
 void MainWindow::setListViewerLabelText()
 {
