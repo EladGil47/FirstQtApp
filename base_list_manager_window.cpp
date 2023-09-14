@@ -88,7 +88,7 @@ void BaseListManagerWindow::updateList()
 
 void BaseListManagerWindow::setHeaderLabelText(const QString &text) 
 {
-    m_header_label->getLabel()->setText(text);
+    m_header_label->setText(text);
 }
 
 void BaseListManagerWindow::setHeaderLabelEditability(bool state) 

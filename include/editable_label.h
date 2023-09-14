@@ -13,25 +13,23 @@ class EditableLabel : public QWidget
 public:
     EditableLabel(QWidget* parent = nullptr);
     void setEditablity(bool state);
-    QLabel * getLabel() ;
-    QLineEdit * getLineEdit() ;
     void setFont(const QFont & font) ;
     void setAlignment(Qt::Alignment alignment) ; 
-
-
-    void setEditLine() ;
+    void setText(const QString &text) ; 
 
 
 protected:
     void mouseDoubleClickEvent(QMouseEvent* event) override;
 
 private:
-    void setLabel() ;
-
+    void createLabel() ;
+    void createHorLayout();
+    void createEditLine() ;
+    
     QLabel* m_label;
     QLineEdit* m_editLine;
-    QString m_originalText;
-    
+    QHBoxLayout *m_layout;
+
     bool m_editability = true;
 
 public slots:

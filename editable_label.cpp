@@ -3,33 +3,33 @@
 
 EditableLabel::EditableLabel(QWidget *parent) : QWidget(parent)
 {
-    QHBoxLayout *layout = new QHBoxLayout(this);
-    setLabel();
-    layout->addWidget(m_label);
-
-    if (m_editability)
-    {
-        setEditLine();
-        layout->addWidget(m_editLine);
-    }
+    createLabel();
+    createEditLine();
+    createHorLayout();
 }
 
-QLabel * EditableLabel::getLabel()
+void EditableLabel::createHorLayout()
 {
-    return m_label;
+    m_layout = new QHBoxLayout(this);
+    m_layout->addWidget(m_label);
+    m_layout->addWidget(m_editLine);
 }
 
-QLineEdit * EditableLabel::getLineEdit()
+void EditableLabel::setText(const QString &text)
 {
-    return m_editLine;
+    m_label->setText(text);
 }
 
 void EditableLabel::setEditablity(bool state)
 {
     m_editability = state;
+    if (!m_editability)
+    {
+        m_label->setToolTip(nullptr);
+    }
 }
 
-void EditableLabel::setLabel()
+void EditableLabel::createLabel()
 {
     m_label = new QLabel(this);
     m_label->setToolTip("Double-click me to edit");
@@ -47,7 +47,7 @@ void EditableLabel::setFont (const QFont & font)
     m_editLine->setFont(font);
 }
 
-void EditableLabel::setEditLine()
+void EditableLabel::createEditLine()
 {
     m_editLine = new QLineEdit(this);
     const QString TRANSPARENT_LINE_EDIT_STYLESHEET =  
@@ -70,9 +70,9 @@ void EditableLabel::mouseDoubleClickEvent(QMouseEvent *event)
     {
         if (event->button() == Qt::LeftButton)
         {
-            m_originalText = m_label->text();
+            const QString ORIGINAL_TEXT = m_label->text();
             m_label->setVisible(false);
-            m_editLine->setText(m_originalText);
+            m_editLine->setText(ORIGINAL_TEXT);
             m_editLine->setVisible(true);
             m_editLine->setFocus();
         }
