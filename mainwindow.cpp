@@ -44,7 +44,6 @@ void MainWindow::setCreateNewGroupButton()
         "    border: 2px solid #45a049;"    // Darker green border on hover
         "}"
     );
-
     // Set the button's size policy (optional)
     m_create_new_group_button->setSizePolicy(QSizePolicy::Preferred, QSizePolicy::Fixed);
     m_create_new_group_button->setToolTip("Click here to create a new group");

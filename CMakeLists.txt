@@ -38,6 +38,8 @@ set(PROJECT_SOURCES
      include/editable_label.h
      editable_label.cpp
 
+     include/app_common.hpp
+
 )
 
 add_executable(${PROJECT_NAME} ${PROJECT_SOURCES})

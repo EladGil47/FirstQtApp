@@ -1,7 +1,7 @@
 #include "base_list_manager_window.h"
 
 #include "editable_label.h"
-
+#include "app_common.hpp"
 
 BaseListManagerWindow::BaseListManagerWindow(QMainWindow *parent): QWidget(parent)
 {
@@ -21,7 +21,7 @@ BaseListManagerWindow::~BaseListManagerWindow()
 void BaseListManagerWindow::setHeaderLabelCommons()
 {
     m_header_label = new EditableLabel(this);
-    m_header_label->setFont(QFont("Arial", 30, QFont::Bold));
+    m_header_label->setFont(QFont(Common::FONT_FAMILY_NAME, 22, QFont::Bold));
     m_header_label->setAlignment(Qt::AlignHCenter);
 }
 

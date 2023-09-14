@@ -11,6 +11,7 @@
 
 #include "groups_collection.hpp"
 
+
 class CustomWindow : public QMainWindow
 {
     Q_OBJECT
