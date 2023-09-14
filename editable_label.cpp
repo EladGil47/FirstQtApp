@@ -66,6 +66,7 @@ void EditableLabel::setEditLine()
 {
     m_editLine = new QLineEdit(this);
 
+    m_editLine->size() = m_label->size();
     QString edit_line_stylesheet =
         "QLineEdit {"
         "    color: black;"

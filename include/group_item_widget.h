@@ -3,6 +3,8 @@
 
 #include "group.hpp"
 #include "mainwindow.h"
+#include "editable_label.h"
+
 
 class GroupItemWidget : public QWidget
 {
@@ -26,7 +28,7 @@ void setItemHorLayout();
 std::shared_ptr<Group> m_group;
 MainWindow * m_main_window;
 
-QLabel* m_name_label;
+EditableLabel* m_name_label;
 QLabel* m_size_label;
 QPushButton* m_enter_button;
 QPushButton* m_remove_button;

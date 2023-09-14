@@ -24,16 +24,11 @@ void GroupItemWidget::setGroupIndex(size_t group_index)
 void GroupItemWidget::setNameLabel()
 {
     QString name = QString::fromStdString(m_group->getName());
-    m_name_label = new QLabel(name, this);
-    // m_name_label->setFont(QFont("Arial", 16, QFont::Bold));
-    m_name_label->setStyleSheet(
-        "QLabel {"
-    "    color: black;"                  /* White text color */
-    "    font-size: 18px;"               /* Font size */
-    "    font-weight: bold;"             /* Bold text */
-        "}"
-    );
-    m_name_label->setAlignment(Qt::AlignLeft);
+    m_name_label = new EditableLabel(this);
+    m_name_label->getLabel()->setText(name);
+    m_name_label->getLabel()->setAlignment(Qt::AlignLeft);
+    // TODO connecit to slot that transfer the new namd and the index of this item
+    // connect(m_name_label,EditableLabel::finishEditingSig, m_main_window, MainWindow::updateList);
 }
 
 void GroupItemWidget::setSizeLabel()
@@ -41,9 +36,12 @@ void GroupItemWidget::setSizeLabel()
     QString size = QString::number(m_group->getNumOfPlayers());
     QString size_wrapped = "(" + size + ")";
     m_size_label = new QLabel(size_wrapped, this);
-    m_size_label->setFont(QFont("Arial", 16, QFont::Bold));
-    m_size_label->setStyleSheet("border: none;");
-    m_size_label->setAlignment(Qt::AlignLeft);
+    m_size_label->setStyleSheet(
+        "QLabel {"
+        "    color: black;"
+        "    font-size: 20px;"
+        "    font-weight: bold;"
+        "}");
 }
 
 void GroupItemWidget::setEnterButton()
@@ -90,7 +88,7 @@ void GroupItemWidget::setRemoveButton()
 void GroupItemWidget::setItemHorLayout()
 {
     m_item_hor_layout = new QHBoxLayout(this);
-    m_item_hor_layout->addWidget(m_name_label, 1);
+    m_item_hor_layout->addWidget(m_name_label, 2);
     m_item_hor_layout->addWidget(m_size_label, 4);
     m_item_hor_layout->addWidget(m_enter_button, 1);
     m_item_hor_layout->addWidget(m_remove_button, 1);

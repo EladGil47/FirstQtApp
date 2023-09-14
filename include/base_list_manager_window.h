@@ -42,7 +42,7 @@ protected :
     virtual void initList()  = 0;
     virtual void updateList() ;
 
-    void setHeaderLabelText(QString text) ;
+    void setHeaderLabelText(const QString &text) ;
     void setHeaderLabelEditability(bool state) ;
     EditableLabel *m_header_label ;
 

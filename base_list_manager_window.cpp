@@ -60,7 +60,7 @@ void BaseListManagerWindow::setListViewerListWidget()
     QPalette palette;
     palette.setBrush(QPalette::Base, scaledBackground);
     m_list_viewer_widget->setPalette(palette);
-    m_list_viewer_widget->setStyleSheet("QListWidget {border: 3px solid black;} QListWidget::item { border: 1px solid border;} QListWidget::item:selected { background: rgba(0, 0, 255, 30%); } ");
+    m_list_viewer_widget->setStyleSheet("QListWidget {border: 3px solid black;} QListWidget::item { border: 1px solid border;} QListWidget::item:selected { background: rgba(0, 0, 255, 10%); } ");
 }
 
 void BaseListManagerWindow::setWindowLayout()
@@ -99,7 +99,7 @@ void BaseListManagerWindow::updateList()
     initList();
 }
 
-void BaseListManagerWindow::setHeaderLabelText(QString text) 
+void BaseListManagerWindow::setHeaderLabelText(const QString &text) 
 {
     m_header_label->getLabel()->setText(text);
 }
