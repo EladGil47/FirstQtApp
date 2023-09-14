@@ -17,6 +17,8 @@ class GroupMenuWindow : public BaseListManagerWindow
 
 public:
     GroupMenuWindow(std::shared_ptr<Group> group = nullptr,QMainWindow *parent = nullptr);
+    void changePlayerName(uint16_t id ,const std::string & name);
+    
 
 private:
     void init() override  ;

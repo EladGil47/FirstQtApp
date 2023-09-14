@@ -25,6 +25,12 @@ void GroupMenuWindow::init()
 
 }
 
+void GroupMenuWindow::changePlayerName(uint16_t id ,const std::string & name)
+{
+    m_group->getPlayersCollectionRef().getItem(static_cast<size_t>(id))->setName(name);
+}
+
+
 void GroupMenuWindow::setGroupName(const QString & text)
 {
     m_group->setName(text.toStdString());

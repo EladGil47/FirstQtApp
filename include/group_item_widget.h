@@ -40,7 +40,7 @@ QHBoxLayout * m_item_hor_layout;
 public slots:
 void onEnterButtonClicked(bool a);
 void onRemoveButtonClicked(bool a);
-void changeGroupName(const QString& name);
+void onChangeGroupName(const QString& name);
 
 
 

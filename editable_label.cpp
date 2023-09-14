@@ -1,4 +1,6 @@
 #include "editable_label.h"
+#include "app_common.hpp"
+
 #include <QMouseEvent>
 
 EditableLabel::EditableLabel(QWidget *parent) : QWidget(parent)
@@ -35,6 +37,11 @@ void EditableLabel::createLabel()
     m_label->setToolTip("Double-click me to edit");
 }
 
+void EditableLabel::setToolTip(const QString &text)
+{
+    m_label->setToolTip(text);
+}
+
 void EditableLabel::setAlignment(Qt::Alignment alignment)
 {
     m_label->setAlignment(alignment);
@@ -50,17 +57,12 @@ void EditableLabel::setFont (const QFont & font)
 void EditableLabel::createEditLine()
 {
     m_editLine = new QLineEdit(this);
-    const QString TRANSPARENT_LINE_EDIT_STYLESHEET =  
-        "QLineEdit {"
-        "    border: transparent;"
-        "    background-color : transparent"
-        "}"
-        ;
-    m_editLine->setStyleSheet(TRANSPARENT_LINE_EDIT_STYLESHEET);
+    m_editLine->setStyleSheet(Style::TRANSPARENT_STYLESHEET);
     m_editLine->size() = m_label->size();
     m_editLine->setFont(m_label->font());
     m_editLine->setAlignment(m_label->alignment());
     m_editLine->setVisible(false);
+    m_editLine->setMaxLength(MaxValues::GROUP_NAME);
     connect(m_editLine, &QLineEdit::editingFinished, this, &EditableLabel::finishEditing);
 }
 
@@ -70,9 +72,9 @@ void EditableLabel::mouseDoubleClickEvent(QMouseEvent *event)
     {
         if (event->button() == Qt::LeftButton)
         {
-            const QString ORIGINAL_TEXT = m_label->text();
+            QString original_text = m_label->text();
             m_label->setVisible(false);
-            m_editLine->setText(ORIGINAL_TEXT);
+            m_editLine->setText(original_text);
             m_editLine->setVisible(true);
             m_editLine->setFocus();
         }

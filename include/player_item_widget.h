@@ -33,7 +33,7 @@ void setupLayout();
 std::shared_ptr<Player> m_player;
 GroupMenuWindow * m_group_menu_window;
 
-QLabel* m_name_label;
+EditableLabel* m_name_label;
 QLabel* m_rate_label;
 QPushButton* m_enter_button;
 QPushButton* m_remove_button;
@@ -42,6 +42,8 @@ QPushButton* m_remove_button;
 public slots:
 void onEnterButtonClicked(bool is_clicked);
 void onRemoveButtonClicked(bool is_clicked);
+void onChangePlayerName(const QString& name);
+
 
 };
 #endif // PLAYER_ITEM_WIDGET_H

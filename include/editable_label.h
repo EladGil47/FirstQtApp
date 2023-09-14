@@ -16,7 +16,7 @@ public:
     void setFont(const QFont & font) ;
     void setAlignment(Qt::Alignment alignment) ; 
     void setText(const QString &text) ; 
-
+    void setToolTip(const QString &text);
 
 protected:
     void mouseDoubleClickEvent(QMouseEvent* event) override;

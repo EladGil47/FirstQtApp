@@ -1,5 +1,7 @@
 
 #include "player_item_widget.h"
+#include "app_common.hpp"
+
 #include <QHBoxLayout>
 
 PlayerItemWidget::PlayerItemWidget(std::shared_ptr<Player> player, GroupMenuWindow *parent)
@@ -24,10 +26,12 @@ void PlayerItemWidget::setPlayerIndex(size_t index)
 void PlayerItemWidget::setNameLabel()
 {
     QString name = QString::fromStdString(m_player->getName());
-    m_name_label = new QLabel(name, this);
-    m_name_label->setFont(QFont("Arial", 10, QFont::Bold));
-    m_name_label->setStyleSheet("border: none;");
+    m_name_label = new EditableLabel(this);
+    m_name_label->setText(name);
     m_name_label->setAlignment(Qt::AlignLeft);
+    m_name_label->setFont(QFont(Common::FONT_FAMILY_NAME, 10, QFont::Bold));
+    connect(m_name_label,EditableLabel::finishEditingSig, this, onChangePlayerName);
+
 }
 
 void PlayerItemWidget::setRateLabel()
@@ -92,9 +96,14 @@ void PlayerItemWidget::setupLayout()
 
 void PlayerItemWidget::onEnterButtonClicked(bool a)
 {
- m_group_menu_window->onEnterButton(m_player_index);
+    m_group_menu_window->onEnterButton(m_player_index);
 }
 void PlayerItemWidget::onRemoveButtonClicked(bool a)
 {
- m_group_menu_window->onRemoveButton(m_player_index);
+    m_group_menu_window->onRemoveButton(m_player_index);
+}
+
+void PlayerItemWidget::onChangePlayerName(const QString &name)
+{
+    m_group_menu_window->changePlayerName(m_player_index, name.toStdString());
 }

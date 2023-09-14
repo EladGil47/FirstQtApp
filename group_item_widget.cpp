@@ -29,14 +29,10 @@ void GroupItemWidget::setNameLabel()
     m_name_label->setText(name);
     m_name_label->setAlignment(Qt::AlignLeft);
     m_name_label->setFont(QFont(Common::FONT_FAMILY_NAME, 14, QFont::Bold));
-    // TODO connecit to slot that transfer the new namd and the index of this item
-    connect(m_name_label,EditableLabel::finishEditingSig, this, changeGroupName);
+    connect(m_name_label,EditableLabel::finishEditingSig, this, onChangeGroupName);
 }
 
-void GroupItemWidget::changeGroupName(const QString& name)
-{
-    m_main_window->changeGroupName(m_group->getId(),name.toStdString());
-}
+
 
 void GroupItemWidget::setSizeLabel()
 {
@@ -110,6 +106,11 @@ void GroupItemWidget::onEnterButtonClicked(bool a)
 void GroupItemWidget::onRemoveButtonClicked(bool a)
 {
  m_main_window->onRemoveGroupButton(m_group_index);
+}
+
+void GroupItemWidget::onChangeGroupName(const QString& name)
+{
+    m_main_window->changeGroupName(m_group_index,name.toStdString());
 }
 
 

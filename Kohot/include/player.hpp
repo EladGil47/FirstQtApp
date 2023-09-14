@@ -24,6 +24,12 @@ public:
 	double getRate()const ;
 	uint16_t getId()const;
 	void setId(uint16_t id);
+	void setName(const std::string & name) ;
+	void setRate(double rate) ;
+	void setRole(std::string role_text) ;
+	void setRole(Player::Role role) ;
+
+
 
 	static Player::Role toPlayerRole(std::string role_text);
 

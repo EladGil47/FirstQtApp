@@ -50,6 +50,7 @@ std::string Player::getRoleText() const
 	}
 	return role_text;
 }
+
 std::string Player::getName() const {
 	return m_config.name;
 }
@@ -59,10 +60,24 @@ double Player::getRate()const {
 uint16_t Player::getId()const {
 	return m_config.id;
 }
- Player::Role Player::getRole() const 
+Player::Role Player::getRole() const 
 {
 	return m_config.role;
 }
 void Player::setId(uint16_t id) {
 	m_config.id = id;
+}
+void Player::setName(const std::string & name)  {
+	m_config.name = name;
+}
+void Player::setRate(double rate)  {
+	m_config.rate = rate;
+}
+void Player::setRole(std::string role_text)
+{
+	m_config.role = toPlayerRole(role_text);
+}
+void Player::setRole(Player::Role role) 
+{
+	m_config.role = role;
 }
