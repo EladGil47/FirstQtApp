@@ -31,15 +31,14 @@ set(PROJECT_SOURCES
     include/group_item_widget.h
 
     player_item_widget.cpp
-     include/player_item_widget.h
+    include/player_item_widget.h
 
-     include/custom_window.h
+    include/custom_window.h
 
-     include/editable_label.h
-     editable_label.cpp
+    include/editable_label.h
+    editable_label.cpp
 
-     include/app_common.hpp
-
+    include/app_common.hpp
 )
 
 add_executable(${PROJECT_NAME} ${PROJECT_SOURCES})

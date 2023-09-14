@@ -29,6 +29,7 @@ void GroupItemWidget::setNameLabel()
     m_name_label->setText(name);
     m_name_label->setAlignment(Qt::AlignLeft);
     m_name_label->setFont(QFont(Common::FONT_FAMILY_NAME, 14, QFont::Bold));
+    m_name_label->setMaxLength(MaxValues::ITEM_WIDGET_LABEL_NAME);
     connect(m_name_label,EditableLabel::finishEditingSig, this, onChangeGroupName);
 }
 
@@ -39,12 +40,7 @@ void GroupItemWidget::setSizeLabel()
     QString size = QString::number(m_group->getNumOfPlayers());
     QString size_wrapped = "(" + size + ")";
     m_size_label = new QLabel(size_wrapped, this);
-    m_size_label->setStyleSheet(
-        "QLabel {"
-        "    color: black;"
-        "    font-size: 20px;"
-        "    font-weight: bold;"
-        "}");
+    m_size_label->setFont(QFont(Common::FONT_FAMILY_NAME, 14, QFont::Bold));
 }
 
 void GroupItemWidget::setEnterButton()

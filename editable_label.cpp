@@ -54,6 +54,11 @@ void EditableLabel::setFont (const QFont & font)
     m_editLine->setFont(font);
 }
 
+void EditableLabel::setMaxLength(uint16_t value)
+{
+    m_editLine->setMaxLength(value);
+}
+
 void EditableLabel::createEditLine()
 {
     m_editLine = new QLineEdit(this);
@@ -62,7 +67,6 @@ void EditableLabel::createEditLine()
     m_editLine->setFont(m_label->font());
     m_editLine->setAlignment(m_label->alignment());
     m_editLine->setVisible(false);
-    m_editLine->setMaxLength(MaxValues::GROUP_NAME);
     connect(m_editLine, &QLineEdit::editingFinished, this, &EditableLabel::finishEditing);
 }
 

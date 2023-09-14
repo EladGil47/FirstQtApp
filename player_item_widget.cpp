@@ -30,17 +30,15 @@ void PlayerItemWidget::setNameLabel()
     m_name_label->setText(name);
     m_name_label->setAlignment(Qt::AlignLeft);
     m_name_label->setFont(QFont(Common::FONT_FAMILY_NAME, 10, QFont::Bold));
+    m_name_label->setMaxLength(MaxValues::ITEM_WIDGET_LABEL_NAME);
     connect(m_name_label,EditableLabel::finishEditingSig, this, onChangePlayerName);
-
 }
 
 void PlayerItemWidget::setRateLabel()
 {
     QString rate = QString::number(m_player->getRate());
     m_rate_label = new QLabel(rate, this);
-    m_rate_label->setFont(QFont("Arial", 10, QFont::Bold));
-    m_rate_label->setStyleSheet("border: none;");
-    m_rate_label->setAlignment(Qt::AlignLeft);
+    m_rate_label->setFont(QFont(Common::FONT_FAMILY_NAME, 10, QFont::Bold));
 }
 
 void PlayerItemWidget::setEnterButton()

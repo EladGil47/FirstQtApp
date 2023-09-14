@@ -17,6 +17,7 @@ public:
     void setAlignment(Qt::Alignment alignment) ; 
     void setText(const QString &text) ; 
     void setToolTip(const QString &text);
+    void setMaxLength(uint16_t value);
 
 protected:
     void mouseDoubleClickEvent(QMouseEvent* event) override;
