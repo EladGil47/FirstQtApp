@@ -9,7 +9,7 @@ PlayersListWindow::PlayersListWindow(std::shared_ptr<Group> group, QMainWindow *
     : BaseListManagerWindow(parent), m_group(group)
 {
     setHeaderLabelText(QString::fromStdString(m_group->getName()));
-    setListViewerLabelText();
+    setListLabelText();
     setCreateNewPlayerButton();
     setCreateTeamsButton();
     setGoBackButton();
@@ -58,9 +58,9 @@ void PlayersListWindow::setGoBackButton()
     connect(m_go_back_button, &QPushButton::clicked, this, &PlayersListWindow::onGoBackButton);
 }
 
-void PlayersListWindow::setListViewerLabelText()
+void PlayersListWindow::setListLabelText()
 {
-    m_list_viewer_label->setText("Players :");
+    m_list_label->setText("Players :");
 }
 
 void PlayersListWindow::createButtonsHorLayout()

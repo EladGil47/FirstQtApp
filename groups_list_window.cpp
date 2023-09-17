@@ -11,7 +11,7 @@ m_groups_collection(groups_collection)
 {
     setHeaderLabelText(QString::fromStdString("Welcome To Kohot"));
     setHeaderLabelEditability(false);
-    setListViewerLabelText();
+    setListLabelText();
     setCreateNewGroupButton();
     createButtonsHorLayout();
     initList();
@@ -58,9 +58,9 @@ void GroupsListWindow::changeGroupName(uint16_t id ,const std::string & name)
     m_groups_collection->getItem(static_cast<size_t>(id))->setName(name);
 }
 
-void GroupsListWindow::setListViewerLabelText()
+void GroupsListWindow::setListLabelText()
 {
-    m_list_viewer_label->setText("Groups :");
+    m_list_label->setText("Groups :");
 }
 
 void GroupsListWindow::createButtonsHorLayout()

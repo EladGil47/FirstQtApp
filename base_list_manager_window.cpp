@@ -4,11 +4,12 @@
 BaseListManagerWindow::BaseListManagerWindow(QMainWindow *parent): QWidget(parent)
 {
     m_parent = parent;
-    setHeaderLabelCommons();
-    setListViewerLabel();
+    createHeaderLabel();
+    createListLabel();
     setListViewerListWidget();
     setListViewerVerLayout();
-    setWindowLayout();
+    createWindowLayout();
+    setLayout(m_window_layout);
 }
 
 BaseListManagerWindow::~BaseListManagerWindow()
@@ -16,31 +17,23 @@ BaseListManagerWindow::~BaseListManagerWindow()
 }
 
 
-void BaseListManagerWindow::setHeaderLabelCommons()
+void BaseListManagerWindow::createHeaderLabel()
 {
     m_header_label = new EditableLabel(this);
     m_header_label->setFont(QFont(Common::FONT_FAMILY_NAME, 22, QFont::Bold));
     m_header_label->setAlignment(Qt::AlignHCenter);
 }
 
-void BaseListManagerWindow::setListViewerLabel()
+void BaseListManagerWindow::createListLabel()
 {
-    m_list_viewer_label = new QLabel(this);
-    QString list_viewer_label_stylesheet =
-    "QLabel {"
-    "    color: black;"                
-    "    font-size: 20px;"            
-    "    font-weight: bold;"          
-    "}";
-
-    m_list_viewer_label->setStyleSheet(list_viewer_label_stylesheet);
-   
+    m_list_label = new QLabel(this);
+    m_list_label->setFont(QFont(Common::FONT_FAMILY_NAME, 18, QFont::Bold));
 }
 
 void BaseListManagerWindow::setListViewerVerLayout()
 {
     m_list_viewer_ver_layout = new QVBoxLayout;
-    m_list_viewer_ver_layout->addWidget(m_list_viewer_label);
+    m_list_viewer_ver_layout->addWidget(m_list_label);
     m_list_viewer_ver_layout->addWidget(m_list_viewer_widget);
 }
 
@@ -55,14 +48,12 @@ void BaseListManagerWindow::setListViewerListWidget()
     m_list_viewer_widget->setStyleSheet("QListWidget {border: 3px solid black;} QListWidget::item { border: 1px solid border;} QListWidget::item:selected { background: rgba(0, 0, 255, 10%); } ");
 }
 
-void BaseListManagerWindow::setWindowLayout()
+void BaseListManagerWindow::createWindowLayout()
 {
     m_window_layout = new QVBoxLayout(this);
     m_window_layout->addWidget(m_header_label);
     m_window_layout->addLayout(m_list_viewer_ver_layout);
     m_window_layout->addLayout(m_buttons_hor_layout);
-    setLayout(m_window_layout);
-
 }
 
 void BaseListManagerWindow::removeAllItemsFromList()

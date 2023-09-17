@@ -13,27 +13,19 @@
 class BaseListManagerWindow : public QWidget
 {
     Q_OBJECT
-
-public: 
-    QMainWindow *m_parent ;
-
-    void setWindowWidget();
-
 private:
-    void setWindowLayout() ;
+    void createWindowLayout() ;
     QVBoxLayout *m_window_layout;
 
-    void setHeaderLabelCommons();
-
+    void createHeaderLabel();
     void setListViewerListWidget();
-
-void setListViewerLabel();
-
-
+    void createListLabel();
     void setListViewerVerLayout();
     QVBoxLayout *m_list_viewer_ver_layout;
 
 protected :
+    QMainWindow *m_parent ;
+
     BaseListManagerWindow(QMainWindow *parent = nullptr);
     ~BaseListManagerWindow();
 
@@ -44,8 +36,8 @@ protected :
     void setHeaderLabelEditability(bool state) ;
     EditableLabel *m_header_label ;
 
-    virtual void setListViewerLabelText() = 0;
-    QLabel *m_list_viewer_label;
+    virtual void setListLabelText() = 0;
+    QLabel *m_list_label;
     QListWidget *m_list_viewer_widget;
 
     virtual void createButtonsHorLayout() = 0;

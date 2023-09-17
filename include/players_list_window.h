@@ -22,7 +22,7 @@ public:
 
 private:
     void initList() override;
-    void setListViewerLabelText() override ;
+    void setListLabelText() override ;
     void createButtonsHorLayout() override;
 
     void setCreateNewPlayerButton();

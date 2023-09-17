@@ -19,7 +19,7 @@ public:
 
 
 private:
-    void setListViewerLabelText() override ;
+    void setListLabelText() override ;
     void createButtonsHorLayout() override;
 
     void addGroupItemToList(std::shared_ptr<Group> group);
