@@ -72,6 +72,7 @@
         "cinttypes": "cpp",
         "qhboxlayout": "cpp",
         "qwidget": "cpp",
-        "qmouseevent": "cpp"
+        "qmouseevent": "cpp",
+        "qstring": "cpp"
     }
 }
