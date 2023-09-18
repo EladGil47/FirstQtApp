@@ -21,7 +21,7 @@ BaseListManagerWindow::~BaseListManagerWindow()
 void BaseListManagerWindow::createHeaderLabel()
 {
     m_header_label = new EditableLabel(this);
-    m_header_label->setFont(QFont(Common::FONT_FAMILY_NAME, 22, QFont::Bold));
+    m_header_label->setFont(QFont(Common::FONT_FAMILY_NAME, 26, QFont::Bold));
     m_header_label->setAlignment(Qt::AlignHCenter);
 }
 
