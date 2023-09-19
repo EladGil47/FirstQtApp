@@ -41,7 +41,7 @@ protected :
     QListWidget *m_list_viewer_widget;
 
     virtual void createButtonsHorLayout() = 0;
-    QHBoxLayout *m_buttons_hor_layout = new QHBoxLayout;
+    QHBoxLayout *m_buttons_hor_layout;
 
     void removeAllItemsFromList() ;
 

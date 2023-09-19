@@ -8,6 +8,7 @@ BaseListManagerWindow::BaseListManagerWindow(QMainWindow *parent): QWidget(paren
     createListLabel();
     setListViewerListWidget();
     setListViewerVerLayout();
+    m_buttons_hor_layout = new QHBoxLayout;
     createWindowLayout();
     Functions::checkNotNull(m_window_layout,"m_window_layout");
     setLayout(m_window_layout);
@@ -51,7 +52,7 @@ void BaseListManagerWindow::setListViewerListWidget()
 
 void BaseListManagerWindow::createWindowLayout()
 {
-    m_window_layout = new QVBoxLayout(this);
+    m_window_layout = new QVBoxLayout;
     Functions::checkNotNull(m_header_label,"m_header_label");
     m_window_layout->addWidget(m_header_label);
 
