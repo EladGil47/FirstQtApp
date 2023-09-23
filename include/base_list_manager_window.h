@@ -9,41 +9,34 @@
 
 #include "editable_label.h"
 
-
 class BaseListManagerWindow : public QWidget
 {
     Q_OBJECT
 private:
     void createWindowLayout() ;
-    QVBoxLayout *m_window_layout;
-
-    void createHeaderLabel();
-    void setListViewerListWidget();
-    void createListLabel();
-    void setListViewerVerLayout();
-    QVBoxLayout *m_list_viewer_ver_layout;
+    void initHeaderLabel();
+    void initListListWidget();
+    void initListLabel();
+    void initListLayout();
+    QVBoxLayout *m_list_layout;
+    void removeAllItemsFromList() ;
 
 protected :
-    QMainWindow *m_parent ;
-
     BaseListManagerWindow(QMainWindow *parent = nullptr);
     ~BaseListManagerWindow();
 
     virtual void initList()  = 0;
-    void updateList() ;
+    virtual void setListLabelText() = 0;
+    virtual void createButtonsHorLayout() = 0;
 
+    void updateList() ;
     void setHeaderLabelText(const QString &text) ;
     void setHeaderLabelEditability(bool state) ;
+
     EditableLabel *m_header_label ;
-
-    virtual void setListLabelText() = 0;
     QLabel *m_list_label;
-    QListWidget *m_list_viewer_widget;
-
-    virtual void createButtonsHorLayout() = 0;
+    QListWidget *m_list_list_widget;
     QHBoxLayout *m_buttons_hor_layout;
-
-    void removeAllItemsFromList() ;
-
 };
+
 #endif // FIRST_QT_APP_INCLUDE_BASE_LIST_MANAGER_WINDOW_H

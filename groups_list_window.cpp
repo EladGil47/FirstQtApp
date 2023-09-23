@@ -73,9 +73,9 @@ void GroupsListWindow::createButtonsHorLayout()
 void GroupsListWindow::addGroupItemToList(std::shared_ptr<Group> group)
 {   
     GroupItemWidget * group_item_widget = new GroupItemWidget(group,this);
-    QListWidgetItem *item = new QListWidgetItem(m_list_viewer_widget);
+    QListWidgetItem *item = new QListWidgetItem(m_list_list_widget);
     item->setSizeHint(group_item_widget->sizeHint());
-    m_list_viewer_widget->setItemWidget(item, group_item_widget);
+    m_list_list_widget->setItemWidget(item, group_item_widget);
 }
 
 // Slots : 
@@ -97,7 +97,7 @@ void GroupsListWindow::onCreateNewGroupButton()
 
 void GroupsListWindow::onRemoveGroupButton(size_t id)
 {
-    QListWidgetItem *itemToRemove = m_list_viewer_widget->takeItem(id);
+    QListWidgetItem *itemToRemove = m_list_list_widget->takeItem(id);
     delete itemToRemove;
     m_groups_collection->deleteItem(id);
     for (size_t index = id; index <  m_groups_collection->getSize(); index++)

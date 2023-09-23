@@ -121,15 +121,15 @@ void PlayersListWindow::onCreateTeamsClicked()
 void PlayersListWindow::addItemToList(std::shared_ptr<Player> player)
 {
     PlayerItemWidget * player_item_widget = new PlayerItemWidget(player,this);
-    QListWidgetItem *item = new QListWidgetItem(m_list_viewer_widget);
+    QListWidgetItem *item = new QListWidgetItem(m_list_list_widget);
     item->setSizeHint(player_item_widget->sizeHint());
-    m_list_viewer_widget->setItemWidget(item, player_item_widget);
+    m_list_list_widget->setItemWidget(item, player_item_widget);
 }
 
 void PlayersListWindow::onRemoveButton(size_t id)
 {
     m_group->getPlayersCollectionRef().deleteItem(id);
-    QListWidgetItem *itemToRemove = m_list_viewer_widget->takeItem(id);
+    QListWidgetItem *itemToRemove = m_list_list_widget->takeItem(id);
     delete itemToRemove;
     for (size_t index = id; index <  m_group->getNumOfPlayers(); index++)
     {
