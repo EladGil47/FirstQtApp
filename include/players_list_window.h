@@ -25,9 +25,9 @@ private:
     void setListLabelText() override ;
     void createButtonsHorLayout() override;
 
-    void setCreateNewPlayerButton();
-    void setCreateTeamsButton();
-    void setGoBackButton();
+    void initCreateNewPlayerButton();
+    void initCreateTeamsButton();
+    void initGoBackButton();
 
 
     QPushButton *m_create_new_player_button;
@@ -64,6 +64,9 @@ public slots:
 
 signals:
     void onGoBackButtonClickedSignal();
+
+    void setToCreateTeamsWindowSignal();
+
     
 
 

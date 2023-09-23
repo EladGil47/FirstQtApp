@@ -12,7 +12,6 @@ m_groups_collection(groups_collection)
     setHeaderLabelText(QString::fromStdString("Welcome To Kohot"));
     setHeaderLabelEditability(false);
     setListLabelText();
-    setCreateNewGroupButton();
     createButtonsHorLayout();
     initList();
 }
@@ -22,7 +21,7 @@ GroupsListWindow::~GroupsListWindow()
 }
 
 
-void GroupsListWindow::setCreateNewGroupButton()
+void GroupsListWindow::initCreateNewGroupButton()
 {
     QString text = "Create new group";
     m_create_new_group_button = new QPushButton(text, this);
@@ -66,6 +65,7 @@ void GroupsListWindow::setListLabelText()
 void GroupsListWindow::createButtonsHorLayout()
 {
     m_buttons_hor_layout->addStretch(1);
+    initCreateNewGroupButton();
     m_buttons_hor_layout->addWidget(m_create_new_group_button, 2);
     m_buttons_hor_layout->addStretch(1);
 }
@@ -109,5 +109,5 @@ void GroupsListWindow::onRemoveGroupButton(size_t id)
 
 void GroupsListWindow::onEnterGroupButton(size_t id)
 {
-    emit switchToGroupMenuWidgetSignal(id);
+    emit setToPlayersListWindowSignal(id);
 }

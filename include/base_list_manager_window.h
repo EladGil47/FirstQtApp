@@ -30,7 +30,7 @@ protected :
     ~BaseListManagerWindow();
 
     virtual void initList()  = 0;
-    virtual void updateList() ;
+    void updateList() ;
 
     void setHeaderLabelText(const QString &text) ;
     void setHeaderLabelEditability(bool state) ;

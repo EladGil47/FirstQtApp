@@ -24,7 +24,7 @@ private:
 
     void addGroupItemToList(std::shared_ptr<Group> group);
 
-void setCreateNewGroupButton();
+void initCreateNewGroupButton();
     QPushButton *m_create_new_group_button; 
 
     std::shared_ptr<GroupsCollection> m_groups_collection;
@@ -39,7 +39,7 @@ public slots:
 
 
 signals:
-    void switchToGroupMenuWidgetSignal(size_t id);
+    void setToPlayersListWindowSignal(size_t id);
 
 };
 #endif // FIRST_QT_APP_INCLUDE_MAINWINDOW_H

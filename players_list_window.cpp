@@ -4,17 +4,17 @@
 
 #include <QInputDialog>
 #include <QDebug>
+#include "app_common.hpp"
+
+
 
 PlayersListWindow::PlayersListWindow(std::shared_ptr<Group> group, QMainWindow *parent)
     : BaseListManagerWindow(parent), m_group(group)
 {
     setHeaderLabelText(QString::fromStdString(m_group->getName()));
     setListLabelText();
-    setCreateNewPlayerButton();
-    setCreateTeamsButton();
-    setGoBackButton();
-    createButtonsHorLayout();
     initList();
+    createButtonsHorLayout();
 
     connect(m_header_label,EditableLabel::finishEditingSig,this,setGroupName);
 }
@@ -37,21 +37,21 @@ void PlayersListWindow::initList()
     }
 }
 
-void PlayersListWindow::setCreateNewPlayerButton()
+void PlayersListWindow::initCreateNewPlayerButton()
 {
     m_create_new_player_button = new QPushButton("Create new player", this);
     m_create_new_player_button->setStyleSheet(BUTTONS_HOR_LAYOUT_STYLE_SHEET);
     connect(m_create_new_player_button, &QPushButton::clicked, this, &PlayersListWindow::onCreateNewPlayerButton);
 }
 
-void PlayersListWindow::setCreateTeamsButton()
+void PlayersListWindow::initCreateTeamsButton()
 {
     m_create_teams_button = new QPushButton("Create teams", this);
     m_create_teams_button->setStyleSheet(BUTTONS_HOR_LAYOUT_STYLE_SHEET);
     connect(m_create_teams_button, &QPushButton::clicked, this, &PlayersListWindow::onCreateTeamsClicked);
 }
 
-void PlayersListWindow::setGoBackButton()
+void PlayersListWindow::initGoBackButton()
 {
     m_go_back_button = new QPushButton("Go back", this);
     m_go_back_button->setStyleSheet(BUTTONS_HOR_LAYOUT_STYLE_SHEET);
@@ -66,9 +66,19 @@ void PlayersListWindow::setListLabelText()
 void PlayersListWindow::createButtonsHorLayout()
 {
     m_buttons_hor_layout->addStretch(1);
+
+    initCreateNewPlayerButton();
+    Functions::checkNotNull(m_create_new_player_button,"m_create_new_player_button");
     addButtonToButtonsHorLayout(m_create_new_player_button);
+
+    initCreateTeamsButton();
+    Functions::checkNotNull(m_create_teams_button,"m_create_teams_button");
     addButtonToButtonsHorLayout(m_create_teams_button);
+
+    initGoBackButton();
+    Functions::checkNotNull(m_go_back_button,"m_go_back_button");
     addButtonToButtonsHorLayout(m_go_back_button);
+
     m_buttons_hor_layout->addStretch(1);
 }
 
@@ -102,6 +112,8 @@ void PlayersListWindow::onCreateNewPlayerButton()
 
 void PlayersListWindow::onCreateTeamsClicked()
 {
+    emit setToCreateTeamsWindowSignal();
+
     /// Open a window to choose players
     /// Calls team creator
 }

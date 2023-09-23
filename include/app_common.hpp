@@ -35,6 +35,7 @@ namespace MaxValues
     const uint16_t MAX_GROUP_SIZE = 999 ;
 }
 
+
 namespace Functions
 {
 // Create a reusable function to check and log errors

@@ -33,6 +33,8 @@ set(PROJECT_SOURCES
     include/editable_label.h
     include/windows_manager.h
     include/app_common.hpp
+
+    include/create_teams_window.h
 )
 
 add_executable(${PROJECT_NAME} ${PROJECT_SOURCES})
