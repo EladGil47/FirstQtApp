@@ -3,11 +3,18 @@
 
 BaseListManagerWindow::BaseListManagerWindow(QMainWindow *parent): QWidget(parent)
 {
-    createWindowLayout();
+    initWindowLayout();
 }
 
 BaseListManagerWindow::~BaseListManagerWindow()
 {
+    delete m_header_label;
+    delete m_list_label;
+    removeAllItemsFromList();
+    delete m_list_list_widget;
+    delete m_list_layout;
+    delete m_buttons_hor_layout;
+    delete m_window_layout;
 }
 
 
@@ -48,9 +55,9 @@ void BaseListManagerWindow::initListListWidget()
     m_list_list_widget->setStyleSheet("QListWidget {border: 3px solid black;} QListWidget::item { border: 1px solid border;} QListWidget::item:selected { background: rgba(0, 0, 255, 10%); } ");
 }
 
-void BaseListManagerWindow::createWindowLayout()
+void BaseListManagerWindow::initWindowLayout()
 {
-    QVBoxLayout * m_window_layout = new QVBoxLayout(this);
+    m_window_layout = new QVBoxLayout(this);
 
     initHeaderLabel();
     Functions::checkNotNull(m_header_label,"m_header_label");

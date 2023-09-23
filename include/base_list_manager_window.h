@@ -13,7 +13,8 @@ class BaseListManagerWindow : public QWidget
 {
     Q_OBJECT
 private:
-    void createWindowLayout() ;
+    QVBoxLayout * m_window_layout;
+    void initWindowLayout() ;
     void initHeaderLabel();
     void initListListWidget();
     void initListLabel();
