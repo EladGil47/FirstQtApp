@@ -15,7 +15,7 @@ class CreateTeamsWindow : public BaseListManagerWindow
 
 public:
     std::shared_ptr<Group> m_group;
-    CreateTeamsWindow(std::shared_ptr<Group> group = nullptr,QMainWindow *parent = nullptr) :  BaseListManagerWindow(parent)
+    CreateTeamsWindow(std::shared_ptr<Group> group = nullptr,QMainWindow *parent = nullptr) 
     {
         m_group = group ;
         m_header_label->setEditablity(false);

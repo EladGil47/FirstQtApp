@@ -1,7 +1,7 @@
 #include "base_list_manager_window.h"
 #include "app_common.hpp"
 
-BaseListManagerWindow::BaseListManagerWindow(QMainWindow *parent): QWidget(parent)
+BaseListManagerWindow::BaseListManagerWindow()
 {
     initWindowLayout();
 }

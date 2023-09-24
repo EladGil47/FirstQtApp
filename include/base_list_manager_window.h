@@ -15,7 +15,6 @@ class BaseListManagerWindow : public QWidget
 private:
     QVBoxLayout * m_window_layout;
     void initWindowLayout() ;
-    void initHeaderLabel();
     void initListListWidget();
     void initListLabel();
     void initListLayout();
@@ -23,9 +22,11 @@ private:
     void removeAllItemsFromList() ;
 
 protected :
-    BaseListManagerWindow(QMainWindow *parent = nullptr);
+    BaseListManagerWindow();
     ~BaseListManagerWindow();
 
+
+    virtual void initHeaderLabel();
     virtual void initList()  = 0;
     virtual void setListLabelText() = 0;
     virtual void createButtonsHorLayout() = 0;

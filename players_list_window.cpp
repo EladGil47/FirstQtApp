@@ -9,7 +9,7 @@
 
 
 PlayersListWindow::PlayersListWindow(std::shared_ptr<Group> group, QMainWindow *parent)
-    : BaseListManagerWindow(parent), m_group(group)
+    :  m_group(group)
 {
     setHeaderLabelText(QString::fromStdString(m_group->getName()));
     setListLabelText();

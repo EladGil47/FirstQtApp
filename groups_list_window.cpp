@@ -5,8 +5,8 @@
 
 #include "group_item_widget.h"
 
-GroupsListWindow::GroupsListWindow(std::shared_ptr<GroupsCollection> groups_collection,QMainWindow *parent):
-BaseListManagerWindow(parent),
+GroupsListWindow::GroupsListWindow(std::shared_ptr<GroupsCollection> groups_collection,QMainWindow *parent)
+:
 m_groups_collection(groups_collection)
 {
     setHeaderLabelText(QString::fromStdString("Welcome To Kohot"));
