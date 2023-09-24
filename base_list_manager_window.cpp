@@ -20,14 +20,14 @@ BaseListManagerWindow::~BaseListManagerWindow()
 
 void BaseListManagerWindow::initHeaderLabel()
 {
-    m_header_label = new EditableLabel(this);
+    m_header_label = new EditableLabel;
     m_header_label->setFont(QFont(Common::FONT_FAMILY_NAME, 26, QFont::Bold));
     m_header_label->setAlignment(Qt::AlignHCenter);
 }
 
 void BaseListManagerWindow::initListLabel()
 {
-    m_list_label = new QLabel(this);
+    m_list_label = new QLabel;
     m_list_label->setFont(QFont(Common::FONT_FAMILY_NAME, 18, QFont::Bold));
 }
 
@@ -46,13 +46,23 @@ void BaseListManagerWindow::initListLayout()
 
 void BaseListManagerWindow::initListListWidget()
 {
-    m_list_list_widget = new QListWidget(this);
-    QPixmap background_image("Data/field.jpg");
-    QPixmap scaledBackground = background_image.scaled(m_list_list_widget->size(), Qt::KeepAspectRatio, Qt::SmoothTransformation);
-    QPalette palette;
-    palette.setBrush(QPalette::Base, scaledBackground);
-    m_list_list_widget->setPalette(palette);
-    m_list_list_widget->setStyleSheet("QListWidget {border: 3px solid black;} QListWidget::item { border: 1px solid border;} QListWidget::item:selected { background: rgba(0, 0, 255, 10%); } ");
+    m_list_list_widget = new QListWidget;
+    // QPixmap background_image("Data/field.jpg");
+    // QPixmap scaledBackground = background_image.scaled(m_list_list_widget->size(), Qt::IgnoreAspectRatio, Qt::SmoothTransformation);
+    // QPalette palette;
+    // palette.setBrush(QPalette::Base, scaledBackground);
+    // m_list_list_widget->setPalette(palette);
+    m_list_list_widget->setStyleSheet(
+        "QListWidget {"
+        "border: 1px solid black;"
+        "background-color : rgb(139, 69, 30);"
+        "}"
+        "QListWidget::item {"
+        "   border: 1px solid border;"
+        "}"
+        "QListWidget::item:selected {"
+        " background: rgba(0, 0, 255, 10%);"
+        " } ");
 }
 
 void BaseListManagerWindow::initWindowLayout()

@@ -19,6 +19,11 @@ namespace Common
     const QString FONT_FAMILY_NAME = "Segoe UI";
 }
 
+namespace Fonts
+{
+   const QFont ITEM_WIDGET_FONT  = QFont(Common::FONT_FAMILY_NAME, 10, QFont::Bold);
+}
+
 namespace Style
 {
     const QString TRANSPARENT_STYLESHEET =  

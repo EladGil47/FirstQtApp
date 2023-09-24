@@ -6,7 +6,7 @@
 #include "group.hpp"
 #include <memory>
 
-
+#include "player_item_widget.h"
 
 
 class CreateTeamsWindow : public BaseListManagerWindow
@@ -14,24 +14,37 @@ class CreateTeamsWindow : public BaseListManagerWindow
     Q_OBJECT
 
 public:
+    std::shared_ptr<Group> m_group;
     CreateTeamsWindow(std::shared_ptr<Group> group = nullptr,QMainWindow *parent = nullptr) :  BaseListManagerWindow(parent)
     {
+        m_group = group ;
         setHeaderLabelText(QString::fromStdString(group->getName()));
-        m_list_label->setText("Players :");
 
-
-    }
-    void initList() override
-    {
 
     }
     void setListLabelText() override
     {
-
+        m_list_label->setText("Players :");
     }
     void createButtonsHorLayout() override
     {
 
+    }
+    void addItemToList(std::shared_ptr<Player> player)
+    {
+        // PlayerItemWidget *player_item_widget = new PlayerItemWidget(player);
+        // Need to create a new calss for player widget : )
+        // QListWidgetItem *item = new QListWidgetItem(m_list_list_widget);
+        // item->setSizeHint(player_item_widget->sizeHint());
+        // m_list_list_widget->setItemWidget(item, player_item_widget);
+    }
+
+    void initList() override
+    {
+        for (std::shared_ptr<Player> player : m_group->getPlayersCollectionRef().getCollectionRef())
+        {
+            addItemToList(player);
+        }
     }
 };
 

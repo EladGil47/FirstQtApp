@@ -26,7 +26,7 @@ void PlayerItemWidget::setPlayerIndex(size_t index)
 void PlayerItemWidget::setNameLabel()
 {
     QString name = QString::fromStdString(m_player->getName());
-    m_name_label = new EditableLabel(this);
+    m_name_label = new EditableLabel;
     m_name_label->setText(name);
     m_name_label->setAlignment(Qt::AlignLeft);
     m_name_label->setFont(QFont(Common::FONT_FAMILY_NAME, 10, QFont::Bold));
@@ -37,7 +37,7 @@ void PlayerItemWidget::setNameLabel()
 void PlayerItemWidget::setRateLabel()
 {
     QString rate = QString::number(m_player->getRate());
-    m_rate_label = new QLabel(rate, this);
+    m_rate_label = new QLabel(rate);
     m_rate_label->setFont(QFont(Common::FONT_FAMILY_NAME, 10, QFont::Bold));
 }
 
