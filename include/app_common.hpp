@@ -5,6 +5,9 @@
 #include <QSize>
 #include <QDebug>
 
+#include <memory>
+
+
 
 namespace Settings
 {
@@ -46,6 +49,13 @@ namespace Functions
 // Create a reusable function to check and log errors
 template <typename T>
 void checkNotNull(T* object, const QString& object_name) {
+    if (object == nullptr)
+    {
+        qCritical() << "Error:" << object_name << "is nullptr";
+    }
+}
+template <typename T>
+void checkNotNull(std::shared_ptr<T> object, const QString& object_name) {
     if (object == nullptr)
     {
         qCritical() << "Error:" << object_name << "is nullptr";

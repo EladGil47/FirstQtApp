@@ -10,7 +10,7 @@ class BaseItemWidget : public QWidget
 {
     Q_OBJECT
 
-private:
+protected:
 
 void initNameLabel(const QString& name)
 {

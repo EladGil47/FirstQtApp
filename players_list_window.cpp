@@ -19,7 +19,7 @@ PlayersListWindow::PlayersListWindow(std::shared_ptr<Group> group, QMainWindow *
     connect(m_header_label,EditableLabel::finishEditingSig,this,setGroupName);
 }
 
-void PlayersListWindow::changePlayerName(uint16_t id ,const std::string & name)
+void PlayersListWindow::onPlayerNameChanged(uint16_t id ,const std::string & name)
 {
     m_group->getPlayersCollectionRef().getItem(static_cast<size_t>(id))->setName(name);
 }
@@ -120,7 +120,13 @@ void PlayersListWindow::onCreateTeamsClicked()
 
 void PlayersListWindow::addItemToList(std::shared_ptr<Player> player)
 {
-    PlayerItemWidget * player_item_widget = new PlayerItemWidget(player,this);
+    PlayerItemWidget * player_item_widget = new PlayerItemWidget(player);
+    connect(player_item_widget,PlayerItemWidget::enterButtonClickedSignal,this,onEnterButton);
+    connect(player_item_widget,PlayerItemWidget::removeButtonClickedSignal,this,onRemoveButton);
+    connect(player_item_widget,PlayerItemWidget::playerNameChangedSignal,this,onPlayerNameChanged);
+
+    
+
     QListWidgetItem *item = new QListWidgetItem(m_list_list_widget);
     item->setSizeHint(player_item_widget->sizeHint());
     m_list_list_widget->setItemWidget(item, player_item_widget);
@@ -140,6 +146,7 @@ void PlayersListWindow::onRemoveButton(size_t id)
 
 void PlayersListWindow::onEnterButton(size_t id)
 {
+    qDebug () << "hello" << id;
  /// Open a window with player attributes
     /// Calls team creator
 }

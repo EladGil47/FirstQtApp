@@ -17,7 +17,6 @@ class PlayersListWindow : public BaseListManagerWindow
 
 public:
     PlayersListWindow(std::shared_ptr<Group> group = nullptr,QMainWindow *parent = nullptr);
-    void changePlayerName(uint16_t id ,const std::string & name);
     
 
 private:
@@ -60,6 +59,7 @@ public slots:
     void onGoBackButton();
     void onRemoveButton(size_t id);
     void onEnterButton(size_t id);
+    void onPlayerNameChanged(uint16_t id ,const std::string & name);
     void setGroupName(const QString & text);
 
 signals:
