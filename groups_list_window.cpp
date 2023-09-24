@@ -14,8 +14,7 @@ m_groups_collection(groups_collection)
 {
     initBaseWindowLayout();
     initGroupsAmountLabel();
-
-
+    
     setHeaderLabelText(QString::fromStdString("Welcome To Kohot"));
     setHeaderLabelEditability(false);
 

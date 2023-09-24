@@ -12,6 +12,8 @@ PlayersListWindow::PlayersListWindow(std::shared_ptr<Group> group, QMainWindow *
     :  m_group(group)
 {
     initBaseWindowLayout();
+    initPlayersAmountLabel();
+
     setHeaderLabelText(QString::fromStdString(m_group->getName()));
     setListLabelText();
     initList();
@@ -19,6 +21,24 @@ PlayersListWindow::PlayersListWindow(std::shared_ptr<Group> group, QMainWindow *
 
     connect(m_header_label,EditableLabel::finishEditingSig,this,setGroupName);
 }
+
+void PlayersListWindow::initPlayersAmountLabel()
+{
+    m_players_amount_label = new QLabel;
+    initPlayersAmountLabelText();
+    m_players_amount_label->setFont(Fonts::LIST_LABEL_FONT);
+    m_players_amount_label->setAlignment(Qt::AlignLeft);
+
+    m_list_label_layout->addWidget(m_players_amount_label);
+    QSpacerItem *spacer = new QSpacerItem(0, 0,QSizePolicy::Expanding, QSizePolicy::Fixed);
+    m_list_label_layout->addSpacerItem(spacer);
+}
+void PlayersListWindow::initPlayersAmountLabelText()
+{
+    QString size = QString::number(m_group->getNumOfPlayers());
+    m_players_amount_label->setText(size);
+}
+
 
 void PlayersListWindow::onPlayerNameChanged(uint16_t id ,const std::string & name)
 {
@@ -107,6 +127,7 @@ void PlayersListWindow::onCreateNewPlayerButton()
             std::shared_ptr<Player> new_player = std::make_shared<Player>(config);
             m_group->getPlayersCollectionRef().addItem(new_player);
             addItemToList(new_player);
+            initPlayersAmountLabelText();
         }
     } 
 }
@@ -143,6 +164,7 @@ void PlayersListWindow::onRemoveButton(size_t id)
         m_group->getPlayersCollectionRef().getItem(index)->setId(static_cast<uint16_t>(index));
     }
     updateList();
+    initPlayersAmountLabelText();
 }
 
 void PlayersListWindow::onEnterButton(size_t id)

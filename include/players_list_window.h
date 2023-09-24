@@ -22,13 +22,17 @@ public:
 private:
     void initList() override;
     void setListLabelText() override ;
+
+void initPlayersAmountLabel();
+void initPlayersAmountLabelText();
+
     void createButtonsHorLayout() override;
 
     void initCreateNewPlayerButton();
     void initCreateTeamsButton();
     void initGoBackButton();
 
-
+    QLabel * m_players_amount_label;
     QPushButton *m_create_new_player_button;
     QPushButton *m_create_teams_button; 
     QPushButton *m_go_back_button;
