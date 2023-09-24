@@ -3,7 +3,11 @@
 
 BaseListManagerWindow::BaseListManagerWindow()
 {
-    initWindowLayout();
+    initHeaderLabel();
+    initListLabel();
+    initListListWidget();
+    initListLayout();
+    m_buttons_hor_layout = new QHBoxLayout;
 }
 
 BaseListManagerWindow::~BaseListManagerWindow()
@@ -17,10 +21,9 @@ BaseListManagerWindow::~BaseListManagerWindow()
     delete m_window_layout;
 }
 
-
 void BaseListManagerWindow::initHeaderLabel()
 {
-    m_header_label = new EditableLabel;
+    m_header_label = new EditableLabel();
     m_header_label->setFont(QFont(Common::FONT_FAMILY_NAME, 26, QFont::Bold));
     m_header_label->setAlignment(Qt::AlignHCenter);
 }
@@ -35,11 +38,9 @@ void BaseListManagerWindow::initListLayout()
 {
     m_list_layout = new QVBoxLayout;
 
-    initListLabel();
     Functions::checkNotNull(m_list_label,"m_list_label");
     m_list_layout->addWidget(m_list_label);
 
-    initListListWidget();
     Functions::checkNotNull(m_list_list_widget,"m_list_list_widget");
     m_list_layout->addWidget(m_list_list_widget);
 }
@@ -65,19 +66,13 @@ void BaseListManagerWindow::initListListWidget()
         " } ");
 }
 
-void BaseListManagerWindow::initWindowLayout()
+void BaseListManagerWindow::initBaseWindowLayout()
 {
-    m_window_layout = new QVBoxLayout(this);
-
-    initHeaderLabel();
     Functions::checkNotNull(m_header_label,"m_header_label");
     m_window_layout->addWidget(m_header_label);
-
-    initListLayout();
     Functions::checkNotNull(m_list_layout,"m_list_layout");
     m_window_layout->addLayout(m_list_layout);
-
-    m_buttons_hor_layout = new QHBoxLayout;
+    Functions::checkNotNull(m_buttons_hor_layout,"m_buttons_hor_layout");
     m_window_layout->addLayout(m_buttons_hor_layout);
 }
 

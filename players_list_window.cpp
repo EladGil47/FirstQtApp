@@ -11,6 +11,7 @@
 PlayersListWindow::PlayersListWindow(std::shared_ptr<Group> group, QMainWindow *parent)
     :  m_group(group)
 {
+    initBaseWindowLayout();
     setHeaderLabelText(QString::fromStdString(m_group->getName()));
     setListLabelText();
     initList();

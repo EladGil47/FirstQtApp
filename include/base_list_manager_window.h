@@ -13,20 +13,20 @@ class BaseListManagerWindow : public QWidget
 {
     Q_OBJECT
 private:
-    QVBoxLayout * m_window_layout;
-    void initWindowLayout() ;
+    QVBoxLayout * m_window_layout = new QVBoxLayout(this);
     void initListListWidget();
     void initListLabel();
     void initListLayout();
     QVBoxLayout *m_list_layout;
     void removeAllItemsFromList() ;
+    void initHeaderLabel();
 
 protected :
     BaseListManagerWindow();
     ~BaseListManagerWindow();
 
 
-    virtual void initHeaderLabel();
+    void initBaseWindowLayout() ;
     virtual void initList()  = 0;
     virtual void setListLabelText() = 0;
     virtual void createButtonsHorLayout() = 0;

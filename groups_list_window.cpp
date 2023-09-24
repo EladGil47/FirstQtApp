@@ -5,12 +5,18 @@
 
 #include "group_item_widget.h"
 
+#include "app_common.hpp"
+
+
 GroupsListWindow::GroupsListWindow(std::shared_ptr<GroupsCollection> groups_collection,QMainWindow *parent)
 :
 m_groups_collection(groups_collection)
 {
+    initBaseWindowLayout();
+
     setHeaderLabelText(QString::fromStdString("Welcome To Kohot"));
     setHeaderLabelEditability(false);
+
     setListLabelText();
     createButtonsHorLayout();
     initList();
@@ -19,7 +25,6 @@ m_groups_collection(groups_collection)
 GroupsListWindow::~GroupsListWindow()
 {
 }
-
 
 void GroupsListWindow::initCreateNewGroupButton()
 {
