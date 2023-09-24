@@ -8,13 +8,13 @@
 #include "app_common.hpp"
 
 
-GroupsListWindow::GroupsListWindow(std::shared_ptr<GroupsCollection> groups_collection,QMainWindow *parent)
+GroupsListWindow::GroupsListWindow(std::shared_ptr<GroupsCollection> groups_collection)
 :
 m_groups_collection(groups_collection)
 {
     initBaseWindowLayout();
     initGroupsAmountLabel();
-    
+
     setHeaderLabelText(QString::fromStdString("Welcome To Kohot"));
     setHeaderLabelEditability(false);
 

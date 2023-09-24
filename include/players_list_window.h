@@ -16,7 +16,7 @@ class PlayersListWindow : public BaseListManagerWindow
     Q_OBJECT
 
 public:
-    PlayersListWindow(std::shared_ptr<Group> group = nullptr,QMainWindow *parent = nullptr);
+    PlayersListWindow(std::shared_ptr<Group> group = nullptr);
     
 
 private:

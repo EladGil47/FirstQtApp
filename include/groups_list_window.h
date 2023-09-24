@@ -11,7 +11,7 @@ class GroupsListWindow : public BaseListManagerWindow
     Q_OBJECT
 
 public:
-    GroupsListWindow(std::shared_ptr<GroupsCollection> groups_collection = nullptr, QMainWindow *parent = nullptr);
+    GroupsListWindow(std::shared_ptr<GroupsCollection> groups_collection = nullptr);
     ~GroupsListWindow();
     void changeGroupName(uint16_t id, const std::string &name);
 

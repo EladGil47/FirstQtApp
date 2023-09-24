@@ -69,7 +69,7 @@ private :
     void initPlayersListWindow(size_t id)
     {
         m_group = m_groups_collection->getItem(id);
-        m_players_list_window = new PlayersListWindow(m_group, this);
+        m_players_list_window = new PlayersListWindow(m_group);
         QObject::connect(m_players_list_window, PlayersListWindow::onGoBackButtonClickedSignal, this, setToGroupsListWindow);
         QObject::connect(m_players_list_window, PlayersListWindow::setToCreateTeamsWindowSignal, this, setToCreateTeamsWindow);
 
@@ -77,7 +77,7 @@ private :
 
     void initGroupsListWindow()
     {
-        m_groups_list_window = new GroupsListWindow(m_groups_collection, this);
+        m_groups_list_window = new GroupsListWindow(m_groups_collection);
         QObject::connect(m_groups_list_window, GroupsListWindow::setToPlayersListWindowSignal, this, setToPlayersListWindow);
     }
 

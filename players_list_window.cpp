@@ -8,7 +8,7 @@
 
 
 
-PlayersListWindow::PlayersListWindow(std::shared_ptr<Group> group, QMainWindow *parent)
+PlayersListWindow::PlayersListWindow(std::shared_ptr<Group> group)
     :  m_group(group)
 {
     initBaseWindowLayout();
@@ -135,9 +135,6 @@ void PlayersListWindow::onCreateNewPlayerButton()
 void PlayersListWindow::onCreateTeamsClicked()
 {
     emit setToCreateTeamsWindowSignal();
-
-    /// Open a window to choose players
-    /// Calls team creator
 }
 
 void PlayersListWindow::addItemToList(std::shared_ptr<Player> player)
