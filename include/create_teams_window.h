@@ -26,7 +26,7 @@ public:
     }
     void setListLabelText() override
     {
-        m_list_label->setText("Check Players :");
+        m_list_label->setText("Checked players :");
     }
     void createButtonsHorLayout() override
     {

@@ -45,8 +45,6 @@ void GroupsListWindow::setGroupsAmountLabelText()
     m_groups_amount_label->setText(size);
 }
 
-
-
 void GroupsListWindow::initCreateNewGroupButton()
 {
     QString text = "Create new group";
