@@ -6,7 +6,7 @@
 #include "group.hpp"
 #include <memory>
 
-#include "player_item_widget.h"
+#include "checkable_player_item_widget.hpp"
 
 
 class CreateTeamsWindow : public BaseListManagerWindow
@@ -19,12 +19,12 @@ public:
     {
         m_group = group ;
         setHeaderLabelText(QString::fromStdString(group->getName()));
-
-
+        setListLabelText();
+        initList();
     }
     void setListLabelText() override
     {
-        m_list_label->setText("Players :");
+        m_list_label->setText("Check Players :");
     }
     void createButtonsHorLayout() override
     {
@@ -32,11 +32,10 @@ public:
     }
     void addItemToList(std::shared_ptr<Player> player)
     {
-        // PlayerItemWidget *player_item_widget = new PlayerItemWidget(player);
-        // Need to create a new calss for player widget : )
-        // QListWidgetItem *item = new QListWidgetItem(m_list_list_widget);
-        // item->setSizeHint(player_item_widget->sizeHint());
-        // m_list_list_widget->setItemWidget(item, player_item_widget);
+        CheckablePlayerItemWidget *player_item_widget = new CheckablePlayerItemWidget(player);
+        QListWidgetItem *item = new QListWidgetItem(m_list_list_widget);
+        item->setSizeHint(player_item_widget->sizeHint());
+        m_list_list_widget->setItemWidget(item, player_item_widget);
     }
 
     void initList() override

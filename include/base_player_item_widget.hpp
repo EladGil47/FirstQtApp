@@ -5,12 +5,26 @@
 #include <QLabel>
 #include "app_common.hpp"
 #include "editable_label.h"
+#include "player.hpp"
 
-class BaseItemWidget : public QWidget
+class BasePlayerItemWidget : public QWidget
 {
     Q_OBJECT
 
 protected:
+
+BasePlayerItemWidget(std::shared_ptr<Player> player)
+{
+    Functions::checkNotNull(player, "player in BasePlayerItemWidget ctor");
+    setPlayerIndex(static_cast<size_t>(player->getId()));
+    initNameLabel(QString::fromStdString(player->getName()));
+    initRateLabel(QString::number(player->getRate()));
+}
+
+void setPlayerIndex(size_t index)
+{
+    m_player_index = index;
+}
 
 void initNameLabel(const QString& name)
 {
@@ -27,7 +41,7 @@ void initRateLabel(const QString& rate)
     m_rate_label->setFont(Fonts::ITEM_WIDGET_FONT);
 }
 
-
+size_t m_player_index;
 EditableLabel* m_name_label;
 QLabel* m_rate_label;
 

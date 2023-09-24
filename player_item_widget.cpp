@@ -4,24 +4,14 @@
 
 #include <QHBoxLayout>
 
-PlayerItemWidget::PlayerItemWidget(std::shared_ptr<Player> player)
+PlayerItemWidget::PlayerItemWidget(std::shared_ptr<Player> player) 
+: BasePlayerItemWidget(player)
 {
-    Functions::checkNotNull(player, "player in PlayerItemWidget ctor");
-    setPlayerIndex(static_cast<size_t>(player->getId()));
-
-    initNameLabel(QString::fromStdString(player->getName()));
-    initRateLabel(QString::number(player->getRate()));
-
     initEnterButton();
     initRemoveButton();
     setupLayout();
 
     connect(m_name_label, EditableLabel::finishEditingSig, this, onChangePlayerName);
-}
-
-void PlayerItemWidget::setPlayerIndex(size_t index)
-{
-    m_player_index = index;
 }
 
 void PlayerItemWidget::initEnterButton()

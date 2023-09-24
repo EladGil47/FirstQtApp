@@ -35,7 +35,8 @@ set(PROJECT_SOURCES
     include/app_common.hpp
 
     include/create_teams_window.h
-    include/base_item_widget.hpp
+    include/base_player_item_widget.hpp
+    include/checkable_player_item_widget.hpp
 )
 
 add_executable(${PROJECT_NAME} ${PROJECT_SOURCES})
