@@ -20,7 +20,7 @@ private:
     void createButtonsHorLayout() override;
 
     void initGroupsAmountLabel();
-
+    void setGroupsAmountLabelText();
 
     void addGroupItemToList(std::shared_ptr<Group> group);
 
@@ -28,6 +28,8 @@ private:
     QPushButton *m_create_new_group_button;
 
     std::shared_ptr<GroupsCollection> m_groups_collection;
+
+    QLabel *m_groups_amount_label;
 
     void initList() override;
 

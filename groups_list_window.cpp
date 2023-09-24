@@ -31,13 +31,21 @@ GroupsListWindow::~GroupsListWindow()
 void GroupsListWindow::initGroupsAmountLabel()
 {
     QString size = QString::number(m_groups_collection->getSize());
-    QLabel *groups_amount_label = new QLabel(size);
-    groups_amount_label->setFont(Fonts::LIST_LABEL_FONT);
-    groups_amount_label->setAlignment(Qt::AlignLeft);
-    m_list_label_layout->addWidget(groups_amount_label);
+    m_groups_amount_label = new QLabel(size);
+    m_groups_amount_label->setFont(Fonts::LIST_LABEL_FONT);
+    m_groups_amount_label->setAlignment(Qt::AlignLeft);
+
+    m_list_label_layout->addWidget(m_groups_amount_label);
     QSpacerItem *spacer = new QSpacerItem(0, 0,QSizePolicy::Expanding, QSizePolicy::Fixed);
     m_list_label_layout->addSpacerItem(spacer);
 }
+void GroupsListWindow::setGroupsAmountLabelText()
+{
+    QString size = QString::number(m_groups_collection->getSize());
+    m_groups_amount_label->setText(size);
+}
+
+
 
 void GroupsListWindow::initCreateNewGroupButton()
 {
@@ -110,6 +118,7 @@ void GroupsListWindow::onCreateNewGroupButton()
         std::shared_ptr<Group> new_group = std::make_shared<Group>(group_config);
         m_groups_collection->addItem(new_group);
         addGroupItemToList(new_group);
+        setGroupsAmountLabelText();
     } 
 }
 
@@ -123,6 +132,7 @@ void GroupsListWindow::onRemoveGroupButton(size_t id)
         m_groups_collection->getItem(index)->setId(static_cast<uint16_t>(index));
     }
     updateList();
+    setGroupsAmountLabelText();
 }
 
 void GroupsListWindow::onEnterGroupButton(size_t id)
