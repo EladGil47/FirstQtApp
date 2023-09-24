@@ -21,6 +21,8 @@ private:
     void removeAllItemsFromList() ;
     void initHeaderLabel();
 
+    
+
 protected :
     BaseListManagerWindow();
     ~BaseListManagerWindow();
@@ -39,6 +41,8 @@ protected :
     QLabel *m_list_label;
     QListWidget *m_list_list_widget;
     QHBoxLayout *m_buttons_hor_layout;
+
+    QHBoxLayout *  m_list_label_layout;
 };
 
 #endif // FIRST_QT_APP_INCLUDE_BASE_LIST_MANAGER_WINDOW_H

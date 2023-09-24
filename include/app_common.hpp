@@ -25,6 +25,21 @@ namespace Common
 namespace Fonts
 {
    const QFont ITEM_WIDGET_FONT  = QFont(Common::FONT_FAMILY_NAME, 10, QFont::Bold);
+   const QFont LIST_LABEL_FONT  = QFont(Common::FONT_FAMILY_NAME, 18, QFont::Bold);
+   const QFont HEADER_LABEL_FONT  = QFont(Common::FONT_FAMILY_NAME, 26, QFont::Bold);
+
+
+
+   
+}
+
+namespace Sizes
+{
+   const QSize WIDGET_IN_GROUP_ITEM_WIDGET  = QSize(150,40);
+
+
+
+   
 }
 
 namespace Style

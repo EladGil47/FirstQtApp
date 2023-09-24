@@ -13,6 +13,8 @@ GroupsListWindow::GroupsListWindow(std::shared_ptr<GroupsCollection> groups_coll
 m_groups_collection(groups_collection)
 {
     initBaseWindowLayout();
+    initGroupsAmountLabel();
+
 
     setHeaderLabelText(QString::fromStdString("Welcome To Kohot"));
     setHeaderLabelEditability(false);
@@ -24,6 +26,17 @@ m_groups_collection(groups_collection)
 
 GroupsListWindow::~GroupsListWindow()
 {
+}
+
+void GroupsListWindow::initGroupsAmountLabel()
+{
+    QString size = QString::number(m_groups_collection->getSize());
+    QLabel *groups_amount_label = new QLabel(size);
+    groups_amount_label->setFont(Fonts::LIST_LABEL_FONT);
+    groups_amount_label->setAlignment(Qt::AlignLeft);
+    m_list_label_layout->addWidget(groups_amount_label);
+    QSpacerItem *spacer = new QSpacerItem(0, 0,QSizePolicy::Expanding, QSizePolicy::Fixed);
+    m_list_label_layout->addSpacerItem(spacer);
 }
 
 void GroupsListWindow::initCreateNewGroupButton()

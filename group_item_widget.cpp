@@ -45,7 +45,8 @@ void GroupItemWidget::setSizeLabel()
 
 void GroupItemWidget::setEnterButton()
 {
-    m_enter_button = new QPushButton("Enter");
+    m_enter_button = new QPushButton("Enter ");
+    m_enter_button->setFixedSize(Sizes::WIDGET_IN_GROUP_ITEM_WIDGET);
     m_enter_button->setStyleSheet(
    "QPushButton {"
     "    background-color: #0074CC;"    /* Blue background color */
@@ -66,6 +67,7 @@ void GroupItemWidget::setEnterButton()
 void GroupItemWidget::setRemoveButton()
 {
     m_remove_button = new QPushButton("Remove");
+    m_remove_button->setFixedSize(Sizes::WIDGET_IN_GROUP_ITEM_WIDGET);
     m_remove_button->setStyleSheet(
         "QPushButton {"
     "    background-color: #FF0000;"   /* Red background color */
@@ -87,10 +89,12 @@ void GroupItemWidget::setRemoveButton()
 void GroupItemWidget::setItemHorLayout()
 {
     m_item_hor_layout = new QHBoxLayout(this);
-    m_item_hor_layout->addWidget(m_name_label, 2);
-    m_item_hor_layout->addWidget(m_size_label, 3);
-    m_item_hor_layout->addWidget(m_enter_button, 1);
-    m_item_hor_layout->addWidget(m_remove_button, 1);
+    m_item_hor_layout->addWidget(m_name_label);
+    m_item_hor_layout->addWidget(m_size_label);
+    QSpacerItem *spacer = new QSpacerItem(0, 0, QSizePolicy::Expanding, QSizePolicy::Fixed);
+    m_item_hor_layout->addSpacerItem(spacer);
+    m_item_hor_layout->addWidget(m_enter_button);
+    m_item_hor_layout->addWidget(m_remove_button);
 }
 
 // Slots : 

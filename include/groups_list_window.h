@@ -19,6 +19,9 @@ private:
     void setListLabelText() override;
     void createButtonsHorLayout() override;
 
+    void initGroupsAmountLabel();
+
+
     void addGroupItemToList(std::shared_ptr<Group> group);
 
     void initCreateNewGroupButton();

@@ -24,22 +24,26 @@ BaseListManagerWindow::~BaseListManagerWindow()
 void BaseListManagerWindow::initHeaderLabel()
 {
     m_header_label = new EditableLabel();
-    m_header_label->setFont(QFont(Common::FONT_FAMILY_NAME, 26, QFont::Bold));
+    m_header_label->setFont(Fonts::HEADER_LABEL_FONT);
     m_header_label->setAlignment(Qt::AlignHCenter);
 }
 
 void BaseListManagerWindow::initListLabel()
 {
     m_list_label = new QLabel;
-    m_list_label->setFont(QFont(Common::FONT_FAMILY_NAME, 18, QFont::Bold));
+    m_list_label->setFont(Fonts::LIST_LABEL_FONT);
 }
 
 void BaseListManagerWindow::initListLayout()
 {
     m_list_layout = new QVBoxLayout;
-
+    m_list_label_layout = new QHBoxLayout;
+  
     Functions::checkNotNull(m_list_label,"m_list_label");
-    m_list_layout->addWidget(m_list_label);
+    m_list_label_layout->addWidget(m_list_label);
+
+    m_list_layout->addLayout(m_list_label_layout);
+
 
     Functions::checkNotNull(m_list_list_widget,"m_list_list_widget");
     m_list_layout->addWidget(m_list_list_widget);
