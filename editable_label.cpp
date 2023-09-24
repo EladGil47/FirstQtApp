@@ -33,7 +33,7 @@ void EditableLabel::setEditablity(bool state)
 
 void EditableLabel::createLabel()
 {
-    m_label = new QLabel(this);
+    m_label = new QLabel;
     m_label->setToolTip("Double-click me to edit");
 }
 
@@ -61,7 +61,7 @@ void EditableLabel::setMaxLength(uint16_t value)
 
 void EditableLabel::createEditLine()
 {
-    m_editLine = new QLineEdit(this);
+    m_editLine = new QLineEdit;
     m_editLine->setStyleSheet(Style::TRANSPARENT_STYLESHEET);
     m_editLine->size() = m_label->size();
     m_editLine->setFont(m_label->font());
