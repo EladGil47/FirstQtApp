@@ -23,6 +23,7 @@ public:
     CheckablePlayerItemWidget(std::shared_ptr<Player> player)
     : BasePlayerItemWidget(player)
     {
+        m_name_label->setEditablity(false);
         setupLayout();
     }
 

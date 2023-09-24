@@ -18,6 +18,7 @@ public:
     CreateTeamsWindow(std::shared_ptr<Group> group = nullptr,QMainWindow *parent = nullptr) :  BaseListManagerWindow(parent)
     {
         m_group = group ;
+        m_header_label->setEditablity(false);
         setHeaderLabelText(QString::fromStdString(group->getName()));
         setListLabelText();
         initList();
