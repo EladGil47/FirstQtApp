@@ -58,12 +58,12 @@ private :
 
     void setWindow()
     {
-        moveWindowToCenter();
-        setWindowTitle(Settings::WINDOW_TITLE_TEXT);
         QSize window_size(Settings::WINDOW_WIDTH,Settings::WINDOW_HEIGHT);
         resize(window_size);
         setMinimumSize(window_size);
+        setWindowTitle(Settings::WINDOW_TITLE_TEXT);
         setStyleSheet(Settings::BACKGROUND_COLOR);
+        moveWindowToCenter();
     }
 
     void initPlayersListWindow(size_t id)

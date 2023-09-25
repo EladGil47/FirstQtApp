@@ -30,15 +30,14 @@ void initNameLabel(const QString& name)
 {
     m_name_label = new EditableLabel;
     m_name_label->setText(name);
-    m_name_label->setAlignment(Qt::AlignLeft);
-    m_name_label->setFont(Fonts::ITEM_WIDGET_FONT);
+    m_name_label->setFont(Fonts::PLAYER_ITEM_WIDGET_FONT);
     m_name_label->setMaxLength(MaxValues::ITEM_WIDGET_LABEL_NAME);
 }
 
 void initRateLabel(const QString& rate)
 {
     m_rate_label = new QLabel(rate);
-    m_rate_label->setFont(Fonts::ITEM_WIDGET_FONT);
+    m_rate_label->setFont(Fonts::PLAYER_ITEM_WIDGET_FONT);
 }
 
 size_t m_player_index;

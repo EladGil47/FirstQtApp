@@ -11,7 +11,7 @@ namespace Settings
 {
     const QString WINDOW_TITLE_TEXT = "Kohot";
     const int WINDOW_WIDTH = 800;
-    const int WINDOW_HEIGHT = 400;
+    const int WINDOW_HEIGHT = 600;
     const QString BACKGROUND_COLOR = "QMainWindow{background-color : #FFFFBF}";
 }
 
@@ -22,7 +22,7 @@ namespace Common
 
 namespace Fonts
 {
-    const QFont ITEM_WIDGET_FONT = QFont(Common::FONT_FAMILY_NAME, 10, QFont::Bold);
+    const QFont PLAYER_ITEM_WIDGET_FONT = QFont(Common::FONT_FAMILY_NAME, 12, QFont::Bold);
     const QFont GROUP_ITEM_WIDGET_FONT = QFont(Common::FONT_FAMILY_NAME, 14, QFont::Bold);
     const QFont LIST_LABEL_FONT = QFont(Common::FONT_FAMILY_NAME, 18, QFont::Bold);
     const QFont HEADER_LABEL_FONT = QFont(Common::FONT_FAMILY_NAME, 26, QFont::Bold);
