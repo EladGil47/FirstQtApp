@@ -20,14 +20,22 @@ void setupLayout()
     layout->addWidget(m_is_selected_check_box);
 }
 
+
 QCheckBox * m_is_selected_check_box ;
 
 void initIsSelectedCheckBox()
 {
     m_is_selected_check_box = new QCheckBox;
+    connect(m_is_selected_check_box, &QCheckBox::stateChanged, this, onCheckBoxStateChanged);
 }
 
 private slots:
+
+    void onCheckBoxStateChanged(int state)
+    {
+    emit checkBoxStateChangedSignal(state);
+    }
+    
 
 public:
     CheckablePlayerItemWidget(std::shared_ptr<Player> player)
@@ -38,8 +46,10 @@ public:
 
         setupLayout();
     }
+    
 
 signals:
-
+void checkBoxStateChangedSignal(int state);
+   
 };
 #endif // FIRST_QT_APP_INCLUDE_CHECKABLE_ITEM_WIDGET_H

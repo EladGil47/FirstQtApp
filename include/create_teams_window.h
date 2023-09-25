@@ -20,6 +20,8 @@ public:
     QLabel *m_slash_label;
     QLabel *m_max_selected_players_amount_label;
     uint32_t m_selected_players_amount = 0;
+    uint32_t m_max_selected_players_amount;
+
 
     QPushButton *m_ok_button;
     QPushButton *m_cancel_button;
@@ -72,7 +74,8 @@ public:
         initSlashLabel();
         m_list_label_layout->addWidget(m_slash_label);
 
-        initMaxSelectedPlayersAmountLabel(group->getTeamsAmount() * group->getPlayersInTeamAmount());
+        m_max_selected_players_amount = group->getTeamsAmount() * group->getPlayersInTeamAmount();
+        initMaxSelectedPlayersAmountLabel(m_max_selected_players_amount);
         m_list_label_layout->addWidget(m_max_selected_players_amount_label);
 
         QSpacerItem *spacer = new QSpacerItem(0, 0, QSizePolicy::Expanding, QSizePolicy::Fixed);
@@ -81,6 +84,9 @@ public:
 
         createButtonsHorLayout();
         initList();
+
+        connect(this,selectedPlayersReachTheMaximumSignal,this,onSelectedPlayersReachTheMaximum);
+
     }
 
 
@@ -103,6 +109,9 @@ public:
     void addItemToList(std::shared_ptr<Player> player)
     {
         CheckablePlayerItemWidget *player_item_widget = new CheckablePlayerItemWidget(player);
+        connect(player_item_widget,CheckablePlayerItemWidget::checkBoxStateChangedSignal,this,onCheckBoxStateChanged);
+
+
         QListWidgetItem *item = new QListWidgetItem(m_list_list_widget);
         item->setSizeHint(player_item_widget->sizeHint());
         m_list_list_widget->setItemWidget(item, player_item_widget);
@@ -117,11 +126,47 @@ public:
     }
 signals:
     void cancelButtonClickedSignal(size_t id);
+    void selectedPlayersReachTheMaximumSignal();
 
 private slots:
     void onCancelButtonClicked()
     {
         emit cancelButtonClickedSignal(m_group->getId());
+    }
+
+    void onSelectedPlayersReachTheMaximum()
+    {
+        qDebug() << "Max";
+        // I need to disable every checkbox item
+        // int item_count = m_list_list_widget->count();
+        // for (int i = 0; i < item_count; ++i)
+        // {
+        //     QListWidgetItem *item = m_list_list_widget->item(0); // Get the first item
+        //     QWidget *widget = m_list_list_widget->itemWidget(item);
+        //     m_list_list_widget->removeItemWidget(item); // Remove the widget from the item
+        //     delete item;                                // Delete the item
+        //     delete widget;                              // Delete the widget
+        // }
+    }
+
+    void onCheckBoxStateChanged(int state)
+    {
+        switch (state)
+        {
+        case Qt::CheckState::Unchecked:
+            m_selected_players_amount--;
+            break;
+        case Qt::CheckState::Checked:
+            m_selected_players_amount++;
+            break;
+        default:
+            break;
+        }
+        m_selected_players_amount_label->setText(QString::number(m_selected_players_amount));
+        if(m_selected_players_amount == m_max_selected_players_amount)
+        {
+            emit selectedPlayersReachTheMaximumSignal();
+        }
     }
 };
 

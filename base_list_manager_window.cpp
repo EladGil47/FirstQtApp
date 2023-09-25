@@ -23,7 +23,7 @@ BaseListManagerWindow::~BaseListManagerWindow()
 
 void BaseListManagerWindow::initHeaderLabel()
 {
-    m_header_label = new EditableLabel();
+    m_header_label = new EditableLabel;
     m_header_label->setFont(Fonts::HEADER_LABEL_FONT);
     m_header_label->setAlignment(Qt::AlignHCenter);
 }
