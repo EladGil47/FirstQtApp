@@ -75,6 +75,7 @@
         "qmouseevent": "cpp",
         "qstring": "cpp",
         "qdebug": "cpp",
-        "qpushbutton": "cpp"
+        "qpushbutton": "cpp",
+        "qcheckbox": "cpp"
     }
 }

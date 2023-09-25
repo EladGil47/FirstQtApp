@@ -3,6 +3,8 @@
 
 #include "base_player_item_widget.hpp"
 
+#include <QCheckBox>
+
 class CheckablePlayerItemWidget : public BasePlayerItemWidget
 {
     Q_OBJECT
@@ -13,8 +15,16 @@ private:
 void setupLayout()
 {
     QHBoxLayout *layout = new QHBoxLayout(this);
-    layout->addWidget(m_name_label, 2);
-    layout->addWidget(m_rate_label, 4);
+    layout->addWidget(m_name_label);
+    layout->addWidget(m_rate_label);
+    layout->addWidget(m_is_selected_check_box);
+}
+
+QCheckBox * m_is_selected_check_box ;
+
+void initIsSelectedCheckBox()
+{
+    m_is_selected_check_box = new QCheckBox;
 }
 
 private slots:
@@ -24,6 +34,8 @@ public:
     : BasePlayerItemWidget(player)
     {
         m_name_label->setEditablity(false);
+        initIsSelectedCheckBox();
+
         setupLayout();
     }
 

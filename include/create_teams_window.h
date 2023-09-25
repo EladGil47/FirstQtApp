@@ -11,19 +11,18 @@
 
 #include "app_common.hpp"
 
-
 class CreateTeamsWindow : public BaseListManagerWindow
 {
     Q_OBJECT
 
 public:
-    QLabel * m_selected_players_amount_label;
-    QLabel * m_slash_label;
-    QLabel * m_max_selected_players_amount_label;
-    uint32_t m_selected_players_amount = 0 ;
+    QLabel *m_selected_players_amount_label;
+    QLabel *m_slash_label;
+    QLabel *m_max_selected_players_amount_label;
+    uint32_t m_selected_players_amount = 0;
 
-    QPushButton * m_ok_button;
-    QPushButton * m_cancel_button;
+    QPushButton *m_ok_button;
+    QPushButton *m_cancel_button;
 
     void initOkButton()
     {
@@ -39,28 +38,34 @@ public:
 
     void initSelectedPlayersAmountLabel()
     {
-    m_selected_players_amount_label = new QLabel(QString::number(m_selected_players_amount));
-    m_selected_players_amount_label->setFont(Fonts::LIST_LABEL_FONT);
+        m_selected_players_amount_label = new QLabel(QString::number(m_selected_players_amount));
+        m_selected_players_amount_label->setFont(Fonts::LIST_LABEL_FONT);
     }
 
     void initSlashLabel()
     {
-    m_slash_label = new QLabel("/");
-    m_slash_label->setFont(Fonts::LIST_LABEL_FONT);
+        m_slash_label = new QLabel("/");
+        m_slash_label->setFont(Fonts::LIST_LABEL_FONT);
     }
 
     void initMaxSelectedPlayersAmountLabel(uint16_t max_amount)
     {
-    m_max_selected_players_amount_label = new QLabel(QString::number(max_amount));
-    m_max_selected_players_amount_label->setFont(Fonts::LIST_LABEL_FONT);
+        m_max_selected_players_amount_label = new QLabel(QString::number(max_amount));
+        m_max_selected_players_amount_label->setFont(Fonts::LIST_LABEL_FONT);
     }
 
-std::shared_ptr<Group> m_group;
-    CreateTeamsWindow(std::shared_ptr<Group> group = nullptr) 
+    std::shared_ptr<Group> m_group;
+    CreateTeamsWindow(std::shared_ptr<Group> group = nullptr)
     {
         m_group = group;
         initBaseWindowLayout();
-        
+        m_header_label->setEditablity(false);
+        setHeaderLabelText(QString::fromStdString(group->getName()));
+
+
+
+        setListLabelText();
+
         initSelectedPlayersAmountLabel();
         m_list_label_layout->addWidget(m_selected_players_amount_label);
 
@@ -74,14 +79,11 @@ std::shared_ptr<Group> m_group;
         m_list_label_layout->addSpacerItem(spacer);
 
 
-        m_header_label->setEditablity(false);
-        setHeaderLabelText(QString::fromStdString(group->getName()));
-        setListLabelText();
-     
         createButtonsHorLayout();
         initList();
-
     }
+
+
     void setListLabelText() override
     {
         m_list_label->setText("Checked players :");
@@ -91,10 +93,10 @@ std::shared_ptr<Group> m_group;
         m_buttons_hor_layout->addStretch(1);
 
         initOkButton();
-        m_buttons_hor_layout->addWidget(m_ok_button,2);
+        m_buttons_hor_layout->addWidget(m_ok_button, 2);
 
         initCancelButton();
-        m_buttons_hor_layout->addWidget(m_cancel_button,2);
+        m_buttons_hor_layout->addWidget(m_cancel_button, 2);
         m_buttons_hor_layout->addStretch(1);
     }
 
@@ -113,17 +115,14 @@ std::shared_ptr<Group> m_group;
             addItemToList(player);
         }
     }
-    signals:
+signals:
     void cancelButtonClickedSignal(size_t id);
 
-    private slots:
+private slots:
     void onCancelButtonClicked()
     {
         emit cancelButtonClickedSignal(m_group->getId());
     }
-    
 };
-
-
 
 #endif // FIRST_QT_APP_INCLUDE_CREATE_TEAMS_WINDOW_H
