@@ -63,11 +63,12 @@ void BaseListManagerWindow::initListListWidget()
         "background-color : rgb(139, 69, 30);"
         "}"
         "QListWidget::item {"
-        "   border: 1px solid border;"
+        "   border: 1px solid black;"
         "}"
         "QListWidget::item:selected {"
         " background: rgba(0, 0, 255, 10%);"
-        " } ");
+        " } "
+        );
 }
 
 void BaseListManagerWindow::initBaseWindowLayout()

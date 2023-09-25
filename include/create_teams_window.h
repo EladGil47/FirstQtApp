@@ -21,6 +21,10 @@ public:
     QLabel *m_max_selected_players_amount_label;
     uint32_t m_selected_players_amount = 0;
     uint32_t m_max_selected_players_amount;
+    // std::vector<std::shared_ptr<Player>> m_selected_players;
+
+	PlayersCollection m_selected_players;
+
 
 
     QPushButton *m_ok_button;
@@ -30,6 +34,7 @@ public:
     {
         m_ok_button = new QPushButton("OK", this);
         m_ok_button->setStyleSheet(Style::GREEN_BUTTON_HOR_LAYOUT);
+        connect(m_ok_button, &QPushButton::clicked,this,onOkButtonClicked);
     }
     void initCancelButton()
     {
@@ -112,6 +117,7 @@ public:
         connect(player_item_widget,CheckablePlayerItemWidget::checkBoxStateChangedSignal,this,onCheckBoxStateChanged);
 
 
+
         QListWidgetItem *item = new QListWidgetItem(m_list_list_widget);
         item->setSizeHint(player_item_widget->sizeHint());
         m_list_list_widget->setItemWidget(item, player_item_widget);
@@ -127,12 +133,20 @@ public:
 signals:
     void cancelButtonClickedSignal(size_t id);
     void selectedPlayersReachTheMaximumSignal();
+    void okButtonClickedSignal();
 
 private slots:
     void onCancelButtonClicked()
     {
         emit cancelButtonClickedSignal(m_group->getId());
     }
+
+    void onOkButtonClicked()
+    {
+        emit okButtonClickedSignal();
+    }
+
+    
 
     void onSelectedPlayersReachTheMaximum()
     {
@@ -149,19 +163,25 @@ private slots:
         // }
     }
 
-    void onCheckBoxStateChanged(int state)
+    void onCheckBoxStateChanged(size_t id,int state)
     {
         switch (state)
         {
         case Qt::CheckState::Unchecked:
             m_selected_players_amount--;
+            m_selected_players.deleteItem(id);
             break;
         case Qt::CheckState::Checked:
             m_selected_players_amount++;
+            m_selected_players.addItem(m_group->getPlayersCollection().getItem(id));
             break;
         default:
             break;
         }
+        // FOR DEBUG
+        // m_selected_players.display();
+        //
+
         m_selected_players_amount_label->setText(QString::number(m_selected_players_amount));
         if(m_selected_players_amount == m_max_selected_players_amount)
         {
