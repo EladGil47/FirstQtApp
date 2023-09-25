@@ -23,6 +23,7 @@ namespace Common
 namespace Fonts
 {
     const QFont ITEM_WIDGET_FONT = QFont(Common::FONT_FAMILY_NAME, 10, QFont::Bold);
+    const QFont GROUP_ITEM_WIDGET_FONT = QFont(Common::FONT_FAMILY_NAME, 14, QFont::Bold);
     const QFont LIST_LABEL_FONT = QFont(Common::FONT_FAMILY_NAME, 18, QFont::Bold);
     const QFont HEADER_LABEL_FONT = QFont(Common::FONT_FAMILY_NAME, 26, QFont::Bold);
 
@@ -60,27 +61,28 @@ namespace Style
         "    background-color: #0074CC;"
         "    border: 2px solid #0074CC;";
 
-    const QString GREEN_BUTTON_HOR_LAYOUT =
-        "QPushButton {" +
-        GREEN_COLOR +
+    const QString HOVER_BLUE_COLOR =
+        "    background-color: #005FAA;"
+        "    border: 2px solid #005FAA;";
+
+    const QString WHITE_TEXT_COLOR =
         "    color: white;"      // White text color
-        "    padding: 3px 15px;" // Padding around the text
+        "    padding: 3px 20px;" // Padding around the text
         "    font-size: 18px;"   // Font size
         "    font-weight: bold;" // Bold text
-        "}"
-        "QPushButton:hover {" +
-        HOVER_GREEN_COLOR + "}";
+        ;
+
+    const QString GREEN_BUTTON_HOR_LAYOUT =
+        "QPushButton {" + GREEN_COLOR + WHITE_TEXT_COLOR + "}"
+        "QPushButton:hover {" + HOVER_GREEN_COLOR + "}";
 
     const QString RED_BUTTON_HOR_LAYOUT =
-        "QPushButton {" +
-        RED_COLOR +
-        "    color: white;"      // White text color
-        "    padding: 3px 15px;" // Padding around the text
-        "    font-size: 18px;"   // Font size
-        "    font-weight: bold;" // Bold text
-        "}"
-        "QPushButton:hover {" +
-        HOVER_RED_COLOR + "}";
+        "QPushButton {" + RED_COLOR + WHITE_TEXT_COLOR +"}"
+        "QPushButton:hover {" + HOVER_RED_COLOR + "}";
+
+    const QString BLUE_BUTTON_HOR_LAYOUT =
+        "QPushButton {" + BLUE_COLOR + WHITE_TEXT_COLOR +"}"
+        "QPushButton:hover {" + HOVER_BLUE_COLOR + "}";
 }
 
 namespace MaxValues
