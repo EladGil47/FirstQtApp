@@ -34,6 +34,7 @@ public:
     {
         m_cancel_button = new QPushButton("Cancel", this);
         m_cancel_button->setStyleSheet(Style::RED_BUTTON_HOR_LAYOUT);
+        connect(m_cancel_button, &QPushButton::clicked, this, onCancelButtonClicked);
     }
 
     void initSelectedPlayersAmountLabel()
@@ -54,9 +55,10 @@ public:
     m_max_selected_players_amount_label->setFont(Fonts::LIST_LABEL_FONT);
     }
 
-
+std::shared_ptr<Group> m_group;
     CreateTeamsWindow(std::shared_ptr<Group> group = nullptr) 
     {
+        m_group = group;
         initBaseWindowLayout();
         
         initSelectedPlayersAmountLabel();
@@ -75,12 +77,9 @@ public:
         m_header_label->setEditablity(false);
         setHeaderLabelText(QString::fromStdString(group->getName()));
         setListLabelText();
-        for (std::shared_ptr<Player> player : group->getPlayersCollectionRef().getCollectionRef())
-        {
-            addItemToList(player);
-        }
-
+     
         createButtonsHorLayout();
+        initList();
 
     }
     void setListLabelText() override
@@ -109,9 +108,20 @@ public:
 
     void initList() override
     {
-        return ;
-       
+        for (std::shared_ptr<Player> player : m_group->getPlayersCollectionRef().getCollectionRef())
+        {
+            addItemToList(player);
+        }
     }
+    signals:
+    void cancelButtonClickedSignal(size_t id);
+
+    private slots:
+    void onCancelButtonClicked()
+    {
+        emit cancelButtonClickedSignal(m_group->getId());
+    }
+    
 };
 
 

@@ -84,6 +84,7 @@ private :
     void initCreateTeamsWindow()
     {
         m_create_teams_window = new CreateTeamsWindow(m_group);
+        QObject::connect(m_create_teams_window, CreateTeamsWindow::cancelButtonClickedSignal, this, setToPlayersListWindow);
     }
 
     void moveWindowToCenter()
