@@ -3,7 +3,7 @@
 
 #include <QMouseEvent>
 
-EditableLabel::EditableLabel(QWidget *parent) : QWidget(parent)
+EditableLabel::EditableLabel()
 {
     createLabel();
     createEditLine();

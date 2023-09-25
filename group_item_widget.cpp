@@ -23,7 +23,7 @@ void GroupItemWidget::setGroupIndex(size_t group_index)
 void GroupItemWidget::setNameLabel()
 {
     QString name = QString::fromStdString(m_group->getName());
-    m_name_label = new EditableLabel(this);
+    m_name_label = new EditableLabel;
     m_name_label->setText(name);
     m_name_label->setAlignment(Qt::AlignLeft);
     m_name_label->setFont(Fonts::GROUP_ITEM_WIDGET_FONT);
@@ -35,7 +35,7 @@ void GroupItemWidget::setSizeLabel()
 {
     QString size = QString::number(m_group->getNumOfPlayers());
     QString size_wrapped = "(" + size + ")";
-    m_size_label = new QLabel(size_wrapped, this);
+    m_size_label = new QLabel(size_wrapped);
     m_size_label->setFont(Fonts::GROUP_ITEM_WIDGET_FONT);
 }
 

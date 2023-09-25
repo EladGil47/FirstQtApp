@@ -25,7 +25,7 @@ namespace Fonts
     const QFont PLAYER_ITEM_WIDGET_FONT = QFont(Common::FONT_FAMILY_NAME, 12, QFont::Bold);
     const QFont GROUP_ITEM_WIDGET_FONT = QFont(Common::FONT_FAMILY_NAME, 14, QFont::Bold);
     const QFont LIST_LABEL_FONT = QFont(Common::FONT_FAMILY_NAME, 18, QFont::Bold);
-    const QFont HEADER_LABEL_FONT = QFont(Common::FONT_FAMILY_NAME, 26, QFont::Bold);
+    const QFont HEADER_LABEL_FONT = QFont(Common::FONT_FAMILY_NAME, 22, QFont::Bold);
 
 }
 

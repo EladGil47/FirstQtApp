@@ -11,7 +11,7 @@ class EditableLabel : public QWidget
     Q_OBJECT
 
 public:
-    EditableLabel(QWidget* parent = nullptr);
+    EditableLabel();
     void setEditablity(bool state);
     void setFont(const QFont & font) ;
     void setAlignment(Qt::Alignment alignment) ; 
