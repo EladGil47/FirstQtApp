@@ -31,8 +31,8 @@ namespace Fonts
 
 namespace Sizes
 {
-    const QSize WIDGET_IN_GROUP_ITEM_WIDGET = QSize(150, 40);
-
+    const QSize WIDGET_IN_GROUP_ITEM_WIDGET = QSize(150, 35);
+    const QSize WIDGET_IN_PLAYER_ITEM_WIDGET = QSize(150, 30);
 }
 
 namespace Style

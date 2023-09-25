@@ -17,42 +17,16 @@ PlayerItemWidget::PlayerItemWidget(std::shared_ptr<Player> player)
 void PlayerItemWidget::initEnterButton()
 {
     m_enter_button = new QPushButton("Enter");
+    m_enter_button->setFixedSize(Sizes::WIDGET_IN_PLAYER_ITEM_WIDGET);
     m_enter_button->setStyleSheet(Style::BLUE_BUTTON_HOR_LAYOUT);
-    // TODO::REMOVE
-//    "QPushButton {"
-//     "    background-color: #0074CC;"    /* Blue background color */
-//     "    border: 2px solid #0074CC;"    /* Blue border */
-//     "    color: white;"                  /* White text color */
-//     "    padding: 1px 20px;"             /* Reduced vertical padding, same horizontal padding */
-//     "    font-size: 10px;"               /* Font size */
-//     "    font-weight: bold;"             /* Bold text */
-//     "}"
-//     "QPushButton:hover {"
-//     "    background-color: #005FAA;"    /* Darker blue on hover */
-//     "    border: 2px solid #005FAA;"    /* Darker blue border on hover */
-//     "}"
-//                                   );
     connect(m_enter_button, &QPushButton::clicked, this, onEnterButtonClicked);
 }
 
 void PlayerItemWidget::initRemoveButton()
 {
     m_remove_button = new QPushButton("Remove");
+    m_remove_button->setFixedSize(Sizes::WIDGET_IN_PLAYER_ITEM_WIDGET);
     m_remove_button->setStyleSheet(Style::RED_BUTTON_HOR_LAYOUT);
-    // TODO::REMOVE
-    //     "QPushButton {"
-    // "    background-color: #FF0000;"   /* Red background color */
-    // "    border: 2px solid #FF0000;"   /* Red border */
-    // "    color: white;"                /* White text color */
-    // "    padding: 1px 20px;"          /* Padding around the text */
-    // "    font-size: 10px;"             /* Font size */
-    // "    font-weight: bold;"           /* Bold text */
-    // "}"
-    // "QPushButton:hover {"
-    // "    background-color: #FF3333;"   /* Darker red on hover */
-    // "    border: 2px solid #FF3333;"   /* Darker red border on hover */
-    // "}"
-    //                                );
     connect(m_remove_button, &QPushButton::clicked, this, onRemoveButtonClicked);
 }
 
