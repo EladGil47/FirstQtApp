@@ -61,21 +61,21 @@ void PlayersListWindow::initList()
 void PlayersListWindow::initCreateNewPlayerButton()
 {
     m_create_new_player_button = new QPushButton("Create new player", this);
-    m_create_new_player_button->setStyleSheet(BUTTONS_HOR_LAYOUT_STYLE_SHEET);
+    m_create_new_player_button->setStyleSheet(Style::GREEN_BUTTON_HOR_LAYOUT);
     connect(m_create_new_player_button, &QPushButton::clicked, this, &PlayersListWindow::onCreateNewPlayerButton);
 }
 
 void PlayersListWindow::initCreateTeamsButton()
 {
     m_create_teams_button = new QPushButton("Create teams", this);
-    m_create_teams_button->setStyleSheet(BUTTONS_HOR_LAYOUT_STYLE_SHEET);
+    m_create_teams_button->setStyleSheet(Style::GREEN_BUTTON_HOR_LAYOUT);
     connect(m_create_teams_button, &QPushButton::clicked, this, &PlayersListWindow::onCreateTeamsClicked);
 }
 
 void PlayersListWindow::initGoBackButton()
 {
     m_go_back_button = new QPushButton("Go back", this);
-    m_go_back_button->setStyleSheet(BUTTONS_HOR_LAYOUT_STYLE_SHEET);
+    m_go_back_button->setStyleSheet(Style::GREEN_BUTTON_HOR_LAYOUT);
     connect(m_go_back_button, &QPushButton::clicked, this, &PlayersListWindow::onGoBackButton);
 }
 

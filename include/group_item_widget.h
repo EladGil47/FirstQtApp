@@ -11,7 +11,7 @@ class GroupItemWidget : public QWidget
     Q_OBJECT
 
 public:
-    GroupItemWidget(std::shared_ptr<Group> group= nullptr, GroupsListWindow* parent = nullptr);
+    GroupItemWidget(std::shared_ptr<Group> group= nullptr);
 
 private:
 
@@ -26,7 +26,6 @@ void setRemoveButton();
 void setItemHorLayout();
 
 std::shared_ptr<Group> m_group;
-GroupsListWindow * m_groups_list_window;
 
 EditableLabel* m_name_label;
 QLabel* m_size_label;
@@ -38,12 +37,14 @@ QPushButton* m_remove_button;
 QHBoxLayout * m_item_hor_layout;
 
 public slots:
-void onEnterButtonClicked(bool a);
-void onRemoveButtonClicked(bool a);
+void onEnterButtonClicked();
+void onRemoveButtonClicked();
 void onChangeGroupName(const QString& name);
 
-
-
+signals:
+    void enterButtonClickedSignal(size_t id);
+    void removeButtonClickedSignal(size_t id);
+    void groupNameChangedSignal(size_t id,std::string name);
 
 };
 #endif // FIRST_QT_APP_INCLUDE_GROUP_ITEM_WIDGET_H

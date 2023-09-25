@@ -40,22 +40,7 @@ void initPlayersAmountLabelText();
     std::shared_ptr<Group> m_group;
 
     void addButtonToButtonsHorLayout(QPushButton * button);
-
     void addItemToList(std::shared_ptr<Player> player);
-
-       const QString BUTTONS_HOR_LAYOUT_STYLE_SHEET = 
-        "QPushButton {"
-        "    background-color: #4CAF50;"     // Green background color
-        "    border: 2px solid #4CAF50;"     // Green border
-        "    color: white;"                  // White text color
-        "    padding: 3px 15px;"            // Padding around the text
-        "    font-size: 18px;"              // Font size
-        "    font-weight: bold;"            // Bold text
-        "}"
-        "QPushButton:hover {"
-        "    background-color: #45a049;"    // Darker green on hover
-        "    border: 2px solid #45a049;"    // Darker green border on hover
-        "}";
 
 public slots:
     void onCreateNewPlayerButton();

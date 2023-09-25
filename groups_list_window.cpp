@@ -47,21 +47,8 @@ void GroupsListWindow::setGroupsAmountLabelText()
 void GroupsListWindow::initCreateNewGroupButton()
 {
     QString text = "Create new group";
-    m_create_new_group_button = new QPushButton(text, this);
-    m_create_new_group_button->setStyleSheet(
-        "QPushButton {"
-        "    background-color: #4CAF50;"     // Green background color
-        "    border: 2px solid #4CAF50;"     // Green border
-        "    color: white;"                  // White text color
-        "    padding: 3px 15px;"              // Padding around the text
-        "    font-size: 18px;"              // Font size
-        "    font-weight: bold;"            // Bold text
-        "}"
-        "QPushButton:hover {"
-        "    background-color: #45a049;"    // Darker green on hover
-        "    border: 2px solid #45a049;"    // Darker green border on hover
-        "}"
-    );
+    m_create_new_group_button = new QPushButton(text);
+    m_create_new_group_button->setStyleSheet(Style::GREEN_BUTTON_HOR_LAYOUT);
     m_create_new_group_button->setSizePolicy(QSizePolicy::Preferred, QSizePolicy::Fixed);
     m_create_new_group_button->setToolTip("Click here to create a new group");
     connect(m_create_new_group_button, &QPushButton::clicked, this, &GroupsListWindow::onCreateNewGroupButton);
@@ -95,7 +82,11 @@ void GroupsListWindow::createButtonsHorLayout()
 
 void GroupsListWindow::addGroupItemToList(std::shared_ptr<Group> group)
 {   
-    GroupItemWidget * group_item_widget = new GroupItemWidget(group,this);
+    GroupItemWidget * group_item_widget = new GroupItemWidget(group);
+    connect(group_item_widget,GroupItemWidget::enterButtonClickedSignal,this,onEnterGroupButton);
+    connect(group_item_widget,GroupItemWidget::removeButtonClickedSignal,this,onRemoveGroupButton);
+    connect(group_item_widget,GroupItemWidget::groupNameChangedSignal,this,changeGroupName);
+
     QListWidgetItem *item = new QListWidgetItem(m_list_list_widget);
     item->setSizeHint(group_item_widget->sizeHint());
     m_list_list_widget->setItemWidget(item, group_item_widget);
