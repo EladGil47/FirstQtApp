@@ -7,6 +7,9 @@
 #include <memory>
 
 #include "checkable_player_item_widget.hpp"
+#include <QPushButton>
+
+#include "app_common.hpp"
 
 
 class CreateTeamsWindow : public BaseListManagerWindow
@@ -14,15 +17,71 @@ class CreateTeamsWindow : public BaseListManagerWindow
     Q_OBJECT
 
 public:
-    std::shared_ptr<Group> m_group;
-    CreateTeamsWindow(std::shared_ptr<Group> group = nullptr,QMainWindow *parent = nullptr) 
+    QLabel * m_selected_players_amount_label;
+    QLabel * m_slash_label;
+    QLabel * m_max_selected_players_amount_label;
+    uint32_t m_selected_players_amount = 0 ;
+
+    QPushButton * m_ok_button;
+    QPushButton * m_cancel_button;
+
+    void initOkButton()
+    {
+        m_ok_button = new QPushButton("OK", this);
+        m_ok_button->setStyleSheet(Style::GREEN_BUTTON_HOR_LAYOUT);
+    }
+    void initCancelButton()
+    {
+        m_cancel_button = new QPushButton("Cancel", this);
+        m_cancel_button->setStyleSheet(Style::RED_BUTTON_HOR_LAYOUT);
+    }
+
+    void initSelectedPlayersAmountLabel()
+    {
+    m_selected_players_amount_label = new QLabel(QString::number(m_selected_players_amount));
+    m_selected_players_amount_label->setFont(Fonts::LIST_LABEL_FONT);
+    }
+
+    void initSlashLabel()
+    {
+    m_slash_label = new QLabel("/");
+    m_slash_label->setFont(Fonts::LIST_LABEL_FONT);
+    }
+
+    void initMaxSelectedPlayersAmountLabel(uint16_t max_amount)
+    {
+    m_max_selected_players_amount_label = new QLabel(QString::number(max_amount));
+    m_max_selected_players_amount_label->setFont(Fonts::LIST_LABEL_FONT);
+    }
+
+
+    CreateTeamsWindow(std::shared_ptr<Group> group = nullptr) 
     {
         initBaseWindowLayout();
-        m_group = group ;
+        
+        initSelectedPlayersAmountLabel();
+        m_list_label_layout->addWidget(m_selected_players_amount_label);
+
+        initSlashLabel();
+        m_list_label_layout->addWidget(m_slash_label);
+
+        initMaxSelectedPlayersAmountLabel(group->getTeamsAmount() * group->getPlayersInTeamAmount());
+        m_list_label_layout->addWidget(m_max_selected_players_amount_label);
+
+        QSpacerItem *spacer = new QSpacerItem(0, 0, QSizePolicy::Expanding, QSizePolicy::Fixed);
+        m_list_label_layout->addSpacerItem(spacer);
+
+
         m_header_label->setEditablity(false);
         setHeaderLabelText(QString::fromStdString(group->getName()));
         setListLabelText();
-        initList();
+        for (std::shared_ptr<Player> player : group->getPlayersCollectionRef().getCollectionRef())
+        {
+            addItemToList(player);
+        }
+
+        createButtonsHorLayout();
+
     }
     void setListLabelText() override
     {
@@ -30,8 +89,16 @@ public:
     }
     void createButtonsHorLayout() override
     {
+        m_buttons_hor_layout->addStretch(1);
 
+        initOkButton();
+        m_buttons_hor_layout->addWidget(m_ok_button,2);
+
+        initCancelButton();
+        m_buttons_hor_layout->addWidget(m_cancel_button,2);
+        m_buttons_hor_layout->addStretch(1);
     }
+
     void addItemToList(std::shared_ptr<Player> player)
     {
         CheckablePlayerItemWidget *player_item_widget = new CheckablePlayerItemWidget(player);
@@ -42,10 +109,8 @@ public:
 
     void initList() override
     {
-        for (std::shared_ptr<Player> player : m_group->getPlayersCollectionRef().getCollectionRef())
-        {
-            addItemToList(player);
-        }
+        return ;
+       
     }
 };
 

@@ -83,7 +83,7 @@ private :
 
     void initCreateTeamsWindow()
     {
-        m_create_teams_window = new CreateTeamsWindow(m_group,this);
+        m_create_teams_window = new CreateTeamsWindow(m_group);
     }
 
     void moveWindowToCenter()
