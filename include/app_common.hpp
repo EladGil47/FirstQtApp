@@ -35,8 +35,17 @@ namespace Sizes
     const QSize WIDGET_IN_PLAYER_ITEM_WIDGET = QSize(150, 30);
 }
 
+namespace Colors{
+     const QString OFFWHITE_COLOR = "#FFFFBF";
+
+
+}
+
 namespace Style
 {
+    const QString OFFWHITE_BACKGROUND = 
+    "background-color :" + Colors::OFFWHITE_COLOR; 
+
     const QString TRANSPARENT_STYLESHEET =
         "border: transparent;"
         "background-color: transparent;";

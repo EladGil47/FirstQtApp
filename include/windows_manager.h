@@ -40,6 +40,11 @@ private slots:
         setCentralWidget(m_players_list_window);
     }
 
+    void setToDisplayTeamsWindow()
+    {
+        qDebug() << " Need to create setToDisplayTeamsWindow";
+    }
+
     void setToCreateTeamsWindow()
     {
         initCreateTeamsWindow();
@@ -85,6 +90,7 @@ private :
     {
         m_create_teams_window = new CreateTeamsWindow(m_group);
         QObject::connect(m_create_teams_window, CreateTeamsWindow::cancelButtonClickedSignal, this, setToPlayersListWindow);
+        QObject::connect(m_create_teams_window, CreateTeamsWindow::okButtonClickedSignal, this, setToDisplayTeamsWindow);
     }
 
     void moveWindowToCenter()

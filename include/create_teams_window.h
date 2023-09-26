@@ -5,6 +5,7 @@
 #include "base_list_manager_window.h"
 #include "group.hpp"
 #include <memory>
+#include <QDialog>
 
 #include "checkable_player_item_widget.hpp"
 #include <QPushButton>
@@ -90,7 +91,9 @@ public:
         createButtonsHorLayout();
         initList();
 
-        connect(this,selectedPlayersReachTheMaximumSignal,this,onSelectedPlayersReachTheMaximum);
+        connect(this,selectedPlayersReachTheMaximumSignal,this,onSelectedPlayersReachTheMaximum); //
+
+        // connect(this,okButtonClickedSignal,
 
     }
 
@@ -143,15 +146,34 @@ private slots:
 
     void onOkButtonClicked()
     {
-        emit okButtonClickedSignal();
+        if (m_selected_players.getSize() == m_max_selected_players_amount)
+        {
+            emit okButtonClickedSignal();
+        }
+        else
+        {
+            initSelectMorePlayersDialog();
+        }
+    }
+    void initSelectMorePlayersDialog()
+    {
+        QDialog *dialog = new QDialog;
+        dialog->setWindowTitle("Warning");
+        dialog->setStyleSheet(Style::OFFWHITE_BACKGROUND);
+        dialog->setFixedSize(250, 100);
+        QVBoxLayout *layout = new QVBoxLayout;
+        QLabel *label = new QLabel("Please select more players");
+        label->setFont(Fonts::PLAYER_ITEM_WIDGET_FONT);
+        label->setAlignment(Qt::AlignCenter);
+        layout->addWidget(label);
+        dialog->setLayout(layout);
+        dialog->exec();
     }
 
-    
-
+    // TODO::  I need to disable every checkbox item
     void onSelectedPlayersReachTheMaximum()
     {
         qDebug() << "Max";
-        // I need to disable every checkbox item
         // int item_count = m_list_list_widget->count();
         // for (int i = 0; i < item_count; ++i)
         // {
