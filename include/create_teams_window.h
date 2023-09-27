@@ -187,21 +187,27 @@ private slots:
 
     void onCheckBoxStateChanged(size_t id,int state)
     {
-        switch (state)
+       switch (state)
         {
         case Qt::CheckState::Unchecked:
+        {
             m_selected_players_amount--;
-            m_selected_players.deleteItem(id);
+            size_t index = m_selected_players.getIndexById(id);
+            m_selected_players.deleteItem(index);
             break;
+        }
         case Qt::CheckState::Checked:
+        {
             m_selected_players_amount++;
-            m_selected_players.addItem(m_group->getPlayersCollection().getItem(id));
+            std::shared_ptr<Player> player = m_group->getPlayersCollection().getItem(id);
+            m_selected_players.addItem(player);
             break;
+        }
         default:
             break;
         }
         // FOR DEBUG
-        // m_selected_players.display();
+        m_selected_players.display();
         //
 
         m_selected_players_amount_label->setText(QString::number(m_selected_players_amount));
