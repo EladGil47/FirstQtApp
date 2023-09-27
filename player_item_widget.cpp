@@ -11,7 +11,7 @@ PlayerItemWidget::PlayerItemWidget(std::shared_ptr<Player> player)
     initRemoveButton();
     setupLayout();
 
-    connect(m_name_label, EditableLabel::finishEditingSig, this, onChangePlayerName);
+    connect(m_name_label,SIGNAL(EditableLabel::finishEditingSig(const QString&)), this, SLOT(onChangePlayerName(const QString&)));
 }
 
 void PlayerItemWidget::initEnterButton()

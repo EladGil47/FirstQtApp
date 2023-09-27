@@ -28,7 +28,7 @@ void GroupItemWidget::setNameLabel()
     m_name_label->setAlignment(Qt::AlignLeft);
     m_name_label->setFont(Fonts::GROUP_ITEM_WIDGET_FONT);
     m_name_label->setMaxLength(MaxValues::ITEM_WIDGET_LABEL_NAME);
-    connect(m_name_label,EditableLabel::finishEditingSig, this, onChangeGroupName);
+    connect(m_name_label,SIGNAL(EditableLabel::finishEditingSig(const QString&))finishEditingSig, this, SLOT(onChangeGroupName(const QString&)));
 }
 
 void GroupItemWidget::setSizeLabel()
