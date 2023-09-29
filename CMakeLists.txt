@@ -25,6 +25,10 @@ set(PROJECT_SOURCES
     group_item_widget.cpp
     player_item_widget.cpp
     editable_label.cpp
+    windows_manager.cpp
+
+
+
     include/groups_list_window.h
     include/players_list_window.h
     include/base_list_manager_window.h

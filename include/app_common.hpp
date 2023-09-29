@@ -36,43 +36,50 @@ namespace Sizes
 }
 
 namespace Colors{
-     const QString OFFWHITE_COLOR = "#FFFFBF";
+    const QString OFFWHITE = "#FFFFBF;";
 
+    const QString GREEN = "#4CAF50;";
+    const QString HOVER_GREEN = "#45a049;";
 
+    const QString RED = "#FF0000;";
+    const QString HOVER_RED = "#FF3333;";
+
+    const QString BLUE = "#0074CC;";
+    const QString HOVER_BLUE = "#005FAA;";
+
+    const QString TRANSPARENT = "transparent;";
+}
+
+namespace CssKeys
+{
+    const QString BACKGROUND_COLOR = "background-color:";
+    const QString BORDER = "border:";
 }
 
 namespace Style
 {
-    const QString OFFWHITE_BACKGROUND = 
-    "background-color :" + Colors::OFFWHITE_COLOR; 
+    const QString OFFWHITE_BACKGROUND = CssKeys::BACKGROUND_COLOR + Colors::OFFWHITE;
 
     const QString TRANSPARENT_STYLESHEET =
-        "border: transparent;"
-        "background-color: transparent;";
+        CssKeys::BORDER + Colors::TRANSPARENT + CssKeys::BACKGROUND_COLOR + Colors::TRANSPARENT;
 
     const QString GREEN_COLOR =
-        "    background-color: #4CAF50;"
-        "    border: 2px solid #4CAF50;";
+        CssKeys::BORDER + Colors::GREEN + CssKeys::BACKGROUND_COLOR + Colors::GREEN;
 
     const QString HOVER_GREEN_COLOR =
-        "    background-color: #45a049;"
-        "    border: 2px solid #45a049;";
+        CssKeys::BORDER + Colors::HOVER_GREEN + CssKeys::BACKGROUND_COLOR + Colors::HOVER_GREEN;
 
     const QString RED_COLOR =
-        "    background-color: #FF0000;"
-        "    border: 2px solid #FF0000;";
+        CssKeys::BORDER + Colors::RED + CssKeys::BACKGROUND_COLOR + Colors::RED;
 
     const QString HOVER_RED_COLOR =
-        "    background-color: #FF3333;"
-        "    border: 2px solid #FF3333;";
+        CssKeys::BORDER + Colors::HOVER_RED + CssKeys::BACKGROUND_COLOR + Colors::HOVER_RED;
 
     const QString BLUE_COLOR =
-        "    background-color: #0074CC;"
-        "    border: 2px solid #0074CC;";
+        CssKeys::BORDER + Colors::BLUE + CssKeys::BACKGROUND_COLOR + Colors::BLUE;
 
     const QString HOVER_BLUE_COLOR =
-        "    background-color: #005FAA;"
-        "    border: 2px solid #005FAA;";
+        CssKeys::BORDER + Colors::HOVER_BLUE + CssKeys::BACKGROUND_COLOR + Colors::HOVER_BLUE;
 
     const QString WHITE_TEXT_COLOR =
         "    color: white;"      // White text color
