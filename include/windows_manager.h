@@ -1,5 +1,5 @@
-#ifndef FIRST_QT_APP_INCLUDE_CUSTOM_WINDOW_H
-#define FIRST_QT_APP_INCLUDE_CUSTOM_WINDOW_H
+#ifndef FIRST_QT_APP_INCLUDE__WINDOW_MANAGER_H
+#define FIRST_QT_APP_INCLUDE__WINDOW_MANAGER_H
 
 #include <QMainWindow>
 
@@ -9,10 +9,11 @@
 #include "groups_list_window.h"
 #include "players_list_window.h"
 #include "create_teams_window.h"
+#include "display_teams_window.hpp"
+
 
 #include "groups_collection.hpp"
 #include "app_common.hpp"
-
 
 
 class WindowsManager : public QMainWindow
@@ -42,7 +43,8 @@ private slots:
 
     void setToDisplayTeamsWindow()
     {
-        qDebug() << " Need to create setToDisplayTeamsWindow";
+        initDisplayTeamsWindow();
+        setCentralWidget(m_display_teams_window);
     }
 
     void setToCreateTeamsWindow()
@@ -56,9 +58,10 @@ private :
     GroupsListWindow *m_groups_list_window;
     PlayersListWindow *m_players_list_window;
     CreateTeamsWindow *m_create_teams_window;
+    DisplayTeamsWindow *m_display_teams_window;
+
 
     std::shared_ptr<Group> m_group ;
-
     std::shared_ptr<GroupsCollection> m_groups_collection;
 
     void setWindow()
@@ -93,6 +96,12 @@ private :
         QObject::connect(m_create_teams_window, CreateTeamsWindow::okButtonClickedSignal, this, setToDisplayTeamsWindow);
     }
 
+    void initDisplayTeamsWindow()
+    {
+        m_display_teams_window = new DisplayTeamsWindow();
+    }
+
+
     void moveWindowToCenter()
     {
         QScreen *primaryScreen = QGuiApplication::primaryScreen();
@@ -103,4 +112,4 @@ private :
     }
 };
 
-#endif // FIRST_QT_APP_INCLUDE_CUSTOM_WINDOW_H
+#endif // FIRST_QT_APP_INCLUDE__WINDOW_MANAGER_H
