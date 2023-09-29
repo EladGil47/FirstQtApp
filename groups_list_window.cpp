@@ -1,12 +1,8 @@
 #include "groups_list_window.h"
 
 #include <QInputDialog>
-#include <QFont>
-
 #include "group_item_widget.h"
-
 #include "app_common.hpp"
-
 
 GroupsListWindow::GroupsListWindow(std::shared_ptr<GroupsCollection> groups_collection)
 :
