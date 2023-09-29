@@ -52,6 +52,8 @@ protected :
 
     QHBoxLayout *  m_list_label_layout;
     QHBoxLayout *  m_list_list_layout; 
+    QHBoxLayout * m_lists_hor_layout ;
+
 
 };
 

@@ -36,6 +36,8 @@ void BaseListManagerWindow::initListLabel()
 
 void BaseListManagerWindow::initListLayout()
 {
+    m_lists_hor_layout = new QHBoxLayout;
+
     m_list_layout = new QVBoxLayout;
 
     m_list_label_layout = new QHBoxLayout;
@@ -53,6 +55,8 @@ void BaseListManagerWindow::initListLayout()
 
     m_list_layout->addLayout(m_list_list_layout);
 
+    m_lists_hor_layout->addLayout(m_list_layout);
+
 }
 
 void BaseListManagerWindow::initListListWidget()
@@ -66,7 +70,7 @@ void BaseListManagerWindow::initBaseWindowLayout()
     Functions::checkNotNull(m_header_label,"m_header_label");
     m_window_layout->addWidget(m_header_label);
     Functions::checkNotNull(m_list_layout,"m_list_layout");
-    m_window_layout->addLayout(m_list_layout);
+    m_window_layout->addLayout(m_lists_hor_layout);
     Functions::checkNotNull(m_buttons_hor_layout,"m_buttons_hor_layout");
     m_window_layout->addLayout(m_buttons_hor_layout);
 }

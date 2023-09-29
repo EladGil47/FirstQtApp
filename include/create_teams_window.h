@@ -22,7 +22,7 @@ public:
     QLabel *m_max_selected_players_amount_label;
     uint32_t m_selected_players_amount = 0;
     uint32_t m_max_selected_players_amount;
-	PlayersCollection m_selected_players;
+    PlayersCollection m_selected_players;
     bool m_all_unchecked_disable;
     QPushButton *m_ok_button;
     QPushButton *m_cancel_button;
@@ -32,7 +32,7 @@ public:
     {
         m_ok_button = new QPushButton("OK", this);
         m_ok_button->setStyleSheet(Style::GREEN_BUTTON_HOR_LAYOUT);
-        connect(m_ok_button, &QPushButton::clicked,this,onOkButtonClicked);
+        connect(m_ok_button, &QPushButton::clicked, this, onOkButtonClicked);
     }
 
     void initCancelButton()
@@ -67,8 +67,6 @@ public:
         m_header_label->setEditablity(false);
         setHeaderLabelText(QString::fromStdString(group->getName()));
 
-
-
         setListLabelText();
 
         initSelectedPlayersAmountLabel();
@@ -84,10 +82,8 @@ public:
         QSpacerItem *spacer = new QSpacerItem(0, 0, QSizePolicy::Expanding, QSizePolicy::Fixed);
         m_list_label_layout->addSpacerItem(spacer);
 
-
         setButtonsHorLayout();
         initList();
-
     }
 
     void setListLabelText() override
@@ -110,9 +106,7 @@ public:
     void addItemToList(std::shared_ptr<Player> player)
     {
         CheckablePlayerItemWidget *player_item_widget = new CheckablePlayerItemWidget(player);
-        connect(player_item_widget,CheckablePlayerItemWidget::checkBoxStateChangedSignal,this,onCheckBoxStateChanged);
-
-
+        connect(player_item_widget, CheckablePlayerItemWidget::checkBoxStateChangedSignal, this, onCheckBoxStateChanged);
 
         QListWidgetItem *item = new QListWidgetItem(m_list_list_widget);
         item->setSizeHint(player_item_widget->sizeHint());
@@ -126,7 +120,7 @@ public:
             addItemToList(player);
         }
     }
-    
+
 signals:
     void cancelButtonClickedSignal(size_t id);
     void okButtonClickedSignal();
@@ -169,7 +163,7 @@ private slots:
         int item_count = m_list_list_widget->count();
         for (int i = 0; i < item_count; ++i)
         {
-            QListWidgetItem *item = m_list_list_widget->item(i);  // Replace 'row' with the row number you want to retrieve
+            QListWidgetItem *item = m_list_list_widget->item(i); // Replace 'row' with the row number you want to retrieve
             if (item)
             {
                 CheckablePlayerItemWidget *widget = qobject_cast<CheckablePlayerItemWidget *>(m_list_list_widget->itemWidget(item));
@@ -203,9 +197,9 @@ private slots:
         }
     }
 
-    void onCheckBoxStateChanged(size_t id,int state)
+    void onCheckBoxStateChanged(size_t id, int state)
     {
-       switch (state)
+        switch (state)
         {
         case Qt::CheckState::Unchecked:
         {
@@ -229,7 +223,7 @@ private slots:
         //
 
         m_selected_players_amount_label->setText(QString::number(m_selected_players_amount));
-        if(m_selected_players_amount == m_max_selected_players_amount)
+        if (m_selected_players_amount == m_max_selected_players_amount)
         {
             disableAllUnchecked();
         }

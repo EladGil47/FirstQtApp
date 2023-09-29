@@ -37,8 +37,8 @@ namespace QtObjects
 namespace Settings
 {
     const QString WINDOW_TITLE_TEXT = "Kohot";
-    const int WINDOW_WIDTH = 800;
-    const int WINDOW_HEIGHT = 600;
+    const int WINDOW_WIDTH = 1200;
+    const int WINDOW_HEIGHT = 640;
     const QString BACKGROUND_COLOR = QtObjects::QMAIN_WINDOW + "{" + CssKeys::BACKGROUND_COLOR  +  Colors::OFFWHITE +  "}";
 }
 
@@ -61,9 +61,6 @@ namespace Sizes
     const QSize WIDGET_IN_GROUP_ITEM_WIDGET = QSize(150, 35);
     const QSize WIDGET_IN_PLAYER_ITEM_WIDGET = QSize(150, 30);
 }
-
-
-
 
 namespace Style
 {
