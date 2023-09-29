@@ -22,17 +22,11 @@ public:
     QLabel *m_max_selected_players_amount_label;
     uint32_t m_selected_players_amount = 0;
     uint32_t m_max_selected_players_amount;
-    // std::vector<std::shared_ptr<Player>> m_selected_players;
-
 	PlayersCollection m_selected_players;
-
     bool m_all_unchecked_disable;
-
-
-
-
     QPushButton *m_ok_button;
     QPushButton *m_cancel_button;
+    std::shared_ptr<Group> m_group;
 
     void initOkButton()
     {
@@ -40,6 +34,7 @@ public:
         m_ok_button->setStyleSheet(Style::GREEN_BUTTON_HOR_LAYOUT);
         connect(m_ok_button, &QPushButton::clicked,this,onOkButtonClicked);
     }
+
     void initCancelButton()
     {
         m_cancel_button = new QPushButton("Cancel", this);
@@ -65,7 +60,6 @@ public:
         m_max_selected_players_amount_label->setFont(Fonts::LIST_LABEL_FONT);
     }
 
-    std::shared_ptr<Group> m_group;
     CreateTeamsWindow(std::shared_ptr<Group> group = nullptr)
     {
         m_group = group;
@@ -96,11 +90,11 @@ public:
 
     }
 
-
     void setListLabelText() override
     {
         m_list_label->setText("Checked players :");
     }
+
     void setButtonsHorLayout() override
     {
         m_buttons_hor_layout->addStretch(1);
@@ -132,6 +126,7 @@ public:
             addItemToList(player);
         }
     }
+    
 signals:
     void cancelButtonClickedSignal(size_t id);
     void okButtonClickedSignal();
@@ -153,6 +148,7 @@ private slots:
             initSelectMorePlayersDialog();
         }
     }
+
     void initSelectMorePlayersDialog()
     {
         QDialog *dialog = new QDialog;
@@ -206,8 +202,6 @@ private slots:
             }
         }
     }
-
-
 
     void onCheckBoxStateChanged(size_t id,int state)
     {
