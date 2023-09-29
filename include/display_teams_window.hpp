@@ -17,6 +17,7 @@ DisplayTeamsWindow()
 {
     initBaseWindowLayout();
     QListWidget * sss = new QListWidget;
+    sss->setStyleSheet(Style::LIST);
     m_list_list_layout->addWidget(sss);
 }
 

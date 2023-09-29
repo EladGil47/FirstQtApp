@@ -15,6 +15,7 @@ public:
     CheckablePlayerItemWidget(std::shared_ptr<Player> player)
     : BasePlayerItemWidget(player)
     {
+        
         m_name_label->setEditablity(false);
         initIsSelectedCheckBox();
 
@@ -23,6 +24,12 @@ public:
 
 
 QCheckBox * m_is_selected_check_box ;
+ bool m_is_double_click_enabled = true ;
+ void setIsDoubleClickEnabled(bool state)
+{
+    m_is_double_click_enabled = state;
+}
+
 
     
 private:
@@ -36,12 +43,19 @@ void setupLayout()
     layout->addWidget(m_is_selected_check_box);
 }
 
-void mouseDoubleClickEvent(QMouseEvent *event) 
+
+
+void mouseDoubleClickEvent(QMouseEvent *event)
 {
-    if (event->button() == Qt::LeftButton) {
+if (m_is_double_click_enabled)
+{
+    if (event->button() == Qt::LeftButton)
+    {
         m_is_selected_check_box->setChecked(!m_is_selected_check_box->isChecked());
     }
-    QWidget::mouseDoubleClickEvent(event);
+QWidget::mouseDoubleClickEvent(event);
+
+}
 }
 
 void initIsSelectedCheckBox()
@@ -63,16 +77,16 @@ void initIsSelectedCheckBox()
 
 }
 
+
+
 private slots:
 
     void onCheckBoxStateChanged(int state)
     {
-    emit checkBoxStateChangedSignal(m_player_index,state);
+    emit checkBoxStateChangedSignal(m_player_index, state);
     }
-    
 
-
-    
+  
 
 signals:
 void checkBoxStateChangedSignal(size_t id,int state);

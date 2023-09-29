@@ -22,11 +22,11 @@ public:
     QLabel *m_max_selected_players_amount_label;
     uint32_t m_selected_players_amount = 0;
     uint32_t m_max_selected_players_amount;
-    PlayersCollection m_selected_players;
     bool m_all_unchecked_disable;
     QPushButton *m_ok_button;
     QPushButton *m_cancel_button;
     std::shared_ptr<Group> m_group;
+    std::shared_ptr<PlayersCollection> m_selected_players = std::make_shared<PlayersCollection>();
 
     void initOkButton()
     {
@@ -107,6 +107,9 @@ public:
     {
         CheckablePlayerItemWidget *player_item_widget = new CheckablePlayerItemWidget(player);
         connect(player_item_widget, CheckablePlayerItemWidget::checkBoxStateChangedSignal, this, onCheckBoxStateChanged);
+        // connect(this, onCheckBoxEnabledSignal, player_item_widget, CheckablePlayerItemWidget::setIsDoubleClickEnabled);
+        
+
 
         QListWidgetItem *item = new QListWidgetItem(m_list_list_widget);
         item->setSizeHint(player_item_widget->sizeHint());
@@ -124,8 +127,11 @@ public:
 signals:
     void cancelButtonClickedSignal(size_t id);
     void okButtonClickedSignal();
+    // void onCheckBoxEnabledSignal(bool state);
+
 
 private slots:
+
     void onCancelButtonClicked()
     {
         emit cancelButtonClickedSignal(m_group->getId());
@@ -133,9 +139,11 @@ private slots:
 
     void onOkButtonClicked()
     {
-        if (m_selected_players.getSize() == m_max_selected_players_amount)
+        if (m_selected_players->getSize() == m_max_selected_players_amount)
         {
+            // emit okButtonClickedSignal(m_selected_players->;
             emit okButtonClickedSignal();
+
         }
         else
         {
@@ -160,6 +168,8 @@ private slots:
 
     void disableAllUnchecked()
     {
+        m_all_unchecked_disable = true;
+
         int item_count = m_list_list_widget->count();
         for (int i = 0; i < item_count; ++i)
         {
@@ -172,7 +182,7 @@ private slots:
                     if (widget->m_is_selected_check_box->checkState() != Qt::CheckState::Checked)
                     {
                         widget->m_is_selected_check_box->setDisabled(true);
-                        m_all_unchecked_disable = true;
+                        widget->setIsDoubleClickEnabled(false);
                     }
                 }
             }
@@ -190,6 +200,7 @@ private slots:
                 CheckablePlayerItemWidget *widget = qobject_cast<CheckablePlayerItemWidget *>(m_list_list_widget->itemWidget(item));
                 if (widget)
                 {
+                    widget->setIsDoubleClickEnabled(true);
                     widget->m_is_selected_check_box->setEnabled(true);
                     m_all_unchecked_disable = false;
                 }
@@ -204,22 +215,22 @@ private slots:
         case Qt::CheckState::Unchecked:
         {
             m_selected_players_amount--;
-            size_t index = m_selected_players.getIndexById(id);
-            m_selected_players.deleteItem(index);
+            size_t index = m_selected_players->getIndexById(id);
+            m_selected_players->deleteItem(index);
             break;
         }
         case Qt::CheckState::Checked:
         {
             m_selected_players_amount++;
             std::shared_ptr<Player> player = m_group->getPlayersCollection().getItem(id);
-            m_selected_players.addItem(player);
+            m_selected_players->addItem(player);
             break;
         }
         default:
             break;
         }
         // FOR DEBUG
-        // m_selected_players.display();
+        // m_selected_players->display();
         //
 
         m_selected_players_amount_label->setText(QString::number(m_selected_players_amount));
