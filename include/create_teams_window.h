@@ -94,10 +94,6 @@ public:
         setButtonsHorLayout();
         initList();
 
-        connect(this,selectedPlayersReachTheMaximumSignal,this,onSelectedPlayersReachTheMaximum); //
-
-        // connect(this,okButtonClickedSignal,
-
     }
 
 
@@ -138,7 +134,6 @@ public:
     }
 signals:
     void cancelButtonClickedSignal(size_t id);
-    void selectedPlayersReachTheMaximumSignal();
     void okButtonClickedSignal();
 
 private slots:
@@ -173,9 +168,8 @@ private slots:
         dialog->exec();
     }
 
-    void onSelectedPlayersReachTheMaximum()
+    void disableAllUnchecked()
     {
-        qDebug() << "Max";
         int item_count = m_list_list_widget->count();
         for (int i = 0; i < item_count; ++i)
         {
@@ -243,7 +237,7 @@ private slots:
         m_selected_players_amount_label->setText(QString::number(m_selected_players_amount));
         if(m_selected_players_amount == m_max_selected_players_amount)
         {
-            emit selectedPlayersReachTheMaximumSignal();  // TODO Done need to be emit
+            disableAllUnchecked();
         }
         if (m_all_unchecked_disable)
         {
