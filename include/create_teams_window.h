@@ -26,7 +26,7 @@ public:
     QPushButton *m_ok_button;
     QPushButton *m_cancel_button;
     std::shared_ptr<Group> m_group;
-    std::shared_ptr<PlayersCollection> m_selected_players = std::make_shared<PlayersCollection>();
+    std::shared_ptr<PlayersCollection> m_selected_players ;
 
     void initOkButton()
     {
@@ -62,6 +62,8 @@ public:
 
     CreateTeamsWindow(std::shared_ptr<Group> group = nullptr)
     {
+        m_selected_players = std::make_shared<PlayersCollection>();
+
         m_group = group;
         initBaseWindowLayout();
         m_header_label->setEditablity(false);
@@ -126,9 +128,7 @@ public:
 
 signals:
     void cancelButtonClickedSignal(size_t id);
-    void okButtonClickedSignal();
-    // void onCheckBoxEnabledSignal(bool state);
-
+    void okButtonClickedSignal(std::shared_ptr <PlayersCollection> players);
 
 private slots:
 
@@ -141,8 +141,8 @@ private slots:
     {
         if (m_selected_players->getSize() == m_max_selected_players_amount)
         {
-            // emit okButtonClickedSignal(m_selected_players->;
-            emit okButtonClickedSignal();
+            emit okButtonClickedSignal(m_selected_players);
+            // emit okButtonClickedSignal();
 
         }
         else

@@ -20,7 +20,7 @@ public:
 private slots:
     void setToGroupsListWindow();
     void setToPlayersListWindow(size_t id);
-    void setToDisplayTeamsWindow();
+    void setToDisplayTeamsWindow(std::shared_ptr <PlayersCollection> players);
     void setToCreateTeamsWindow();
 
 private:
@@ -35,7 +35,7 @@ private:
     void initPlayersListWindow(size_t id);
     void initGroupsListWindow();
     void initCreateTeamsWindow();
-    void initDisplayTeamsWindow();
+    void initDisplayTeamsWindow(std::shared_ptr <PlayersCollection> players);
     void moveWindowToCenter();
 };
 

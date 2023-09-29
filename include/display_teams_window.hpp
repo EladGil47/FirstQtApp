@@ -8,17 +8,25 @@
 #include "base_list_manager_window.h"
 
 
+#include "players_collection.hpp"
+
+#include "teams_creator.hpp"
+
+
+
 class DisplayTeamsWindow : public BaseListManagerWindow
 {
     Q_OBJECT
 
 public : 
-DisplayTeamsWindow()
+DisplayTeamsWindow(std::shared_ptr <PlayersCollection> players)
 {
     initBaseWindowLayout();
     QListWidget * sss = new QListWidget;
     sss->setStyleSheet(Style::LIST);
     m_list_list_layout->addWidget(sss);
+
+    TeamsCreator::createTeams(players->getCollection(),3,5);
 }
 
 
