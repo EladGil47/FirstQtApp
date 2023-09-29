@@ -26,6 +26,9 @@ public:
 
 	PlayersCollection m_selected_players;
 
+    bool m_all_unchecked_disable;
+
+
 
 
     QPushButton *m_ok_button;
@@ -88,7 +91,7 @@ public:
         m_list_label_layout->addSpacerItem(spacer);
 
 
-        createButtonsHorLayout();
+        setButtonsHorLayout();
         initList();
 
         connect(this,selectedPlayersReachTheMaximumSignal,this,onSelectedPlayersReachTheMaximum); //
@@ -102,7 +105,7 @@ public:
     {
         m_list_label->setText("Checked players :");
     }
-    void createButtonsHorLayout() override
+    void setButtonsHorLayout() override
     {
         m_buttons_hor_layout->addStretch(1);
 
@@ -170,20 +173,47 @@ private slots:
         dialog->exec();
     }
 
-    // TODO::  I need to disable every checkbox item
     void onSelectedPlayersReachTheMaximum()
     {
         qDebug() << "Max";
-        // int item_count = m_list_list_widget->count();
-        // for (int i = 0; i < item_count; ++i)
-        // {
-        //     QListWidgetItem *item = m_list_list_widget->item(0); // Get the first item
-        //     QWidget *widget = m_list_list_widget->itemWidget(item);
-        //     m_list_list_widget->removeItemWidget(item); // Remove the widget from the item
-        //     delete item;                                // Delete the item
-        //     delete widget;                              // Delete the widget
-        // }
+        int item_count = m_list_list_widget->count();
+        for (int i = 0; i < item_count; ++i)
+        {
+            QListWidgetItem *item = m_list_list_widget->item(i);  // Replace 'row' with the row number you want to retrieve
+            if (item)
+            {
+                CheckablePlayerItemWidget *widget = qobject_cast<CheckablePlayerItemWidget *>(m_list_list_widget->itemWidget(item));
+                if (widget)
+                {
+                    if (widget->m_is_selected_check_box->checkState() != Qt::CheckState::Checked)
+                    {
+                        widget->m_is_selected_check_box->setDisabled(true);
+                        m_all_unchecked_disable = true;
+                    }
+                }
+            }
+        }
     }
+
+    void enableAllCheckables()
+    {
+        int item_count = m_list_list_widget->count();
+        for (int i = 0; i < item_count; ++i)
+        {
+            QListWidgetItem *item = m_list_list_widget->item(i); // Replace 'row' with the row number you want to retrieve
+            if (item)
+            {
+                CheckablePlayerItemWidget *widget = qobject_cast<CheckablePlayerItemWidget *>(m_list_list_widget->itemWidget(item));
+                if (widget)
+                {
+                    widget->m_is_selected_check_box->setEnabled(true);
+                    m_all_unchecked_disable = false;
+                }
+            }
+        }
+    }
+
+
 
     void onCheckBoxStateChanged(size_t id,int state)
     {
@@ -207,13 +237,20 @@ private slots:
             break;
         }
         // FOR DEBUG
-        m_selected_players.display();
+        // m_selected_players.display();
         //
 
         m_selected_players_amount_label->setText(QString::number(m_selected_players_amount));
         if(m_selected_players_amount == m_max_selected_players_amount)
         {
-            emit selectedPlayersReachTheMaximumSignal();
+            emit selectedPlayersReachTheMaximumSignal();  // TODO Done need to be emit
+        }
+        if (m_all_unchecked_disable)
+        {
+            if (m_selected_players_amount == m_max_selected_players_amount - 1)
+            {
+                enableAllCheckables();
+            }
         }
     }
 };

@@ -37,7 +37,10 @@ void BaseListManagerWindow::initListLabel()
 void BaseListManagerWindow::initListLayout()
 {
     m_list_layout = new QVBoxLayout;
+
     m_list_label_layout = new QHBoxLayout;
+    m_list_list_layout = new QHBoxLayout;
+
   
     Functions::checkNotNull(m_list_label,"m_list_label");
     m_list_label_layout->addWidget(m_list_label);
@@ -46,7 +49,10 @@ void BaseListManagerWindow::initListLayout()
 
 
     Functions::checkNotNull(m_list_list_widget,"m_list_list_widget");
-    m_list_layout->addWidget(m_list_list_widget);
+    m_list_list_layout->addWidget(m_list_list_widget);
+
+    m_list_layout->addLayout(m_list_list_layout);
+
 }
 
 void BaseListManagerWindow::initListListWidget()

@@ -17,7 +17,7 @@ PlayersListWindow::PlayersListWindow(std::shared_ptr<Group> group)
     setHeaderLabelText(QString::fromStdString(m_group->getName()));
     setListLabelText();
     initList();
-    createButtonsHorLayout();
+    setButtonsHorLayout();
 
     connect(m_header_label,EditableLabel::finishEditingSig,this,setGroupName);
 }
@@ -84,7 +84,7 @@ void PlayersListWindow::setListLabelText()
     m_list_label->setText("Players :");
 }
 
-void PlayersListWindow::createButtonsHorLayout()
+void PlayersListWindow::setButtonsHorLayout()
 {
     m_buttons_hor_layout->addStretch(1);
 

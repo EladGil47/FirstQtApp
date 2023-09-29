@@ -21,7 +21,6 @@ void setupLayout()
 }
 
 
-QCheckBox * m_is_selected_check_box ;
 
 void initIsSelectedCheckBox()
 {
@@ -57,6 +56,8 @@ public:
 
         setupLayout();
     }
+QCheckBox * m_is_selected_check_box ;
+
     
 
 signals:

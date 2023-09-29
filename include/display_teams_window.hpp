@@ -5,15 +5,20 @@
 #include <QHBoxLayout>
 #include "app_common.hpp"
 
+#include "base_list_manager_window.h"
 
 
-class DisplayTeamsWindow : public QWidget
+class DisplayTeamsWindow : public BaseListManagerWindow
 {
     Q_OBJECT
 
 public : 
-    QHBoxLayout * m_layout = new QHBoxLayout;
-
+DisplayTeamsWindow()
+{
+    initBaseWindowLayout();
+    QListWidget * sss = new QListWidget;
+    m_list_list_layout->addWidget(sss);
+}
 
 
 };

@@ -19,7 +19,7 @@ m_groups_collection(groups_collection)
     setHeaderLabelEditability(false);
 
     setListLabelText();
-    createButtonsHorLayout();
+    setButtonsHorLayout();
     initList();
 }
 
@@ -72,7 +72,7 @@ void GroupsListWindow::setListLabelText()
     m_list_label->setText("Groups :");
 }
 
-void GroupsListWindow::createButtonsHorLayout()
+void GroupsListWindow::setButtonsHorLayout()
 {
     m_buttons_hor_layout->addStretch(1);
     initCreateNewGroupButton();
