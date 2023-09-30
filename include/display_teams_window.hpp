@@ -23,10 +23,20 @@ DisplayTeamsWindow(std::shared_ptr <PlayersCollection> players)
 {
     initBaseWindowLayout();
     QListWidget * sss = new QListWidget;
-    sss->setStyleSheet(Style::LIST);
+    // sss->setStyleSheet(Style::LIST);
     m_list_list_layout->addWidget(sss);
 
-    TeamsCreator::createTeams(players->getCollection(),3,5);
+   int teams_amount  = 3;
+	std::shared_ptr <std::vector<Team>> m_teams;
+
+
+    m_teams = TeamsCreator::createTeams(players->getCollection(), teams_amount, 5);
+    for (uint16_t team_index = 0; team_index < teams_amount; team_index++)
+    {
+        std::cout << "Team " << team_index + 1 << " : " << std::endl;
+        (*m_teams)[team_index].displayTeam();
+        std::cout << std::endl;
+    }
 }
 
 
