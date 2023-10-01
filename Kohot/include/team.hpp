@@ -11,14 +11,11 @@ public:
 	// PlayersCollection getPlayersCollection();
 	std::shared_ptr<PlayersCollection> getPlayersCollection();
 	void addPlayer(std::shared_ptr<Player> player);
-	double m_rating_sum = 0;
-
-
+	double getAverageRate();
 
 	void displayTeam();
 private :
 	std::shared_ptr<PlayersCollection> m_players_collection;
-
 };
 
 #endif //KOHOT_TEAM_HPP

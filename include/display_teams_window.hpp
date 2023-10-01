@@ -21,21 +21,12 @@ class DisplayTeamsWindow : public QWidget
 private:
 QHBoxLayout  * m_header_layout; 
 QHBoxLayout  * m_teams_hor_layout; 
-// QHBoxLayout  * m_avg_rate_layout;
 QHBoxLayout  * m_buttons_layout;
 
 QPushButton *m_go_back_button;
 
 std::shared_ptr <PlayersCollection> m_players;
 Group::Config m_group_config;
-
-
-// TODO CREATE AVGRATE BUT IT WONT BE HERE
-void initAvgRateLayout()
-{
-    // m_avg_rate_layout = new QHBoxLayout;
-    // QString team_text = "Avarage rate :";
-}
 
 void initHeaderLayout()
 {
@@ -53,6 +44,8 @@ void initTeamsHorLayout()
 {
     m_teams_hor_layout = new QHBoxLayout;
     QString team_text = "Team";
+    QString avg_rate = "Avarage rate :";
+
     std::shared_ptr<std::vector<Team>> teams = TeamsCreator::createTeams(
         m_players->getCollection(),
         m_group_config.teams_amount,
@@ -78,6 +71,25 @@ void initTeamsHorLayout()
             player_name_label->setStyleSheet(Style::WHITE_TEXT_COLOR);
             labeled_list->addItemToList(player_name_label);
         }
+
+        QHBoxLayout *avg_rate_layout = new QHBoxLayout;
+
+        QLabel *avg_rate_label = new QLabel(avg_rate);
+        avg_rate_label->setFont(Fonts::GROUP_ITEM_WIDGET_FONT);
+
+
+        QString team_rate = QString::number((*teams)[team_index].getAverageRate());
+        QLabel *team_rate_label = new QLabel(team_rate);
+        team_rate_label->setFont(Fonts::GROUP_ITEM_WIDGET_FONT);
+
+        avg_rate_layout->addWidget(avg_rate_label);
+        avg_rate_layout->addWidget(team_rate_label);
+        avg_rate_layout->addStretch(10);
+
+
+        
+        labeled_list->addLayout(avg_rate_layout);
+
         m_teams_hor_layout->addWidget(labeled_list);
     }
 }
@@ -109,7 +121,6 @@ void initWindowLayout()
     window_layout->addLayout(m_header_layout);
     window_layout->addStretch(5);
     window_layout->addLayout(m_teams_hor_layout);
-    // window_layout->addLayout(m_avg_rate_hor_layout);
     window_layout->addStretch(20);
     window_layout->addLayout(m_buttons_layout);
 

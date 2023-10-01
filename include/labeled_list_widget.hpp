@@ -40,6 +40,16 @@ public:
        m_list->setStyleSheet(style_sheet);
     }
 
+    void addWidget(QWidget *widget)
+    {
+       m_labeled_list_layout->addWidget(widget);
+    }
+
+    void addLayout(QLayout *layout)
+    {
+       m_labeled_list_layout->addLayout(layout);
+    }
+
     template <typename T>
     void addItemToList(const T &custom_item)
     {
@@ -67,11 +77,6 @@ private:
 
         m_labeled_list_layout->addLayout(m_labels_layout);
         m_labeled_list_layout->addWidget(m_list);
-
-        QSpacerItem *spacer = new QSpacerItem(0, 0, QSizePolicy::Expanding, QSizePolicy::Fixed);
-        m_labeled_list_layout->addSpacerItem(spacer);
-
-        // Add labels and other initialization as needed...
     }
 };
 
