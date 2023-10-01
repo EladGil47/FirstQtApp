@@ -7,11 +7,16 @@
 #include <QListWidget>
 #include <QLabel>
 
+#include "app_common.hpp"
+
+
 class LabeledListWidget : public QWidget
 {
     Q_OBJECT
 
 public:
+    QListWidget *m_list;
+
     LabeledListWidget() 
     {
         initLabeledListLayout();
@@ -20,7 +25,19 @@ public:
     void addLabel(const QString &text)
     {
         QLabel *label = new QLabel(text);
+        label->setFont(Fonts::LIST_LABEL_FONT);
         m_labels_layout->addWidget(label);
+    }
+    
+    // void adjustListSize()
+    // {
+    //    int h =  m_list->count() * m_list->item(0)->sizeHint().height();
+    //     m_list->setFixedHeight(h);
+    // }
+
+    void setListColor(const QString style_sheet)
+    {
+       m_list->setStyleSheet(style_sheet);
     }
 
     template <typename T>
@@ -29,21 +46,30 @@ public:
         QListWidgetItem *item = new QListWidgetItem(m_list);
         item->setSizeHint(custom_item->sizeHint());
         m_list->setItemWidget(item, custom_item);
+
+        //  QListWidgetItem *item = new QListWidgetItem(custom_item);
+        // item->setSizeHint(custom_item->sizeHint());
+        // m_list->setItemWidget(item, custom_item);
+        // m_list->addItem(custom_item);
     }
+
 
 private:
     QVBoxLayout *m_labeled_list_layout;
     QHBoxLayout *m_labels_layout;
-    QListWidget *m_list;
 
     void initLabeledListLayout()
     {
         m_labeled_list_layout = new QVBoxLayout(this);
+
         m_labels_layout = new QHBoxLayout;
         m_list = new QListWidget;
 
         m_labeled_list_layout->addLayout(m_labels_layout);
         m_labeled_list_layout->addWidget(m_list);
+
+        QSpacerItem *spacer = new QSpacerItem(0, 0, QSizePolicy::Expanding, QSizePolicy::Fixed);
+        m_labeled_list_layout->addSpacerItem(spacer);
 
         // Add labels and other initialization as needed...
     }

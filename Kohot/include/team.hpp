@@ -7,10 +7,17 @@ class Team
 {
 public:
 	Team();
-	PlayersCollection& getPlayersCollectionRef();
+	// PlayersCollection& getPlayersCollectionRef();
+	// PlayersCollection getPlayersCollection();
+	std::shared_ptr<PlayersCollection> getPlayersCollection();
+	void addPlayer(std::shared_ptr<Player> player);
+	double m_rating_sum = 0;
+
+
+
 	void displayTeam();
 private :
-	PlayersCollection m_players_collection;
+	std::shared_ptr<PlayersCollection> m_players_collection;
 
 };
 

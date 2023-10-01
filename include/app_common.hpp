@@ -7,8 +7,16 @@
 #include <QDebug>
 
 #include <memory>
-namespace Colors{
+namespace Colors
+{
     const QString OFFWHITE = "#FFFFBF;";
+
+    const QString ORANGE = "#FFA500;";
+
+    const QString BROWN = " rgb(139, 69, 30);";
+
+
+   
 
     const QString GREEN = "#4CAF50;";
     const QString HOVER_GREEN = "#45a049;";
@@ -39,7 +47,7 @@ namespace Settings
     const QString WINDOW_TITLE_TEXT = "Kohot";
     const int WINDOW_WIDTH = 1200;
     const int WINDOW_HEIGHT = 640;
-    const QString BACKGROUND_COLOR = QtObjects::QMAIN_WINDOW + "{" + CssKeys::BACKGROUND_COLOR  +  Colors::OFFWHITE +  "}";
+    const QString BACKGROUND_COLOR = QtObjects::QMAIN_WINDOW + "{" + CssKeys::BACKGROUND_COLOR + Colors::OFFWHITE + "}";
 }
 
 namespace Common
@@ -96,28 +104,47 @@ namespace Style
 
     const QString GREEN_BUTTON_HOR_LAYOUT =
         "QPushButton {" + GREEN_COLOR + WHITE_TEXT_COLOR + "}"
-        "QPushButton:hover {" + HOVER_GREEN_COLOR + "}";
+                                                           "QPushButton:hover {" +
+        HOVER_GREEN_COLOR + "}";
 
     const QString RED_BUTTON_HOR_LAYOUT =
-        "QPushButton {" + RED_COLOR + WHITE_TEXT_COLOR +"}"
-        "QPushButton:hover {" + HOVER_RED_COLOR + "}";
+        "QPushButton {" + RED_COLOR + WHITE_TEXT_COLOR + "}"
+                                                         "QPushButton:hover {" +
+        HOVER_RED_COLOR + "}";
 
     const QString BLUE_BUTTON_HOR_LAYOUT =
-        "QPushButton {" + BLUE_COLOR + WHITE_TEXT_COLOR +"}"
-        "QPushButton:hover {" + HOVER_BLUE_COLOR + "}";
-    
-    const QString LIST =      "QListWidget {"
-        "border: 1px solid black;"
-        "background-color : rgb(139, 69, 30);"
-        "}"
-        "QListWidget::item {"
-        "   border: 1px solid black;"
-        "}"
-        "QListWidget::item:selected {"
-        " background: rgba(0, 0, 255, 10%);"
-        " } ";
-  
+        "QPushButton {" + BLUE_COLOR + WHITE_TEXT_COLOR + "}"
+                                                          "QPushButton:hover {" +
+        HOVER_BLUE_COLOR + "}";
 
+    const QString LIST = "QListWidget {"
+                         "border: 1px solid black;"
+                        "background-color :"+  Colors::BROWN + "}"
+                         "QListWidget::item {"
+                         "   border: 1px solid black;"
+                         "}"
+                         "QListWidget::item:selected {"
+                         " background: rgba(0, 0, 255, 10%);"
+                         " } ";
+
+    const QString ORANGE_LIST = "QListWidget {"
+                                "border: 1px solid black;"
+                                "background-color :"+  Colors::ORANGE + "}"
+                                "QListWidget::item {"
+                                "   border: 1px solid black;"
+                                "}";
+    const QString GREEN_LIST = "QListWidget {"
+                               "border: 1px solid black;"
+                  "background-color :"+  Colors::GREEN + "}"
+                               "QListWidget::item {"
+                               "   border: 1px solid black;"
+                               "}";
+    const QString BLUE_LIST = "QListWidget {"
+                               "border: 1px solid black;"
+                              "background-color :"+  Colors::BLUE + "}"
+                               "QListWidget::item {"
+                               "   border: 1px solid black;"
+                               "}";
 }
 
 namespace MaxValues

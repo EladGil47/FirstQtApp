@@ -77,6 +77,7 @@
         "qdebug": "cpp",
         "qpushbutton": "cpp",
         "qcheckbox": "cpp",
-        "qfont": "cpp"
+        "qfont": "cpp",
+        "qvboxlayout": "cpp"
     }
 }

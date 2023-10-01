@@ -18,9 +18,9 @@ std::shared_ptr<std::vector<Team>> TeamsCreator::createTeams(std::vector<std::sh
 		{
 			for (uint16_t team_index = 0; team_index < teams_amount;team_index++)
 			{
-				(*m_teams)[team_index].getPlayersCollectionRef().addItem(players[i]);
+				(*m_teams)[team_index].addPlayer(players[i]);
 
-				if (team_index == 2)
+				if (team_index == teams_amount-1)
 				{
 					directLeft = false;
 				}
@@ -31,7 +31,7 @@ std::shared_ptr<std::vector<Team>> TeamsCreator::createTeams(std::vector<std::sh
 		{
 			for (int team_index = 2; team_index >= 0;team_index--)
 			{
-				(*m_teams)[team_index].getPlayersCollectionRef().addItem(players[i]);
+				(*m_teams)[team_index].addPlayer(players[i]);
 				if (team_index == 0)
 				{
 					directLeft = true;

@@ -66,7 +66,9 @@ void WindowsManager::initCreateTeamsWindow()
 
 void WindowsManager::initDisplayTeamsWindow(std::shared_ptr <PlayersCollection> players)
 {
-    m_display_teams_window = new DisplayTeamsWindow(players);
+    m_display_teams_window = new DisplayTeamsWindow(players,m_group->getConfig());
+    QObject::connect(m_display_teams_window, &DisplayTeamsWindow::goBackButtonClickedSignal, this, &WindowsManager::setToCreateTeamsWindow);
+
 }
 
 void WindowsManager::moveWindowToCenter()
