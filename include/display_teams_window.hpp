@@ -58,7 +58,7 @@ void initTeamsHorLayout()
     {
         LabeledListWidget *labeled_list = new LabeledListWidget();
         QString team_number = QString::number(team_index + 1);
-        labeled_list->addLabel(team_text + " " + team_number ,Qt::AlignCenter);
+        labeled_list->addLabelAboveList(team_text + " " + team_number ,Qt::AlignCenter);
         labeled_list->setListColor(list_styles.getColoredListStyle(team_index));
 
         for (uint16_t player_index = 0; player_index < players_in_teams_amount; player_index++)
@@ -73,22 +73,15 @@ void initTeamsHorLayout()
 
             QWidget * team_player_item_widget = new QWidget;
             QHBoxLayout * team_player_item_widget_layout = new QHBoxLayout(team_player_item_widget);
+            team_player_item_widget_layout->setContentsMargins(0, 0, 0, 0); // Set margins to zero
+            team_player_item_widget_layout->setSpacing(0);                  // Set spacing to zero
             team_player_item_widget_layout->addWidget(player_name_label);
 
 
             labeled_list->addItemToList(team_player_item_widget);
         }
-
-        QHBoxLayout *avg_rate_layout = new QHBoxLayout;
-
-
         QString avg_rate_label_text = avg_rate + " : " +  QString::number((*teams)[team_index].getAverageRate(),'g',2);
-        QLabel *avg_rate_label = new QLabel(avg_rate_label_text);
-        avg_rate_label->setFont(Fonts::GROUP_ITEM_WIDGET_FONT);
-        avg_rate_layout->addWidget(avg_rate_label,0,Qt::AlignCenter);
-
-        
-        labeled_list->addLayout(avg_rate_layout);
+        labeled_list->addLabelbeneathList(avg_rate_label_text,Qt::AlignCenter);
 
         m_teams_hor_layout->addWidget(labeled_list);
     }
@@ -121,7 +114,7 @@ void initWindowLayout()
     window_layout->addLayout(m_header_layout);
     window_layout->addStretch(5);
     window_layout->addLayout(m_teams_hor_layout);
-    window_layout->addStretch(10);
+    window_layout->addStretch(8);
     window_layout->addLayout(m_buttons_layout);
 
 }
