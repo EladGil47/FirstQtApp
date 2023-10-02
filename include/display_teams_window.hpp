@@ -45,23 +45,21 @@ void initTeamsHorLayout()
     m_teams_hor_layout = new QHBoxLayout;
     QString team_text = "Team";
     QString avg_rate = "Avarage rate :";
+    ListStyles list_styles;
 
     std::shared_ptr<std::vector<Team>> teams = TeamsCreator::createTeams(
         m_players->getCollection(),
         m_group_config.teams_amount,
         m_group_config.players_in_team_amount);
 
-    // todo FIX TEAM_COLORS
-    std::vector<QString> team_colors = {Style::GREEN_LIST,Style::BLUE_LIST,Style::ORANGE_LIST};
-        
     size_t teams_amount = static_cast<size_t>(m_group_config.teams_amount);
     size_t players_in_teams_amount = static_cast<size_t>(m_group_config.players_in_team_amount);
     for (size_t team_index = 0; team_index < teams_amount; team_index++)
     {
         LabeledListWidget *labeled_list = new LabeledListWidget();
         QString team_number = QString::number(team_index + 1);
-        labeled_list->addLabel(team_text + " " + team_number + " : ");
-        labeled_list->setListColor(team_colors[team_index]);
+        labeled_list->addLabel(team_text + " " + team_number ,Qt::AlignCenter);
+        labeled_list->setListColor(list_styles.getColoredListStyle(team_index));
 
         for (uint16_t player_index = 0; player_index < players_in_teams_amount; player_index++)
         {

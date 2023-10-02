@@ -22,10 +22,11 @@ public:
         initLabeledListLayout();
     }
 
-    void addLabel(const QString &text)
+    void addLabel(const QString &text,Qt::Alignment allignment)
     {
         QLabel *label = new QLabel(text);
         label->setFont(Fonts::LIST_LABEL_FONT);
+        label->setAlignment(allignment);
         m_labels_layout->addWidget(label);
     }
     

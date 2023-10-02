@@ -7,8 +7,31 @@
 #include <QDebug>
 
 #include <memory>
+
+enum class COLOR
+{
+    GREEN,
+    BLUE ,
+    ORANGE,
+    RED,
+    YELLOW,
+    PINK,
+    PURPLE,
+    GREY
+};
+
+
+
+
 namespace Colors
 {
+    const QString YELLOW = "yellow";
+    const QString PINK = "pink";
+    const QString PURPLE = "purpel";
+    const QString GREY = "grey";
+
+
+
     const QString OFFWHITE = "#FFFFBF;";
 
     const QString ORANGE = "#FFA500;";
@@ -128,24 +151,40 @@ namespace Style
                          " } ";
 
     const QString ORANGE_LIST = "QListWidget {"
-                                "border: 1px solid black;"
-                                "background-color :"+  Colors::ORANGE + "}"
-                                "QListWidget::item {"
-                                "   border: 1px solid black;"
-                                "}";
+                                "background-color :"+  Colors::ORANGE + "}";
+                               
     const QString GREEN_LIST = "QListWidget {"
-                               "border: 1px solid black;"
-                  "background-color :"+  Colors::GREEN + "}"
-                               "QListWidget::item {"
-                               "   border: 1px solid black;"
-                               "}";
+                  "background-color :"+  Colors::GREEN + "}";
+                               
     const QString BLUE_LIST = "QListWidget {"
-                               "border: 1px solid black;"
-                              "background-color :"+  Colors::BLUE + "}"
-                               "QListWidget::item {"
-                               "   border: 1px solid black;"
-                               "}";
+                              "background-color :"+  Colors::BLUE + "}";
 }
+
+class ListStyles
+{
+    private: 
+    std::vector<QString> m_team_colors = {
+    Style::GREEN_LIST,
+    Style::BLUE_LIST,
+    Style::ORANGE_LIST};
+    public: 
+
+
+    QString getColoredListStyle(std::uint16_t index)
+    {
+        QString ret_val;
+        if(index < m_team_colors.size())
+        {
+            ret_val = m_team_colors[index];
+        }
+        else{
+        throw std::out_of_range("Index out of range");
+        }
+        return ret_val;
+    }
+};
+
+
 
 namespace MaxValues
 {
