@@ -12,6 +12,8 @@
 #include "teams_creator.hpp"
 #include "group.hpp"
 
+#include "team_player_item_widget.hpp" 
+
 
 
 
@@ -63,21 +65,8 @@ void initTeamsHorLayout()
 
         for (uint16_t player_index = 0; player_index < players_in_teams_amount; player_index++)
         {
-
             QString player_name = QString::fromStdString((*teams)[team_index].getPlayersCollection()->getItem(player_index)->getName());
-            QLabel *player_name_label = new QLabel(player_name);
-            player_name_label->setFont(Fonts::PLAYER_ITEM_WIDGET_FONT);
-            player_name_label->setStyleSheet(Style::WHITE_TEXT_COLOR);
-            player_name_label->setAlignment(Qt::AlignHCenter);
-
-
-            QWidget * team_player_item_widget = new QWidget;
-            QHBoxLayout * team_player_item_widget_layout = new QHBoxLayout(team_player_item_widget);
-            team_player_item_widget_layout->setContentsMargins(0, 0, 0, 0); // Set margins to zero
-            team_player_item_widget_layout->setSpacing(0);                  // Set spacing to zero
-            team_player_item_widget_layout->addWidget(player_name_label);
-
-
+            TeamPlayerItemWidget * team_player_item_widget = new TeamPlayerItemWidget(player_name);
             labeled_list->addItemToList(team_player_item_widget);
         }
         QString avg_rate_label_text = avg_rate + " : " +  QString::number((*teams)[team_index].getAverageRate(),'g',2);

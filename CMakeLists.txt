@@ -43,6 +43,7 @@ set(PROJECT_SOURCES
     include/checkable_player_item_widget.hpp
     include/display_teams_window.hpp
     include/labeled_list_widget.hpp
+    include/team_player_item_widget.hpp
 
 
     
