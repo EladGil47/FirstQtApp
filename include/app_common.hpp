@@ -84,6 +84,8 @@ namespace Fonts
     const QFont GROUP_ITEM_WIDGET_FONT = QFont(Common::FONT_FAMILY_NAME, 14, QFont::Bold);
     const QFont LIST_LABEL_FONT = QFont(Common::FONT_FAMILY_NAME, 18, QFont::Bold);
     const QFont HEADER_LABEL_FONT = QFont(Common::FONT_FAMILY_NAME, 22, QFont::Bold);
+    const QFont LARGE_FONT = QFont(Common::FONT_FAMILY_NAME, 30, QFont::Bold);
+
 
 }
 

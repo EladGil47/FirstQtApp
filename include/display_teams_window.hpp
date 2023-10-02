@@ -34,7 +34,7 @@ void initHeaderLayout()
 
     QString group_name =QString::fromStdString( m_group_config.name);
     QLabel *m_header_label = new QLabel(group_name);
-    m_header_label->setFont(Fonts::HEADER_LABEL_FONT);
+    m_header_label->setFont(Fonts::LARGE_FONT);
     m_header_label->setAlignment(Qt::AlignHCenter);
 
     m_header_layout->addWidget(m_header_label);
@@ -44,7 +44,7 @@ void initTeamsHorLayout()
 {
     m_teams_hor_layout = new QHBoxLayout;
     QString team_text = "Team";
-    QString avg_rate = "Avarage rate :";
+    QString avg_rate = "Avg. rate";
     ListStyles list_styles;
 
     std::shared_ptr<std::vector<Team>> teams = TeamsCreator::createTeams(
@@ -72,18 +72,13 @@ void initTeamsHorLayout()
 
         QHBoxLayout *avg_rate_layout = new QHBoxLayout;
 
-        QLabel *avg_rate_label = new QLabel(avg_rate);
+
+        QString avg_rate_label_text = avg_rate + " : " +  QString::number((*teams)[team_index].getAverageRate(),'g',2);
+        QLabel *avg_rate_label = new QLabel(avg_rate_label_text);
         avg_rate_label->setFont(Fonts::GROUP_ITEM_WIDGET_FONT);
-
-
-        QString team_rate = QString::number((*teams)[team_index].getAverageRate());
-        QLabel *team_rate_label = new QLabel(team_rate);
-        team_rate_label->setFont(Fonts::GROUP_ITEM_WIDGET_FONT);
-
+        avg_rate_label->setAlignment(Qt::AlignCenter);
         avg_rate_layout->addWidget(avg_rate_label);
-        avg_rate_layout->addWidget(team_rate_label);
         avg_rate_layout->addStretch(10);
-
 
         
         labeled_list->addLayout(avg_rate_layout);

@@ -29,12 +29,6 @@ public:
         label->setAlignment(allignment);
         m_labels_layout->addWidget(label);
     }
-    
-    // void adjustListSize()
-    // {
-    //    int h =  m_list->count() * m_list->item(0)->sizeHint().height();
-    //     m_list->setFixedHeight(h);
-    // }
 
     void setListColor(const QString style_sheet)
     {
