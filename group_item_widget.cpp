@@ -1,6 +1,8 @@
 #include "group_item_widget.h"
 #include "app_common.hpp"
 
+#include <QMouseEvent>
+
 GroupItemWidget::GroupItemWidget(std::shared_ptr<Group> group)
     :  m_group(group) 
 {
@@ -64,6 +66,14 @@ void GroupItemWidget::setItemHorLayout()
     m_item_hor_layout->addSpacerItem(spacer);
     m_item_hor_layout->addWidget(m_enter_button);
     m_item_hor_layout->addWidget(m_remove_button);
+}
+
+void GroupItemWidget::mouseDoubleClickEvent(QMouseEvent *event)
+{
+    if (event->button() == Qt::LeftButton)
+    {
+        emit enterButtonClickedSignal(m_group_index);
+    }
 }
 
 // Slots : 

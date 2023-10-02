@@ -17,6 +17,8 @@ private:
 
 size_t m_group_index ; 
 void setGroupIndex(size_t group_index);
+void mouseDoubleClickEvent(QMouseEvent *event) override;
+
 
 
 void setNameLabel();

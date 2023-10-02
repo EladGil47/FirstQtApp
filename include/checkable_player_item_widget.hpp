@@ -46,6 +46,8 @@ private:
         layout->addWidget(m_rate_label);
         QSpacerItem *spacer = new QSpacerItem(0, 0, QSizePolicy::Expanding, QSizePolicy::Fixed);
         layout->addSpacerItem(spacer);
+        layout->setContentsMargins(10, 0, 0, 0);
+        layout->setSpacing(0);
     }
 
     void mousePressEvent(QMouseEvent *event)
@@ -62,15 +64,17 @@ private:
     {
         m_is_selected_check_box = new QCheckBox;
         m_is_selected_check_box->setStyleSheet(
-            "QCheckBox::indicator {"
-            "    border: 1px solid black;"
-            "    background-color: white;"
-            "    width: 24px; /* Increase the checkbox width */"
-            "    height: 24px; /* Increase the checkbox height */"
-            "}"
-            "QCheckBox::indicator::checked {"
-            "   background-color : rgba(0,60,255,60%);"
-            "}");
+    "QCheckBox::indicator {"
+                           "    border: white;"
+                           "    border-radius: 6px;"    // Make it circular
+                           "    background-color: white;"
+                           "    width: 12px;"
+                           "    height: 12px;"
+                           "}"
+                           "QCheckBox::indicator:checked {"
+                           "   background-color: #4CAF50;"  // Green color when checked
+                           "}"
+            );
         connect(m_is_selected_check_box, &QCheckBox::stateChanged, this, onCheckBoxStateChanged);
     }
 

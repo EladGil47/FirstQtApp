@@ -80,6 +80,7 @@ namespace Common
 
 namespace Fonts
 {
+    const QFont SMALL_FONT = QFont(Common::FONT_FAMILY_NAME, 8, QFont::Bold);
     const QFont PLAYER_ITEM_WIDGET_FONT = QFont(Common::FONT_FAMILY_NAME, 12, QFont::Bold);
     const QFont GROUP_ITEM_WIDGET_FONT = QFont(Common::FONT_FAMILY_NAME, 14, QFont::Bold);
     const QFont LIST_LABEL_FONT = QFont(Common::FONT_FAMILY_NAME, 18, QFont::Bold);
