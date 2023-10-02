@@ -109,10 +109,6 @@ public:
     {
         CheckablePlayerItemWidget *player_item_widget = new CheckablePlayerItemWidget(player);
         connect(player_item_widget, CheckablePlayerItemWidget::checkBoxStateChangedSignal, this, onCheckBoxStateChanged);
-        // connect(this, onCheckBoxEnabledSignal, player_item_widget, CheckablePlayerItemWidget::setIsDoubleClickEnabled);
-        
-
-
         QListWidgetItem *item = new QListWidgetItem(m_list_list_widget);
         item->setSizeHint(player_item_widget->sizeHint());
         m_list_list_widget->setItemWidget(item, player_item_widget);
@@ -179,10 +175,9 @@ private slots:
                 CheckablePlayerItemWidget *widget = qobject_cast<CheckablePlayerItemWidget *>(m_list_list_widget->itemWidget(item));
                 if (widget)
                 {
-                    if (widget->m_is_selected_check_box->checkState() != Qt::CheckState::Checked)
+                    if (widget->getCheckBoxState() != Qt::CheckState::Checked)
                     {
-                        widget->m_is_selected_check_box->setDisabled(true);
-                        widget->setIsDoubleClickEnabled(false);
+                        widget->setIsCheckBoxEnabled(false);
                     }
                 }
             }
@@ -200,8 +195,7 @@ private slots:
                 CheckablePlayerItemWidget *widget = qobject_cast<CheckablePlayerItemWidget *>(m_list_list_widget->itemWidget(item));
                 if (widget)
                 {
-                    widget->setIsDoubleClickEnabled(true);
-                    widget->m_is_selected_check_box->setEnabled(true);
+                    widget->setIsCheckBoxEnabled(true);
                     m_all_unchecked_disable = false;
                 }
             }

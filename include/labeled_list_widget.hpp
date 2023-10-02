@@ -43,6 +43,8 @@ public:
     void addLayout(QLayout *layout)
     {
        m_labeled_list_layout->addLayout(layout);
+       m_labeled_list_layout->addStretch(5);
+
     }
 
     template <typename T>
@@ -72,6 +74,7 @@ private:
 
         m_labeled_list_layout->addLayout(m_labels_layout);
         m_labeled_list_layout->addWidget(m_list);
+
     }
 };
 
