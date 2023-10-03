@@ -7,11 +7,14 @@
 PlayerItemWidget::PlayerItemWidget(std::shared_ptr<Player> player) 
 : BasePlayerItemWidget(player)
 {
+    initEditableNameLabel(QString::fromStdString(player->getName()));
+    initRateLabel(QString::number(player->getRate()));
+
     initEnterButton();
     initRemoveButton();
     setupLayout();
 
-    connect(m_name_label, EditableLabel::finishEditingSig, this, onChangePlayerName);
+    connect(m_editable_name_label, EditableLabel::finishEditingSig, this, onChangePlayerName);
 }
 
 void PlayerItemWidget::initEnterButton()
@@ -32,12 +35,11 @@ void PlayerItemWidget::initRemoveButton()
 
 void PlayerItemWidget::setupLayout()
 {
-    // OR 2 4 1  1
     QHBoxLayout *layout = new QHBoxLayout(this);
-    layout->addWidget(m_name_label);
+    layout->addWidget(m_editable_name_label);
     layout->addWidget(m_rate_label);
-    QSpacerItem *spacer = new QSpacerItem(0, 0, QSizePolicy::Expanding, QSizePolicy::Fixed);
-    layout->addSpacerItem(spacer);
+    QSpacerItem *space_all_to_end = new QSpacerItem(0, 0, QSizePolicy::Expanding, QSizePolicy::Fixed);
+    layout->addSpacerItem(space_all_to_end);
     layout->addWidget(m_enter_button);
     layout->addWidget(m_remove_button);
 }
@@ -53,6 +55,8 @@ void PlayerItemWidget::onRemoveButtonClicked()
     emit removeButtonClickedSignal(m_player_index);
 }
 void PlayerItemWidget::onChangePlayerName(const QString &name)
-{
-    emit playerNameChangedSignal(m_player_index, name.toStdString());
+{   
+    std::string player_name = name.toStdString();
+    m_player->setName(player_name);
+    emit playerNameChangedSignal(m_player_index, player_name);
 }

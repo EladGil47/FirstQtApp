@@ -14,14 +14,11 @@ public:
     CheckablePlayerItemWidget(std::shared_ptr<Player> player)
         : BasePlayerItemWidget(player)
     {
-
-        m_name_label->setEditablity(false);
+        initNameLabel(QString::fromStdString(player->getName()));
         initIsSelectedCheckBox();
 
         setupLayout();
     }
-
-  
 
     void setIsCheckBoxEnabled(bool state)
     {
@@ -43,11 +40,9 @@ private:
         QHBoxLayout *layout = new QHBoxLayout(this);
         layout->addWidget(m_is_selected_check_box);
         layout->addWidget(m_name_label);
-        layout->addWidget(m_rate_label);
         QSpacerItem *spacer = new QSpacerItem(0, 0, QSizePolicy::Expanding, QSizePolicy::Fixed);
         layout->addSpacerItem(spacer);
         layout->setContentsMargins(10, 0, 0, 0);
-        layout->setSpacing(0);
     }
 
     void mousePressEvent(QMouseEvent *event)

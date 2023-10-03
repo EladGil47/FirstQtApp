@@ -15,15 +15,29 @@ class LabeledListWidget : public QWidget
     Q_OBJECT
 
 public:
+    QListWidget *m_list;
+
 
     LabeledListWidget() 
     {
         initLabeledListLayout();
     }
 
+    void addSpacerAboveList(QSpacerItem *spacer)
+    {
+        m_top_labels_layout->addSpacerItem(spacer);
+    }
+
     void addLabelAboveList(const QString &text,Qt::Alignment allignment)
     {
         QLabel *label = new QLabel(text);
+        label->setFont(Fonts::LIST_LABEL_FONT);
+        label->setAlignment(allignment);
+        m_top_labels_layout->addWidget(label);
+    }
+
+    void addLabelAboveList(QLabel *label,Qt::Alignment allignment)
+    {
         label->setFont(Fonts::LIST_LABEL_FONT);
         label->setAlignment(allignment);
         m_top_labels_layout->addWidget(label);
@@ -66,7 +80,7 @@ public:
 private:
     QVBoxLayout *m_labeled_list_layout;
 
-    QListWidget *m_list;
+    // QListWidget *m_list;
     QHBoxLayout *m_top_labels_layout;
     QHBoxLayout *m_bottom_labels_layout;
 
@@ -76,13 +90,16 @@ private:
         m_labeled_list_layout = new QVBoxLayout(this);
 
         m_top_labels_layout = new QHBoxLayout;
+        // m_top_labels_layout->setContentsMargins(0, 0, 0, 0);
+        // m_top_labels_layout->setSpacing(0);
+
         m_list = new QListWidget;
         m_bottom_labels_layout = new QHBoxLayout;
 
 
         m_labeled_list_layout->addLayout(m_top_labels_layout);
         m_labeled_list_layout->addWidget(m_list);
-        m_labeled_list_layout->addLayout(m_bottom_labels_layout);
+        // m_labeled_list_layout->addLayout(m_bottom_labels_layout);
 
     }
 };
