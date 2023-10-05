@@ -18,6 +18,32 @@ public:
 		}
 		return names;
 	}
+	size_t getIndexById(size_t id)
+	{
+		size_t ret_val;
+		bool is_found ;
+		if (!m_collection.empty())
+		{
+			size_t index = 0 ; 
+			for (std::shared_ptr<Player> player : m_collection )
+			{
+				if(player->getId() == id)
+				{
+					ret_val = index;
+					is_found = true;
+				}
+				index ++;
+			}
+			if (!is_found)
+			{
+			std::cerr << "Can not find player with id" << id << "in Players Collection" ; 
+			}
+		}
+		else{
+			std::cerr << "Players Collection is empty" ; 
+		}
+		return ret_val;
+	}
 private:
 	Player::Config getPlayerConfigFromUser();
 };

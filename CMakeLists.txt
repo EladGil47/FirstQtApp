@@ -25,6 +25,10 @@ set(PROJECT_SOURCES
     group_item_widget.cpp
     player_item_widget.cpp
     editable_label.cpp
+    windows_manager.cpp
+
+
+
     include/groups_list_window.h
     include/players_list_window.h
     include/base_list_manager_window.h
@@ -37,6 +41,13 @@ set(PROJECT_SOURCES
     include/create_teams_window.h
     include/base_player_item_widget.hpp
     include/checkable_player_item_widget.hpp
+    include/display_teams_window.hpp
+    include/labeled_list_widget.hpp
+    include/team_player_item_widget.hpp
+
+
+    
+
 )
 
 add_executable(${PROJECT_NAME} ${PROJECT_SOURCES})

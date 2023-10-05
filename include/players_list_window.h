@@ -26,7 +26,7 @@ private:
 void initPlayersAmountLabel();
 void initPlayersAmountLabelText();
 
-    void createButtonsHorLayout() override;
+    void setButtonsHorLayout() override;
 
     void initCreateNewPlayerButton();
     void initCreateTeamsButton();

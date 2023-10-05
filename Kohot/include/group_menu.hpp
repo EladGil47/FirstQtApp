@@ -3,6 +3,8 @@
 
 #include "menu.hpp"
 #include "group.hpp"
+#include "team.hpp"
+
 #include <memory>
 
 class GroupMenu : public Menu
@@ -25,6 +27,8 @@ private:
 		return static_cast<GroupMenuOption>(getChoiceFromUser());
 	}
 	std::shared_ptr<Group> m_group;
+	std::shared_ptr <std::vector<Team>> m_teams;
+
 	void moveToFinalMenu();
 
 	void onDeletePlayer();

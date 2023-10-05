@@ -17,7 +17,7 @@ public:
 
 private:
     void setListLabelText() override;
-    void createButtonsHorLayout() override;
+    void setButtonsHorLayout() override;
 
     void initGroupsAmountLabel();
     void setGroupsAmountLabelText();

@@ -36,8 +36,13 @@ void BaseListManagerWindow::initListLabel()
 
 void BaseListManagerWindow::initListLayout()
 {
+    m_lists_hor_layout = new QHBoxLayout;
+
     m_list_layout = new QVBoxLayout;
+
     m_list_label_layout = new QHBoxLayout;
+    m_list_list_layout = new QHBoxLayout;
+
   
     Functions::checkNotNull(m_list_label,"m_list_label");
     m_list_label_layout->addWidget(m_list_label);
@@ -46,29 +51,18 @@ void BaseListManagerWindow::initListLayout()
 
 
     Functions::checkNotNull(m_list_list_widget,"m_list_list_widget");
-    m_list_layout->addWidget(m_list_list_widget);
+    m_list_list_layout->addWidget(m_list_list_widget);
+
+    m_list_layout->addLayout(m_list_list_layout);
+
+    m_lists_hor_layout->addLayout(m_list_layout);
+
 }
 
 void BaseListManagerWindow::initListListWidget()
 {
     m_list_list_widget = new QListWidget;
-    // QPixmap background_image("Data/field.jpg");
-    // QPixmap scaledBackground = background_image.scaled(m_list_list_widget->size(), Qt::IgnoreAspectRatio, Qt::SmoothTransformation);
-    // QPalette palette;
-    // palette.setBrush(QPalette::Base, scaledBackground);
-    // m_list_list_widget->setPalette(palette);
-    m_list_list_widget->setStyleSheet(
-        "QListWidget {"
-        "border: 1px solid black;"
-        "background-color : rgb(139, 69, 30);"
-        "}"
-        "QListWidget::item {"
-        "   border: 1px solid black;"
-        "}"
-        "QListWidget::item:selected {"
-        " background: rgba(0, 0, 255, 10%);"
-        " } "
-        );
+    m_list_list_widget->setStyleSheet(Style::LIST);
 }
 
 void BaseListManagerWindow::initBaseWindowLayout()
@@ -76,7 +70,7 @@ void BaseListManagerWindow::initBaseWindowLayout()
     Functions::checkNotNull(m_header_label,"m_header_label");
     m_window_layout->addWidget(m_header_label);
     Functions::checkNotNull(m_list_layout,"m_list_layout");
-    m_window_layout->addLayout(m_list_layout);
+    m_window_layout->addLayout(m_lists_hor_layout);
     Functions::checkNotNull(m_buttons_hor_layout,"m_buttons_hor_layout");
     m_window_layout->addLayout(m_buttons_hor_layout);
 }
@@ -84,13 +78,15 @@ void BaseListManagerWindow::initBaseWindowLayout()
 void BaseListManagerWindow::removeAllItemsFromList()
 {
     int item_count = m_list_list_widget->count();
-    for (int i = 0; i < item_count; ++i)
-    {
-        QListWidgetItem *item = m_list_list_widget->item(0); // Get the first item
+    int const FIRST_ROW =  0;
+    for (int i = FIRST_ROW; i < item_count; ++i)
+    {   
+        // Each iteration the first elemnt is deleted which means second element becoming first
+        QListWidgetItem *item = m_list_list_widget->item(FIRST_ROW); 
         QWidget *widget = m_list_list_widget->itemWidget(item);
-        m_list_list_widget->removeItemWidget(item); // Remove the widget from the item
-        delete item;                                  // Delete the item
-        delete widget;                                // Delete the widget
+        m_list_list_widget->removeItemWidget(item);
+        delete item;                                 
+        delete widget;                            
     }
 }
 

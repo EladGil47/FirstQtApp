@@ -29,9 +29,17 @@ protected :
 
 
     void initBaseWindowLayout() ;
-    virtual void initList()  = 0;
-    virtual void setListLabelText() = 0;
-    virtual void createButtonsHorLayout() = 0;
+    virtual void initList()  {
+        return ;
+    }
+    virtual void setListLabelText() 
+    {
+        return ;
+    }
+    virtual void setButtonsHorLayout() 
+    {
+        return ;
+    }
 
     void updateList() ;
     void setHeaderLabelText(const QString &text) ;
@@ -43,6 +51,10 @@ protected :
     QHBoxLayout *m_buttons_hor_layout;
 
     QHBoxLayout *  m_list_label_layout;
+    QHBoxLayout *  m_list_list_layout; 
+    QHBoxLayout * m_lists_hor_layout ;
+
+
 };
 
 #endif // FIRST_QT_APP_INCLUDE_BASE_LIST_MANAGER_WINDOW_H

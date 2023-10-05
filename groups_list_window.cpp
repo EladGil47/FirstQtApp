@@ -1,12 +1,8 @@
 #include "groups_list_window.h"
 
 #include <QInputDialog>
-#include <QFont>
-
 #include "group_item_widget.h"
-
 #include "app_common.hpp"
-
 
 GroupsListWindow::GroupsListWindow(std::shared_ptr<GroupsCollection> groups_collection)
 :
@@ -19,7 +15,7 @@ m_groups_collection(groups_collection)
     setHeaderLabelEditability(false);
 
     setListLabelText();
-    createButtonsHorLayout();
+    setButtonsHorLayout();
     initList();
 }
 
@@ -72,7 +68,7 @@ void GroupsListWindow::setListLabelText()
     m_list_label->setText("Groups :");
 }
 
-void GroupsListWindow::createButtonsHorLayout()
+void GroupsListWindow::setButtonsHorLayout()
 {
     m_buttons_hor_layout->addStretch(1);
     initCreateNewGroupButton();

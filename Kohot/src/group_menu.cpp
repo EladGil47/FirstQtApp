@@ -4,11 +4,13 @@
 
 #include "teams_creator.hpp" 
 
+
 GroupMenu::GroupMenu(std::shared_ptr<Group> group) :Menu()
 {
 	std::vector<std::string> options = { "Add Player","Delete Player","Create Teams" ,"Change Group Name" ,"Go Back", "Exit"};
 	initializeOptions(options);
 	initializeHeader("Menu : ");
+	m_teams = std::make_shared<std::vector<Team>>>();
 
 	m_group = group;
 }
@@ -113,7 +115,13 @@ bool GroupMenu::handle()
 			uint16_t teams_amount = getTeamsAmountFromUser();
 			uint16_t players_in_team_amount = getPlayersInTeamAmountFromUser(teams_amount);
 			const uint16_t COMING_PLAYERS_AMOUNT = teams_amount * players_in_team_amount;
-			TeamsCreator::createTeams(chooseComingPlayers(COMING_PLAYERS_AMOUNT), teams_amount ,players_in_team_amount);
+			m_teams = TeamsCreator::createTeams(chooseComingPlayers(COMING_PLAYERS_AMOUNT), teams_amount ,players_in_team_amount);
+			for (uint16_t team_index = 0; team_index < teams_amount; team_index++)
+			{
+				std::cout << "Team " << team_index + 1 << " : " << std::endl;
+				(*m_teams)[team_index].displayTeam();
+				std::cout << std::endl;
+			}
 
 			moveToFinalMenu();
 			break;
