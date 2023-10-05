@@ -2,7 +2,18 @@ cmake_minimum_required(VERSION 3.2)
 
 project(KohotQtApp VERSION 0.1 LANGUAGES CXX)
 
-add_subdirectory(Kohot)
+include(ExternalProject)
+
+include(FetchContent)
+
+FetchContent_Declare(
+	KohotLibrary
+	GIT_REPOSITORY https://github.com/EladGil47/KohotLibrary.git
+	GIT_TAG only_lib
+    SOURCE_DIR ${PROJECT_SOURCE_DIR}/KohotLibrary
+    BINARY_DIR ${PROJECT_SOURCE_DIR}/build/KohotLibrary
+)
+FetchContent_MakeAvailable(KohotLibrary)
 
 set(CMAKE_AUTOUIC ON)
 set(CMAKE_AUTOMOC ON)
@@ -27,8 +38,6 @@ set(PROJECT_SOURCES
     editable_label.cpp
     windows_manager.cpp
 
-
-
     include/groups_list_window.h
     include/players_list_window.h
     include/base_list_manager_window.h
@@ -44,15 +53,11 @@ set(PROJECT_SOURCES
     include/display_teams_window.hpp
     include/labeled_list_widget.hpp
     include/team_player_item_widget.hpp
-
-
-    
-
 )
 
 add_executable(${PROJECT_NAME} ${PROJECT_SOURCES})
 
-link_directories(${CMAKE_SOURCE_DIR}/Kohot)
+link_directories(${CMAKE_SOURCE_DIR}/KohotLibrary)
 
 target_compile_options(${PROJECT_NAME} PRIVATE
 		-Wall
