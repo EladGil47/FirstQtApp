@@ -1,8 +1,6 @@
 cmake_minimum_required(VERSION 3.2)
-
 project(KohotQtApp VERSION 0.1 LANGUAGES CXX)
-
-include(ExternalProject)
+set(CMAKE_CXX_STANDARD 17)
 
 include(FetchContent)
 
@@ -19,8 +17,6 @@ FetchContent_MakeAvailable(${DEPS_LIBRARY})
 set(CMAKE_AUTOUIC ON)
 set(CMAKE_AUTOMOC ON)
 set(CMAKE_AUTORCC ON)
-
-set(CMAKE_CXX_STANDARD 17)
 
 # Detect Qt 5 and Qt 6
 find_package(QT NAMES Qt6 Qt5 REQUIRED COMPONENTS Widgets)
@@ -58,7 +54,7 @@ set(PROJECT_SOURCES
 
 add_executable(${PROJECT_NAME} ${PROJECT_SOURCES})
 
-link_directories(${CMAKE_SOURCE_DIR}/KohotLibrary)
+link_directories(${CMAKE_SOURCE_DIR}/${DEPS_LIBRARY})
 
 target_compile_options(${PROJECT_NAME} PRIVATE
 		-Wall
@@ -69,6 +65,6 @@ target_link_libraries(${PROJECT_NAME} PRIVATE
     KOHOT_LIB
 )
 target_include_directories(${PROJECT_NAME} PUBLIC
-    ${CMAKE_SOURCE_DIR}/include
+    ${CMAKE_CURRENT_SOURCE_DIR}/include
     ${Qt6Widgets_INCLUDE_DIRS}
 )
