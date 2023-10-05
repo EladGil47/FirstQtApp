@@ -90,16 +90,12 @@ private:
         m_labeled_list_layout = new QVBoxLayout(this);
 
         m_top_labels_layout = new QHBoxLayout;
-        // m_top_labels_layout->setContentsMargins(0, 0, 0, 0);
-        // m_top_labels_layout->setSpacing(0);
-
         m_list = new QListWidget;
         m_bottom_labels_layout = new QHBoxLayout;
 
-
         m_labeled_list_layout->addLayout(m_top_labels_layout);
         m_labeled_list_layout->addWidget(m_list);
-        // m_labeled_list_layout->addLayout(m_bottom_labels_layout);
+        m_labeled_list_layout->addLayout(m_bottom_labels_layout);
 
     }
 };

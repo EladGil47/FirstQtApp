@@ -24,27 +24,30 @@ void mouseDoubleClickEvent(QMouseEvent *event) override;
 void setNameLabel();
 void setSizeLabel();
 void setEnterButton();
+void initCreateTeamsButton();
 void setRemoveButton();
-void setItemHorLayout();
+void setupLayout();
 
 std::shared_ptr<Group> m_group;
 
 EditableLabel* m_name_label;
 QLabel* m_size_label;
 QPushButton* m_enter_button;
+QPushButton* m_create_teams_button;
 QPushButton* m_remove_button;
 
 
 
-QHBoxLayout * m_item_hor_layout;
 
 public slots:
 void onEnterButtonClicked();
+void onCreateTeamsButtonClicked();
 void onRemoveButtonClicked();
 void onChangeGroupName(const QString& name);
 
 signals:
     void enterButtonClickedSignal(size_t id);
+    void createTeamsButtonClickedSignal(size_t id);
     void removeButtonClickedSignal(size_t id);
     void groupNameChangedSignal(size_t id,std::string name);
 

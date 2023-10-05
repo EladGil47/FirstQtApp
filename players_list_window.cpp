@@ -134,7 +134,7 @@ void PlayersListWindow::onCreateNewPlayerButton()
 
 void PlayersListWindow::onCreateTeamsClicked()
 {
-    emit setToCreateTeamsWindowSignal();
+    emit setToCreateTeamsWindowSignal(m_group->getId());
 }
 
 void PlayersListWindow::addItemToList(std::shared_ptr<Player> player)

@@ -80,6 +80,7 @@ void GroupsListWindow::addGroupItemToList(std::shared_ptr<Group> group)
 {   
     GroupItemWidget * group_item_widget = new GroupItemWidget(group);
     connect(group_item_widget,GroupItemWidget::enterButtonClickedSignal,this,onEnterGroupButton);
+    connect(group_item_widget,GroupItemWidget::createTeamsButtonClickedSignal,this,onCreateTeamsButton);
     connect(group_item_widget,GroupItemWidget::removeButtonClickedSignal,this,onRemoveGroupButton);
     connect(group_item_widget,GroupItemWidget::groupNameChangedSignal,this,changeGroupName);
 
@@ -122,4 +123,9 @@ void GroupsListWindow::onRemoveGroupButton(size_t id)
 void GroupsListWindow::onEnterGroupButton(size_t id)
 {
     emit setToPlayersListWindowSignal(id);
+}
+
+void GroupsListWindow::onCreateTeamsButton(size_t id)
+{
+    emit setToCreateTeamsWindowSignal(id);
 }

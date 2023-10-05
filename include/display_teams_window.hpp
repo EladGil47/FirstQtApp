@@ -25,7 +25,9 @@ QHBoxLayout  * m_header_layout;
 QHBoxLayout  * m_teams_hor_layout; 
 QHBoxLayout  * m_buttons_layout;
 
+QPushButton *m_ok_button;
 QPushButton *m_go_back_button;
+
 
 std::shared_ptr <PlayersCollection> m_players;
 Group::Config m_group_config;
@@ -79,18 +81,28 @@ void initTeamsHorLayout()
 
 void initGoBackButton()
 {
-    m_go_back_button = new QPushButton("Go back");
-    m_go_back_button->setStyleSheet(Style::GREEN_BUTTON_HOR_LAYOUT);
+    m_go_back_button = new QPushButton("Go Back");
+    m_go_back_button->setStyleSheet(Style::RED_BUTTON_HOR_LAYOUT);
     connect(m_go_back_button, &QPushButton::clicked, this, onGoBackButton);
+}
+void initOkButton()
+{
+    m_ok_button = new QPushButton("OK");
+    m_ok_button->setStyleSheet(Style::GREEN_BUTTON_HOR_LAYOUT);
+    connect(m_ok_button, &QPushButton::clicked, this, onOkButton);
 }
 
 void initButtonsLayout()
 {
     initGoBackButton();
+    initOkButton();
+
 
     m_buttons_layout = new QHBoxLayout;
     m_buttons_layout->addStretch(1);
-    m_buttons_layout->addWidget(m_go_back_button);
+    m_buttons_layout->addWidget(m_ok_button,2);
+    m_buttons_layout->addStretch(1);
+    m_buttons_layout->addWidget(m_go_back_button,2);
     m_buttons_layout->addStretch(1);
 }
 
@@ -120,12 +132,21 @@ DisplayTeamsWindow(std::shared_ptr <PlayersCollection> players,Group::Config gro
 }
 
 signals:
-   void goBackButtonClickedSignal();
+   void goBackButtonClickedSignal(size_t id);
+   void okButtonClickedSignal();
+
 
 public slots:
 void onGoBackButton()
 {
-  emit goBackButtonClickedSignal();
+  emit goBackButtonClickedSignal(m_group_config.id);
+}
+
+
+void onOkButton()
+{
+  emit okButtonClickedSignal();
+
 }
 
 

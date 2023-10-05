@@ -20,22 +20,22 @@ public:
 private slots:
     void setToGroupsListWindow();
     void setToPlayersListWindow(size_t id);
-    void setToDisplayTeamsWindow(std::shared_ptr <PlayersCollection> players);
-    void setToCreateTeamsWindow();
+    void setToDisplayTeamsWindow(std::shared_ptr <PlayersCollection> players,size_t group_id);
+    void setToCreateTeamsWindow(size_t id);
 
 private:
     GroupsListWindow *m_groups_list_window;
     PlayersListWindow *m_players_list_window;
     CreateTeamsWindow *m_create_teams_window;
     DisplayTeamsWindow *m_display_teams_window;
-    std::shared_ptr<Group> m_group;
+    // std::shared_ptr<Group> m_group;
     std::shared_ptr<GroupsCollection> m_groups_collection;
 
     void setWindow();
     void initPlayersListWindow(size_t id);
     void initGroupsListWindow();
-    void initCreateTeamsWindow();
-    void initDisplayTeamsWindow(std::shared_ptr <PlayersCollection> players);
+    void initCreateTeamsWindow(size_t id);
+    void initDisplayTeamsWindow(std::shared_ptr <PlayersCollection> players,size_t group_id);
     void moveWindowToCenter();
 };
 
