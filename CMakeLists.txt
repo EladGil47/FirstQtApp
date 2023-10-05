@@ -8,7 +8,7 @@ set(DEPS_LIBRARY KohotLibrary)
 FetchContent_Declare(
 	${DEPS_LIBRARY}
 	GIT_REPOSITORY https://github.com/EladGil47/${DEPS_LIBRARY}.git
-	GIT_TAG only_lib
+	GIT_TAG master
     SOURCE_DIR ${PROJECT_SOURCE_DIR}/_deps/${DEPS_LIBRARY}
     BINARY_DIR ${PROJECT_SOURCE_DIR}/build/_deps/${DEPS_LIBRARY}
 )
