@@ -6,14 +6,15 @@ include(ExternalProject)
 
 include(FetchContent)
 
+set(DEPS_LIBRARY KohotLibrary)
 FetchContent_Declare(
-	KohotLibrary
-	GIT_REPOSITORY https://github.com/EladGil47/KohotLibrary.git
+	${DEPS_LIBRARY}
+	GIT_REPOSITORY https://github.com/EladGil47/${DEPS_LIBRARY}.git
 	GIT_TAG only_lib
-    SOURCE_DIR ${PROJECT_SOURCE_DIR}/KohotLibrary
-    BINARY_DIR ${PROJECT_SOURCE_DIR}/build/KohotLibrary
+    SOURCE_DIR ${PROJECT_SOURCE_DIR}/_deps/${DEPS_LIBRARY}
+    BINARY_DIR ${PROJECT_SOURCE_DIR}/build/_deps/${DEPS_LIBRARY}
 )
-FetchContent_MakeAvailable(KohotLibrary)
+FetchContent_MakeAvailable(${DEPS_LIBRARY})
 
 set(CMAKE_AUTOUIC ON)
 set(CMAKE_AUTOMOC ON)
