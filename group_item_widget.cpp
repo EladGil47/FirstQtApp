@@ -55,7 +55,7 @@ void GroupItemWidget::initCreateTeamsButton()
     m_create_teams_button = new QPushButton("Create Teams");
     m_create_teams_button->setFixedSize(Sizes::WIDGET_IN_GROUP_ITEM_WIDGET);
     m_create_teams_button->setStyleSheet(Style::GREEN_BUTTON_HOR_LAYOUT);
-    connect(m_create_teams_button, &QPushButton::clicked, this,onCreateTeamsButtonClicked);
+    connect(m_create_teams_button, &QPushButton::clicked, this,&GroupItemWidget::onCreateTeamsButtonClicked);
 }
 
 void GroupItemWidget::setRemoveButton()
