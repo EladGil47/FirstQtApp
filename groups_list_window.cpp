@@ -123,3 +123,8 @@ void GroupsListWindow::onEnterGroupButton(size_t id)
 {
     emit setToPlayersListWindowSignal(id);
 }
+
+void GroupsListWindow::onCreateTeamsButton(size_t id)
+{
+    emit setToCreateTeamsWindowSignal(id);
+}

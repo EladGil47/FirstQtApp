@@ -6,14 +6,15 @@
 GroupItemWidget::GroupItemWidget(std::shared_ptr<Group> group)
     :  m_group(group) 
 {
-    if (group != nullptr)
+    if (group)
     {
         setGroupIndex(static_cast<size_t>(m_group->getId()));
         setNameLabel();
         setSizeLabel();
         setEnterButton();
+        initCreateTeamsButton();
         setRemoveButton();
-        setItemHorLayout();
+        setupLayout();
     }
 }
 
@@ -43,10 +44,18 @@ void GroupItemWidget::setSizeLabel()
 
 void GroupItemWidget::setEnterButton()
 {
-    m_enter_button = new QPushButton("Enter ");
+    m_enter_button = new QPushButton("Enter");
     m_enter_button->setFixedSize(Sizes::WIDGET_IN_GROUP_ITEM_WIDGET);
     m_enter_button->setStyleSheet(Style::BLUE_BUTTON_HOR_LAYOUT);
     connect(m_enter_button, &QPushButton::clicked, this,&GroupItemWidget::onEnterButtonClicked);
+}
+
+void GroupItemWidget::initCreateTeamsButton()
+{
+    m_create_teams_button = new QPushButton("Create Teams");
+    m_create_teams_button->setFixedSize(Sizes::WIDGET_IN_GROUP_ITEM_WIDGET);
+    m_create_teams_button->setStyleSheet(Style::GREEN_BUTTON_HOR_LAYOUT);
+    connect(m_create_teams_button, &QPushButton::clicked, this,onCreateTeamsButtonClicked);
 }
 
 void GroupItemWidget::setRemoveButton()
@@ -57,15 +66,16 @@ void GroupItemWidget::setRemoveButton()
     connect(m_remove_button, &QPushButton::clicked, this,&GroupItemWidget::onRemoveButtonClicked);
 }
 
-void GroupItemWidget::setItemHorLayout()
+void GroupItemWidget::setupLayout()
 {
-    m_item_hor_layout = new QHBoxLayout(this);
-    m_item_hor_layout->addWidget(m_name_label);
-    m_item_hor_layout->addWidget(m_size_label);
+    QHBoxLayout *layout = new QHBoxLayout(this);
+    layout->addWidget(m_name_label);
+    layout->addWidget(m_size_label);
     QSpacerItem *spacer = new QSpacerItem(0, 0, QSizePolicy::Expanding, QSizePolicy::Fixed);
-    m_item_hor_layout->addSpacerItem(spacer);
-    m_item_hor_layout->addWidget(m_enter_button);
-    m_item_hor_layout->addWidget(m_remove_button);
+    layout->addSpacerItem(spacer);
+    layout->addWidget(m_enter_button);
+    layout->addWidget(m_create_teams_button);
+    layout->addWidget(m_remove_button);
 }
 
 void GroupItemWidget::mouseDoubleClickEvent(QMouseEvent *event)
@@ -82,6 +92,12 @@ void GroupItemWidget::onEnterButtonClicked()
 {
     emit enterButtonClickedSignal(m_group_index);
 }
+
+void GroupItemWidget::onCreateTeamsButtonClicked()
+{
+    emit createTeamsButtonClickedSignal(m_group_index);
+}
+
 void GroupItemWidget::onRemoveButtonClicked()
 {
     emit removeButtonClickedSignal(m_group_index);

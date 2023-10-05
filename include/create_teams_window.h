@@ -19,6 +19,20 @@ class CreateTeamsWindow : public QWidget
     Q_OBJECT
 
 public:
+    CreateTeamsWindow(std::shared_ptr<Group> group)
+    {
+        if (group)
+        {
+        m_group = group;
+        m_selected_players = std::make_shared<PlayersCollection>();
+
+        initHeaderLabel();
+        initListsLayout();
+        initButtonsHorLayout();
+
+        setupLayout();
+        }
+    }
 
     void initHeaderLabel()
     {
@@ -70,31 +84,13 @@ public:
         addAllPlayersToCheckablePlayersList();
     }
 
-    CreateTeamsWindow(std::shared_ptr<Group> group)
-    {
-        if (group)
-        {
-        m_group = group;
-        m_selected_players = std::make_shared<PlayersCollection>();
 
-        initHeaderLabel();
-        initListsLayout();
-        initButtonsHorLayout();
-
-        setupLayout();
-        }
-    }
 
     void setupLayout()
     {
         QVBoxLayout *layout = new QVBoxLayout(this);
         layout->addWidget(m_header_label);
-
         layout->addLayout(m_lists_layout);
-
-        // layout->addWidget(m_checkable_players_list);
-        // layout->addWidget(m_checkable_players_list);
-
         layout->addLayout(m_buttons_hor_layout);
     }
 
@@ -241,7 +237,7 @@ private:
 
 signals:
     void cancelButtonClickedSignal(size_t id);
-    void okButtonClickedSignal(std::shared_ptr <PlayersCollection> players);
+    void okButtonClickedSignal(std::shared_ptr <PlayersCollection> players,size_t id);
 
 public slots:
 
@@ -254,7 +250,7 @@ public slots:
     {
         if (m_selected_players->getSize() == m_max_selected_players_amount)
         {
-            emit okButtonClickedSignal(m_selected_players);
+            emit okButtonClickedSignal(m_selected_players,m_group->getId());
         }
         else
         {

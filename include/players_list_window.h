@@ -54,7 +54,7 @@ public slots:
 signals:
     void onGoBackButtonClickedSignal();
 
-    void setToCreateTeamsWindowSignal();
+    void setToCreateTeamsWindowSignal(size_t id);
 
     
 
