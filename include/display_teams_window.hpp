@@ -81,7 +81,7 @@ void initGoBackButton()
 {
     m_go_back_button = new QPushButton("Go back");
     m_go_back_button->setStyleSheet(Style::GREEN_BUTTON_HOR_LAYOUT);
-    connect(m_go_back_button, &QPushButton::clicked, this, onGoBackButton);
+    connect(m_go_back_button, &QPushButton::clicked, this, &DisplayTeamsWindow::onGoBackButton);
 }
 
 void initButtonsLayout()

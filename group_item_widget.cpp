@@ -30,7 +30,7 @@ void GroupItemWidget::setNameLabel()
     m_name_label->setAlignment(Qt::AlignLeft);
     m_name_label->setFont(Fonts::GROUP_ITEM_WIDGET_FONT);
     m_name_label->setMaxLength(MaxValues::ITEM_WIDGET_LABEL_NAME);
-    connect(m_name_label,SIGNAL(EditableLabel::finishEditingSig(const QString&))finishEditingSig, this, SLOT(onChangeGroupName(const QString&)));
+    connect(m_name_label,&EditableLabel::finishEditingSig, this, &GroupItemWidget::onChangeGroupName);
 }
 
 void GroupItemWidget::setSizeLabel()
@@ -46,7 +46,7 @@ void GroupItemWidget::setEnterButton()
     m_enter_button = new QPushButton("Enter ");
     m_enter_button->setFixedSize(Sizes::WIDGET_IN_GROUP_ITEM_WIDGET);
     m_enter_button->setStyleSheet(Style::BLUE_BUTTON_HOR_LAYOUT);
-    connect(m_enter_button, &QPushButton::clicked, this,onEnterButtonClicked);
+    connect(m_enter_button, &QPushButton::clicked, this,&GroupItemWidget::onEnterButtonClicked);
 }
 
 void GroupItemWidget::setRemoveButton()
@@ -54,7 +54,7 @@ void GroupItemWidget::setRemoveButton()
     m_remove_button = new QPushButton("Remove");
     m_remove_button->setFixedSize(Sizes::WIDGET_IN_GROUP_ITEM_WIDGET);
     m_remove_button->setStyleSheet(Style::RED_BUTTON_HOR_LAYOUT);
-    connect(m_remove_button, &QPushButton::clicked, this,onRemoveButtonClicked);
+    connect(m_remove_button, &QPushButton::clicked, this,&GroupItemWidget::onRemoveButtonClicked);
 }
 
 void GroupItemWidget::setItemHorLayout()

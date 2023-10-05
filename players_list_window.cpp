@@ -19,7 +19,7 @@ PlayersListWindow::PlayersListWindow(std::shared_ptr<Group> group)
     initList();
     setButtonsHorLayout();
 
-    connect(m_header_label,EditableLabel::finishEditingSig,this,setGroupName);
+    connect(m_header_label,&EditableLabel::finishEditingSig,this,&PlayersListWindow::setGroupName);
 }
 
 void PlayersListWindow::initPlayersAmountLabel()
@@ -140,9 +140,9 @@ void PlayersListWindow::onCreateTeamsClicked()
 void PlayersListWindow::addItemToList(std::shared_ptr<Player> player)
 {
     PlayerItemWidget * player_item_widget = new PlayerItemWidget(player);
-    connect(player_item_widget,PlayerItemWidget::enterButtonClickedSignal,this,onEnterButton);
-    connect(player_item_widget,PlayerItemWidget::removeButtonClickedSignal,this,onRemoveButton);
-    connect(player_item_widget,PlayerItemWidget::playerNameChangedSignal,this,onPlayerNameChanged);
+    connect(player_item_widget,&PlayerItemWidget::enterButtonClickedSignal,this,&PlayersListWindow::onEnterButton);
+    connect(player_item_widget,&PlayerItemWidget::removeButtonClickedSignal,this,&PlayersListWindow::onRemoveButton);
+    connect(player_item_widget,&PlayerItemWidget::playerNameChangedSignal,this,&PlayersListWindow::onPlayerNameChanged);
 
     
 

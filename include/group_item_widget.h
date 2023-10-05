@@ -2,8 +2,13 @@
 #define FIRST_QT_APP_INCLUDE_GROUP_ITEM_WIDGET_H
 
 #include "group.hpp"
-#include "groups_list_window.h"
 #include "editable_label.h"
+
+#include <QWidget>
+#include <QLabel>
+#include <QPushButton>
+#include <QHBoxLayout>
+
 
 
 class GroupItemWidget : public QWidget
