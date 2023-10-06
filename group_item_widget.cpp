@@ -29,10 +29,9 @@ void GroupItemWidget::initNameLabel()
 {
     QString name = QString::fromStdString(m_group->getName());
     m_name_label = new EditableLabel;
-    m_name_label->setText(name);
-    m_name_label->setAlignment(Qt::AlignLeft);
-    m_name_label->setFont(Fonts::GROUP_ITEM_WIDGET_FONT);
     m_name_label->setMaxLength(MaxValues::ITEM_WIDGET_LABEL_NAME);
+    m_name_label->setText(name);
+    m_name_label->setFont(Fonts::GROUP_ITEM_WIDGET_FONT);
     connect(m_name_label,&EditableLabel::finishEditingSig, this, &GroupItemWidget::onChangeGroupName);
 }
 
@@ -42,6 +41,7 @@ void GroupItemWidget::initSizeLabel()
     QString size_wrapped = "(" + size + ")";
     m_size_label = new QLabel(size_wrapped);
     m_size_label->setFont(Fonts::GROUP_ITEM_WIDGET_FONT);
+
 }
 
 void GroupItemWidget::initEnterButton()
@@ -82,7 +82,6 @@ void GroupItemWidget::adjustButtonsSize()
     {
         if (button)
         {
-            button->setMaximumWidth(max_width);
             button->setMinimumWidth(max_width);
         }
     }
