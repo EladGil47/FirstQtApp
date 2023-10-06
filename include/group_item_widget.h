@@ -21,16 +21,17 @@ public:
 private:
 
 size_t m_group_index ; 
-void setGroupIndex(size_t group_index);
 void mouseDoubleClickEvent(QMouseEvent *event) override;
 
 
 
-void setNameLabel();
-void setSizeLabel();
-void setEnterButton();
+void initNameLabel();
+void initSizeLabel();
+void adjustButtonsSize();
+void initButtons();
+void initEnterButton();
 void initCreateTeamsButton();
-void setRemoveButton();
+void initRemoveButton();
 void setupLayout();
 
 std::shared_ptr<Group> m_group;
@@ -40,6 +41,10 @@ QLabel* m_size_label;
 QPushButton* m_enter_button;
 QPushButton* m_create_teams_button;
 QPushButton* m_remove_button;
+
+
+
+
 
 
 

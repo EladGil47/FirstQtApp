@@ -129,29 +129,27 @@ namespace Style
         ;
 
     const QString GREEN_BUTTON_HOR_LAYOUT =
-        "QPushButton {" + GREEN_COLOR + WHITE_TEXT_COLOR + "}"
-                                                           "QPushButton:hover {" +
-        HOVER_GREEN_COLOR + "}";
+        QtObjects::QPUSH_BUTTON + "{" + GREEN_COLOR + WHITE_TEXT_COLOR + "}" +
+        QtObjects::QPUSH_BUTTON + ":hover {" + HOVER_GREEN_COLOR + "}";
 
     const QString RED_BUTTON_HOR_LAYOUT =
-        "QPushButton {" + RED_COLOR + WHITE_TEXT_COLOR + "}"
-                                                         "QPushButton:hover {" +
-        HOVER_RED_COLOR + "}";
+        QtObjects::QPUSH_BUTTON + " {" + RED_COLOR + WHITE_TEXT_COLOR + "}" +
+        QtObjects::QPUSH_BUTTON + ":hover {" + HOVER_RED_COLOR + "}";
 
     const QString BLUE_BUTTON_HOR_LAYOUT =
-        "QPushButton {" + BLUE_COLOR + WHITE_TEXT_COLOR + "}"
-                                                          "QPushButton:hover {" +
-        HOVER_BLUE_COLOR + "}";
+        QtObjects::QPUSH_BUTTON + " {" + BLUE_COLOR + WHITE_TEXT_COLOR + "}" +
+        QtObjects::QPUSH_BUTTON + ":hover {" + HOVER_BLUE_COLOR + "}";
 
     const QString LIST = "QListWidget {"
                          "border: 1px solid black;"
-                        "background-color :"+  Colors::BROWN + "}"
-                         "QListWidget::item {"
-                         "   border: 1px solid black;"
-                         "}"
-                         "QListWidget::item:selected {"
-                         " background: rgba(0, 0, 255, 10%);"
-                         " } ";
+                         "background-color :" +
+                         Colors::BROWN + "}"
+                                         "QListWidget::item {"
+                                         "   border: 1px solid black;"
+                                         "}"
+                                         "QListWidget::item:selected {"
+                                         " background: rgba(0, 0, 255, 10%);"
+                                         " } ";
 
     const QString ORANGE_LIST = "QListWidget {"
                                 "background-color :"+  Colors::ORANGE + "}";

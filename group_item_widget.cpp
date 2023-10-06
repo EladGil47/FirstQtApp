@@ -4,26 +4,28 @@
 #include <QMouseEvent>
 
 GroupItemWidget::GroupItemWidget(std::shared_ptr<Group> group)
-    :  m_group(group) 
 {
     if (group)
     {
-        setGroupIndex(static_cast<size_t>(m_group->getId()));
-        setNameLabel();
-        setSizeLabel();
-        setEnterButton();
-        initCreateTeamsButton();
-        setRemoveButton();
+        m_group = group ;
+        m_group_index = static_cast<size_t>(m_group->getId());
+
+        initNameLabel();
+        initSizeLabel();
+        initButtons();
         setupLayout();
     }
 }
 
-void GroupItemWidget::setGroupIndex(size_t group_index)
+void GroupItemWidget::initButtons()
 {
-    m_group_index = group_index;
+    initEnterButton();
+    initCreateTeamsButton();
+    initRemoveButton();
+    adjustButtonsSize();
 }
 
-void GroupItemWidget::setNameLabel()
+void GroupItemWidget::initNameLabel()
 {
     QString name = QString::fromStdString(m_group->getName());
     m_name_label = new EditableLabel;
@@ -34,7 +36,7 @@ void GroupItemWidget::setNameLabel()
     connect(m_name_label,&EditableLabel::finishEditingSig, this, &GroupItemWidget::onChangeGroupName);
 }
 
-void GroupItemWidget::setSizeLabel()
+void GroupItemWidget::initSizeLabel()
 {
     QString size = QString::number(m_group->getNumOfPlayers());
     QString size_wrapped = "(" + size + ")";
@@ -42,10 +44,9 @@ void GroupItemWidget::setSizeLabel()
     m_size_label->setFont(Fonts::GROUP_ITEM_WIDGET_FONT);
 }
 
-void GroupItemWidget::setEnterButton()
+void GroupItemWidget::initEnterButton()
 {
     m_enter_button = new QPushButton("Enter");
-    m_enter_button->setFixedSize(Sizes::WIDGET_IN_GROUP_ITEM_WIDGET);
     m_enter_button->setStyleSheet(Style::BLUE_BUTTON_HOR_LAYOUT);
     connect(m_enter_button, &QPushButton::clicked, this,&GroupItemWidget::onEnterButtonClicked);
 }
@@ -53,29 +54,58 @@ void GroupItemWidget::setEnterButton()
 void GroupItemWidget::initCreateTeamsButton()
 {
     m_create_teams_button = new QPushButton("Create Teams");
-    m_create_teams_button->setFixedSize(Sizes::WIDGET_IN_GROUP_ITEM_WIDGET);
     m_create_teams_button->setStyleSheet(Style::GREEN_BUTTON_HOR_LAYOUT);
     connect(m_create_teams_button, &QPushButton::clicked, this,&GroupItemWidget::onCreateTeamsButtonClicked);
 }
 
-void GroupItemWidget::setRemoveButton()
+void GroupItemWidget::initRemoveButton()
 {
     m_remove_button = new QPushButton("Remove");
-    m_remove_button->setFixedSize(Sizes::WIDGET_IN_GROUP_ITEM_WIDGET);
     m_remove_button->setStyleSheet(Style::RED_BUTTON_HOR_LAYOUT);
     connect(m_remove_button, &QPushButton::clicked, this,&GroupItemWidget::onRemoveButtonClicked);
 }
 
+void GroupItemWidget::adjustButtonsSize()
+{
+    QList<QPushButton*> buttons = { m_enter_button, m_create_teams_button, m_remove_button };
+
+    // Find the maximum width among the buttons
+    int max_width = 0;
+    for (QPushButton* button : buttons)
+    {
+        if (button)
+            max_width = qMax(max_width, button->sizeHint().width());
+    }
+
+    // Set the maximum width to all buttons
+    for (QPushButton* button : buttons)
+    {
+        if (button)
+        {
+            button->setMaximumWidth(max_width);
+            button->setMinimumWidth(max_width);
+        }
+    }
+
+}
+
+
 void GroupItemWidget::setupLayout()
 {
-    QHBoxLayout *layout = new QHBoxLayout(this);
-    layout->addWidget(m_name_label);
-    layout->addWidget(m_size_label);
-    QSpacerItem *spacer = new QSpacerItem(0, 0, QSizePolicy::Expanding, QSizePolicy::Fixed);
-    layout->addSpacerItem(spacer);
-    layout->addWidget(m_enter_button);
-    layout->addWidget(m_create_teams_button);
-    layout->addWidget(m_remove_button);
+    if (m_name_label && m_size_label && m_enter_button && m_create_teams_button && m_remove_button)
+    {
+        QHBoxLayout *layout = new QHBoxLayout(this);
+        layout->addWidget(m_name_label);
+        layout->addWidget(m_size_label);
+        QSpacerItem *spacer = new QSpacerItem(0, 0, QSizePolicy::Expanding, QSizePolicy::Fixed);
+        layout->addSpacerItem(spacer);
+        layout->addWidget(m_enter_button);
+        layout->addWidget(m_create_teams_button);
+        layout->addWidget(m_remove_button);
+    }
+    else{
+        qFatal("Error: Failed to set GroupItemWidget.\nOne or more required pointers are not set.");
+    }
 }
 
 void GroupItemWidget::mouseDoubleClickEvent(QMouseEvent *event)
