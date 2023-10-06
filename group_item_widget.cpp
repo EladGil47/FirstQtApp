@@ -97,7 +97,7 @@ void GroupItemWidget::setupLayout()
         QHBoxLayout *layout = new QHBoxLayout(this);
         layout->addWidget(m_name_label);
         layout->addWidget(m_size_label);
-        QSpacerItem *spacer = new QSpacerItem(0, 0, QSizePolicy::Expanding, QSizePolicy::Fixed);
+        QSpacerItem *spacer = new QSpacerItem(0, 0, QSizePolicy::Expanding, QSizePolicy::Expanding);
         layout->addSpacerItem(spacer);
         layout->addWidget(m_enter_button);
         layout->addWidget(m_create_teams_button);

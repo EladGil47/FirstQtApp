@@ -54,6 +54,7 @@ set(PROJECT_SOURCES
 
 add_executable(${PROJECT_NAME} ${PROJECT_SOURCES})
 
+
 link_directories(${CMAKE_SOURCE_DIR}/${DEPS_LIBRARY})
 
 target_compile_options(${PROJECT_NAME} PRIVATE
@@ -67,4 +68,29 @@ target_link_libraries(${PROJECT_NAME} PRIVATE
 target_include_directories(${PROJECT_NAME} PUBLIC
     ${CMAKE_CURRENT_SOURCE_DIR}/include
     ${Qt6Widgets_INCLUDE_DIRS}
+)
+
+
+# CPACK SECTION 
+set_target_properties(${PROJECT_NAME} PROPERTIES WIN32_EXECUTABLE TRUE)
+
+
+# Set the CPack variables
+set(CPACK_PACKAGE_NAME "${PROJECT_NAME}")
+set(CPACK_PACKAGE_VERSION "${PROJECT_VERSION}")
+set(CPACK_GENERATOR "ZIP")  # Use ZIP generator for standalone package
+
+# Include the CPack module
+include(CPack)
+
+# Include the necessary files in the package
+install(TARGETS ${PROJECT_NAME}
+    RUNTIME DESTINATION .
+    LIBRARY DESTINATION lib
+    ARCHIVE DESTINATION lib
+)
+
+install(DIRECTORY "${PROJECT_SOURCE_DIR}/Data"
+    DESTINATION .
+    FILES_MATCHING PATTERN "*.*"
 )
