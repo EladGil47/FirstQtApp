@@ -45,14 +45,14 @@ public:
     {
         m_ok_button = new QPushButton("OK");
         m_ok_button->setStyleSheet(Style::GREEN_BUTTON_HOR_LAYOUT);
-        connect(m_ok_button, &QPushButton::clicked, this, onOkButtonClicked);
+        connect(m_ok_button, &QPushButton::clicked, this, &CreateTeamsWindow::onOkButtonClicked);
     }
 
     void initCancelButton()
     {
         m_cancel_button = new QPushButton("Cancel");
         m_cancel_button->setStyleSheet(Style::RED_BUTTON_HOR_LAYOUT);
-        connect(m_cancel_button, &QPushButton::clicked, this, onCancelButtonClicked);
+        connect(m_cancel_button, &QPushButton::clicked, this, &CreateTeamsWindow::onCancelButtonClicked);
     }
     
     void initCheckedPlayersList()
@@ -123,7 +123,7 @@ public:
     void addPlayerToCheckablePlayersList(std::shared_ptr<Player> player)
     {
         CheckablePlayerItemWidget *player_item_widget = new CheckablePlayerItemWidget(player);
-        connect(player_item_widget, CheckablePlayerItemWidget::checkBoxStateChangedSignal, this, onCheckBoxStateChanged);
+        connect(player_item_widget, &CheckablePlayerItemWidget::checkBoxStateChangedSignal, this, &CreateTeamsWindow::onCheckBoxStateChanged);
         m_checkable_players_list->addItemToList(player_item_widget);
     }
 
@@ -239,7 +239,7 @@ signals:
     void cancelButtonClickedSignal(size_t id);
     void okButtonClickedSignal(std::shared_ptr <PlayersCollection> players,size_t id);
 
-private slots:
+public slots:
 
     void onCancelButtonClicked()
     {

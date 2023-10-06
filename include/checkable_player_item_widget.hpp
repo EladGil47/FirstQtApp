@@ -70,7 +70,7 @@ private:
                            "   background-color: #4CAF50;"  // Green color when checked
                            "}"
             );
-        connect(m_is_selected_check_box, &QCheckBox::stateChanged, this, onCheckBoxStateChanged);
+        connect(m_is_selected_check_box, &QCheckBox::stateChanged, this, &CheckablePlayerItemWidget::onCheckBoxStateChanged);
     }
 
 private slots:

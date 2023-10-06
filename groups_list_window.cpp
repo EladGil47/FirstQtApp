@@ -79,10 +79,10 @@ void GroupsListWindow::setButtonsHorLayout()
 void GroupsListWindow::addGroupItemToList(std::shared_ptr<Group> group)
 {   
     GroupItemWidget * group_item_widget = new GroupItemWidget(group);
-    connect(group_item_widget,GroupItemWidget::enterButtonClickedSignal,this,onEnterGroupButton);
-    connect(group_item_widget,GroupItemWidget::createTeamsButtonClickedSignal,this,onCreateTeamsButton);
-    connect(group_item_widget,GroupItemWidget::removeButtonClickedSignal,this,onRemoveGroupButton);
-    connect(group_item_widget,GroupItemWidget::groupNameChangedSignal,this,changeGroupName);
+    connect(group_item_widget,&GroupItemWidget::enterButtonClickedSignal,this,&GroupsListWindow::onEnterGroupButton);
+    connect(group_item_widget,&GroupItemWidget::removeButtonClickedSignal,this,&GroupsListWindow::onRemoveGroupButton);
+    connect(group_item_widget,&GroupItemWidget::createTeamsButtonClickedSignal,this,&GroupsListWindow::onCreateTeamsButton);
+    connect(group_item_widget,&GroupItemWidget::groupNameChangedSignal,this,&GroupsListWindow::changeGroupName);
 
     QListWidgetItem *item = new QListWidgetItem(m_list_list_widget);
     item->setSizeHint(group_item_widget->sizeHint());

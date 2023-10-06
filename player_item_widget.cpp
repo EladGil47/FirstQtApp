@@ -14,7 +14,7 @@ PlayerItemWidget::PlayerItemWidget(std::shared_ptr<Player> player)
     initRemoveButton();
     setupLayout();
 
-    connect(m_editable_name_label, EditableLabel::finishEditingSig, this, onChangePlayerName);
+    connect(m_editable_name_label, &EditableLabel::finishEditingSig, this, &PlayerItemWidget::onChangePlayerName);
 }
 
 void PlayerItemWidget::initEnterButton()
@@ -22,7 +22,7 @@ void PlayerItemWidget::initEnterButton()
     m_enter_button = new QPushButton("Enter");
     m_enter_button->setFixedSize(Sizes::WIDGET_IN_PLAYER_ITEM_WIDGET);
     m_enter_button->setStyleSheet(Style::BLUE_BUTTON_HOR_LAYOUT);
-    connect(m_enter_button, &QPushButton::clicked, this, onEnterButtonClicked);
+    connect(m_enter_button, &QPushButton::clicked, this, &PlayerItemWidget::onEnterButtonClicked);
 }
 
 void PlayerItemWidget::initRemoveButton()
@@ -30,7 +30,7 @@ void PlayerItemWidget::initRemoveButton()
     m_remove_button = new QPushButton("Remove");
     m_remove_button->setFixedSize(Sizes::WIDGET_IN_PLAYER_ITEM_WIDGET);
     m_remove_button->setStyleSheet(Style::RED_BUTTON_HOR_LAYOUT);
-    connect(m_remove_button, &QPushButton::clicked, this, onRemoveButtonClicked);
+    connect(m_remove_button, &QPushButton::clicked, this, &PlayerItemWidget::onRemoveButtonClicked);
 }
 
 void PlayerItemWidget::setupLayout()
