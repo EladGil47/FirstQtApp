@@ -76,6 +76,12 @@ public:
         m_list->setItemWidget(item, custom_item);
     }
 
+    template <typename T>
+    void addWidgetAboveList(T *widget,Qt::Alignment allignment)
+    {
+        widget->setFont(Fonts::LIST_LABEL_FONT);
+        m_top_labels_layout->addWidget(widget);
+    }
 
 private:
     QVBoxLayout *m_labeled_list_layout;

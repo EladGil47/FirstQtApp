@@ -14,6 +14,13 @@
 
 #include "labeled_list_widget.hpp"
 
+#include <random>
+#include <set>
+
+#include <QMessageBox>
+
+
+
 class CreateTeamsWindow : public QWidget
 {
     Q_OBJECT
@@ -23,14 +30,16 @@ public:
     {
         if (group)
         {
-        m_group = group;
-        m_selected_players = std::make_shared<PlayersCollection>();
+            m_group = group;
+            m_selected_players = std::make_shared<PlayersCollection>();
+            m_max_selected_players_amount = group->getTeamsAmount() * group->getPlayersInTeamAmount();
 
-        initHeaderLabel();
-        initListsLayout();
-        initButtonsHorLayout();
 
-        setupLayout();
+            initHeaderLabel();
+            initListsLayout();
+            initButtonsHorLayout();
+
+            setupLayout();
         }
     }
 
@@ -70,17 +79,42 @@ public:
     {
         m_checkable_players_list = new LabeledListWidget();
         m_checkable_players_list->setListColor(Style::LIST);
+        
         QLabel *m_list_label = new QLabel("Checked players :");
         m_checkable_players_list->addLabelAboveList(m_list_label, Qt::AlignLeft);
-        m_max_selected_players_amount = m_group->getTeamsAmount() * m_group->getPlayersInTeamAmount();
+        
         m_selected_players_amount_label = new QLabel(QString::number(m_selected_players_amount));
         m_checkable_players_list->addLabelAboveList(m_selected_players_amount_label, Qt::AlignLeft);
+        
         QLabel *m_slash_label = new QLabel("/");
         m_checkable_players_list->addLabelAboveList(m_slash_label, Qt::AlignLeft);
+        
         QLabel * m_max_selected_players_amount_label = new QLabel(QString::number(m_max_selected_players_amount));
         m_checkable_players_list->addLabelAboveList(m_max_selected_players_amount_label, Qt::AlignLeft);
+        
         QSpacerItem *spacer = new QSpacerItem(0, 0, QSizePolicy::Expanding, QSizePolicy::Fixed);
         m_checkable_players_list->addSpacerAboveList(spacer);
+
+        
+        QLabel *random_label = new QLabel("Random :");
+        m_checkable_players_list->addLabelAboveList(random_label,Qt::AlignRight);
+
+        m_random_select_check_box = new QCheckBox;
+        m_random_select_check_box->setStyleSheet(
+         "QCheckBox::indicator {"
+                           "    border-color: black;"
+                           "    border-radius: 12px;"    // Make it circular
+                           "    background-color: white;"
+                           "    width: 24px;"
+                           "    height: 24px;"
+                           "}"
+                           "QCheckBox::indicator:checked {"
+                           "   background-color: #4CAF50;"  // Green color when checked
+                           "}");
+        connect(m_random_select_check_box, &QCheckBox::stateChanged, this, &CreateTeamsWindow::onRandomSelectCheckBoxStateChanged);
+        m_checkable_players_list->addWidgetAboveList(m_random_select_check_box,Qt::AlignRight);
+
+
         addAllPlayersToCheckablePlayersList();
     }
 
@@ -156,20 +190,20 @@ private:
     QPushButton *m_cancel_button;
     std::shared_ptr<Group> m_group;
     std::shared_ptr<PlayersCollection> m_selected_players ;
+    QCheckBox * m_random_select_check_box;
 
     void initSelectMorePlayersDialog()
     {
-        QDialog *dialog = new QDialog;
-        dialog->setWindowTitle("Warning");
-        dialog->setStyleSheet(Style::OFFWHITE_BACKGROUND);
-        dialog->setFixedSize(250, 100);
-        QVBoxLayout *layout = new QVBoxLayout;
-        QLabel *label = new QLabel("Please select more players");
-        label->setFont(Fonts::PLAYER_ITEM_WIDGET_FONT);
-        label->setAlignment(Qt::AlignCenter);
-        layout->addWidget(label);
-        dialog->setLayout(layout);
-        dialog->exec();
+        QMessageBox messageBox;
+        messageBox.setWindowTitle("Warning");
+        messageBox.setIcon(QMessageBox::Warning);
+        messageBox.setStyleSheet(Style::OFFWHITE_BACKGROUND);
+        messageBox.setFont(Fonts::PLAYER_ITEM_WIDGET_FONT);
+        messageBox.setText("Please select more players");
+        messageBox.setStandardButtons(QMessageBox::Ok);
+        messageBox.setDefaultButton(QMessageBox::Ok);
+
+        messageBox.exec();
     }
 
     void disableAllUnchecked()
@@ -190,6 +224,19 @@ private:
                         widget->setIsCheckBoxEnabled(false);
                     }
                 }
+            }
+        }
+    }
+
+    void setCheckableItemWidgetCheckBox(size_t index,Qt::CheckState state)
+    {
+        QListWidgetItem *item = m_checkable_players_list->m_list->item(index); // Replace 'row' with the row number you want to retrieve
+        if (item)
+        {
+            CheckablePlayerItemWidget *widget = qobject_cast<CheckablePlayerItemWidget *>(m_checkable_players_list->m_list->itemWidget(item));
+            if (widget)
+            {
+                    widget->setCheckState(state);
             }
         }
     }
@@ -258,7 +305,6 @@ public slots:
         }
     }
 
-
     void onCheckBoxStateChanged(size_t id, int state)
     {
         switch (state)
@@ -269,6 +315,9 @@ public slots:
             size_t index = m_selected_players->getIndexById(id);
             m_selected_players->deleteItem(index);
             removePlayerFromCheckedPlayerList(id);
+            m_random_select_check_box->setCheckState(Qt::CheckState::Unchecked);
+
+            
             break;
         }
         case Qt::CheckState::Checked:
@@ -283,10 +332,6 @@ public slots:
         default:
             break;
         }
-        // FOR DEBUG
-        // m_selected_players->display();
-        //
-
         m_selected_players_amount_label->setText(QString::number(m_selected_players_amount));
         if (m_selected_players_amount == m_max_selected_players_amount)
         {
@@ -300,6 +345,56 @@ public slots:
             }
         }
     }
+
+    void onRandomSelectCheckBoxStateChanged(int state)
+    {
+        switch (state)
+        {
+        case Qt::CheckState::Unchecked:
+        {
+            if (m_selected_players_amount == m_max_selected_players_amount)
+            {
+                for (std::shared_ptr<Player> player : m_selected_players->getCollection())
+                {
+                    setCheckableItemWidgetCheckBox(player->getId(), Qt::CheckState::Unchecked);
+                }
+            }
+            break;
+        }
+        case Qt::CheckState::Checked:
+        {
+            std::random_device rd;
+            std::mt19937 gen(rd());
+            std::uniform_int_distribution<int> distribution(0, m_group->getNumOfPlayers() - 1);
+            std::set<int> generatedNumbers;
+            for (std::shared_ptr<Player> player : m_selected_players->getCollection())
+            {
+                generatedNumbers.insert(player->getId());
+            }
+            uint32_t amount_of_players_to_add = m_max_selected_players_amount - m_selected_players_amount;
+            for (uint32_t i = 0; i <amount_of_players_to_add ; ++i)
+            {
+                int randomInt;
+                do
+                {
+                    randomInt = distribution(gen);
+                    setCheckableItemWidgetCheckBox(randomInt,Qt::CheckState::Checked);
+
+                } while (generatedNumbers.count(randomInt) > 0);
+
+                generatedNumbers.insert(randomInt);
+            }
+            break;
+        }
+        default:
+            break;
+        }
+    }
 };
 
 #endif // FIRST_QT_APP_INCLUDE_CREATE_TEAMS_WINDOW_H
+
+//// std::set<int> generatedNumbers;
+//random
+
+ 

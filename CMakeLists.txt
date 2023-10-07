@@ -70,11 +70,7 @@ target_include_directories(${PROJECT_NAME} PUBLIC
     ${Qt6Widgets_INCLUDE_DIRS}
 )
 
-
 # CPACK SECTION 
-set_target_properties(${PROJECT_NAME} PROPERTIES WIN32_EXECUTABLE TRUE)
-
-
 # Set the CPack variables
 set(CPACK_PACKAGE_NAME "${PROJECT_NAME}")
 set(CPACK_PACKAGE_VERSION "${PROJECT_VERSION}")

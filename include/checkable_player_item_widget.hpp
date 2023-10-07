@@ -26,6 +26,11 @@ public:
         m_is_selected_check_box->setEnabled(state);
     }
 
+    void setCheckState(Qt::CheckState state)
+    {
+        m_is_selected_check_box->setCheckState(state);
+    }
+
     Qt::CheckState getCheckBoxState()
     {
         return m_is_selected_check_box->checkState();
