@@ -115,19 +115,6 @@ void GroupsListWindow::onCreateNewGroupButton()
         addGroupItemToList(newGroup);
         setGroupsAmountLabelText();
     }
-
-    // bool ok;
-    // QString userInput = QInputDialog::getText(this, "Create new group", "Enter group name:", QLineEdit::Normal, "", &ok);
-    // if (ok && !userInput.isEmpty()) {
-    //     // User entered something and pressed OK
-    //     Group::Config group_config;
-    //     group_config.id = static_cast<uint16_t>(m_groups_collection->getSize());
-    //     group_config.name = userInput.toStdString();
-    //     std::shared_ptr<Group> new_group = std::make_shared<Group>(group_config);
-    //     m_groups_collection->addItem(new_group);
-    //     addGroupItemToList(new_group);
-    //     setGroupsAmountLabelText();
-    // }
 }
 
 void GroupsListWindow::onRemoveGroupButton(size_t id)
