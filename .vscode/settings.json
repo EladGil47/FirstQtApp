@@ -78,6 +78,7 @@
         "qpushbutton": "cpp",
         "qcheckbox": "cpp",
         "qfont": "cpp",
-        "qvboxlayout": "cpp"
+        "qvboxlayout": "cpp",
+        "qapplication": "cpp"
     }
 }

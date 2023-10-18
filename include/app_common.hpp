@@ -20,9 +20,6 @@ enum class COLOR
     GREY
 };
 
-
-
-
 namespace Colors
 {
     const QString YELLOW = "yellow";

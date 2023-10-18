@@ -3,10 +3,7 @@
 #include "player_item_widget.h"
 
 #include <QInputDialog>
-#include <QDebug>
 #include "app_common.hpp"
-
-
 
 PlayersListWindow::PlayersListWindow(std::shared_ptr<Group> group)
     :  m_group(group)
@@ -33,12 +30,12 @@ void PlayersListWindow::initPlayersAmountLabel()
     QSpacerItem *spacer = new QSpacerItem(0, 0,QSizePolicy::Expanding, QSizePolicy::Fixed);
     m_list_label_layout->addSpacerItem(spacer);
 }
+
 void PlayersListWindow::initPlayersAmountLabelText()
 {
     QString size = QString::number(m_group->getNumOfPlayers());
     m_players_amount_label->setText(size);
 }
-
 
 void PlayersListWindow::onPlayerNameChanged(uint16_t id ,const std::string & name)
 {
@@ -175,4 +172,3 @@ void PlayersListWindow::onGoBackButton()
 {
     emit onGoBackButtonClickedSignal();
 }
-

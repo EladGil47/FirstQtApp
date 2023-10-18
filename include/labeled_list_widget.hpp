@@ -17,7 +17,6 @@ class LabeledListWidget : public QWidget
 public:
     QListWidget *m_list;
 
-
     LabeledListWidget() 
     {
         initLabeledListLayout();
@@ -67,7 +66,6 @@ public:
     }
 // UNUSED
 
-
     template <typename T>
     void addItemToList(const T &custom_item)
     {
@@ -89,8 +87,7 @@ private:
     // QListWidget *m_list;
     QHBoxLayout *m_top_labels_layout;
     QHBoxLayout *m_bottom_labels_layout;
-
-
+    
     void initLabeledListLayout()
     {
         m_labeled_list_layout = new QVBoxLayout(this);

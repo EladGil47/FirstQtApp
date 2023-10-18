@@ -9,8 +9,6 @@
 #include <QPushButton>
 #include <QHBoxLayout>
 
-
-
 class GroupItemWidget : public QWidget
 {
     Q_OBJECT

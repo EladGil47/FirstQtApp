@@ -28,7 +28,6 @@ private:
     PlayersListWindow *m_players_list_window;
     CreateTeamsWindow *m_create_teams_window;
     DisplayTeamsWindow *m_display_teams_window;
-    // std::shared_ptr<Group> m_group;
     std::shared_ptr<GroupsCollection> m_groups_collection;
 
     void setWindow();

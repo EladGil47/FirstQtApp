@@ -18,9 +18,6 @@
 #include <set>
 
 #include <QMessageBox>
-
-
-
 class CreateTeamsWindow : public QWidget
 {
     Q_OBJECT
@@ -74,7 +71,6 @@ public:
 
     }
 
-
     void initCheckablePlayersList()
     {
         m_checkable_players_list = new LabeledListWidget();
@@ -117,8 +113,6 @@ public:
 
         addAllPlayersToCheckablePlayersList();
     }
-
-
 
     void setupLayout()
     {
@@ -175,6 +169,7 @@ public:
             addPlayerToCheckablePlayersList(player);
         }
     }
+
 private:
     QLabel *m_header_label ;
     QHBoxLayout *m_lists_layout;
@@ -281,6 +276,14 @@ private:
             }
         }
     }
+    
+    void uncheckAll()
+    {
+        for (std::shared_ptr<Player> player : m_selected_players->getCollection())
+        {
+            setCheckableItemWidgetCheckBox(player->getId(), Qt::CheckState::Unchecked);
+        }
+    }
 
 signals:
     void cancelButtonClickedSignal(size_t id);
@@ -346,6 +349,7 @@ public slots:
         }
     }
 
+
     void onRandomSelectCheckBoxStateChanged(int state)
     {
         switch (state)
@@ -354,10 +358,7 @@ public slots:
         {
             if (m_selected_players_amount == m_max_selected_players_amount)
             {
-                for (std::shared_ptr<Player> player : m_selected_players->getCollection())
-                {
-                    setCheckableItemWidgetCheckBox(player->getId(), Qt::CheckState::Unchecked);
-                }
+                uncheckAll();
             }
             break;
         }
@@ -392,9 +393,4 @@ public slots:
     }
 };
 
-#endif // FIRST_QT_APP_INCLUDE_CREATE_TEAMS_WINDOW_H
-
-//// std::set<int> generatedNumbers;
-//random
-
- 
+#endif // FIRST_QT_APP_INCLUDE_CREATE_TEAMS_WINDOW_H 
