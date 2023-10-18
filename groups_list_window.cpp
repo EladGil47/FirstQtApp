@@ -2,6 +2,8 @@
 
 #include <QInputDialog>
 #include "group_item_widget.h"
+#include "group_input_dialog.hpp"
+
 #include "app_common.hpp"
 
 GroupsListWindow::GroupsListWindow(std::shared_ptr<GroupsCollection> groups_collection)
@@ -89,22 +91,43 @@ void GroupsListWindow::addGroupItemToList(std::shared_ptr<Group> group)
     m_list_list_widget->setItemWidget(item, group_item_widget);
 }
 
-// Slots : 
+// Slots :
 
 void GroupsListWindow::onCreateNewGroupButton()
 {
-    bool ok;
-    QString userInput = QInputDialog::getText(this, "Create new group", "Enter group name:", QLineEdit::Normal, "", &ok);
-    if (ok && !userInput.isEmpty()) {
-        // User entered something and pressed OK
+    GroupInputDialog group_input_dialog(this);
+    group_input_dialog.setStyleSheet(Settings::DIALOGS_COLOR);
+    if (group_input_dialog.exec() == QDialog::Accepted)
+    {
+        QString groupName = group_input_dialog.getGroupName();
+        int teams = group_input_dialog.getTeamsAmount();
+        int players_in_team = group_input_dialog.getPlayersInTeamAmount();
+
         Group::Config group_config;
         group_config.id = static_cast<uint16_t>(m_groups_collection->getSize());
-        group_config.name = userInput.toStdString();
-        std::shared_ptr<Group> new_group = std::make_shared<Group>(group_config);
-        m_groups_collection->addItem(new_group);
-        addGroupItemToList(new_group);
+        group_config.name = groupName.toStdString();
+        group_config.teams_amount = static_cast<uint16_t>(teams);
+        group_config.players_in_team_amount = static_cast<uint16_t>(players_in_team);
+
+
+        std::shared_ptr<Group> newGroup = std::make_shared<Group>(group_config);
+        m_groups_collection->addItem(newGroup);
+        addGroupItemToList(newGroup);
         setGroupsAmountLabelText();
-    } 
+    }
+
+    // bool ok;
+    // QString userInput = QInputDialog::getText(this, "Create new group", "Enter group name:", QLineEdit::Normal, "", &ok);
+    // if (ok && !userInput.isEmpty()) {
+    //     // User entered something and pressed OK
+    //     Group::Config group_config;
+    //     group_config.id = static_cast<uint16_t>(m_groups_collection->getSize());
+    //     group_config.name = userInput.toStdString();
+    //     std::shared_ptr<Group> new_group = std::make_shared<Group>(group_config);
+    //     m_groups_collection->addItem(new_group);
+    //     addGroupItemToList(new_group);
+    //     setGroupsAmountLabelText();
+    // }
 }
 
 void GroupsListWindow::onRemoveGroupButton(size_t id)

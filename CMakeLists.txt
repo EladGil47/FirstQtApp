@@ -25,33 +25,39 @@ if(TARGET Qt${QT_VERSION_MAJOR}::Widgets)
     message(STATUS "Qt found at: ${Qt${QT_VERSION_MAJOR}_DIR}")
 endif()
 
-set(PROJECT_SOURCES
-    main.cpp
-    groups_list_window.cpp
-    players_list_window.cpp
-    base_list_manager_window.cpp
-    group_item_widget.cpp
-    player_item_widget.cpp
-    editable_label.cpp
-    windows_manager.cpp
-    team_player_item_widget.cpp
+# set(PROJECT_SOURCES
+#     main.cpp
+#     groups_list_window.cpp
+#     players_list_window.cpp
+#     base_list_manager_window.cpp
+#     group_item_widget.cpp
+#     player_item_widget.cpp
+#     editable_label.cpp
+#     windows_manager.cpp
+#     team_player_item_widget.cpp
 
-    include/groups_list_window.h
-    include/players_list_window.h
-    include/base_list_manager_window.h
-    include/group_item_widget.h
-    include/player_item_widget.h
-    include/editable_label.h
-    include/windows_manager.h
-    include/app_common.hpp
+#     include/groups_list_window.h
+#     include/players_list_window.h
+#     include/base_list_manager_window.h
+#     include/group_item_widget.h
+#     include/player_item_widget.h
+#     include/editable_label.h
+#     include/windows_manager.h
+#     include/app_common.hpp
 
-    include/create_teams_window.h
-    include/base_player_item_widget.hpp
-    include/checkable_player_item_widget.hpp
-    include/display_teams_window.hpp
-    include/labeled_list_widget.hpp
-    include/team_player_item_widget.hpp
-    include/player_input_dialog.hpp
+#     include/create_teams_window.h
+#     include/base_player_item_widget.hpp
+#     include/checkable_player_item_widget.hpp
+#     include/display_teams_window.hpp
+#     include/labeled_list_widget.hpp
+#     include/team_player_item_widget.hpp
+#     include/player_input_dialog.hpp
+#     include/group_input_dialog.hpp
+# )
+file(GLOB PROJECT_SOURCES
+    *.cpp
+    include/*.h
+    include/*.hpp
 )
 
 add_executable(${PROJECT_NAME} ${PROJECT_SOURCES})

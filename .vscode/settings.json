@@ -80,6 +80,8 @@
         "qfont": "cpp",
         "qvboxlayout": "cpp",
         "qapplication": "cpp",
-        "qinputdialog": "cpp"
+        "qinputdialog": "cpp",
+        "qdoublespinbox": "cpp",
+        "qdialogbuttonbox": "cpp"
     }
 }

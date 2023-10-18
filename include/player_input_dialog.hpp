@@ -1,3 +1,6 @@
+#ifndef FIRST_QT_APP_INCLUDE_PLAYER_INPUT_DIALOG_HPP
+#define FIRST_QT_APP_INCLUDE_PLAYER_INPUT_DIALOG_HPP
+
 #include <QDialog>
 #include <QFormLayout>
 #include <QLineEdit>
@@ -43,3 +46,5 @@ private:
     QLineEdit* nameLineEdit;
     QDoubleSpinBox* rateSpinBox;
 };
+
+#endif // FIRST_QT_APP_INCLUDE_PLAYER_INPUT_DIALOG_HPP
