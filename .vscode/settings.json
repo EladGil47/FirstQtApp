@@ -79,6 +79,7 @@
         "qcheckbox": "cpp",
         "qfont": "cpp",
         "qvboxlayout": "cpp",
-        "qapplication": "cpp"
+        "qapplication": "cpp",
+        "qinputdialog": "cpp"
     }
 }

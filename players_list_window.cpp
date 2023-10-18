@@ -2,6 +2,8 @@
 
 #include "player_item_widget.h"
 
+#include "player_input_dialog.hpp"
+
 #include <QInputDialog>
 #include "app_common.hpp"
 
@@ -107,26 +109,23 @@ void PlayersListWindow::addButtonToButtonsHorLayout(QPushButton * button)
 
 void PlayersListWindow::onCreateNewPlayerButton()
 {
-    Player::Config config;
+    PlayerInputDialog dialog;
+    dialog.setStyleSheet(Settings::DIALOGS_COLOR);
+    if (dialog.exec() == QDialog::Accepted)
+    {
+        QString name = dialog.getPlayerName();
+        double rate = dialog.getPlayerRate();
 
-    bool name_user_input_is_ok;
-    QString name_user_input = QInputDialog::getText(this, "Create new player", "Enter player name:", QLineEdit::Normal, "", &name_user_input_is_ok);
-    if (name_user_input_is_ok && !name_user_input.isEmpty()) {
-        config.name = name_user_input.toStdString();
+        Player::Config config;
+        config.name = name.toStdString();
+        config.rate = rate;
+        config.id = static_cast<uint16_t>(m_group->getNumOfPlayers());
 
-        bool rate_user_input_is_ok;
-        double  rate_user_input = QInputDialog::getDouble(this, "Create new player", "Enter player rate:",0,0,7,1,&rate_user_input_is_ok);
-        if(rate_user_input_is_ok && rate_user_input >=0)
-        {
-            config.rate = rate_user_input;
-
-            config.id = static_cast<uint16_t>(m_group->getNumOfPlayers());
-            std::shared_ptr<Player> new_player = std::make_shared<Player>(config);
-            m_group->getPlayersCollectionRef().addItem(new_player);
-            addItemToList(new_player);
-            initPlayersAmountLabelText();
-        }
-    } 
+        std::shared_ptr<Player> new_player = std::make_shared<Player>(config);
+        m_group->getPlayersCollectionRef().addItem(new_player);
+        addItemToList(new_player);
+        initPlayersAmountLabelText();
+    }
 }
 
 void PlayersListWindow::onCreateTeamsClicked()
@@ -140,8 +139,6 @@ void PlayersListWindow::addItemToList(std::shared_ptr<Player> player)
     connect(player_item_widget,&PlayerItemWidget::enterButtonClickedSignal,this,&PlayersListWindow::onEnterButton);
     connect(player_item_widget,&PlayerItemWidget::removeButtonClickedSignal,this,&PlayersListWindow::onRemoveButton);
     connect(player_item_widget,&PlayerItemWidget::playerNameChangedSignal,this,&PlayersListWindow::onPlayerNameChanged);
-
-    
 
     QListWidgetItem *item = new QListWidgetItem(m_list_list_widget);
     item->setSizeHint(player_item_widget->sizeHint());

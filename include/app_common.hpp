@@ -60,6 +60,7 @@ namespace QtObjects
 {
     const QString QMAIN_WINDOW = "QMainWindow";
     const QString QPUSH_BUTTON = "QPushButton";
+    const QString QDIALOG = "QDialog";
 }
 
 namespace Settings
@@ -67,7 +68,9 @@ namespace Settings
     const QString WINDOW_TITLE_TEXT = "Kohot";
     const int WINDOW_WIDTH = 1200;
     const int WINDOW_HEIGHT = 640;
-    const QString BACKGROUND_COLOR = QtObjects::QMAIN_WINDOW + "{" + CssKeys::BACKGROUND_COLOR + Colors::OFFWHITE + "}";
+    const QString WINDOWS_COLOR = QtObjects::QMAIN_WINDOW + "{" + CssKeys::BACKGROUND_COLOR + Colors::OFFWHITE + "}";
+    const QString DIALOGS_COLOR = QtObjects::QDIALOG + "{" + CssKeys::BACKGROUND_COLOR + Colors::OFFWHITE + "}";
+
 }
 
 namespace Common

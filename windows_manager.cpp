@@ -39,7 +39,7 @@ void WindowsManager::setWindow()
     resize(window_size);
     setMinimumSize(window_size);
     setWindowTitle(Settings::WINDOW_TITLE_TEXT);
-    setStyleSheet(Settings::BACKGROUND_COLOR);
+    setStyleSheet(Settings::WINDOWS_COLOR);
     moveWindowToCenter();
 }
 

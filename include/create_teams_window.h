@@ -187,18 +187,17 @@ private:
     std::shared_ptr<PlayersCollection> m_selected_players ;
     QCheckBox * m_random_select_check_box;
 
-    void initSelectMorePlayersDialog()
+    void initSelectMorePlayersMessageBox()
     {
-        QMessageBox messageBox;
-        messageBox.setWindowTitle("Warning");
-        messageBox.setIcon(QMessageBox::Warning);
-        messageBox.setStyleSheet(Style::OFFWHITE_BACKGROUND);
-        messageBox.setFont(Fonts::PLAYER_ITEM_WIDGET_FONT);
-        messageBox.setText("Please select more players");
-        messageBox.setStandardButtons(QMessageBox::Ok);
-        messageBox.setDefaultButton(QMessageBox::Ok);
+        QMessageBox message_box;
+        message_box.setWindowTitle("Warning");
+        message_box.setIcon(QMessageBox::Warning);
+        message_box.setStyleSheet(Style::OFFWHITE_BACKGROUND);
+        message_box.setFont(Fonts::PLAYER_ITEM_WIDGET_FONT);
+        message_box.setText("Please select more players");
+        message_box.setStandardButtons(QMessageBox::Ok);
 
-        messageBox.exec();
+        message_box.exec();
     }
 
     void disableAllUnchecked()
@@ -304,7 +303,7 @@ public slots:
         }
         else
         {
-            initSelectMorePlayersDialog();
+            initSelectMorePlayersMessageBox();
         }
     }
 

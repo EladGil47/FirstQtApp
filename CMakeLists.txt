@@ -51,6 +51,7 @@ set(PROJECT_SOURCES
     include/display_teams_window.hpp
     include/labeled_list_widget.hpp
     include/team_player_item_widget.hpp
+    include/player_input_dialog.hpp
 )
 
 add_executable(${PROJECT_NAME} ${PROJECT_SOURCES})
