@@ -27,21 +27,6 @@ public:
         m_top_labels_layout->addSpacerItem(spacer);
     }
 
-    void addLabelAboveList(const QString &text,Qt::Alignment allignment)
-    {
-        QLabel *label = new QLabel(text);
-        label->setFont(Fonts::LIST_LABEL_FONT);
-        label->setAlignment(allignment);
-        m_top_labels_layout->addWidget(label);
-    }
-
-    void addLabelAboveList(QLabel *label,Qt::Alignment allignment)
-    {
-        label->setFont(Fonts::LIST_LABEL_FONT);
-        label->setAlignment(allignment);
-        m_top_labels_layout->addWidget(label);
-    }
-
     void addLabelbeneathList(const QString &text,Qt::Alignment allignment)
     {
         QLabel *label = new QLabel(text);
@@ -75,7 +60,7 @@ public:
     }
 
     template <typename T>
-    void addWidgetAboveList(T *widget,Qt::Alignment allignment)
+    void addWidgetAboveList(T *widget)
     {
         widget->setFont(Fonts::LIST_LABEL_FONT);
         m_top_labels_layout->addWidget(widget);

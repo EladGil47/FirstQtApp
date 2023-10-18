@@ -62,7 +62,9 @@ void initTeamsHorLayout()
     {
         LabeledListWidget *labeled_list = new LabeledListWidget();
         QString team_number = QString::number(team_index + 1);
-        labeled_list->addLabelAboveList(team_text + " " + team_number ,Qt::AlignCenter);
+        QLabel * team_label = new QLabel(team_text + " " + team_number);
+        team_label->setAlignment(Qt::AlignCenter);
+        labeled_list->addWidgetAboveList(team_label);
         labeled_list->setListColor(list_styles.getColoredListStyle(team_index));
 
         for (uint16_t player_index = 0; player_index < players_in_teams_amount; player_index++)

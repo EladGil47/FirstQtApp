@@ -66,7 +66,7 @@ public:
         m_checked_players_list = new LabeledListWidget();
         m_checked_players_list->setListColor(Style::LIST);
         QLabel *m_list_label = new QLabel("Coming players :");
-        m_checked_players_list->addLabelAboveList(m_list_label, Qt::AlignLeft);
+        m_checked_players_list->addWidgetAboveList(m_list_label);
 
 
     }
@@ -77,23 +77,23 @@ public:
         m_checkable_players_list->setListColor(Style::LIST);
         
         QLabel *m_list_label = new QLabel("Checked players :");
-        m_checkable_players_list->addLabelAboveList(m_list_label, Qt::AlignLeft);
+        m_checkable_players_list->addWidgetAboveList(m_list_label);
         
         m_selected_players_amount_label = new QLabel(QString::number(m_selected_players_amount));
-        m_checkable_players_list->addLabelAboveList(m_selected_players_amount_label, Qt::AlignLeft);
+        m_checkable_players_list->addWidgetAboveList(m_selected_players_amount_label);
         
         QLabel *m_slash_label = new QLabel("/");
-        m_checkable_players_list->addLabelAboveList(m_slash_label, Qt::AlignLeft);
+        m_checkable_players_list->addWidgetAboveList(m_slash_label);
         
         QLabel * m_max_selected_players_amount_label = new QLabel(QString::number(m_max_selected_players_amount));
-        m_checkable_players_list->addLabelAboveList(m_max_selected_players_amount_label, Qt::AlignLeft);
+        m_checkable_players_list->addWidgetAboveList(m_max_selected_players_amount_label);
         
         QSpacerItem *spacer = new QSpacerItem(0, 0, QSizePolicy::Expanding, QSizePolicy::Fixed);
         m_checkable_players_list->addSpacerAboveList(spacer);
 
         
         QLabel *random_label = new QLabel("Random :");
-        m_checkable_players_list->addLabelAboveList(random_label,Qt::AlignRight);
+        m_checkable_players_list->addWidgetAboveList(random_label);
 
         m_random_select_check_box = new QCheckBox;
         m_random_select_check_box->setStyleSheet(
@@ -108,7 +108,7 @@ public:
                            "   background-color: #4CAF50;"  // Green color when checked
                            "}");
         connect(m_random_select_check_box, &QCheckBox::stateChanged, this, &CreateTeamsWindow::onRandomSelectCheckBoxStateChanged);
-        m_checkable_players_list->addWidgetAboveList(m_random_select_check_box,Qt::AlignRight);
+        m_checkable_players_list->addWidgetAboveList(m_random_select_check_box);
 
 
         addAllPlayersToCheckablePlayersList();
