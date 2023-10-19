@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 3.2)
-project(KohotQtApp VERSION 0.1 LANGUAGES CXX)
+project(KohotQtApp VERSION 1.0.0 LANGUAGES CXX)
 set(CMAKE_CXX_STANDARD 17)
 
 include(FetchContent)
@@ -94,6 +94,7 @@ install(TARGETS ${PROJECT_NAME}
     ARCHIVE DESTINATION lib
 )
 
+# Include the Data Dir
 install(DIRECTORY "${PROJECT_SOURCE_DIR}/Data"
     DESTINATION .
     FILES_MATCHING PATTERN "*.*"
