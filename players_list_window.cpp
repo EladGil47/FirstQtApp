@@ -9,7 +9,7 @@ PlayersListWindow::PlayersListWindow(std::shared_ptr<Group> group)
     {
         m_group = group;
 
-        initHeaderLabel();
+        initGroupNameLabel();
         initPlayersList();
         initButtonsHorLayout();
 
@@ -25,14 +25,14 @@ void PlayersListWindow::initPlayersList()
     initList();
 }
 
-void PlayersListWindow::initHeaderLabel()
+void PlayersListWindow::initGroupNameLabel()
 {
-    m_header_label = new EditableLabel;
-    m_header_label->setFont(Fonts::HEADER_LABEL_FONT);
-    m_header_label->setAlignment(Qt::AlignHCenter);
+    m_group_label_name = new EditableLabel;
+    m_group_label_name->setFont(Fonts::HEADER_LABEL_FONT);
+    m_group_label_name->setAlignment(Qt::AlignHCenter);
     QString m_header_label_text = QString::fromStdString(m_group->getName());
-    m_header_label->setText(m_header_label_text);
-    connect(m_header_label, &EditableLabel::finishEditingSig, this, &PlayersListWindow::setGroupName);
+    m_group_label_name->setText(m_header_label_text);
+    connect(m_group_label_name, &EditableLabel::finishEditingSig, this, &PlayersListWindow::setGroupName);
 }
 
 void PlayersListWindow::initPlayersAmountLabel()
@@ -43,9 +43,8 @@ void PlayersListWindow::initPlayersAmountLabel()
     m_players_amount_label = new QLabel;
     initPlayersAmountLabelText();
     m_players_amount_label->setFont(Fonts::LIST_LABEL_FONT);
-    m_players_amount_label->setAlignment(Qt::AlignLeft);
-
     m_players_list->addWidgetAboveList(m_players_amount_label);
+    
     QSpacerItem *spacer = new QSpacerItem(0, 0,QSizePolicy::Expanding, QSizePolicy::Fixed);
     m_players_list->addSpacerAboveList(spacer);
 }
@@ -115,7 +114,7 @@ void PlayersListWindow::initButtonsHorLayout()
 void PlayersListWindow::addButtonToButtonsHorLayout(QPushButton * button)
 {
     if(button)
-    m_buttons_hor_layout->addWidget(button, 2,  Qt::AlignVCenter);
+    m_buttons_hor_layout->addWidget(button, 2);
     else
     qDebug() << "Notice : The system prevent to add unassigned button to a layout";
 }
@@ -123,7 +122,7 @@ void PlayersListWindow::addButtonToButtonsHorLayout(QPushButton * button)
 void PlayersListWindow::setupLayout()
 {
     QVBoxLayout *layout = new QVBoxLayout(this);
-    layout->addWidget(m_header_label);
+    layout->addWidget(m_group_label_name);
     layout->addWidget(m_players_list);
     layout->addLayout(m_buttons_hor_layout);
 }

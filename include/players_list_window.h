@@ -19,14 +19,13 @@ public:
 
 private:
     void setupLayout();
-    void initHeaderLabel();
+    void initGroupNameLabel();
     void initPlayersList();
-    LabeledListWidget *m_players_list;
 
     void initList() ;
 
-void initPlayersAmountLabel();
-void initPlayersAmountLabelText();
+    void initPlayersAmountLabel();
+    void initPlayersAmountLabelText();
 
     void initButtonsHorLayout() ;
 
@@ -34,17 +33,15 @@ void initPlayersAmountLabelText();
     void initCreateTeamsButton();
     void initGoBackButton();
 
+    std::shared_ptr<Group> m_group;
+    
+    EditableLabel *m_group_label_name ;
     QLabel * m_players_amount_label;
+    LabeledListWidget *m_players_list;
     QPushButton *m_create_new_player_button;
     QPushButton *m_create_teams_button; 
     QPushButton *m_go_back_button;
-
-
-    EditableLabel *m_header_label ;
     QHBoxLayout *m_buttons_hor_layout;
-
-
-    std::shared_ptr<Group> m_group;
 
     void addButtonToButtonsHorLayout(QPushButton * button);
     void addItemToList(std::shared_ptr<Player> player);
@@ -60,7 +57,6 @@ public slots:
 
 signals:
     void onGoBackButtonClickedSignal();
-
     void setToCreateTeamsWindowSignal(size_t id);
 };
 
