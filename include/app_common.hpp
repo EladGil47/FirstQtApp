@@ -151,14 +151,12 @@ namespace Style
                                          " background: rgba(0, 0, 255, 10%);"
                                          " } ";
 
-    const QString ORANGE_LIST = "QListWidget {"
-                                "background-color :"+  Colors::ORANGE + "}";
-                               
-    const QString GREEN_LIST = "QListWidget {"
-                  "background-color :"+  Colors::GREEN + "}";
-                               
-    const QString BLUE_LIST = "QListWidget {"
-                              "background-color :"+  Colors::BLUE + "}";
+    const QString ORANGE_LIST = "QListWidget {" + CssKeys::BACKGROUND_COLOR +  Colors::ORANGE + "}";
+    const QString GREEN_LIST = "QListWidget {" + CssKeys::BACKGROUND_COLOR +  Colors::GREEN + "}";
+    const QString BLUE_LIST = "QListWidget {" + CssKeys::BACKGROUND_COLOR +  Colors::BLUE + "}";
+    const QString RED_LIST = "QListWidget {" + CssKeys::BACKGROUND_COLOR +  Colors::RED + "}";
+    const QString YELLOW_LIST = "QListWidget {" + CssKeys::BACKGROUND_COLOR +  Colors::YELLOW + "}";
+
 }
 
 class ListStyles
@@ -167,7 +165,8 @@ class ListStyles
     std::vector<QString> m_team_colors = {
     Style::GREEN_LIST,
     Style::BLUE_LIST,
-    Style::ORANGE_LIST};
+    Style::ORANGE_LIST,
+    Style::RED_LIST};
     public: 
 
 

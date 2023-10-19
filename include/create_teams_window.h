@@ -92,20 +92,21 @@ public:
         m_checkable_players_list->addSpacerAboveList(spacer);
 
         
-        QLabel *random_label = new QLabel("Random :");
+        random_label = new QLabel("Auto fill :");
         m_checkable_players_list->addWidgetAboveList(random_label);
 
         m_random_select_check_box = new QCheckBox;
+        m_random_select_check_box->setToolTip("Press to Auto fill");
         m_random_select_check_box->setStyleSheet(
          "QCheckBox::indicator {"
                            "    border-color: black;"
                            "    border-radius: 12px;"    // Make it circular
-                           "    background-color: white;"
+                           "    background-color: yellow;"
                            "    width: 24px;"
                            "    height: 24px;"
                            "}"
                            "QCheckBox::indicator:checked {"
-                           "   background-color: #4CAF50;"  // Green color when checked
+                           "   background-color: red;"  // Green color when checked
                            "}");
         connect(m_random_select_check_box, &QCheckBox::stateChanged, this, &CreateTeamsWindow::onRandomSelectCheckBoxStateChanged);
         m_checkable_players_list->addWidgetAboveList(m_random_select_check_box);
@@ -185,6 +186,7 @@ private:
     QPushButton *m_cancel_button;
     std::shared_ptr<Group> m_group;
     std::shared_ptr<PlayersCollection> m_selected_players ;
+    QLabel *random_label;
     QCheckBox * m_random_select_check_box;
 
     void initSelectMorePlayersMessageBox()
@@ -328,6 +330,10 @@ public slots:
             std::shared_ptr<Player> player = m_group->getPlayersCollection().getItem(id);
             m_selected_players->addItem(player);
             addPlayerToCheckedPlayersList(player);
+            if(m_selected_players_amount == m_max_selected_players_amount)
+            {
+                m_random_select_check_box->setChecked(true);
+            }
 
             break;
         }
@@ -357,32 +363,40 @@ public slots:
         {
             if (m_selected_players_amount == m_max_selected_players_amount)
             {
+                random_label->setText("Auto fill :");
+                m_random_select_check_box->setToolTip("Press to Auto fill");
                 uncheckAll();
             }
             break;
         }
         case Qt::CheckState::Checked:
         {
-            std::random_device rd;
-            std::mt19937 gen(rd());
-            std::uniform_int_distribution<int> distribution(0, m_group->getNumOfPlayers() - 1);
-            std::set<int> generatedNumbers;
-            for (std::shared_ptr<Player> player : m_selected_players->getCollection())
+            if (m_selected_players_amount != m_max_selected_players_amount)
             {
-                generatedNumbers.insert(player->getId());
-            }
-            uint32_t amount_of_players_to_add = m_max_selected_players_amount - m_selected_players_amount;
-            for (uint32_t i = 0; i <amount_of_players_to_add ; ++i)
-            {
-                int randomInt;
-                do
+                random_label->setText("Reset :");
+                m_random_select_check_box->setToolTip("Press to Reset");
+
+                std::random_device rd;
+                std::mt19937 gen(rd());
+                std::uniform_int_distribution<int> distribution(0, m_group->getNumOfPlayers() - 1);
+                std::set<int> generatedNumbers;
+                for (std::shared_ptr<Player> player : m_selected_players->getCollection())
                 {
-                    randomInt = distribution(gen);
-                    setCheckableItemWidgetCheckBox(randomInt,Qt::CheckState::Checked);
+                    generatedNumbers.insert(player->getId());
+                }
+                uint32_t amount_of_players_to_add = m_max_selected_players_amount - m_selected_players_amount;
+                for (uint32_t i = 0; i < amount_of_players_to_add; ++i)
+                {
+                    int randomInt;
+                    do
+                    {
+                        randomInt = distribution(gen);
+                        setCheckableItemWidgetCheckBox(randomInt, Qt::CheckState::Checked);
 
-                } while (generatedNumbers.count(randomInt) > 0);
+                    } while (generatedNumbers.count(randomInt) > 0);
 
-                generatedNumbers.insert(randomInt);
+                    generatedNumbers.insert(randomInt);
+                }
             }
             break;
         }
