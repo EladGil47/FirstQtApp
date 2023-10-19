@@ -1,36 +1,53 @@
 #include "players_list_window.h"
-
 #include "player_item_widget.h"
-
 #include "player_input_dialog.hpp"
-
-#include <QInputDialog>
 #include "app_common.hpp"
 
 PlayersListWindow::PlayersListWindow(std::shared_ptr<Group> group)
-    :  m_group(group)
 {
-    initBaseWindowLayout();
+    if (group)
+    {
+        m_group = group;
+
+        initHeaderLabel();
+        initPlayersList();
+        initButtonsHorLayout();
+
+        setupLayout();
+    }
+}
+
+void PlayersListWindow::initPlayersList()
+{
+    m_players_list = new LabeledListWidget();
+    m_players_list->setListColor(Style::LIST);
     initPlayersAmountLabel();
-
-    setHeaderLabelText(QString::fromStdString(m_group->getName()));
-    setListLabelText();
     initList();
-    setButtonsHorLayout();
+}
 
-    connect(m_header_label,&EditableLabel::finishEditingSig,this,&PlayersListWindow::setGroupName);
+void PlayersListWindow::initHeaderLabel()
+{
+    m_header_label = new EditableLabel;
+    m_header_label->setFont(Fonts::HEADER_LABEL_FONT);
+    m_header_label->setAlignment(Qt::AlignHCenter);
+    QString m_header_label_text = QString::fromStdString(m_group->getName());
+    m_header_label->setText(m_header_label_text);
+    connect(m_header_label, &EditableLabel::finishEditingSig, this, &PlayersListWindow::setGroupName);
 }
 
 void PlayersListWindow::initPlayersAmountLabel()
-{
+{   
+    QLabel *players_text_label = new QLabel("Players :");
+    m_players_list->addWidgetAboveList(players_text_label);
+
     m_players_amount_label = new QLabel;
     initPlayersAmountLabelText();
     m_players_amount_label->setFont(Fonts::LIST_LABEL_FONT);
     m_players_amount_label->setAlignment(Qt::AlignLeft);
 
-    m_list_label_layout->addWidget(m_players_amount_label);
+    m_players_list->addWidgetAboveList(m_players_amount_label);
     QSpacerItem *spacer = new QSpacerItem(0, 0,QSizePolicy::Expanding, QSizePolicy::Fixed);
-    m_list_label_layout->addSpacerItem(spacer);
+    m_players_list->addSpacerAboveList(spacer);
 }
 
 void PlayersListWindow::initPlayersAmountLabelText()
@@ -78,25 +95,18 @@ void PlayersListWindow::initGoBackButton()
     connect(m_go_back_button, &QPushButton::clicked, this, &PlayersListWindow::onGoBackButton);
 }
 
-void PlayersListWindow::setListLabelText()
+void PlayersListWindow::initButtonsHorLayout()
 {
-    m_list_label->setText("Players :");
-}
-
-void PlayersListWindow::setButtonsHorLayout()
-{
+    m_buttons_hor_layout = new QHBoxLayout;
     m_buttons_hor_layout->addStretch(1);
 
     initCreateNewPlayerButton();
-    Functions::checkNotNull(m_create_new_player_button,"m_create_new_player_button");
     addButtonToButtonsHorLayout(m_create_new_player_button);
 
     initCreateTeamsButton();
-    Functions::checkNotNull(m_create_teams_button,"m_create_teams_button");
     addButtonToButtonsHorLayout(m_create_teams_button);
 
     initGoBackButton();
-    Functions::checkNotNull(m_go_back_button,"m_go_back_button");
     addButtonToButtonsHorLayout(m_go_back_button);
 
     m_buttons_hor_layout->addStretch(1);
@@ -104,8 +114,21 @@ void PlayersListWindow::setButtonsHorLayout()
 
 void PlayersListWindow::addButtonToButtonsHorLayout(QPushButton * button)
 {
+    if(button)
     m_buttons_hor_layout->addWidget(button, 2,  Qt::AlignVCenter);
+    else
+    qDebug() << "Notice : The system prevent to add unassigned button to a layout";
 }
+
+void PlayersListWindow::setupLayout()
+{
+    QVBoxLayout *layout = new QVBoxLayout(this);
+    layout->addWidget(m_header_label);
+    layout->addWidget(m_players_list);
+    layout->addLayout(m_buttons_hor_layout);
+}
+
+// Slots : 
 
 void PlayersListWindow::onCreateNewPlayerButton()
 {
@@ -140,21 +163,20 @@ void PlayersListWindow::addItemToList(std::shared_ptr<Player> player)
     connect(player_item_widget,&PlayerItemWidget::removeButtonClickedSignal,this,&PlayersListWindow::onRemoveButton);
     connect(player_item_widget,&PlayerItemWidget::playerNameChangedSignal,this,&PlayersListWindow::onPlayerNameChanged);
 
-    QListWidgetItem *item = new QListWidgetItem(m_list_list_widget);
-    item->setSizeHint(player_item_widget->sizeHint());
-    m_list_list_widget->setItemWidget(item, player_item_widget);
+    m_players_list->addItemToList(player_item_widget);
 }
 
 void PlayersListWindow::onRemoveButton(size_t id)
 {
     m_group->getPlayersCollectionRef().deleteItem(id);
-    QListWidgetItem *itemToRemove = m_list_list_widget->takeItem(id);
+    QListWidgetItem *itemToRemove = m_players_list->m_list->takeItem(id);
     delete itemToRemove;
     for (size_t index = id; index <  m_group->getNumOfPlayers(); index++)
     {
         m_group->getPlayersCollectionRef().getItem(index)->setId(static_cast<uint16_t>(index));
     }
-    updateList();
+    m_players_list->removeAllItemsFromList();
+    initList();
     initPlayersAmountLabelText();
 }
 

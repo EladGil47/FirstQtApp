@@ -2,31 +2,33 @@
 #define FIRST_QT_APP_INCLUDE_players_list_window_H
 
 #include <QWidget>
+#include <QPushButton>
+
+#include "editable_label.h"
+#include "labeled_list_widget.hpp"
 
 #include "group.hpp"
+
 #include <memory>
-#include <iostream>
-
-#include "groups_list_window.h"
-
-#include "base_list_manager_window.h"
-
-class PlayersListWindow : public BaseListManagerWindow
+class PlayersListWindow  : public QWidget
 {
     Q_OBJECT
 
 public:
     PlayersListWindow(std::shared_ptr<Group> group = nullptr);
-    
 
 private:
-    void initList() override;
-    void setListLabelText() override ;
+    void setupLayout();
+    void initHeaderLabel();
+    void initPlayersList();
+    LabeledListWidget *m_players_list;
+
+    void initList() ;
 
 void initPlayersAmountLabel();
 void initPlayersAmountLabelText();
 
-    void setButtonsHorLayout() override;
+    void initButtonsHorLayout() ;
 
     void initCreateNewPlayerButton();
     void initCreateTeamsButton();
@@ -36,6 +38,11 @@ void initPlayersAmountLabelText();
     QPushButton *m_create_new_player_button;
     QPushButton *m_create_teams_button; 
     QPushButton *m_go_back_button;
+
+
+    EditableLabel *m_header_label ;
+    QHBoxLayout *m_buttons_hor_layout;
+
 
     std::shared_ptr<Group> m_group;
 
@@ -55,10 +62,6 @@ signals:
     void onGoBackButtonClickedSignal();
 
     void setToCreateTeamsWindowSignal(size_t id);
-
-    
-
-
 };
 
 #endif // FIRST_QT_APP_INCLUDE_players_list_window_H

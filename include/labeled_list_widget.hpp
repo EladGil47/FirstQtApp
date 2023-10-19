@@ -40,6 +40,21 @@ public:
        m_list->setStyleSheet(style_sheet);
     }
 
+    void removeAllItemsFromList()
+    {
+       int item_count = m_list->count();
+       int const FIRST_ROW = 0;
+       for (int i = FIRST_ROW; i < item_count; ++i)
+       {
+           // Each iteration the first elemnt is deleted which means second element becoming first
+           QListWidgetItem *item = m_list->item(FIRST_ROW);
+           QWidget *widget = m_list->itemWidget(item);
+           m_list->removeItemWidget(item);
+           delete item;
+           delete widget;
+       }
+    }
+
 // UNUSED
     void addWidgetToBottom(QWidget *widget)
     {
