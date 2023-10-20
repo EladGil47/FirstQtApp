@@ -2,6 +2,8 @@
 #include "app_common.hpp"
 
 #include <QMouseEvent>
+#include <QMessageBox>
+
 
 GroupItemWidget::GroupItemWidget(std::shared_ptr<Group> group)
 {
@@ -115,6 +117,18 @@ void GroupItemWidget::mouseDoubleClickEvent(QMouseEvent *event)
     }
 }
 
+void GroupItemWidget::initAddMorePlayersMessageBox()
+{
+    QMessageBox message_box;
+    message_box.setWindowTitle("Warning");
+    message_box.setIcon(QMessageBox::Warning);
+    message_box.setStyleSheet(Settings::MESSAGES_BOX_COLOR);
+    message_box.setFont(Fonts::PLAYER_ITEM_WIDGET_FONT);
+    message_box.setText("Please add more players to create teams");
+    message_box.setStandardButtons(QMessageBox::Ok);
+    message_box.exec();
+}
+
 // Slots : 
 
 void GroupItemWidget::onEnterButtonClicked()
@@ -124,7 +138,14 @@ void GroupItemWidget::onEnterButtonClicked()
 
 void GroupItemWidget::onCreateTeamsButtonClicked()
 {
-    emit createTeamsButtonClickedSignal(m_group_index);
+    uint16_t minimun_required_players_amount = m_group->getPlayersInTeamAmount() * m_group->getTeamsAmount();
+    if (m_group->getNumOfPlayers() >= static_cast<size_t>(minimun_required_players_amount))
+    {
+        emit createTeamsButtonClickedSignal(m_group_index);
+    }
+    else{
+        initAddMorePlayersMessageBox();
+    }
 }
 
 void GroupItemWidget::onRemoveButtonClicked()

@@ -194,7 +194,7 @@ private:
         QMessageBox message_box;
         message_box.setWindowTitle("Warning");
         message_box.setIcon(QMessageBox::Warning);
-        message_box.setStyleSheet(Style::OFFWHITE_BACKGROUND);
+        message_box.setStyleSheet(Settings::MESSAGES_BOX_COLOR);
         message_box.setFont(Fonts::PLAYER_ITEM_WIDGET_FONT);
         message_box.setText("Please select more players");
         message_box.setStandardButtons(QMessageBox::Ok);
