@@ -63,37 +63,26 @@ public:
     
     void initCheckedPlayersList()
     {
+        QLabel *m_coming_players_label = new QLabel("Coming players");
+
         m_checked_players_list = new LabeledListWidget();
         m_checked_players_list->setListColor(Style::LIST);
-        QLabel *m_list_label = new QLabel("Coming players :");
-        m_checked_players_list->addWidgetAboveList(m_list_label);
-
-
+        m_checked_players_list->addWidgetAboveList(m_coming_players_label);
     }
 
     void initCheckablePlayersList()
     {
-        m_checkable_players_list = new LabeledListWidget();
-        m_checkable_players_list->setListColor(Style::LIST);
-        
-        QLabel *m_list_label = new QLabel("Checked players :");
-        m_checkable_players_list->addWidgetAboveList(m_list_label);
+        QLabel *checked_label = new QLabel("Checked :");
         
         m_selected_players_amount_label = new QLabel(QString::number(m_selected_players_amount));
-        m_checkable_players_list->addWidgetAboveList(m_selected_players_amount_label);
         
-        QLabel *m_slash_label = new QLabel("/");
-        m_checkable_players_list->addWidgetAboveList(m_slash_label);
+        QLabel *slash_label = new QLabel("/");
         
-        QLabel * m_max_selected_players_amount_label = new QLabel(QString::number(m_max_selected_players_amount));
-        m_checkable_players_list->addWidgetAboveList(m_max_selected_players_amount_label);
+        QLabel * max_selected_players_amount_label = new QLabel(QString::number(m_max_selected_players_amount));
         
         QSpacerItem *spacer = new QSpacerItem(0, 0, QSizePolicy::Expanding, QSizePolicy::Fixed);
-        m_checkable_players_list->addSpacerAboveList(spacer);
-
         
-        random_label = new QLabel("Auto fill :");
-        m_checkable_players_list->addWidgetAboveList(random_label);
+        random_label = new QLabel("Auto fill");
 
         m_random_select_check_box = new QCheckBox;
         m_random_select_check_box->setToolTip("Press to Auto fill");
@@ -109,9 +98,16 @@ public:
                            "   background-color: red;"  // Green color when checked
                            "}");
         connect(m_random_select_check_box, &QCheckBox::stateChanged, this, &CreateTeamsWindow::onRandomSelectCheckBoxStateChanged);
+        
+        m_checkable_players_list = new LabeledListWidget();
+        m_checkable_players_list->setListColor(Style::LIST);
         m_checkable_players_list->addWidgetAboveList(m_random_select_check_box);
-
-
+        m_checkable_players_list->addWidgetAboveList(random_label);
+        m_checkable_players_list->addSpacerAboveList(spacer);
+        m_checkable_players_list->addWidgetAboveList(checked_label);
+        m_checkable_players_list->addWidgetAboveList(m_selected_players_amount_label);
+        m_checkable_players_list->addWidgetAboveList(slash_label);
+        m_checkable_players_list->addWidgetAboveList(max_selected_players_amount_label);
         addAllPlayersToCheckablePlayersList();
     }
 
@@ -354,7 +350,6 @@ public slots:
         }
     }
 
-
     void onRandomSelectCheckBoxStateChanged(int state)
     {
         switch (state)
@@ -363,41 +358,42 @@ public slots:
         {
             if (m_selected_players_amount == m_max_selected_players_amount)
             {
-                random_label->setText("Auto fill :");
-                m_random_select_check_box->setToolTip("Press to Auto fill");
+
                 uncheckAll();
             }
+            random_label->setText("Auto fil");
+            m_random_select_check_box->setToolTip("Press to Auto fill");
             break;
         }
         case Qt::CheckState::Checked:
         {
-            if (m_selected_players_amount != m_max_selected_players_amount)
-            {
-                random_label->setText("Reset :");
-                m_random_select_check_box->setToolTip("Press to Reset");
+                if (m_selected_players_amount != m_max_selected_players_amount)
+                {
+                    random_label->setText("Reset");
+                    m_random_select_check_box->setToolTip("Press to Reset");
 
-                std::random_device rd;
-                std::mt19937 gen(rd());
-                std::uniform_int_distribution<int> distribution(0, m_group->getNumOfPlayers() - 1);
-                std::set<int> generatedNumbers;
-                for (std::shared_ptr<Player> player : m_selected_players->getCollection())
-                {
-                    generatedNumbers.insert(player->getId());
-                }
-                uint32_t amount_of_players_to_add = m_max_selected_players_amount - m_selected_players_amount;
-                for (uint32_t i = 0; i < amount_of_players_to_add; ++i)
-                {
-                    int randomInt;
-                    do
+                    std::random_device rd;
+                    std::mt19937 gen(rd());
+                    std::uniform_int_distribution<int> distribution(0, m_group->getNumOfPlayers() - 1);
+                    std::set<int> generatedNumbers;
+                    for (std::shared_ptr<Player> player : m_selected_players->getCollection())
                     {
-                        randomInt = distribution(gen);
-                        setCheckableItemWidgetCheckBox(randomInt, Qt::CheckState::Checked);
+                        generatedNumbers.insert(player->getId());
+                    }
+                    uint32_t amount_of_players_to_add = m_max_selected_players_amount - m_selected_players_amount;
+                    for (uint32_t i = 0; i < amount_of_players_to_add; ++i)
+                    {
+                        int randomInt;
+                        do
+                        {
+                            randomInt = distribution(gen);
+                            setCheckableItemWidgetCheckBox(randomInt, Qt::CheckState::Checked);
 
-                    } while (generatedNumbers.count(randomInt) > 0);
+                        } while (generatedNumbers.count(randomInt) > 0);
 
-                    generatedNumbers.insert(randomInt);
+                        generatedNumbers.insert(randomInt);
+                    }
                 }
-            }
             break;
         }
         default:
