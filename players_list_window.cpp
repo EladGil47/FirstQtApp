@@ -152,7 +152,18 @@ void PlayersListWindow::onCreateNewPlayerButton()
 
 void PlayersListWindow::onCreateTeamsClicked()
 {
-    emit setToCreateTeamsWindowSignal(m_group->getId());
+    uint16_t minimun_required_players_amount = m_group->getPlayersInTeamAmount() * m_group->getTeamsAmount();
+    uint16_t players_amount = static_cast<uint16_t>(m_group->getNumOfPlayers());
+
+    if (players_amount >= minimun_required_players_amount)
+    {
+        emit setToCreateTeamsWindowSignal(m_group->getId());
+    }
+    else
+    {
+        uint16_t required_players_to_add = minimun_required_players_amount - players_amount;
+        MessageBoxHandler::showAddMorePlayersMessage(required_players_to_add);
+    }
 }
 
 void PlayersListWindow::addItemToList(std::shared_ptr<Player> player)

@@ -29,7 +29,6 @@ void initEnterButton();
 void initCreateTeamsButton();
 void initRemoveButton();
 void setupLayout();
-void initAddMorePlayersMessageBox();
 
 
 std::shared_ptr<Group> m_group;

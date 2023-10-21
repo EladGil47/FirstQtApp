@@ -83,6 +83,7 @@
         "qinputdialog": "cpp",
         "qdoublespinbox": "cpp",
         "qdialogbuttonbox": "cpp",
-        "set": "cpp"
+        "set": "cpp",
+        "qlabel": "cpp"
     }
 }

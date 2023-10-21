@@ -25,7 +25,7 @@ void TeamPlayerItemWidget::initRemoveButton()
 {
     m_remove_button = new QPushButton("X");
     m_remove_button->setFont(Fonts::PLAYER_ITEM_WIDGET_FONT);
-    m_remove_button->setStyleSheet(Style::RED_COLOR_BLACK_BORDER);
+    m_remove_button->setStyleSheet(Style::RED_BACKGROUND_BLACK_BORDER_WHITE_TEXT);
     connect(m_remove_button, &QPushButton::clicked, this, &TeamPlayerItemWidget::onRemoveClicked);
 }
 

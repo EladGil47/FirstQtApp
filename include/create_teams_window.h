@@ -155,7 +155,10 @@ public:
     void addPlayerToCheckedPlayersList(std::shared_ptr<Player> player)
     {
         BasePlayerItemWidget *player_item_widget = new BasePlayerItemWidget(player);
-        player_item_widget->setupLayout(BasePlayerItemWidget::SetupLayoutOptions::NAME);
+        player_item_widget->setupLayout(
+            (BasePlayerItemWidget::SetupLayoutOptions::NAME |
+             BasePlayerItemWidget::SetupLayoutOptions::REMOVE));
+        connect(player_item_widget, &BasePlayerItemWidget::removeButtonClickedSignal,this,&CreateTeamsWindow::onRemovePlayerButton);
         m_checked_players_list->addItemToList(player_item_widget);
     }
 
@@ -288,6 +291,11 @@ signals:
 
 public slots:
 
+    void onRemovePlayerButton(size_t player_id)
+    {
+        setCheckableItemWidgetCheckBox(player_id,Qt::CheckState::Unchecked);
+    }
+
     void onCancelButtonClicked()
     {
         emit cancelButtonClickedSignal(m_group->getId());
@@ -358,7 +366,6 @@ public slots:
         {
             if (m_selected_players_amount == m_max_selected_players_amount)
             {
-
                 uncheckAll();
             }
             random_label->setText("Auto fil");
@@ -367,33 +374,30 @@ public slots:
         }
         case Qt::CheckState::Checked:
         {
-                if (m_selected_players_amount != m_max_selected_players_amount)
+            random_label->setText("Reset");
+            m_random_select_check_box->setToolTip("Press to Reset");
+
+            std::random_device rd;
+            std::mt19937 gen(rd());
+            std::uniform_int_distribution<int> distribution(0, m_group->getNumOfPlayers() - 1);
+            std::set<int> generatedNumbers;
+            for (std::shared_ptr<Player> player : m_selected_players->getCollection())
+            {
+                generatedNumbers.insert(player->getId());
+            }
+            uint32_t amount_of_players_to_add = m_max_selected_players_amount - m_selected_players_amount;
+            for (uint32_t i = 0; i < amount_of_players_to_add; ++i)
+            {
+                int randomInt;
+                do
                 {
-                    random_label->setText("Reset");
-                    m_random_select_check_box->setToolTip("Press to Reset");
+                    randomInt = distribution(gen);
+                    setCheckableItemWidgetCheckBox(randomInt, Qt::CheckState::Checked);
 
-                    std::random_device rd;
-                    std::mt19937 gen(rd());
-                    std::uniform_int_distribution<int> distribution(0, m_group->getNumOfPlayers() - 1);
-                    std::set<int> generatedNumbers;
-                    for (std::shared_ptr<Player> player : m_selected_players->getCollection())
-                    {
-                        generatedNumbers.insert(player->getId());
-                    }
-                    uint32_t amount_of_players_to_add = m_max_selected_players_amount - m_selected_players_amount;
-                    for (uint32_t i = 0; i < amount_of_players_to_add; ++i)
-                    {
-                        int randomInt;
-                        do
-                        {
-                            randomInt = distribution(gen);
-                            setCheckableItemWidgetCheckBox(randomInt, Qt::CheckState::Checked);
+                } while (generatedNumbers.count(randomInt) > 0);
 
-                        } while (generatedNumbers.count(randomInt) > 0);
-
-                        generatedNumbers.insert(randomInt);
-                    }
-                }
+                generatedNumbers.insert(randomInt);
+            }
             break;
         }
         default:

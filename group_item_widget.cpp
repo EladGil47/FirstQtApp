@@ -117,17 +117,6 @@ void GroupItemWidget::mouseDoubleClickEvent(QMouseEvent *event)
     }
 }
 
-void GroupItemWidget::initAddMorePlayersMessageBox()
-{
-    QMessageBox message_box;
-    message_box.setWindowTitle("Warning");
-    message_box.setIcon(QMessageBox::Warning);
-    message_box.setStyleSheet(Settings::MESSAGES_BOX_COLOR);
-    message_box.setFont(Fonts::PLAYER_ITEM_WIDGET_FONT);
-    message_box.setText("Please add more players to create teams");
-    message_box.setStandardButtons(QMessageBox::Ok);
-    message_box.exec();
-}
 
 // Slots : 
 
@@ -139,12 +128,15 @@ void GroupItemWidget::onEnterButtonClicked()
 void GroupItemWidget::onCreateTeamsButtonClicked()
 {
     uint16_t minimun_required_players_amount = m_group->getPlayersInTeamAmount() * m_group->getTeamsAmount();
-    if (m_group->getNumOfPlayers() >= static_cast<size_t>(minimun_required_players_amount))
+    uint16_t players_amount = static_cast<uint16_t>(m_group->getNumOfPlayers());
+
+    if (players_amount >= minimun_required_players_amount)
     {
         emit createTeamsButtonClickedSignal(m_group_index);
     }
     else{
-        initAddMorePlayersMessageBox();
+        uint16_t required_players_to_add = minimun_required_players_amount - players_amount;
+        MessageBoxHandler::showAddMorePlayersMessage(required_players_to_add);
     }
 }
 

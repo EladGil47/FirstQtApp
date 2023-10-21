@@ -22,11 +22,11 @@ enum class COLOR
 
 namespace Colors
 {
-    const QString YELLOW = "yellow";
-    const QString PINK = "pink";
-    const QString PURPLE = "purpel";
-    const QString GREY = "grey";
-    const QString BLACK = "black";
+    const QString YELLOW = "yellow;";
+    const QString PINK = "pink;";
+    const QString PURPLE = "purpel;";
+    const QString GREY = "grey;";
+    const QString BLACK = "black;";
 
 
 
@@ -103,7 +103,7 @@ namespace Style
         CssKeys::BORDER + Colors::GREEN + CssKeys::BACKGROUND_COLOR + Colors::GREEN;
 
     const QString GREEN_COLOR_BLACK_BORDER =
-        CssKeys::BORDER + "1px solid " + Colors::BLACK + ";" + CssKeys::BACKGROUND_COLOR + Colors::GREEN;
+        CssKeys::BORDER + "1px solid " + Colors::BLACK  + CssKeys::BACKGROUND_COLOR + Colors::GREEN;
 
     const QString HOVER_GREEN_COLOR =
         CssKeys::BORDER + Colors::HOVER_GREEN + CssKeys::BACKGROUND_COLOR + Colors::HOVER_GREEN;
@@ -111,8 +111,8 @@ namespace Style
     const QString RED_COLOR =
         CssKeys::BORDER + Colors::RED + CssKeys::BACKGROUND_COLOR + Colors::RED;
     
-    const QString RED_COLOR_BLACK_BORDER =
-        CssKeys::BORDER + "1px solid " + Colors::BLACK +  ";" + CssKeys::BACKGROUND_COLOR + Colors::RED;
+    const QString RED_BACKGROUND_BLACK_BORDER_WHITE_TEXT =
+        CssKeys::BORDER + "1px solid " + Colors::BLACK  + CssKeys::BACKGROUND_COLOR + Colors::RED +  "color: white;"  ;
 
     const QString HOVER_RED_COLOR =
         CssKeys::BORDER + Colors::HOVER_RED + CssKeys::BACKGROUND_COLOR + Colors::HOVER_RED;
@@ -227,5 +227,28 @@ namespace Functions
         }
     }
 }
+
+#include <QMessageBox>
+#include <QString>
+
+class MessageBoxHandler
+{
+public:
+    static void showAddMorePlayersMessage(uint16_t requiredPlayersToAdd)
+    {
+        QMessageBox messageBox;
+        messageBox.setWindowTitle("Warning");
+        messageBox.setIcon(QMessageBox::Warning);
+        messageBox.setStyleSheet(Settings::MESSAGES_BOX_COLOR);
+        messageBox.setFont(Fonts::PLAYER_ITEM_WIDGET_FONT);
+
+        QString messageText = "Please add " + QString::number(requiredPlayersToAdd) + " more players to create teams";
+        messageBox.setText(messageText);
+
+        messageBox.setStandardButtons(QMessageBox::Ok);
+        messageBox.exec();
+    }
+};
+
 
 #endif // FIRST_QT_APP_INCLUDE_APP_COMMON_H
