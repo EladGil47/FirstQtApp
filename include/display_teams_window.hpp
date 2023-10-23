@@ -14,8 +14,7 @@
 
 #include "team_player_item_widget.hpp" 
 
-
-
+#include "search_widget.hpp" 
 
 class DisplayTeamsWindow : public QWidget
 {
@@ -71,6 +70,7 @@ void initTeamsHorLayout()
         {
             QString player_name = QString::fromStdString((*teams)[team_index].getPlayersCollection()->getItem(player_index)->getName());
             TeamPlayerItemWidget * team_player_item_widget = new TeamPlayerItemWidget(player_name);
+            connect(team_player_item_widget,&TeamPlayerItemWidget::addPlayerSignal,this,&DisplayTeamsWindow::onAddPlayer);
             labeled_list->addItemToList(team_player_item_widget);
         }
         QString avg_rate_label_text = avg_rate + " : " +  QString::number((*teams)[team_index].getAverageRate(),'g',2);
@@ -107,9 +107,12 @@ void initButtonsLayout()
     m_buttons_layout->addWidget(m_go_back_button,2);
     m_buttons_layout->addStretch(1);
 }
+ 
+QLabel * resultLabel ;
+QStringList * m_group_players_names;
+SearchWidget * m_search_player_dialog; 
 
 
-    
 void initWindowLayout()
 {
     QVBoxLayout  * window_layout = new QVBoxLayout(this);
@@ -120,12 +123,28 @@ void initWindowLayout()
     window_layout->addStretch(8);
     window_layout->addLayout(m_buttons_layout);
 
+    initGroupPlayersNames();
+    m_search_player_dialog = new SearchWidget(m_group_players_names);
+
+
+}
+std::shared_ptr <Group> m_group;
+
+void initGroupPlayersNames()
+{
+    m_group_players_names = new QStringList;
+
+    for (const std::string player_name : m_group->getPlayersCollection().getPlayersNames())
+    {
+        m_group_players_names->append(QString::fromStdString(player_name));
+    }
 }
 
 public : 
-DisplayTeamsWindow(std::shared_ptr <PlayersCollection> players,Group::Config group_config)
+DisplayTeamsWindow(std::shared_ptr <PlayersCollection> players,std::shared_ptr <Group> group)
 {
-    m_group_config = group_config;
+    m_group = group;
+    m_group_config = group->getConfig();
     m_players=players;
     initHeaderLayout();
     initTeamsHorLayout();
@@ -150,8 +169,12 @@ void onOkButton()
   emit okButtonClickedSignal();
 
 }
+private slots:
 
-
+void onAddPlayer()
+{
+    m_search_player_dialog->exec();
+}
 
 
 };

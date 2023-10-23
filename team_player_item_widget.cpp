@@ -1,6 +1,8 @@
 #include "team_player_item_widget.hpp"
 #include "app_common.hpp"
 
+#include  <QToolButton>
+
 TeamPlayerItemWidget::TeamPlayerItemWidget(const QString& playerName)
 {
     m_player_name_label = new QLabel(playerName);
@@ -29,6 +31,23 @@ void TeamPlayerItemWidget::initRemoveButton()
     connect(m_remove_button, &QPushButton::clicked, this, &TeamPlayerItemWidget::onRemoveClicked);
 }
 
+void TeamPlayerItemWidget::initAddButton()
+{
+    m_add_button = new QPushButton("+");
+    m_add_button->setFont(Fonts::PLAYER_ITEM_WIDGET_FONT);
+    m_add_button->setStyleSheet(Style::GREEN_COLOR_BLACK_BORDER);
+    connect(m_add_button, &QPushButton::clicked, this, &TeamPlayerItemWidget::onAddPlayerClicked);
+}
+
+void TeamPlayerItemWidget::initAddPlayerButton()
+{
+    m_add_player_button = new QPushButton("Add Player");
+    m_add_player_button->setFont(Fonts::PLAYER_ITEM_WIDGET_FONT);
+    m_add_player_button->setStyleSheet(Style::TRANSPARENT_STYLESHEET + Style::BLACK_TEXT_COLOR);
+     // connect(m_add_player_button, &QToolButton::doubleClicked, this, &TeamPlayerItemWidget::onAddPlayerClicked);
+
+}
+
 void TeamPlayerItemWidget::onRemoveClicked()
 {
     if (m_player_name_label)
@@ -39,15 +58,14 @@ void TeamPlayerItemWidget::onRemoveClicked()
         delete m_remove_button;
         m_remove_button = nullptr;
 
-        QPushButton * m_add_button = new QPushButton("+");
-        m_add_button->setFont(Fonts::PLAYER_ITEM_WIDGET_FONT);
-        m_add_button->setStyleSheet(Style::GREEN_COLOR_BLACK_BORDER);
-
-        QPushButton *add_player_button = new QPushButton("Add Player");
-        add_player_button->setFont(Fonts::PLAYER_ITEM_WIDGET_FONT);
-        add_player_button->setStyleSheet(Style::TRANSPARENT_STYLESHEET + Style::BLACK_TEXT_COLOR);
-
+        initAddButton();
+        initAddPlayerButton();
         m_layout->addWidget(m_add_button, 1);
-        m_layout->addWidget(add_player_button, 20);
+        m_layout->addWidget(m_add_player_button, 20);
     }
+}
+
+void TeamPlayerItemWidget::onAddPlayerClicked()
+{
+    emit addPlayerSignal();
 }

@@ -84,6 +84,7 @@
         "qdoublespinbox": "cpp",
         "qdialogbuttonbox": "cpp",
         "set": "cpp",
-        "qlabel": "cpp"
+        "qlabel": "cpp",
+        "qdialog": "cpp"
     }
 }
