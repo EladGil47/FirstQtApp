@@ -1,5 +1,7 @@
 #include "search_widget.hpp"
 
+#include <QDialogButtonBox>
+
 SearchWidget::SearchWidget(QStringList *possibilities) 
 {
     if (possibilities)
@@ -7,8 +9,8 @@ SearchWidget::SearchWidget(QStringList *possibilities)
         m_possibilities = possibilities;
         QVBoxLayout *layout = new QVBoxLayout(this);
 
-        searchLineEdit = new QLineEdit(this);
-        connect(searchLineEdit, &QLineEdit::textChanged, this, &SearchWidget::onSearchTextChanged);
+        m_search_line_edit = new QLineEdit(this);
+        connect(m_search_line_edit, &QLineEdit::textChanged, this, &SearchWidget::onSearchTextChanged);
 
         suggestionsListView = new QListView(this);
         suggestionsModel = new QStandardItemModel(this);
@@ -19,14 +21,39 @@ SearchWidget::SearchWidget(QStringList *possibilities)
             suggestionsModel->appendRow(item);
         }
 
-        layout->addWidget(searchLineEdit);
+        QDialogButtonBox *buttonBox = new QDialogButtonBox(QDialogButtonBox::Ok | QDialogButtonBox::Cancel, this);
+
+        connect(buttonBox, &QDialogButtonBox::accepted, this, &SearchWidget::accept);
+        connect(buttonBox, &QDialogButtonBox::rejected, this, &SearchWidget::reject);
+
+
+        connect(suggestionsListView, &QListView::clicked, this, &SearchWidget::onItemClicked);
+        connect(suggestionsListView, &QListView::doubleClicked, this, &SearchWidget::onItemDoubleClicked);
+
+        layout->addWidget(m_search_line_edit);
         layout->addWidget(suggestionsListView);
+        layout->addWidget(buttonBox);
+
     }
+}
+
+void SearchWidget::onItemClicked(const QModelIndex &index)
+{
+    QString selected_item = index.data(Qt::DisplayRole).toString();
+    emit itemSelected(selected_item);
+    m_search_line_edit->setText(selected_item);
+}
+
+void SearchWidget::onItemDoubleClicked(const QModelIndex &index)
+{
+    QString selected_item = index.data(Qt::DisplayRole).toString();
+    emit itemSelected(selected_item);
+    m_search_line_edit->setText(selected_item);
 }
 
 void SearchWidget::onSearchTextChanged()
 {
-    QString search_text = searchLineEdit->text();
+    QString search_text = m_search_line_edit->text();
     
     // Emit the signal to notify the main window about the search text change
     emit searchTextChanged(search_text);
@@ -42,4 +69,9 @@ void SearchWidget::onSearchTextChanged()
             suggestionsModel->appendRow(item);
         }
     }
+}
+
+QString SearchWidget::getSearchText() const
+{
+    return m_search_line_edit->text();
 }

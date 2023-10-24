@@ -109,8 +109,6 @@ void initButtonsLayout()
 }
  
 QLabel * resultLabel ;
-QStringList * m_group_players_names;
-SearchWidget * m_search_player_dialog; 
 
 
 void initWindowLayout()
@@ -123,21 +121,20 @@ void initWindowLayout()
     window_layout->addStretch(8);
     window_layout->addLayout(m_buttons_layout);
 
-    initGroupPlayersNames();
-    m_search_player_dialog = new SearchWidget(m_group_players_names);
 
 
 }
 std::shared_ptr <Group> m_group;
 
-void initGroupPlayersNames()
+QStringList * getGroupPlayersNames()
 {
-    m_group_players_names = new QStringList;
+    QStringList * m_group_players_names = new QStringList;
 
     for (const std::string player_name : m_group->getPlayersCollection().getPlayersNames())
     {
         m_group_players_names->append(QString::fromStdString(player_name));
     }
+    return m_group_players_names;
 }
 
 public : 
@@ -171,9 +168,16 @@ void onOkButton()
 }
 private slots:
 
-void onAddPlayer()
-{
-    m_search_player_dialog->exec();
+QString onAddPlayer()
+{   
+    SearchWidget * m_search_player_dialog  = new SearchWidget(getGroupPlayersNames());
+
+    QString player_name;
+    if (m_search_player_dialog->exec() == QDialog::Accepted)
+    {
+        player_name = m_search_player_dialog->getSearchText();
+    }
+    return player_name;
 }
 
 

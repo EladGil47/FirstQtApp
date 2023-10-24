@@ -10,10 +10,10 @@ class TeamPlayerItemWidget : public QWidget
 {
  Q_OBJECT
 public:
-    TeamPlayerItemWidget(const QString &playerName);
+    TeamPlayerItemWidget(const QString &player_name);
 
 signals :
-void addPlayerSignal();
+QString addPlayerSignal();
 
 private slots:
 void onRemoveClicked();
@@ -26,6 +26,7 @@ private:
     QPushButton *m_add_button;
     QPushButton *m_add_player_button;
 
+    void initPlayerNameLabel(const QString& player_name);
     void initRemoveButton();
     void initLayout();
     void initAddPlayerButton();

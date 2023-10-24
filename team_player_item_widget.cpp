@@ -3,15 +3,19 @@
 
 #include  <QToolButton>
 
-TeamPlayerItemWidget::TeamPlayerItemWidget(const QString& playerName)
+TeamPlayerItemWidget::TeamPlayerItemWidget(const QString& player_name)
 {
-    m_player_name_label = new QLabel(playerName);
+    initPlayerNameLabel(player_name);
+    initRemoveButton();
+    initLayout();
+}
+
+void TeamPlayerItemWidget ::initPlayerNameLabel(const QString& player_name)
+{
+    m_player_name_label = new QLabel(player_name);
     m_player_name_label->setFont(Fonts::PLAYER_ITEM_WIDGET_FONT);
     m_player_name_label->setStyleSheet(Style::WHITE_TEXT_COLOR);
     m_player_name_label->setAlignment(Qt::AlignHCenter);
-
-    initRemoveButton();
-    initLayout();
 }
 
 void TeamPlayerItemWidget::initLayout()
@@ -54,18 +58,41 @@ void TeamPlayerItemWidget::onRemoveClicked()
     {
         delete m_player_name_label;
         m_player_name_label = nullptr;
-
+    }
+    if (m_remove_button)
+    {
         delete m_remove_button;
         m_remove_button = nullptr;
-
-        initAddButton();
-        initAddPlayerButton();
-        m_layout->addWidget(m_add_button, 1);
-        m_layout->addWidget(m_add_player_button, 20);
     }
+    initAddButton();
+    initAddPlayerButton();
+
+    m_layout->addWidget(m_add_button, 1);
+    m_layout->addWidget(m_add_player_button, 20);
 }
 
 void TeamPlayerItemWidget::onAddPlayerClicked()
 {
-    emit addPlayerSignal();
+    QString player_name;
+    emit player_name = addPlayerSignal();
+    if (!player_name.isEmpty())
+    {
+        if (m_add_button)
+        {
+            delete m_add_button;
+            m_add_button = nullptr;
+        }
+
+        if (m_add_player_button)
+        {
+            delete m_add_player_button;
+            m_add_player_button = nullptr;
+        }
+
+        initPlayerNameLabel(player_name);
+        initRemoveButton();
+
+        m_layout->addWidget(m_remove_button, 1);
+        m_layout->addWidget(m_player_name_label, 20);
+    }
 }
