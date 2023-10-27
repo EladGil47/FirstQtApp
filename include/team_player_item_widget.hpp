@@ -5,15 +5,19 @@
 #include <QLabel>
 #include <QHBoxLayout>
 #include <QPushButton>
+#include "player.hpp"
 
 class TeamPlayerItemWidget : public QWidget
 {
  Q_OBJECT
 public:
-    TeamPlayerItemWidget(const QString &player_name);
+    TeamPlayerItemWidget(std::shared_ptr<Player> player);
 
 signals :
-QString addPlayerSignal();
+std::shared_ptr<Player> addPlayerClickedSignal();
+void removePlayerClickedSignal(uint16_t player_id);
+
+
 
 private slots:
 void onRemoveClicked();
@@ -25,6 +29,8 @@ private:
     QHBoxLayout *m_layout;
     QPushButton *m_add_button;
     QPushButton *m_add_player_button;
+    std::shared_ptr<Player> m_player;
+
 
     void initPlayerNameLabel(const QString& player_name);
     void initRemoveButton();
@@ -36,5 +42,4 @@ private:
 
 };
 
-#define FIRST_QT_APP_INCLUDE_TEAM_PLAYER_ITEM_WIDGET_H
 #endif // FIRST_QT_APP_INCLUDE_TEAM_PLAYER_ITEM_WIDGET_H

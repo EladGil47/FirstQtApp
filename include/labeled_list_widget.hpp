@@ -27,13 +27,13 @@ public:
         m_top_labels_layout->addSpacerItem(spacer);
     }
 
-    void addLabelbeneathList(const QString &text,Qt::Alignment allignment)
-    {
-        QLabel *label = new QLabel(text);
-        label->setFont(Fonts::LIST_LABEL_FONT);
-        label->setAlignment(allignment);
-        m_bottom_labels_layout->addWidget(label);
-    }
+    // void addWidgetBeneathList(const QString &text,Qt::Alignment allignment)
+    // {
+    //     QLabel *label = new QLabel(text);
+    //     label->setFont(Fonts::LIST_LABEL_FONT);
+    //     label->setAlignment(allignment);
+    //     m_bottom_labels_layout->addWidget(label);
+    // }
 
     void setListColor(const QString style_sheet)
     {
@@ -79,6 +79,13 @@ public:
     {
         widget->setFont(Fonts::LIST_LABEL_FONT);
         m_top_labels_layout->addWidget(widget);
+    }
+
+    template <typename T>
+    void addWidgetBeneathList(T *widget)
+    {
+        widget->setFont(Fonts::LIST_LABEL_FONT);
+        m_bottom_labels_layout->addWidget(widget);
     }
 
 private:

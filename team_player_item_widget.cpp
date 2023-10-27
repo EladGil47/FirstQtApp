@@ -3,11 +3,16 @@
 
 #include  <QToolButton>
 
-TeamPlayerItemWidget::TeamPlayerItemWidget(const QString& player_name)
+TeamPlayerItemWidget::TeamPlayerItemWidget(std::shared_ptr<Player> player)
 {
-    initPlayerNameLabel(player_name);
-    initRemoveButton();
-    initLayout();
+    if (player)
+    {
+        m_player = player;
+        QString player_name = QString::fromStdString(player->getName());
+        initPlayerNameLabel(player_name);
+        initRemoveButton();
+        initLayout();
+    }
 }
 
 void TeamPlayerItemWidget ::initPlayerNameLabel(const QString& player_name)
@@ -53,7 +58,8 @@ void TeamPlayerItemWidget::initAddPlayerButton()
 }
 
 void TeamPlayerItemWidget::onRemoveClicked()
-{
+{   
+    emit removePlayerClickedSignal(m_player->getId());
     if (m_player_name_label)
     {
         delete m_player_name_label;
@@ -73,9 +79,8 @@ void TeamPlayerItemWidget::onRemoveClicked()
 
 void TeamPlayerItemWidget::onAddPlayerClicked()
 {
-    QString player_name;
-    emit player_name = addPlayerSignal();
-    if (!player_name.isEmpty())
+    emit std::shared_ptr<Player> player = addPlayerClickedSignal();
+    if(player)
     {
         if (m_add_button)
         {
@@ -89,6 +94,8 @@ void TeamPlayerItemWidget::onAddPlayerClicked()
             m_add_player_button = nullptr;
         }
 
+        m_player = player;
+        QString player_name = QString::fromStdString(player->getName());
         initPlayerNameLabel(player_name);
         initRemoveButton();
 

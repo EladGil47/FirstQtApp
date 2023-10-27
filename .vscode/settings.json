@@ -86,6 +86,7 @@
         "set": "cpp",
         "qlabel": "cpp",
         "qdialog": "cpp",
-        "qstandarditemmodel": "cpp"
+        "qstandarditemmodel": "cpp",
+        "qlistwidget": "cpp"
     }
 }
