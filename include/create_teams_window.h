@@ -17,7 +17,6 @@
 #include <random>
 #include <set>
 
-#include <QMessageBox>
 class CreateTeamsWindow : public QWidget
 {
     Q_OBJECT
@@ -188,19 +187,6 @@ private:
     QLabel *random_label;
     QCheckBox * m_random_select_check_box;
 
-    void initSelectMorePlayersMessageBox()
-    {
-        QMessageBox message_box;
-        message_box.setWindowTitle("Warning");
-        message_box.setIcon(QMessageBox::Warning);
-        message_box.setStyleSheet(Settings::MESSAGES_BOX_COLOR);
-        message_box.setFont(Fonts::PLAYER_ITEM_WIDGET_FONT);
-        message_box.setText("Please select more players");
-        message_box.setStandardButtons(QMessageBox::Ok);
-
-        message_box.exec();
-    }
-
     void disableAllUnchecked()
     {
         m_all_unchecked_disable = true;
@@ -309,7 +295,8 @@ public slots:
         }
         else
         {
-            initSelectMorePlayersMessageBox();
+            MessageBoxHandler::showMessageBox("Please select more players");
+            // initSelectMorePlayersMessageBox();
         }
     }
 

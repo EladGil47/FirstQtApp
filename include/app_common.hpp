@@ -229,12 +229,11 @@ namespace Functions
 }
 
 #include <QMessageBox>
-#include <QString>
 
 class MessageBoxHandler
 {
 public:
-    static void showAddMorePlayersMessage(uint16_t requiredPlayersToAdd)
+    static void showMessageBox(QString message_text )
     {
         QMessageBox messageBox;
         messageBox.setWindowTitle("Warning");
@@ -242,8 +241,7 @@ public:
         messageBox.setStyleSheet(Settings::MESSAGES_BOX_COLOR);
         messageBox.setFont(Fonts::PLAYER_ITEM_WIDGET_FONT);
 
-        QString messageText = "Please add " + QString::number(requiredPlayersToAdd) + " more players to create teams";
-        messageBox.setText(messageText);
+        messageBox.setText(message_text);
 
         messageBox.setStandardButtons(QMessageBox::Ok);
         messageBox.exec();

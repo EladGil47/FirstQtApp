@@ -162,7 +162,8 @@ void PlayersListWindow::onCreateTeamsClicked()
     else
     {
         uint16_t required_players_to_add = minimun_required_players_amount - players_amount;
-        MessageBoxHandler::showAddMorePlayersMessage(required_players_to_add);
+        QString message =  "Please add " + QString::number(required_players_to_add) + " more players to create teams";
+        MessageBoxHandler::showMessageBox(message);
     }
 }
 
