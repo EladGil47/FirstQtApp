@@ -141,7 +141,10 @@ public slots:
             }
         }
         if(is_ok_valid)
-        emit okButtonClickedSignal();
+        {
+            TeamsCreator::serializeTeams(m_teams);
+            emit okButtonClickedSignal();
+        }
         else{
             MessageBoxHandler::showMessageBox("Please fill all teams");
         }
