@@ -13,48 +13,44 @@ class BaseListManagerWindow : public QWidget
 {
     Q_OBJECT
 private:
-    QVBoxLayout * m_window_layout = new QVBoxLayout(this);
+    QVBoxLayout *m_window_layout = new QVBoxLayout(this);
     void initListListWidget();
     void initListLabel();
     void initListLayout();
     QVBoxLayout *m_list_layout;
-    void removeAllItemsFromList() ;
+    void removeAllItemsFromList();
     void initHeaderLabel();
 
-    
-
-protected :
+protected:
     BaseListManagerWindow();
     ~BaseListManagerWindow();
 
-
-    void initBaseWindowLayout() ;
-    virtual void initList()  {
-        return ;
-    }
-    virtual void setListLabelText() 
+    void initBaseWindowLayout();
+    virtual void initList()
     {
-        return ;
+        return;
     }
-    virtual void setButtonsHorLayout() 
+    virtual void setListLabelText()
     {
-        return ;
+        return;
+    }
+    virtual void setButtonsHorLayout()
+    {
+        return;
     }
 
-    void updateList() ;
-    void setHeaderLabelText(const QString &text) ;
-    void setHeaderLabelEditability(bool state) ;
+    void updateList();
+    void setHeaderLabelText(const QString &text);
+    void setHeaderLabelEditability(bool state);
 
-    EditableLabel *m_header_label ;
+    EditableLabel *m_header_label;
     QLabel *m_list_label;
     QListWidget *m_list_list_widget;
     QHBoxLayout *m_buttons_hor_layout;
 
-    QHBoxLayout *  m_list_label_layout;
-    QHBoxLayout *  m_list_list_layout; 
-    QHBoxLayout * m_lists_hor_layout ;
-
-
+    QHBoxLayout *m_list_label_layout;
+    QHBoxLayout *m_list_list_layout;
+    QHBoxLayout *m_lists_hor_layout;
 };
 
 #endif // FIRST_QT_APP_INCLUDE_BASE_LIST_MANAGER_WINDOW_H

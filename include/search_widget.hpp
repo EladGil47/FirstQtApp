@@ -28,7 +28,6 @@ private:
     QLineEdit *m_search_line_edit;
     QListView *suggestionsListView;
     QStandardItemModel *suggestionsModel;
-    QStringList * m_possibilities;
+    QStringList *m_possibilities;
 };
 #endif // FIRST_QT_APP_INCLUDE_SEARCH_WIDGET_H
-

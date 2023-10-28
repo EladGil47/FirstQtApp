@@ -30,7 +30,6 @@ public:
             m_selected_players = std::make_shared<PlayersCollection>();
             m_max_selected_players_amount = group->getTeamsAmount() * group->getPlayersInTeamAmount();
 
-
             initHeaderLabel();
             initListsLayout();
             initButtonsHorLayout();
@@ -59,7 +58,7 @@ public:
         m_cancel_button->setStyleSheet(Style::RED_BUTTON_HOR_LAYOUT);
         connect(m_cancel_button, &QPushButton::clicked, this, &CreateTeamsWindow::onCancelButtonClicked);
     }
-    
+
     void initCheckedPlayersList()
     {
         QLabel *m_coming_players_label = new QLabel("Coming players");
@@ -72,32 +71,32 @@ public:
     void initCheckablePlayersList()
     {
         QLabel *checked_label = new QLabel("Checked :");
-        
+
         m_selected_players_amount_label = new QLabel(QString::number(m_selected_players_amount));
-        
+
         QLabel *slash_label = new QLabel("/");
-        
-        QLabel * max_selected_players_amount_label = new QLabel(QString::number(m_max_selected_players_amount));
-        
+
+        QLabel *max_selected_players_amount_label = new QLabel(QString::number(m_max_selected_players_amount));
+
         QSpacerItem *spacer = new QSpacerItem(0, 0, QSizePolicy::Expanding, QSizePolicy::Fixed);
-        
+
         random_label = new QLabel("Auto fill");
 
         m_random_select_check_box = new QCheckBox;
         m_random_select_check_box->setToolTip("Press to Auto fill");
         m_random_select_check_box->setStyleSheet(
-         "QCheckBox::indicator {"
-                           "    border-color: black;"
-                           "    border-radius: 12px;"    // Make it circular
-                           "    background-color: yellow;"
-                           "    width: 24px;"
-                           "    height: 24px;"
-                           "}"
-                           "QCheckBox::indicator:checked {"
-                           "   background-color: red;"  // Green color when checked
-                           "}");
+            "QCheckBox::indicator {"
+            "    border-color: black;"
+            "    border-radius: 12px;" // Make it circular
+            "    background-color: yellow;"
+            "    width: 24px;"
+            "    height: 24px;"
+            "}"
+            "QCheckBox::indicator:checked {"
+            "   background-color: red;" // Green color when checked
+            "}");
         connect(m_random_select_check_box, &QCheckBox::stateChanged, this, &CreateTeamsWindow::onRandomSelectCheckBoxStateChanged);
-        
+
         m_checkable_players_list = new LabeledListWidget();
         m_checkable_players_list->setListColor(Style::LIST);
         m_checkable_players_list->addWidgetAboveList(m_random_select_check_box);
@@ -127,10 +126,9 @@ public:
 
         m_lists_layout->addWidget(m_checkable_players_list);
         m_lists_layout->addWidget(m_checked_players_list);
-
     }
 
-    void initButtonsHorLayout() 
+    void initButtonsHorLayout()
     {
         m_buttons_hor_layout = new QHBoxLayout;
 
@@ -157,11 +155,11 @@ public:
         player_item_widget->setupLayout(
             (BasePlayerItemWidget::SetupLayoutOptions::NAME |
              BasePlayerItemWidget::SetupLayoutOptions::REMOVE));
-        connect(player_item_widget, &BasePlayerItemWidget::removeButtonClickedSignal,this,&CreateTeamsWindow::onRemovePlayerButton);
+        connect(player_item_widget, &BasePlayerItemWidget::removeButtonClickedSignal, this, &CreateTeamsWindow::onRemovePlayerButton);
         m_checked_players_list->addItemToList(player_item_widget);
     }
 
-    void addAllPlayersToCheckablePlayersList() 
+    void addAllPlayersToCheckablePlayersList()
     {
         for (std::shared_ptr<Player> player : m_group->getPlayersCollectionRef().getCollectionRef())
         {
@@ -170,10 +168,10 @@ public:
     }
 
 private:
-    QLabel *m_header_label ;
+    QLabel *m_header_label;
     QHBoxLayout *m_lists_layout;
-    LabeledListWidget * m_checkable_players_list;
-    LabeledListWidget * m_checked_players_list;
+    LabeledListWidget *m_checkable_players_list;
+    LabeledListWidget *m_checked_players_list;
     QHBoxLayout *m_buttons_hor_layout;
 
     QLabel *m_selected_players_amount_label;
@@ -183,9 +181,9 @@ private:
     QPushButton *m_ok_button;
     QPushButton *m_cancel_button;
     std::shared_ptr<Group> m_group;
-    std::shared_ptr<PlayersCollection> m_selected_players ;
+    std::shared_ptr<PlayersCollection> m_selected_players;
     QLabel *random_label;
-    QCheckBox * m_random_select_check_box;
+    QCheckBox *m_random_select_check_box;
 
     void disableAllUnchecked()
     {
@@ -194,7 +192,7 @@ private:
         int item_count = m_checkable_players_list->m_list->count();
         for (int i = 0; i < item_count; ++i)
         {
-            QListWidgetItem *item =  m_checkable_players_list->m_list->item(i); // Replace 'row' with the row number you want to retrieve
+            QListWidgetItem *item = m_checkable_players_list->m_list->item(i); // Replace 'row' with the row number you want to retrieve
             if (item)
             {
                 CheckablePlayerItemWidget *widget = qobject_cast<CheckablePlayerItemWidget *>(m_checkable_players_list->m_list->itemWidget(item));
@@ -209,7 +207,7 @@ private:
         }
     }
 
-    void setCheckableItemWidgetCheckBox(size_t index,Qt::CheckState state)
+    void setCheckableItemWidgetCheckBox(size_t index, Qt::CheckState state)
     {
         QListWidgetItem *item = m_checkable_players_list->m_list->item(index); // Replace 'row' with the row number you want to retrieve
         if (item)
@@ -217,7 +215,7 @@ private:
             CheckablePlayerItemWidget *widget = qobject_cast<CheckablePlayerItemWidget *>(m_checkable_players_list->m_list->itemWidget(item));
             if (widget)
             {
-                    widget->setCheckState(state);
+                widget->setCheckState(state);
             }
         }
     }
@@ -262,7 +260,7 @@ private:
             }
         }
     }
-    
+
     void uncheckAll()
     {
         for (std::shared_ptr<Player> player : m_selected_players->getCollection())
@@ -273,13 +271,13 @@ private:
 
 signals:
     void cancelButtonClickedSignal(size_t id);
-    void okButtonClickedSignal(std::shared_ptr <PlayersCollection> players,size_t id);
+    void okButtonClickedSignal(std::shared_ptr<PlayersCollection> players, size_t id);
 
 public slots:
 
     void onRemovePlayerButton(size_t player_id)
     {
-        setCheckableItemWidgetCheckBox(player_id,Qt::CheckState::Unchecked);
+        setCheckableItemWidgetCheckBox(player_id, Qt::CheckState::Unchecked);
     }
 
     void onCancelButtonClicked()
@@ -291,7 +289,7 @@ public slots:
     {
         if (m_selected_players->getSize() == m_max_selected_players_amount)
         {
-            emit okButtonClickedSignal(m_selected_players,m_group->getId());
+            emit okButtonClickedSignal(m_selected_players, m_group->getId());
         }
         else
         {
@@ -312,7 +310,6 @@ public slots:
             removePlayerFromCheckedPlayerList(id);
             m_random_select_check_box->setCheckState(Qt::CheckState::Unchecked);
 
-            
             break;
         }
         case Qt::CheckState::Checked:
@@ -321,7 +318,7 @@ public slots:
             std::shared_ptr<Player> player = m_group->getPlayersCollection().getItem(id);
             m_selected_players->addItem(player);
             addPlayerToCheckedPlayersList(player);
-            if(m_selected_players_amount == m_max_selected_players_amount)
+            if (m_selected_players_amount == m_max_selected_players_amount)
             {
                 m_random_select_check_box->setChecked(true);
             }
@@ -393,4 +390,4 @@ public slots:
     }
 };
 
-#endif // FIRST_QT_APP_INCLUDE_CREATE_TEAMS_WINDOW_H 
+#endif // FIRST_QT_APP_INCLUDE_CREATE_TEAMS_WINDOW_H

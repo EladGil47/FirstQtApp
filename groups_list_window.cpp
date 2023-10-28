@@ -7,8 +7,7 @@
 #include "app_common.hpp"
 
 GroupsListWindow::GroupsListWindow(std::shared_ptr<GroupsCollection> groups_collection)
-:
-m_groups_collection(groups_collection)
+    : m_groups_collection(groups_collection)
 {
     initBaseWindowLayout();
     initGroupsAmountLabel();
@@ -33,7 +32,7 @@ void GroupsListWindow::initGroupsAmountLabel()
     m_groups_amount_label->setAlignment(Qt::AlignLeft);
 
     m_list_label_layout->addWidget(m_groups_amount_label);
-    QSpacerItem *spacer = new QSpacerItem(0, 0,QSizePolicy::Expanding, QSizePolicy::Fixed);
+    QSpacerItem *spacer = new QSpacerItem(0, 0, QSizePolicy::Expanding, QSizePolicy::Fixed);
     m_list_label_layout->addSpacerItem(spacer);
 }
 void GroupsListWindow::setGroupsAmountLabelText()
@@ -60,7 +59,7 @@ void GroupsListWindow::initList()
     }
 }
 
-void GroupsListWindow::changeGroupName(uint16_t id ,const std::string & name)
+void GroupsListWindow::changeGroupName(uint16_t id, const std::string &name)
 {
     m_groups_collection->getItem(static_cast<size_t>(id))->setName(name);
 }
@@ -79,12 +78,12 @@ void GroupsListWindow::setButtonsHorLayout()
 }
 
 void GroupsListWindow::addGroupItemToList(std::shared_ptr<Group> group)
-{   
-    GroupItemWidget * group_item_widget = new GroupItemWidget(group);
-    connect(group_item_widget,&GroupItemWidget::enterButtonClickedSignal,this,&GroupsListWindow::onEnterGroupButton);
-    connect(group_item_widget,&GroupItemWidget::removeButtonClickedSignal,this,&GroupsListWindow::onRemoveGroupButton);
-    connect(group_item_widget,&GroupItemWidget::createTeamsButtonClickedSignal,this,&GroupsListWindow::onCreateTeamsButton);
-    connect(group_item_widget,&GroupItemWidget::groupNameChangedSignal,this,&GroupsListWindow::changeGroupName);
+{
+    GroupItemWidget *group_item_widget = new GroupItemWidget(group);
+    connect(group_item_widget, &GroupItemWidget::enterButtonClickedSignal, this, &GroupsListWindow::onEnterGroupButton);
+    connect(group_item_widget, &GroupItemWidget::removeButtonClickedSignal, this, &GroupsListWindow::onRemoveGroupButton);
+    connect(group_item_widget, &GroupItemWidget::createTeamsButtonClickedSignal, this, &GroupsListWindow::onCreateTeamsButton);
+    connect(group_item_widget, &GroupItemWidget::groupNameChangedSignal, this, &GroupsListWindow::changeGroupName);
 
     QListWidgetItem *item = new QListWidgetItem(m_list_list_widget);
     item->setSizeHint(group_item_widget->sizeHint());
@@ -109,7 +108,6 @@ void GroupsListWindow::onCreateNewGroupButton()
         group_config.teams_amount = static_cast<uint16_t>(teams);
         group_config.players_in_team_amount = static_cast<uint16_t>(players_in_team);
 
-
         std::shared_ptr<Group> newGroup = std::make_shared<Group>(group_config);
         m_groups_collection->addItem(newGroup);
         addGroupItemToList(newGroup);
@@ -122,7 +120,7 @@ void GroupsListWindow::onRemoveGroupButton(size_t id)
     QListWidgetItem *itemToRemove = m_list_list_widget->takeItem(id);
     delete itemToRemove;
     m_groups_collection->deleteItem(id);
-    for (size_t index = id; index <  m_groups_collection->getSize(); index++)
+    for (size_t index = id; index < m_groups_collection->getSize(); index++)
     {
         m_groups_collection->getItem(index)->setId(static_cast<uint16_t>(index));
     }

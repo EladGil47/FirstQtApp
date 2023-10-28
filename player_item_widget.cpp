@@ -4,8 +4,8 @@
 
 #include <QHBoxLayout>
 
-PlayerItemWidget::PlayerItemWidget(std::shared_ptr<Player> player) 
-: BasePlayerItemWidget(player)
+PlayerItemWidget::PlayerItemWidget(std::shared_ptr<Player> player)
+    : BasePlayerItemWidget(player)
 {
     initEditableNameLabel(QString::fromStdString(player->getName()));
     initRateLabel(QString::number(player->getRate()));
@@ -55,7 +55,7 @@ void PlayerItemWidget::onRemoveButtonClicked()
     emit removeButtonClickedSignal(m_player_index);
 }
 void PlayerItemWidget::onChangePlayerName(const QString &name)
-{   
+{
     std::string player_name = name.toStdString();
     m_player->setName(player_name);
     emit playerNameChangedSignal(m_player_index, player_name);

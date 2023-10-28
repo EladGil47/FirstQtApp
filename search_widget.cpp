@@ -2,7 +2,7 @@
 
 #include <QDialogButtonBox>
 
-SearchWidget::SearchWidget(QStringList *possibilities) 
+SearchWidget::SearchWidget(QStringList *possibilities)
 {
     if (possibilities)
     {
@@ -26,14 +26,12 @@ SearchWidget::SearchWidget(QStringList *possibilities)
         connect(buttonBox, &QDialogButtonBox::accepted, this, &SearchWidget::accept);
         connect(buttonBox, &QDialogButtonBox::rejected, this, &SearchWidget::reject);
 
-
         connect(suggestionsListView, &QListView::clicked, this, &SearchWidget::onItemClicked);
         connect(suggestionsListView, &QListView::doubleClicked, this, &SearchWidget::onItemDoubleClicked);
 
         layout->addWidget(m_search_line_edit);
         layout->addWidget(suggestionsListView);
         layout->addWidget(buttonBox);
-
     }
 }
 
@@ -54,7 +52,7 @@ void SearchWidget::onItemDoubleClicked(const QModelIndex &index)
 void SearchWidget::onSearchTextChanged()
 {
     QString search_text = m_search_line_edit->text();
-    
+
     // Emit the signal to notify the main window about the search text change
     emit searchTextChanged(search_text);
 

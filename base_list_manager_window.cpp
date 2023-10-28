@@ -43,20 +43,17 @@ void BaseListManagerWindow::initListLayout()
     m_list_label_layout = new QHBoxLayout;
     m_list_list_layout = new QHBoxLayout;
 
-  
-    Functions::checkNotNull(m_list_label,"m_list_label");
+    Functions::checkNotNull(m_list_label, "m_list_label");
     m_list_label_layout->addWidget(m_list_label);
 
     m_list_layout->addLayout(m_list_label_layout);
 
-
-    Functions::checkNotNull(m_list_list_widget,"m_list_list_widget");
+    Functions::checkNotNull(m_list_list_widget, "m_list_list_widget");
     m_list_list_layout->addWidget(m_list_list_widget);
 
     m_list_layout->addLayout(m_list_list_layout);
 
     m_lists_hor_layout->addLayout(m_list_layout);
-
 }
 
 void BaseListManagerWindow::initListListWidget()
@@ -67,26 +64,26 @@ void BaseListManagerWindow::initListListWidget()
 
 void BaseListManagerWindow::initBaseWindowLayout()
 {
-    Functions::checkNotNull(m_header_label,"m_header_label");
+    Functions::checkNotNull(m_header_label, "m_header_label");
     m_window_layout->addWidget(m_header_label);
-    Functions::checkNotNull(m_list_layout,"m_list_layout");
+    Functions::checkNotNull(m_list_layout, "m_list_layout");
     m_window_layout->addLayout(m_lists_hor_layout);
-    Functions::checkNotNull(m_buttons_hor_layout,"m_buttons_hor_layout");
+    Functions::checkNotNull(m_buttons_hor_layout, "m_buttons_hor_layout");
     m_window_layout->addLayout(m_buttons_hor_layout);
 }
 
 void BaseListManagerWindow::removeAllItemsFromList()
 {
     int item_count = m_list_list_widget->count();
-    int const FIRST_ROW =  0;
+    int const FIRST_ROW = 0;
     for (int i = FIRST_ROW; i < item_count; ++i)
-    {   
+    {
         // Each iteration the first elemnt is deleted which means second element becoming first
-        QListWidgetItem *item = m_list_list_widget->item(FIRST_ROW); 
+        QListWidgetItem *item = m_list_list_widget->item(FIRST_ROW);
         QWidget *widget = m_list_list_widget->itemWidget(item);
         m_list_list_widget->removeItemWidget(item);
-        delete item;                                 
-        delete widget;                            
+        delete item;
+        delete widget;
     }
 }
 
@@ -96,12 +93,12 @@ void BaseListManagerWindow::updateList()
     initList();
 }
 
-void BaseListManagerWindow::setHeaderLabelText(const QString &text) 
+void BaseListManagerWindow::setHeaderLabelText(const QString &text)
 {
     m_header_label->setText(text);
 }
 
-void BaseListManagerWindow::setHeaderLabelEditability(bool state) 
+void BaseListManagerWindow::setHeaderLabelEditability(bool state)
 {
     m_header_label->setEditablity(state);
 }

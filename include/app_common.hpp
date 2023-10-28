@@ -11,7 +11,7 @@
 enum class COLOR
 {
     GREEN,
-    BLUE ,
+    BLUE,
     ORANGE,
     RED,
     YELLOW,
@@ -28,17 +28,11 @@ namespace Colors
     const QString GREY = "grey;";
     const QString BLACK = "black;";
 
-
-
-
     const QString OFFWHITE = "#FFFFBF;";
 
     const QString ORANGE = "#FFA500;";
 
     const QString BROWN = " rgb(139, 69, 30);";
-
-
-   
 
     const QString GREEN = "#4CAF50;";
     const QString HOVER_GREEN = "#45a049;";
@@ -67,8 +61,6 @@ namespace QtObjects
 
 }
 
-
-
 namespace Common
 {
     const QString FONT_FAMILY_NAME = "Segoe UI";
@@ -83,7 +75,6 @@ namespace Fonts
     const QFont HEADER_LABEL_FONT = QFont(Common::FONT_FAMILY_NAME, 22, QFont::Bold);
     const QFont LARGE_FONT = QFont(Common::FONT_FAMILY_NAME, 30, QFont::Bold);
 
-
 }
 
 namespace Sizes
@@ -97,22 +88,22 @@ namespace Style
     const QString OFFWHITE_BACKGROUND = CssKeys::BACKGROUND_COLOR + Colors::OFFWHITE;
 
     const QString TRANSPARENT_STYLESHEET =
-        CssKeys::BORDER + Colors::TRANSPARENT + ";" + CssKeys::BACKGROUND_COLOR + Colors::TRANSPARENT + ";" ;
+        CssKeys::BORDER + Colors::TRANSPARENT + ";" + CssKeys::BACKGROUND_COLOR + Colors::TRANSPARENT + ";";
 
     const QString GREEN_COLOR =
         CssKeys::BORDER + Colors::GREEN + CssKeys::BACKGROUND_COLOR + Colors::GREEN;
 
     const QString GREEN_COLOR_BLACK_BORDER =
-        CssKeys::BORDER + "1px solid " + Colors::BLACK  + CssKeys::BACKGROUND_COLOR + Colors::GREEN;
+        CssKeys::BORDER + "1px solid " + Colors::BLACK + CssKeys::BACKGROUND_COLOR + Colors::GREEN;
 
     const QString HOVER_GREEN_COLOR =
         CssKeys::BORDER + Colors::HOVER_GREEN + CssKeys::BACKGROUND_COLOR + Colors::HOVER_GREEN;
 
     const QString RED_COLOR =
         CssKeys::BORDER + Colors::RED + CssKeys::BACKGROUND_COLOR + Colors::RED;
-    
+
     const QString RED_BACKGROUND_BLACK_BORDER_WHITE_TEXT =
-        CssKeys::BORDER + "1px solid " + Colors::BLACK  + CssKeys::BACKGROUND_COLOR + Colors::RED +  "color: white;"  ;
+        CssKeys::BORDER + "1px solid " + Colors::BLACK + CssKeys::BACKGROUND_COLOR + Colors::RED + "color: white;";
 
     const QString HOVER_RED_COLOR =
         CssKeys::BORDER + Colors::HOVER_RED + CssKeys::BACKGROUND_COLOR + Colors::HOVER_RED;
@@ -129,8 +120,8 @@ namespace Style
         "    font-size: 18px;"   // Font size
         "    font-weight: bold;" // Bold text
         ;
-    
-      const QString BLACK_TEXT_COLOR =
+
+    const QString BLACK_TEXT_COLOR =
         "    color: black;"      // White text color
         "    padding: 3px 20px;" // Padding around the text
         "    font-size: 18px;"   // Font size
@@ -149,38 +140,40 @@ namespace Style
         QtObjects::QPUSH_BUTTON + " {" + BLUE_COLOR + WHITE_TEXT_COLOR + "}" +
         QtObjects::QPUSH_BUTTON + ":hover {" + HOVER_BLUE_COLOR + "}";
 
-    const QString LIST = "QListWidget {" +  CssKeys::BORDER + "1px solid "+ Colors::BLACK + ";" + CssKeys::BACKGROUND_COLOR + Colors::BROWN + "}"
-                            "QListWidget::item {"+  CssKeys::BORDER + "1px solid "+ Colors::BLACK + ";" + "}"
-                                "QListWidget::item:selected {" + CssKeys::BACKGROUND_COLOR+ "rgba(0, 0, 255, 10%) " + ";" + " } ";
+    const QString LIST = "QListWidget {" + CssKeys::BORDER + "1px solid " + Colors::BLACK + ";" + CssKeys::BACKGROUND_COLOR + Colors::BROWN + "}"
+                                                                                                                                              "QListWidget::item {" +
+                         CssKeys::BORDER + "1px solid " + Colors::BLACK + ";" + "}"
+                                                                                "QListWidget::item:selected {" +
+                         CssKeys::BACKGROUND_COLOR + "rgba(0, 0, 255, 10%) " + ";" + " } ";
 
-    const QString ORANGE_LIST = "QListWidget {" + CssKeys::BACKGROUND_COLOR +  Colors::ORANGE + "}";
-    const QString GREEN_LIST = "QListWidget {" + CssKeys::BACKGROUND_COLOR +  Colors::GREEN + "}";
-    const QString BLUE_LIST = "QListWidget {" + CssKeys::BACKGROUND_COLOR +  Colors::BLUE + "}";
-    const QString RED_LIST = "QListWidget {" + CssKeys::BACKGROUND_COLOR +  Colors::RED + "}";
-    const QString YELLOW_LIST = "QListWidget {" + CssKeys::BACKGROUND_COLOR +  Colors::YELLOW + "}";
+    const QString ORANGE_LIST = "QListWidget {" + CssKeys::BACKGROUND_COLOR + Colors::ORANGE + "}";
+    const QString GREEN_LIST = "QListWidget {" + CssKeys::BACKGROUND_COLOR + Colors::GREEN + "}";
+    const QString BLUE_LIST = "QListWidget {" + CssKeys::BACKGROUND_COLOR + Colors::BLUE + "}";
+    const QString RED_LIST = "QListWidget {" + CssKeys::BACKGROUND_COLOR + Colors::RED + "}";
+    const QString YELLOW_LIST = "QListWidget {" + CssKeys::BACKGROUND_COLOR + Colors::YELLOW + "}";
 
 }
 
 class ListStyles
 {
-    private: 
+private:
     std::vector<QString> m_team_colors = {
-    Style::GREEN_LIST,
-    Style::BLUE_LIST,
-    Style::ORANGE_LIST,
-    Style::RED_LIST};
-    public: 
+        Style::GREEN_LIST,
+        Style::BLUE_LIST,
+        Style::ORANGE_LIST,
+        Style::RED_LIST};
 
-
+public:
     QString getColoredListStyle(std::uint16_t index)
     {
         QString ret_val;
-        if(index < m_team_colors.size())
+        if (index < m_team_colors.size())
         {
             ret_val = m_team_colors[index];
         }
-        else{
-        throw std::out_of_range("Index out of range");
+        else
+        {
+            throw std::out_of_range("Index out of range");
         }
         return ret_val;
     }
@@ -199,7 +192,6 @@ namespace Settings
     const QString DIALOGS_COLOR = QtObjects::QDIALOG + "{" + Style::OFFWHITE_BACKGROUND + "}";
     const QString MESSAGES_BOX_COLOR = QtObjects::QMESSAGEBOX + "{" + Style::OFFWHITE_BACKGROUND + "}";
 }
-
 
 namespace MaxValues
 {
@@ -233,7 +225,7 @@ namespace Functions
 class MessageBoxHandler
 {
 public:
-    static void showMessageBox(QString message_text )
+    static void showMessageBox(QString message_text)
     {
         QMessageBox messageBox;
         messageBox.setWindowTitle("Warning");
@@ -247,6 +239,5 @@ public:
         messageBox.exec();
     }
 };
-
 
 #endif // FIRST_QT_APP_INCLUDE_APP_COMMON_H

@@ -4,16 +4,16 @@
 #include <QWidget>
 #include <QString>
 #include <QLabel>
-#include "labeled_list_widget.hpp"  
+#include "labeled_list_widget.hpp"
 #include "team.hpp"
 
 class TeamList : public QWidget
 {
-Q_OBJECT
+    Q_OBJECT
 public:
     TeamList(std::shared_ptr<Team> team);
 
-    void addPlayer(std::shared_ptr <Player> player);
+    void addPlayer(std::shared_ptr<Player> player);
     void setAverageRateLabel(const QString &m_avg_rate_label);
     LabeledListWidget *getLabeledListWidget();
 
@@ -24,16 +24,15 @@ private:
 
     std::shared_ptr<Team> m_team;
 
-void initAvgRateLabel();
-void updateAvgRateLabel();
+    void initAvgRateLabel();
+    void updateAvgRateLabel();
 
 private slots:
-    std::shared_ptr<Player > onAddPlayerClicked();
+    std::shared_ptr<Player> onAddPlayerClicked();
     void onRempovePlayerClicked(uint16_t player_id);
-
 
 signals:
     std::shared_ptr<Player> addPlayerClickedSignal(uint16_t id);
 };
 
-#endif //FIRST_QT_APP_TEAM_LIST_H
+#endif // FIRST_QT_APP_TEAM_LIST_H

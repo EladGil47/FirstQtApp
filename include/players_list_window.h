@@ -10,7 +10,7 @@
 #include "group.hpp"
 
 #include <memory>
-class PlayersListWindow  : public QWidget
+class PlayersListWindow : public QWidget
 {
     Q_OBJECT
 
@@ -22,28 +22,28 @@ private:
     void initGroupNameLabel();
     void initPlayersList();
 
-    void initList() ;
+    void initList();
 
     void initPlayersAmountLabel();
     void initPlayersAmountLabelText();
 
-    void initButtonsHorLayout() ;
+    void initButtonsHorLayout();
 
     void initCreateNewPlayerButton();
     void initCreateTeamsButton();
     void initGoBackButton();
 
     std::shared_ptr<Group> m_group;
-    
-    EditableLabel *m_group_label_name ;
-    QLabel * m_players_amount_label;
+
+    EditableLabel *m_group_label_name;
+    QLabel *m_players_amount_label;
     LabeledListWidget *m_players_list;
     QPushButton *m_create_new_player_button;
-    QPushButton *m_create_teams_button; 
+    QPushButton *m_create_teams_button;
     QPushButton *m_go_back_button;
     QHBoxLayout *m_buttons_hor_layout;
 
-    void addButtonToButtonsHorLayout(QPushButton * button);
+    void addButtonToButtonsHorLayout(QPushButton *button);
     void addItemToList(std::shared_ptr<Player> player);
 
 public slots:
@@ -52,8 +52,8 @@ public slots:
     void onGoBackButton();
     void onRemoveButton(size_t id);
     void onEnterButton(size_t id);
-    void onPlayerNameChanged(uint16_t id ,const std::string & name);
-    void setGroupName(const QString & text);
+    void onPlayerNameChanged(uint16_t id, const std::string &name);
+    void setGroupName(const QString &text);
 
 signals:
     void onGoBackButtonClickedSignal();

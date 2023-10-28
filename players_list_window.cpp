@@ -36,7 +36,7 @@ void PlayersListWindow::initGroupNameLabel()
 }
 
 void PlayersListWindow::initPlayersAmountLabel()
-{   
+{
     QLabel *players_text_label = new QLabel("Players :");
     m_players_list->addWidgetAboveList(players_text_label);
 
@@ -44,8 +44,8 @@ void PlayersListWindow::initPlayersAmountLabel()
     initPlayersAmountLabelText();
     m_players_amount_label->setFont(Fonts::LIST_LABEL_FONT);
     m_players_list->addWidgetAboveList(m_players_amount_label);
-    
-    QSpacerItem *spacer = new QSpacerItem(0, 0,QSizePolicy::Expanding, QSizePolicy::Fixed);
+
+    QSpacerItem *spacer = new QSpacerItem(0, 0, QSizePolicy::Expanding, QSizePolicy::Fixed);
     m_players_list->addSpacerAboveList(spacer);
 }
 
@@ -55,12 +55,12 @@ void PlayersListWindow::initPlayersAmountLabelText()
     m_players_amount_label->setText(size);
 }
 
-void PlayersListWindow::onPlayerNameChanged(uint16_t id ,const std::string & name)
+void PlayersListWindow::onPlayerNameChanged(uint16_t id, const std::string &name)
 {
     m_group->getPlayersCollectionRef().getItem(static_cast<size_t>(id))->setName(name);
 }
 
-void PlayersListWindow::setGroupName(const QString & text)
+void PlayersListWindow::setGroupName(const QString &text)
 {
     m_group->setName(text.toStdString());
 }
@@ -111,12 +111,12 @@ void PlayersListWindow::initButtonsHorLayout()
     m_buttons_hor_layout->addStretch(1);
 }
 
-void PlayersListWindow::addButtonToButtonsHorLayout(QPushButton * button)
+void PlayersListWindow::addButtonToButtonsHorLayout(QPushButton *button)
 {
-    if(button)
-    m_buttons_hor_layout->addWidget(button, 2);
+    if (button)
+        m_buttons_hor_layout->addWidget(button, 2);
     else
-    qDebug() << "Notice : The system prevent to add unassigned button to a layout";
+        qDebug() << "Notice : The system prevent to add unassigned button to a layout";
 }
 
 void PlayersListWindow::setupLayout()
@@ -127,7 +127,7 @@ void PlayersListWindow::setupLayout()
     layout->addLayout(m_buttons_hor_layout);
 }
 
-// Slots : 
+// Slots :
 
 void PlayersListWindow::onCreateNewPlayerButton()
 {
@@ -162,17 +162,17 @@ void PlayersListWindow::onCreateTeamsClicked()
     else
     {
         uint16_t required_players_to_add = minimun_required_players_amount - players_amount;
-        QString message =  "Please add " + QString::number(required_players_to_add) + " more players to create teams";
+        QString message = "Please add " + QString::number(required_players_to_add) + " more players to create teams";
         MessageBoxHandler::showMessageBox(message);
     }
 }
 
 void PlayersListWindow::addItemToList(std::shared_ptr<Player> player)
 {
-    PlayerItemWidget * player_item_widget = new PlayerItemWidget(player);
-    connect(player_item_widget,&PlayerItemWidget::enterButtonClickedSignal,this,&PlayersListWindow::onEnterButton);
-    connect(player_item_widget,&PlayerItemWidget::removeButtonClickedSignal,this,&PlayersListWindow::onRemoveButton);
-    connect(player_item_widget,&PlayerItemWidget::playerNameChangedSignal,this,&PlayersListWindow::onPlayerNameChanged);
+    PlayerItemWidget *player_item_widget = new PlayerItemWidget(player);
+    connect(player_item_widget, &PlayerItemWidget::enterButtonClickedSignal, this, &PlayersListWindow::onEnterButton);
+    connect(player_item_widget, &PlayerItemWidget::removeButtonClickedSignal, this, &PlayersListWindow::onRemoveButton);
+    connect(player_item_widget, &PlayerItemWidget::playerNameChangedSignal, this, &PlayersListWindow::onPlayerNameChanged);
 
     m_players_list->addItemToList(player_item_widget);
 }
@@ -182,7 +182,7 @@ void PlayersListWindow::onRemoveButton(size_t id)
     m_group->getPlayersCollectionRef().deleteItem(id);
     QListWidgetItem *itemToRemove = m_players_list->m_list->takeItem(id);
     delete itemToRemove;
-    for (size_t index = id; index <  m_group->getNumOfPlayers(); index++)
+    for (size_t index = id; index < m_group->getNumOfPlayers(); index++)
     {
         m_group->getPlayersCollectionRef().getItem(index)->setId(static_cast<uint16_t>(index));
     }
@@ -193,8 +193,8 @@ void PlayersListWindow::onRemoveButton(size_t id)
 
 void PlayersListWindow::onEnterButton(size_t id)
 {
-    qDebug () << "hello" << id;
- /// Open a window with player attributes
+    qDebug() << "hello" << id;
+    /// Open a window with player attributes
     /// Calls team creator
 }
 

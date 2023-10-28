@@ -3,12 +3,11 @@
 
 #include <QMouseEvent>
 
-
 GroupItemWidget::GroupItemWidget(std::shared_ptr<Group> group)
 {
     if (group)
     {
-        m_group = group ;
+        m_group = group;
         m_group_index = static_cast<size_t>(m_group->getId());
 
         initNameLabel();
@@ -33,7 +32,7 @@ void GroupItemWidget::initNameLabel()
     m_name_label->setMaxLength(MaxValues::ITEM_WIDGET_LABEL_NAME);
     m_name_label->setText(name);
     m_name_label->setFont(Fonts::GROUP_ITEM_WIDGET_FONT);
-    connect(m_name_label,&EditableLabel::finishEditingSig, this, &GroupItemWidget::onChangeGroupName);
+    connect(m_name_label, &EditableLabel::finishEditingSig, this, &GroupItemWidget::onChangeGroupName);
 }
 
 void GroupItemWidget::initSizeLabel()
@@ -42,53 +41,50 @@ void GroupItemWidget::initSizeLabel()
     QString size_wrapped = "(" + size + ")";
     m_size_label = new QLabel(size_wrapped);
     m_size_label->setFont(Fonts::GROUP_ITEM_WIDGET_FONT);
-
 }
 
 void GroupItemWidget::initEnterButton()
 {
     m_enter_button = new QPushButton("Enter");
     m_enter_button->setStyleSheet(Style::BLUE_BUTTON_HOR_LAYOUT);
-    connect(m_enter_button, &QPushButton::clicked, this,&GroupItemWidget::onEnterButtonClicked);
+    connect(m_enter_button, &QPushButton::clicked, this, &GroupItemWidget::onEnterButtonClicked);
 }
 
 void GroupItemWidget::initCreateTeamsButton()
 {
     m_create_teams_button = new QPushButton("Create Teams");
     m_create_teams_button->setStyleSheet(Style::GREEN_BUTTON_HOR_LAYOUT);
-    connect(m_create_teams_button, &QPushButton::clicked, this,&GroupItemWidget::onCreateTeamsButtonClicked);
+    connect(m_create_teams_button, &QPushButton::clicked, this, &GroupItemWidget::onCreateTeamsButtonClicked);
 }
 
 void GroupItemWidget::initRemoveButton()
 {
     m_remove_button = new QPushButton("Remove");
     m_remove_button->setStyleSheet(Style::RED_BUTTON_HOR_LAYOUT);
-    connect(m_remove_button, &QPushButton::clicked, this,&GroupItemWidget::onRemoveButtonClicked);
+    connect(m_remove_button, &QPushButton::clicked, this, &GroupItemWidget::onRemoveButtonClicked);
 }
 
 void GroupItemWidget::adjustButtonsSize()
 {
-    QList<QPushButton*> buttons = { m_enter_button, m_create_teams_button, m_remove_button };
+    QList<QPushButton *> buttons = {m_enter_button, m_create_teams_button, m_remove_button};
 
     // Find the maximum width among the buttons
     int max_width = 0;
-    for (QPushButton* button : buttons)
+    for (QPushButton *button : buttons)
     {
         if (button)
             max_width = qMax(max_width, button->sizeHint().width());
     }
 
     // Set the maximum width to all buttons
-    for (QPushButton* button : buttons)
+    for (QPushButton *button : buttons)
     {
         if (button)
         {
             button->setMinimumWidth(max_width);
         }
     }
-
 }
-
 
 void GroupItemWidget::setupLayout()
 {
@@ -103,7 +99,8 @@ void GroupItemWidget::setupLayout()
         layout->addWidget(m_create_teams_button);
         layout->addWidget(m_remove_button);
     }
-    else{
+    else
+    {
         qFatal("Error: Failed to set GroupItemWidget.\nOne or more required pointers are not set.");
     }
 }
@@ -116,8 +113,7 @@ void GroupItemWidget::mouseDoubleClickEvent(QMouseEvent *event)
     }
 }
 
-
-// Slots : 
+// Slots :
 
 void GroupItemWidget::onEnterButtonClicked()
 {
@@ -133,9 +129,10 @@ void GroupItemWidget::onCreateTeamsButtonClicked()
     {
         emit createTeamsButtonClickedSignal(m_group_index);
     }
-    else{
+    else
+    {
         uint16_t required_players_to_add = minimun_required_players_amount - players_amount;
-        QString message =  "Please add " + QString::number(required_players_to_add) + " more players to create teams";
+        QString message = "Please add " + QString::number(required_players_to_add) + " more players to create teams";
         MessageBoxHandler::showMessageBox(message);
     }
 }
@@ -145,7 +142,7 @@ void GroupItemWidget::onRemoveButtonClicked()
     emit removeButtonClickedSignal(m_group_index);
 }
 
-void GroupItemWidget::onChangeGroupName(const QString& name)
+void GroupItemWidget::onChangeGroupName(const QString &name)
 {
-    emit groupNameChangedSignal(m_group_index,name.toStdString());
+    emit groupNameChangedSignal(m_group_index, name.toStdString());
 }

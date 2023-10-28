@@ -48,7 +48,7 @@ void EditableLabel::setAlignment(Qt::Alignment alignment)
     m_editLine->setAlignment(alignment);
 }
 
-void EditableLabel::setFont (const QFont & font)
+void EditableLabel::setFont(const QFont &font)
 {
     m_label->setFont(font);
     m_editLine->setFont(font);

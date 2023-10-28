@@ -64,17 +64,16 @@ private:
     {
         m_is_selected_check_box = new QCheckBox;
         m_is_selected_check_box->setStyleSheet(
-    "QCheckBox::indicator {"
-                           "    border: white;"
-                           "    border-radius: 6px;"    // Make it circular
-                           "    background-color: white;"
-                           "    width: 12px;"
-                           "    height: 12px;"
-                           "}"
-                           "QCheckBox::indicator:checked {"
-                           "   background-color: #4CAF50;"  // Green color when checked
-                           "}"
-            );
+            "QCheckBox::indicator {"
+            "    border: white;"
+            "    border-radius: 6px;" // Make it circular
+            "    background-color: white;"
+            "    width: 12px;"
+            "    height: 12px;"
+            "}"
+            "QCheckBox::indicator:checked {"
+            "   background-color: #4CAF50;" // Green color when checked
+            "}");
         connect(m_is_selected_check_box, &QCheckBox::stateChanged, this, &CheckablePlayerItemWidget::onCheckBoxStateChanged);
     }
 

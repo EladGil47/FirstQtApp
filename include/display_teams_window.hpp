@@ -6,7 +6,6 @@
 #include <QVBoxLayout>
 #include <QPushButton>
 
-
 #include "group.hpp"
 #include "teams_creator.hpp"
 
@@ -140,12 +139,13 @@ public slots:
                 is_ok_valid = false;
             }
         }
-        if(is_ok_valid)
+        if (is_ok_valid)
         {
             TeamsCreator::serializeTeams(m_teams);
             emit okButtonClickedSignal();
         }
-        else{
+        else
+        {
             MessageBoxHandler::showMessageBox("Please fill all teams");
         }
     }

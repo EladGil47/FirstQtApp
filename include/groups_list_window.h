@@ -39,7 +39,6 @@ public slots:
     void onEnterGroupButton(size_t id);
     void onCreateTeamsButton(size_t id);
 
-
 signals:
     void setToPlayersListWindowSignal(size_t id);
     void setToCreateTeamsWindowSignal(size_t id);

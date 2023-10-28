@@ -21,9 +21,9 @@ void WindowsManager::setToPlayersListWindow(size_t id)
     setCentralWidget(m_players_list_window);
 }
 
-void WindowsManager::setToDisplayTeamsWindow(std::shared_ptr <PlayersCollection> players,size_t group_id)
+void WindowsManager::setToDisplayTeamsWindow(std::shared_ptr<PlayersCollection> players, size_t group_id)
 {
-    initDisplayTeamsWindow(players,group_id);
+    initDisplayTeamsWindow(players, group_id);
     setCentralWidget(m_display_teams_window);
 }
 
@@ -64,9 +64,9 @@ void WindowsManager::initCreateTeamsWindow(size_t id)
     QObject::connect(m_create_teams_window, &CreateTeamsWindow::okButtonClickedSignal, this, &WindowsManager::setToDisplayTeamsWindow);
 }
 
-void WindowsManager::initDisplayTeamsWindow(std::shared_ptr <PlayersCollection> players,size_t group_id)
+void WindowsManager::initDisplayTeamsWindow(std::shared_ptr<PlayersCollection> players, size_t group_id)
 {
-    m_display_teams_window = new DisplayTeamsWindow(players,m_groups_collection->getItem(group_id));
+    m_display_teams_window = new DisplayTeamsWindow(players, m_groups_collection->getItem(group_id));
     QObject::connect(m_display_teams_window, &DisplayTeamsWindow::okButtonClickedSignal, this, &WindowsManager::setToGroupsListWindow);
     QObject::connect(m_display_teams_window, &DisplayTeamsWindow::goBackButtonClickedSignal, this, &WindowsManager::setToCreateTeamsWindow);
 }

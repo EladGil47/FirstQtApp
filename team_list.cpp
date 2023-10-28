@@ -1,14 +1,13 @@
 #include "team_list.hpp"
 #include <vector>
-#include "team_player_item_widget.hpp" 
+#include "team_player_item_widget.hpp"
 #include "app_common.hpp"
-
 
 TeamList::TeamList(std::shared_ptr<Team> team)
 {
     ListStyles list_styles;
 
-    m_team = team ;
+    m_team = team;
 
     m_labeled_list = new LabeledListWidget();
     m_labeled_list->setListColor(list_styles.getColoredListStyle(team->getId()));
@@ -22,10 +21,10 @@ TeamList::TeamList(std::shared_ptr<Team> team)
     for (uint16_t player_index = 0; player_index < m_team->getNumOfPlayers(); player_index++)
     {
         std::shared_ptr<Player> player = m_team->getPlayersCollection()->getItem(player_index);
-        TeamPlayerItemWidget * team_player_item_widget = new TeamPlayerItemWidget(player);
+        TeamPlayerItemWidget *team_player_item_widget = new TeamPlayerItemWidget(player);
         connect(team_player_item_widget, &TeamPlayerItemWidget::addPlayerClickedSignal, this, &TeamList::onAddPlayerClicked);
         connect(team_player_item_widget, &TeamPlayerItemWidget::removePlayerClickedSignal, this, &TeamList::onRempovePlayerClicked);
-        
+
         m_labeled_list->addItemToList(team_player_item_widget);
     }
 
@@ -34,25 +33,25 @@ TeamList::TeamList(std::shared_ptr<Team> team)
 }
 
 void TeamList::initAvgRateLabel()
-{   
+{
     const QString AVG_RATE_TEXT = "Avg. rate";
     double avg_rate = m_team->getAverageRate();
-    QString avg_rate_label_text = AVG_RATE_TEXT + " : " + QString::number(avg_rate  + 1 , 'g', 2);
+    QString avg_rate_label_text = AVG_RATE_TEXT + " : " + QString::number(avg_rate + 1, 'g', 2);
     m_avg_rate_label = new QLabel(avg_rate_label_text);
     m_avg_rate_label->setAlignment(Qt::AlignCenter);
 }
 
 void TeamList::updateAvgRateLabel()
-{   
+{
     const QString AVG_RATE_TEXT = "Avg. rate";
     double avg_rate = m_team->getAverageRate();
-    QString avg_rate_label_text = AVG_RATE_TEXT + " : " + QString::number(avg_rate + 1 , 'g', 2);
+    QString avg_rate_label_text = AVG_RATE_TEXT + " : " + QString::number(avg_rate + 1, 'g', 2);
     m_avg_rate_label->setText(avg_rate_label_text);
 }
 
-void TeamList::addPlayer(std::shared_ptr <Player> player)
+void TeamList::addPlayer(std::shared_ptr<Player> player)
 {
-    TeamPlayerItemWidget * team_player_item_widget = new TeamPlayerItemWidget(player);
+    TeamPlayerItemWidget *team_player_item_widget = new TeamPlayerItemWidget(player);
     m_labeled_list->addItemToList(team_player_item_widget);
 }
 
@@ -61,7 +60,7 @@ void TeamList::setAverageRateLabel(const QString &avgRate)
     m_avg_rate_label->setText(avgRate);
 }
 
-LabeledListWidget * TeamList::getLabeledListWidget()
+LabeledListWidget *TeamList::getLabeledListWidget()
 {
     return m_labeled_list;
 }
