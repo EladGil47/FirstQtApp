@@ -88,5 +88,6 @@
         "qdialog": "cpp",
         "qstandarditemmodel": "cpp",
         "qlistwidget": "cpp"
-    }
+    },
+    "cquery.cacheDirectory": "${workspaceFolder}/.vscode/cquery_cached_index/"
 }
