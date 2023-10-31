@@ -137,10 +137,12 @@ void PlayersListWindow::onCreateNewPlayerButton()
     {
         QString name = dialog.getPlayerName();
         double rate = dialog.getPlayerRate();
+        QString role = dialog.getPlayerRole();
 
         Player::Config config;
         config.name = name.toStdString();
         config.rate = rate;
+        config.role = Player::toPlayerRole(role.toStdString());
         config.id = static_cast<uint16_t>(m_group->getNumOfPlayers());
 
         std::shared_ptr<Player> new_player = std::make_shared<Player>(config);

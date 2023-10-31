@@ -8,13 +8,14 @@ PlayerItemWidget::PlayerItemWidget(std::shared_ptr<Player> player)
     : BasePlayerItemWidget(player)
 {
     initEditableNameLabel(QString::fromStdString(player->getName()));
-    initRateLabel(QString::number(player->getRate()));
+    connect(m_editable_name_label, &EditableLabel::finishEditingSig, this, &PlayerItemWidget::onChangePlayerName);
+
+    initRateLabel(QString::number(player->getRate(), 'g', 2));
+    initRoleLabel(QString::fromStdString(player->getRoleText()));
 
     initEnterButton();
     initRemoveButton();
     setupLayout();
-
-    connect(m_editable_name_label, &EditableLabel::finishEditingSig, this, &PlayerItemWidget::onChangePlayerName);
 }
 
 void PlayerItemWidget::initEnterButton()
@@ -36,10 +37,12 @@ void PlayerItemWidget::initRemoveButton()
 void PlayerItemWidget::setupLayout()
 {
     QHBoxLayout *layout = new QHBoxLayout(this);
-    layout->addWidget(m_editable_name_label);
-    layout->addWidget(m_rate_label);
+    layout->addWidget(m_editable_name_label, 1);
+    layout->addWidget(m_rate_label, 1);
+    layout->addWidget(m_role_label, 1);
     QSpacerItem *space_all_to_end = new QSpacerItem(0, 0, QSizePolicy::Expanding, QSizePolicy::Fixed);
     layout->addSpacerItem(space_all_to_end);
+    layout->addStretch(2);
     layout->addWidget(m_enter_button);
     layout->addWidget(m_remove_button);
 }

@@ -19,8 +19,9 @@ public:
         None = 0x00,
         NAME = 0x01,
         RATE = 0x02,
-        REMOVE = 0x04,
-        AllOptions = NAME | RATE
+        ROLE = 0x04,
+        REMOVE = 0x08,
+        AllOptions = NAME | RATE | ROLE
     };
 
     BasePlayerItemWidget(std::shared_ptr<Player> player)
@@ -51,6 +52,11 @@ public:
             initRateLabel(QString::number(m_player->getRate()));
             layout->addWidget(m_rate_label, 24);
         }
+        if (option & ROLE)
+        {
+            initRoleLabel(QString::fromStdString(m_player->getRoleText()));
+            layout->addWidget(m_role_label, 24);
+        }
         layout->setContentsMargins(5, 0, 0, 0);
     }
 
@@ -80,6 +86,12 @@ protected:
         m_rate_label->setFont(Fonts::PLAYER_ITEM_WIDGET_FONT);
     }
 
+    void initRoleLabel(const QString &role)
+    {
+        m_role_label = new QLabel(role);
+        m_role_label->setFont(Fonts::PLAYER_ITEM_WIDGET_FONT);
+    }
+
     void initRemoveButton()
     {
         m_remove_button = new QPushButton("X");
@@ -94,6 +106,8 @@ protected:
     EditableLabel *m_editable_name_label;
     QLabel *m_name_label;
     QLabel *m_rate_label;
+    QLabel *m_role_label;
+
     QPushButton *m_remove_button;
 
 private slots:
