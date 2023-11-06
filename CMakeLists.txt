@@ -50,23 +50,32 @@ target_include_directories(${PROJECT_NAME} PUBLIC
 )
 
 # CPACK SECTION 
+# Include the CPack module
+
 # Set the CPack variables
 set(CPACK_PACKAGE_NAME "${PROJECT_NAME}")
 set(CPACK_PACKAGE_VERSION "${PROJECT_VERSION}")
-set(CPACK_GENERATOR "ZIP")  # Use ZIP generator for standalone package
 
-# Include the CPack module
+if(WIN32)
+set(CPACK_GENERATOR "ZIP")  
+set(CPACK_PACKAGING_INSTALL_PREFIX ".")
+endif()
+
+if(UNIX)
+set(CPACK_GENERATOR "DEB")
+set(CPACK_DEBIAN_PACKAGE_MAINTAINER "eladgil47@gmail.com")
+set(CPACK_PACKAGING_INSTALL_PREFIX "$ENV{HOME}/Downloads/${PROJECT_NAME}")
+message("-- Notice : Application path: ${CPACK_PACKAGING_INSTALL_PREFIX}" )
+set(CPACK_DEBIAN_PACKAGE_DEPENDS "libqt5widgets5")
+endif()
+
 include(CPack)
 
 # Include the necessary files in the package
-install(TARGETS ${PROJECT_NAME}
-    RUNTIME DESTINATION .
-    LIBRARY DESTINATION lib
-    ARCHIVE DESTINATION lib
-)
+install(TARGETS ${PROJECT_NAME} )
 
-# Include the Data Dir
-install(DIRECTORY "${PROJECT_SOURCE_DIR}/Data"
-    DESTINATION .
-    FILES_MATCHING PATTERN "*.*"
+# Set explicit permissions for the groups.json file during installation
+install(FILES "${PROJECT_SOURCE_DIR}/Data/groups.json"
+    DESTINATION ${CPACK_PACKAGING_INSTALL_PREFIX}/Data/
+    PERMISSIONS OWNER_WRITE OWNER_READ GROUP_READ GROUP_WRITE WORLD_READ WORLD_WRITE
 )
