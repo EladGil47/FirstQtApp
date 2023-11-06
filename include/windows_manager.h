@@ -15,7 +15,7 @@ class WindowsManager : public QMainWindow
 {
     Q_OBJECT
 public:
-    WindowsManager(std::shared_ptr<GroupsCollection> groups_collection = nullptr, QWidget *parent = nullptr);
+    WindowsManager(std::shared_ptr<GroupsCollection> groups_collection);
 
 private slots:
     void setToGroupsListWindow();

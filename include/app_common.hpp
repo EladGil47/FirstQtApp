@@ -66,16 +66,7 @@ namespace Common
     const QString FONT_FAMILY_NAME = "Segoe UI";
 }
 
-namespace Fonts
-{
-    const QFont SMALL_FONT = QFont(Common::FONT_FAMILY_NAME, 8, QFont::Bold);
-    const QFont PLAYER_ITEM_WIDGET_FONT = QFont(Common::FONT_FAMILY_NAME, 12, QFont::Bold);
-    const QFont GROUP_ITEM_WIDGET_FONT = QFont(Common::FONT_FAMILY_NAME, 14, QFont::Bold);
-    const QFont LIST_LABEL_FONT = QFont(Common::FONT_FAMILY_NAME, 18, QFont::Bold);
-    const QFont HEADER_LABEL_FONT = QFont(Common::FONT_FAMILY_NAME, 22, QFont::Bold);
-    const QFont LARGE_FONT = QFont(Common::FONT_FAMILY_NAME, 30, QFont::Bold);
 
-}
 
 namespace Sizes
 {
@@ -182,6 +173,9 @@ public:
 namespace Settings
 {
     const QString WINDOW_TITLE_TEXT = "Kohot";
+
+    const QString FONT_FAMILY_NAME = "Segoe UI";
+
     const int WINDOW_WIDTH = 1200;
     const int WINDOW_HEIGHT = 640;
 
@@ -191,6 +185,16 @@ namespace Settings
     const QString WINDOWS_COLOR = QtObjects::QMAIN_WINDOW + "{" + Style::OFFWHITE_BACKGROUND + "}";
     const QString DIALOGS_COLOR = QtObjects::QDIALOG + "{" + Style::OFFWHITE_BACKGROUND + "}";
     const QString MESSAGES_BOX_COLOR = QtObjects::QMESSAGEBOX + "{" + Style::OFFWHITE_BACKGROUND + "}";
+}
+
+namespace Fonts
+{
+    const QFont SMALL_FONT = QFont(Common::FONT_FAMILY_NAME, 8, QFont::Bold);
+    const QFont PLAYER_ITEM_WIDGET_FONT = QFont(Common::FONT_FAMILY_NAME, 12, QFont::Bold);
+    const QFont GROUP_ITEM_WIDGET_FONT = QFont(Common::FONT_FAMILY_NAME, 14, QFont::Bold);
+    const QFont LIST_LABEL_FONT = QFont(Common::FONT_FAMILY_NAME, 18, QFont::Bold);
+    const QFont HEADER_LABEL_FONT = QFont(Common::FONT_FAMILY_NAME, 22, QFont::Bold);
+    const QFont LARGE_FONT = QFont(Common::FONT_FAMILY_NAME, 30, QFont::Bold);
 }
 
 namespace MaxValues

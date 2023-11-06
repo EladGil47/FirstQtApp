@@ -1,12 +1,14 @@
 #include "windows_manager.h"
 
-WindowsManager::WindowsManager(std::shared_ptr<GroupsCollection> groups_collection, QWidget *parent)
-    : QMainWindow(parent)
+WindowsManager::WindowsManager(std::shared_ptr<GroupsCollection> groups_collection)
 {
-    m_groups_collection = groups_collection;
-    setWindow();
-    setToGroupsListWindow();
-    show();
+    if (groups_collection)
+    {
+        m_groups_collection = groups_collection;
+        setWindow();
+        setToGroupsListWindow();
+        show();
+    }
 }
 
 void WindowsManager::setToGroupsListWindow()

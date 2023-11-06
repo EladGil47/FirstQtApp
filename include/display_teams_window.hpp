@@ -66,7 +66,7 @@ private:
     {
         m_ok_button = new QPushButton("OK");
         m_ok_button->setStyleSheet(Style::GREEN_BUTTON_HOR_LAYOUT);
-        connect(m_ok_button, &QPushButton::clicked, this, onOkButton);
+        connect(m_ok_button, &QPushButton::clicked, this, &DisplayTeamsWindow::onOkButton);
     }
 
     void initButtonsLayout()
