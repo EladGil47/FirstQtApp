@@ -62,7 +62,7 @@ void EditableLabel::setMaxLength(uint16_t value)
 void EditableLabel::createEditLine()
 {
     m_editLine = new QLineEdit;
-    m_editLine->setStyleSheet(Style::TRANSPARENT_STYLESHEET);
+    m_editLine->setStyleSheet(Style::TRANSPARENT_BORDER_BG);
     m_editLine->size() = m_label->size();
     m_editLine->setFont(m_label->font());
     m_editLine->setAlignment(m_label->alignment());

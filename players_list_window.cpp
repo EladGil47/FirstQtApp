@@ -47,6 +47,9 @@ void PlayersListWindow::initPlayersAmountLabel()
 
     QSpacerItem *spacer = new QSpacerItem(0, 0, QSizePolicy::Expanding, QSizePolicy::Fixed);
     m_players_list->addSpacerAboveList(spacer);
+
+    initCreateNewPlayerButton();
+    m_players_list->addWidgetAboveList(m_create_new_player_button);
 }
 
 void PlayersListWindow::initPlayersAmountLabelText()
@@ -75,22 +78,20 @@ void PlayersListWindow::initList()
 
 void PlayersListWindow::initCreateNewPlayerButton()
 {
-    m_create_new_player_button = new QPushButton("Create new player", this);
-    m_create_new_player_button->setStyleSheet(Style::GREEN_BUTTON_HOR_LAYOUT);
+    m_create_new_player_button = new QPushButton("+");
+    m_create_new_player_button->setStyleSheet(Style::BLACK_BUTTON);
     connect(m_create_new_player_button, &QPushButton::clicked, this, &PlayersListWindow::onCreateNewPlayerButton);
 }
 
 void PlayersListWindow::initCreateTeamsButton()
 {
-    m_create_teams_button = new QPushButton("Create teams", this);
-    m_create_teams_button->setStyleSheet(Style::GREEN_BUTTON_HOR_LAYOUT);
+    m_create_teams_button = new QPushButton("Create teams");
     connect(m_create_teams_button, &QPushButton::clicked, this, &PlayersListWindow::onCreateTeamsClicked);
 }
 
 void PlayersListWindow::initGoBackButton()
 {
-    m_go_back_button = new QPushButton("Go back", this);
-    m_go_back_button->setStyleSheet(Style::GREEN_BUTTON_HOR_LAYOUT);
+    m_go_back_button = new QPushButton("Go back");
     connect(m_go_back_button, &QPushButton::clicked, this, &PlayersListWindow::onGoBackButton);
 }
 
@@ -98,9 +99,6 @@ void PlayersListWindow::initButtonsHorLayout()
 {
     m_buttons_hor_layout = new QHBoxLayout;
     m_buttons_hor_layout->addStretch(1);
-
-    initCreateNewPlayerButton();
-    addButtonToButtonsHorLayout(m_create_new_player_button);
 
     initCreateTeamsButton();
     addButtonToButtonsHorLayout(m_create_teams_button);
@@ -114,9 +112,14 @@ void PlayersListWindow::initButtonsHorLayout()
 void PlayersListWindow::addButtonToButtonsHorLayout(QPushButton *button)
 {
     if (button)
+    {
+        button->setStyleSheet(Style::BLACK_BUTTON);
         m_buttons_hor_layout->addWidget(button, 2);
+    }
     else
+    {
         qDebug() << "Notice : The system prevent to add unassigned button to a layout";
+    }
 }
 
 void PlayersListWindow::setupLayout()

@@ -26,7 +26,9 @@ namespace Colors
     const QString PINK = "pink;";
     const QString PURPLE = "purpel;";
     const QString GREY = "grey;";
+
     const QString BLACK = "black;";
+    const QString HOVER_BLACK = "#222222;";
 
     const QString OFFWHITE = "#FFFFBF;";
 
@@ -87,8 +89,17 @@ namespace Style
 {
     const QString OFFWHITE_BACKGROUND = CssKeys::BACKGROUND_COLOR + Colors::OFFWHITE;
 
-    const QString TRANSPARENT_STYLESHEET =
+    const QString BLACK_COLOR =
+        CssKeys::BORDER + Colors::BLACK + ";" + CssKeys::BACKGROUND_COLOR + Colors::BLACK + ";";
+
+    const QString HOVER_BLACK_COLOR =
+        CssKeys::BORDER + Colors::HOVER_BLACK + ";" + CssKeys::BACKGROUND_COLOR + Colors::HOVER_BLACK + ";";
+
+    const QString TRANSPARENT_BORDER_BG =
         CssKeys::BORDER + Colors::TRANSPARENT + ";" + CssKeys::BACKGROUND_COLOR + Colors::TRANSPARENT + ";";
+
+    const QString BLACK_BORDER_TRANSPARENT_BG =
+        CssKeys::BORDER + "2px solid " + Colors::BLACK + ";" + CssKeys::BACKGROUND_COLOR + Colors::TRANSPARENT + ";";
 
     const QString GREEN_COLOR =
         CssKeys::BORDER + Colors::GREEN + CssKeys::BACKGROUND_COLOR + Colors::GREEN;
@@ -101,6 +112,9 @@ namespace Style
 
     const QString RED_COLOR =
         CssKeys::BORDER + Colors::RED + CssKeys::BACKGROUND_COLOR + Colors::RED;
+
+    const QString BLACK_BORDER_BG =
+        CssKeys::BORDER + Colors::BLACK + CssKeys::BACKGROUND_COLOR + Colors::BLACK;
 
     const QString RED_BACKGROUND_BLACK_BORDER_WHITE_TEXT =
         CssKeys::BORDER + "1px solid " + Colors::BLACK + CssKeys::BACKGROUND_COLOR + Colors::RED + "color: white;";
@@ -115,18 +129,20 @@ namespace Style
         CssKeys::BORDER + Colors::HOVER_BLUE + CssKeys::BACKGROUND_COLOR + Colors::HOVER_BLUE;
 
     const QString WHITE_TEXT_COLOR =
-        "    color: white;"      // White text color
-        "    padding: 3px 20px;" // Padding around the text
-        "    font-size: 18px;"   // Font size
-        "    font-weight: bold;" // Bold text
-        ;
+        "    color: white;"
+        "    padding: 3px 20px;"
+        "    font-size: 18px;"
+        "    font-weight: bold;";
 
     const QString BLACK_TEXT_COLOR =
-        "    color: black;"      // White text color
-        "    padding: 3px 20px;" // Padding around the text
-        "    font-size: 18px;"   // Font size
-        "    font-weight: bold;" // Bold text
-        ;
+        "    color: black;"
+        "    padding: 3px 20px;"
+        "    font-size: 18px;"
+        "    font-weight: bold;";
+
+    const QString BLACK_BUTTON =
+        QtObjects::QPUSH_BUTTON + "{" + BLACK_COLOR + WHITE_TEXT_COLOR + "}" +
+        QtObjects::QPUSH_BUTTON + ":hover {" + HOVER_BLACK_COLOR + "}";
 
     const QString GREEN_BUTTON_HOR_LAYOUT =
         QtObjects::QPUSH_BUTTON + "{" + GREEN_COLOR + WHITE_TEXT_COLOR + "}" +
@@ -140,28 +156,29 @@ namespace Style
         QtObjects::QPUSH_BUTTON + " {" + BLUE_COLOR + WHITE_TEXT_COLOR + "}" +
         QtObjects::QPUSH_BUTTON + ":hover {" + HOVER_BLUE_COLOR + "}";
 
-    const QString LIST = "QListWidget {" + CssKeys::BORDER + "1px solid " + Colors::BLACK + ";" + CssKeys::BACKGROUND_COLOR + Colors::BROWN + "}"
-                                                                                                                                              "QListWidget::item {" +
+    const QString LIST = "QListWidget {" + CssKeys::BORDER + "1px solid " + Colors::BLACK +
+                         CssKeys::BACKGROUND_COLOR + Colors::BROWN + "}"
+                                                                     "QListWidget::item {" +
                          CssKeys::BORDER + "1px solid " + Colors::BLACK + ";" + "}"
                                                                                 "QListWidget::item:selected {" +
                          CssKeys::BACKGROUND_COLOR + "rgba(0, 0, 255, 10%) " + ";" + " } ";
-
-    const QString ORANGE_LIST = "QListWidget {" + CssKeys::BACKGROUND_COLOR + Colors::ORANGE + "}";
-    const QString GREEN_LIST = "QListWidget {" + CssKeys::BACKGROUND_COLOR + Colors::GREEN + "}";
-    const QString BLUE_LIST = "QListWidget {" + CssKeys::BACKGROUND_COLOR + Colors::BLUE + "}";
-    const QString RED_LIST = "QListWidget {" + CssKeys::BACKGROUND_COLOR + Colors::RED + "}";
-    const QString YELLOW_LIST = "QListWidget {" + CssKeys::BACKGROUND_COLOR + Colors::YELLOW + "}";
 
 }
 
 class ListStyles
 {
 private:
+    const QString ORANGE_LIST = "QListWidget {" + CssKeys::BACKGROUND_COLOR + Colors::ORANGE + "}";
+    const QString GREEN_LIST = "QListWidget {" + CssKeys::BACKGROUND_COLOR + Colors::GREEN + "}";
+    const QString BLUE_LIST = "QListWidget {" + CssKeys::BACKGROUND_COLOR + Colors::BLUE + "}";
+    const QString RED_LIST = "QListWidget {" + CssKeys::BACKGROUND_COLOR + Colors::RED + "}";
+    const QString YELLOW_LIST = "QListWidget {" + CssKeys::BACKGROUND_COLOR + Colors::YELLOW + "}";
+
     std::vector<QString> m_team_colors = {
-        Style::GREEN_LIST,
-        Style::BLUE_LIST,
-        Style::ORANGE_LIST,
-        Style::RED_LIST};
+        GREEN_LIST,
+        BLUE_LIST,
+        ORANGE_LIST,
+        RED_LIST};
 
 public:
     QString getColoredListStyle(std::uint16_t index)

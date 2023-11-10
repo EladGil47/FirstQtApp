@@ -52,7 +52,7 @@ void TeamPlayerItemWidget::initAddPlayerButton()
 {
     m_add_player_button = new QPushButton("Add Player");
     m_add_player_button->setFont(Fonts::PLAYER_ITEM_WIDGET_FONT);
-    m_add_player_button->setStyleSheet(Style::TRANSPARENT_STYLESHEET + Style::BLACK_TEXT_COLOR);
+    m_add_player_button->setStyleSheet(Style::TRANSPARENT_BORDER_BG + Style::BLACK_TEXT_COLOR);
     // connect(m_add_player_button, &QToolButton::doubleClicked, this, &TeamPlayerItemWidget::onAddPlayerClicked);
 }
 
