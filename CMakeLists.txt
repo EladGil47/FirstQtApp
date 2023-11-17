@@ -56,19 +56,23 @@ set(CPACK_PACKAGE_VERSION "${PROJECT_VERSION}")
 if(WIN32)
     set(CPACK_GENERATOR "ZIP")
     set(CPACK_PACKAGING_INSTALL_PREFIX ".")
+    message("System : Windows")
+
 endif()
 
 if(UNIX)
     set(CPACK_GENERATOR "DEB")
     set(CPACK_DEBIAN_PACKAGE_MAINTAINER "eladgil47@gmail.com")
     set(CPACK_PACKAGING_INSTALL_PREFIX "$ENV{HOME}/Downloads/${PROJECT_NAME}")
-    message("-- Notice : Application path: ${CPACK_PACKAGING_INSTALL_PREFIX}")
     set(CPACK_DEBIAN_PACKAGE_DEPENDS "libqt5widgets5")
+    message("System : Linux")
 endif()
+message("-- Notice : Application path: ${CPACK_PACKAGING_INSTALL_PREFIX}")
+
 
 include(CPack)
 
-install(TARGETS ${PROJECT_NAME})
+install(TARGETS ${PROJECT_NAME} DESTINATION ${CPACK_PACKAGING_INSTALL_PREFIX})
 
 install(DIRECTORY "${PROJECT_SOURCE_DIR}/Data"
     DESTINATION ${CPACK_PACKAGING_INSTALL_PREFIX}
