@@ -3,16 +3,9 @@
 
 #include <QHBoxLayout>
 #include <QPushButton>
-#include <QVBoxLayout>
 #include <QWidget>
 
-#include <set>
-
 #include "group.hpp"
-#include "teams_creator.hpp"
-
-#include "app_common.hpp"
-#include "search_widget.hpp"
 #include "team_list.hpp"
 
 class DisplayTeamsWindow : public QWidget

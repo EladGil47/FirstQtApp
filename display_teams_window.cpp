@@ -1,5 +1,11 @@
 #include "display_teams_window.hpp"
 
+#include <set>
+#include "app_common.hpp"
+#include "teams_creator.hpp"
+#include "search_widget.hpp"
+#include <QVBoxLayout>
+
 bool DisplayTeamsWindow::hasDuplicates() const
 {
     std::set<std::string> unique_strings;
@@ -21,7 +27,7 @@ void DisplayTeamsWindow::initHeaderLayout()
 {
     m_header_layout = new QHBoxLayout;
 
-    QString group_name = QString::fromStdString(m_group->getName());
+    QString group_name     = QString::fromStdString(m_group->getName());
     QLabel* m_header_label = new QLabel(group_name);
     m_header_label->setFont(Fonts::LARGE_FONT);
     m_header_label->setAlignment(Qt::AlignHCenter);
