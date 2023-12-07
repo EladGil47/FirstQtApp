@@ -16,6 +16,7 @@ public:
     void addPlayer(std::shared_ptr<Player> player);
     void setAverageRateLabel(const QString &m_avg_rate_label);
     LabeledListWidget *getLabeledListWidget();
+    std::shared_ptr<Team> getTeam();
 
 private:
     LabeledListWidget *m_labeled_list;
