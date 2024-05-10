@@ -29,7 +29,9 @@ void GroupsListWindow::setupLayout()
 
 void GroupsListWindow::initAppNameLabel()
 {
-    m_app_name_label = new QLabel("Welcome To Kohot");
+    m_app_name_label = new EditableLabel;
+    m_app_name_label->setText("Welcome To Kohot");
+    m_app_name_label->setEditablity(false);
     m_app_name_label->setFont(Fonts::HEADER_LABEL_FONT);
     m_app_name_label->setAlignment(Qt::AlignHCenter);
 }

@@ -7,6 +7,8 @@
 #include "groups_collection.hpp"
 #include "labeled_list_widget.hpp"
 
+#include "editable_label.h"
+
 class GroupsListWindow : public QWidget
 {
     Q_OBJECT
@@ -32,7 +34,7 @@ private:
 
     QPushButton*       m_create_new_group_button;
     QLabel*            m_groups_amount_label;
-    QLabel*            m_app_name_label;
+    EditableLabel*     m_app_name_label;
     LabeledListWidget* m_groups_list;
     QHBoxLayout*       m_buttons_hor_layout;
 
