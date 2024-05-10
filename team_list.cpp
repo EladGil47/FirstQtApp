@@ -34,19 +34,19 @@ TeamList::TeamList(std::shared_ptr<Team> team)
 
 void TeamList::initAvgRateLabel()
 {
-    const QString AVG_RATE_TEXT       = "Avg. rate";
-    double        avg_rate            = m_team->getAverageRate();
-    QString       avg_rate_label_text = AVG_RATE_TEXT + " : " + QString::number(avg_rate + 1, 'g', 2);
-    m_avg_rate_label                  = new QLabel(avg_rate_label_text);
+    m_avg_rate_label = new QLabel(getAvgRateLabel());
     m_avg_rate_label->setAlignment(Qt::AlignCenter);
 }
 
 void TeamList::updateAvgRateLabel()
 {
-    const QString AVG_RATE_TEXT       = "Avg. rate";
-    double        avg_rate            = m_team->getAverageRate();
-    QString       avg_rate_label_text = AVG_RATE_TEXT + " : " + QString::number(avg_rate + 1, 'g', 2);
-    m_avg_rate_label->setText(avg_rate_label_text);
+    m_avg_rate_label->setText(getAvgRateLabel());
+}
+
+QString TeamList::getAvgRateLabel()
+{
+    QString avg_rate_label_text = "Avg. rate : " + QString::number(m_team->getAverageRate(), 'g', 2);
+    return avg_rate_label_text;
 }
 
 void TeamList::setAverageRateLabel(const QString& avgRate)

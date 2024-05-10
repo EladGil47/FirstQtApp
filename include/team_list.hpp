@@ -24,8 +24,9 @@ private:
 
     std::shared_ptr<Team> m_team;
 
-    void initAvgRateLabel();
-    void updateAvgRateLabel();
+    void    initAvgRateLabel();
+    void    updateAvgRateLabel();
+    QString getAvgRateLabel();
 
 private slots:
     std::shared_ptr<Player> onAddPlayerClicked(uint16_t player_index_in_team_list);
