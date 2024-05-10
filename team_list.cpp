@@ -21,7 +21,7 @@ TeamList::TeamList(std::shared_ptr<Team> team)
     for (uint16_t player_index = 0; player_index < m_team->getNumOfPlayers(); player_index++)
     {
         std::shared_ptr<Player> player                  = m_team->getPlayersCollection()->getItem(player_index);
-        TeamPlayerItemWidget*   team_player_item_widget = new TeamPlayerItemWidget(player);
+        TeamPlayerItemWidget*   team_player_item_widget = new TeamPlayerItemWidget(player, player_index);
         connect(team_player_item_widget, &TeamPlayerItemWidget::addPlayerClickedSignal, this, &TeamList::onAddPlayerClicked);
         connect(team_player_item_widget, &TeamPlayerItemWidget::removePlayerClickedSignal, this, &TeamList::onRempovePlayerClicked);
 
@@ -49,12 +49,6 @@ void TeamList::updateAvgRateLabel()
     m_avg_rate_label->setText(avg_rate_label_text);
 }
 
-void TeamList::addPlayer(std::shared_ptr<Player> player)
-{
-    TeamPlayerItemWidget* team_player_item_widget = new TeamPlayerItemWidget(player);
-    m_labeled_list->addItemToList(team_player_item_widget);
-}
-
 void TeamList::setAverageRateLabel(const QString& avgRate)
 {
     m_avg_rate_label->setText(avgRate);
@@ -70,20 +64,21 @@ LabeledListWidget* TeamList::getLabeledListWidget()
     return m_labeled_list;
 }
 
-std::shared_ptr<Player> TeamList::onAddPlayerClicked()
+std::shared_ptr<Player> TeamList::onAddPlayerClicked(uint16_t player_index_in_team_list)
 {
-    std::shared_ptr<Player> player = nullptr;
-    player                         = emit           addPlayerClickedSignal(m_team->getId());
-    if (player)
+    std::shared_ptr<Player> new_player = nullptr;
+
+    new_player = emit addPlayerClickedSignal(m_team->getId());
+    if (new_player)
     {
-        m_team->addPlayer(player);
+        m_team->replacePlayer(player_index_in_team_list, new_player);
         updateAvgRateLabel();
     }
-    return player;
+    return new_player;
 }
 
-void TeamList::onRempovePlayerClicked(uint16_t player_id)
+void TeamList::onRempovePlayerClicked(uint16_t player_index_in_team_list)
 {
-    m_team->removePlayer(player_id);
+    m_team->cleanPlayer(player_index_in_team_list);
     updateAvgRateLabel();
 }

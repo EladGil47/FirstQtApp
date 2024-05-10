@@ -1,10 +1,10 @@
 #include "display_teams_window.hpp"
 
+#include <QVBoxLayout>
 #include <set>
 #include "app_common.hpp"
-#include "teams_creator.hpp"
 #include "search_widget.hpp"
-#include <QVBoxLayout>
+#include "teams_creator.hpp"
 
 bool DisplayTeamsWindow::hasDuplicates() const
 {
@@ -102,10 +102,31 @@ QStringList* DisplayTeamsWindow::getGroupPlayersNames()
 DisplayTeamsWindow::DisplayTeamsWindow(std::shared_ptr<PlayersCollection> players, std::shared_ptr<Group> group)
 {
     m_group = group;
-    m_teams = TeamsCreator::createTeams(
-        players->getCollection(),
-        m_group->getTeamsAmount(),
-        m_group->getPlayersInTeamAmount());
+    if (players->getSize() == 0 || players == nullptr)
+    {
+        // Create teams with empty players in each team
+        m_teams = std::make_shared<std::vector<std::shared_ptr<Team>>>();
+
+        for (uint16_t team_index = 0; team_index < m_group->getTeamsAmount(); team_index++)
+        {
+            m_teams->push_back(std::make_shared<Team>(team_index));
+        }
+        for (int player_index = 0; player_index < m_group->getPlayersInTeamAmount(); player_index++)
+        {
+            for (uint16_t team_index = 0; team_index < m_group->getTeamsAmount(); team_index++)
+            {
+                std::shared_ptr<Player> player;
+                (*m_teams)[team_index]->addPlayer(player);
+            }
+        }
+    }
+    else
+    {
+        m_teams = TeamsCreator::createTeams(
+            players->getCollection(),
+            m_group->getTeamsAmount(),
+            m_group->getPlayersInTeamAmount());
+    }
 
     initHeaderLayout();
     initTeamsHorLayout();

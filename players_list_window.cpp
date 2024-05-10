@@ -1,7 +1,7 @@
 #include "players_list_window.h"
 #include "player_item_widget.h"
-#include "player_input_dialog.hpp"
 #include "app_common.hpp"
+#include "player_input_dialog.hpp"
 
 PlayersListWindow::PlayersListWindow(std::shared_ptr<Group> group)
 {
@@ -37,7 +37,7 @@ void PlayersListWindow::initGroupNameLabel()
 
 void PlayersListWindow::initPlayersAmountLabel()
 {
-    QLabel *players_text_label = new QLabel("Players :");
+    QLabel* players_text_label = new QLabel("Players :");
     m_players_list->addWidgetAboveList(players_text_label);
 
     m_players_amount_label = new QLabel;
@@ -45,7 +45,7 @@ void PlayersListWindow::initPlayersAmountLabel()
     m_players_amount_label->setFont(Fonts::LIST_LABEL_FONT);
     m_players_list->addWidgetAboveList(m_players_amount_label);
 
-    QSpacerItem *spacer = new QSpacerItem(0, 0, QSizePolicy::Expanding, QSizePolicy::Fixed);
+    QSpacerItem* spacer = new QSpacerItem(0, 0, QSizePolicy::Expanding, QSizePolicy::Fixed);
     m_players_list->addSpacerAboveList(spacer);
 }
 
@@ -55,12 +55,12 @@ void PlayersListWindow::initPlayersAmountLabelText()
     m_players_amount_label->setText(size);
 }
 
-void PlayersListWindow::onPlayerNameChanged(uint16_t id, const std::string &name)
+void PlayersListWindow::onPlayerNameChanged(uint16_t id, const std::string& name)
 {
     m_group->getPlayersCollectionRef().getItem(static_cast<size_t>(id))->setName(name);
 }
 
-void PlayersListWindow::setGroupName(const QString &text)
+void PlayersListWindow::setGroupName(const QString& text)
 {
     m_group->setName(text.toStdString());
 }
@@ -111,7 +111,7 @@ void PlayersListWindow::initButtonsHorLayout()
     m_buttons_hor_layout->addStretch(1);
 }
 
-void PlayersListWindow::addButtonToButtonsHorLayout(QPushButton *button)
+void PlayersListWindow::addButtonToButtonsHorLayout(QPushButton* button)
 {
     if (button)
         m_buttons_hor_layout->addWidget(button, 2);
@@ -121,7 +121,7 @@ void PlayersListWindow::addButtonToButtonsHorLayout(QPushButton *button)
 
 void PlayersListWindow::setupLayout()
 {
-    QVBoxLayout *layout = new QVBoxLayout(this);
+    QVBoxLayout* layout = new QVBoxLayout(this);
     layout->addWidget(m_group_label_name);
     layout->addWidget(m_players_list);
     layout->addLayout(m_buttons_hor_layout);
@@ -136,14 +136,14 @@ void PlayersListWindow::onCreateNewPlayerButton()
     if (dialog.exec() == QDialog::Accepted)
     {
         QString name = dialog.getPlayerName();
-        double rate = dialog.getPlayerRate();
+        double  rate = dialog.getPlayerRate();
         QString role = dialog.getPlayerRole();
 
         Player::Config config;
         config.name = name.toStdString();
         config.rate = rate;
         config.role = Player::toPlayerRole(role.toStdString());
-        config.id = static_cast<uint16_t>(m_group->getNumOfPlayers());
+        config.id   = static_cast<uint16_t>(m_group->getNumOfPlayers());
 
         std::shared_ptr<Player> new_player = std::make_shared<Player>(config);
         m_group->getPlayersCollectionRef().addItem(new_player);
@@ -152,26 +152,70 @@ void PlayersListWindow::onCreateNewPlayerButton()
     }
 }
 
+enum CreateTeamsOption
+{
+    RANDOM,
+    MANUALLY
+};
+
+CreateTeamsOption showDialogWithOptions()
+{
+    CreateTeamsOption option;
+    QMessageBox       dialog;
+    dialog.setWindowTitle("Kohot");
+    dialog.setText("Choose an option:");
+    dialog.setIcon(QMessageBox::Question);
+    dialog.setStyleSheet(Settings::MESSAGES_BOX_COLOR);
+    dialog.setFont(Fonts::PLAYER_ITEM_WIDGET_FONT);
+
+    QPushButton* manual_button = dialog.addButton("Manually", QMessageBox::ActionRole);
+    QPushButton* random_button = dialog.addButton("Random", QMessageBox::ActionRole);
+
+    QObject::connect(manual_button, &QPushButton::clicked, [&]() {
+        option = CreateTeamsOption::MANUALLY;
+    });
+
+    QObject::connect(random_button, &QPushButton::clicked, [&]() {
+        option = CreateTeamsOption::RANDOM;
+    });
+
+    dialog.exec();
+
+    return option;
+}
+
 void PlayersListWindow::onCreateTeamsClicked()
 {
     uint16_t minimun_required_players_amount = m_group->getPlayersInTeamAmount() * m_group->getTeamsAmount();
-    uint16_t players_amount = static_cast<uint16_t>(m_group->getNumOfPlayers());
+    uint16_t players_amount                  = static_cast<uint16_t>(m_group->getNumOfPlayers());
 
     if (players_amount >= minimun_required_players_amount)
     {
-        emit setToCreateTeamsWindowSignal(m_group->getId());
+        // Open a dialog
+        CreateTeamsOption option;
+        option = showDialogWithOptions();
+        if (option == CreateTeamsOption::RANDOM)
+        {
+            emit setToCreateTeamsWindowSignal(m_group->getId());
+        }
+        else if (option == CreateTeamsOption::MANUALLY)
+        {
+            std::shared_ptr<PlayersCollection> players = std::make_shared<PlayersCollection>();
+
+            emit setToDisplayTeamsWindowSignal(players, m_group->getId());
+        }
     }
     else
     {
         uint16_t required_players_to_add = minimun_required_players_amount - players_amount;
-        QString message = "Please add " + QString::number(required_players_to_add) + " more players to create teams";
+        QString  message                 = "Please add " + QString::number(required_players_to_add) + " more players to create teams";
         MessageBoxHandler::showMessageBox(message);
     }
 }
 
 void PlayersListWindow::addItemToList(std::shared_ptr<Player> player)
 {
-    PlayerItemWidget *player_item_widget = new PlayerItemWidget(player);
+    PlayerItemWidget* player_item_widget = new PlayerItemWidget(player);
     connect(player_item_widget, &PlayerItemWidget::enterButtonClickedSignal, this, &PlayersListWindow::onEnterButton);
     connect(player_item_widget, &PlayerItemWidget::removeButtonClickedSignal, this, &PlayersListWindow::onRemoveButton);
     connect(player_item_widget, &PlayerItemWidget::playerNameChangedSignal, this, &PlayersListWindow::onPlayerNameChanged);
@@ -182,7 +226,7 @@ void PlayersListWindow::addItemToList(std::shared_ptr<Player> player)
 void PlayersListWindow::onRemoveButton(size_t id)
 {
     m_group->getPlayersCollectionRef().deleteItem(id);
-    QListWidgetItem *itemToRemove = m_players_list->m_list->takeItem(id);
+    QListWidgetItem* itemToRemove = m_players_list->m_list->takeItem(id);
     delete itemToRemove;
     for (size_t index = id; index < m_group->getNumOfPlayers(); index++)
     {

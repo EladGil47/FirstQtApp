@@ -3,21 +3,17 @@
 
 #include <QToolButton>
 
-TeamPlayerItemWidget::TeamPlayerItemWidget(std::shared_ptr<Player> player)
+TeamPlayerItemWidget::TeamPlayerItemWidget(std::shared_ptr<Player> player, uint16_t player_index_in_team)
 {
-    if (player)
-    {
-        m_player = player;
-        QString player_name = QString::fromStdString(player->getName());
-        initPlayerNameLabel(player_name);
-        initRemoveButton();
-        initLayout();
-    }
+    m_player_index_in_team = player_index_in_team;
+    m_player               = player;
+    initLayout();
+    player ? updateLayout(true) : updateLayout(false);
 }
 
-void TeamPlayerItemWidget ::initPlayerNameLabel(const QString &player_name)
+void TeamPlayerItemWidget ::initPlayerNameLabel()
 {
-    m_player_name_label = new QLabel(player_name);
+    m_player_name_label = new QLabel(QString::fromStdString(m_player->getName()));
     m_player_name_label->setFont(Fonts::PLAYER_ITEM_WIDGET_FONT);
     m_player_name_label->setStyleSheet(Style::WHITE_TEXT_COLOR);
     m_player_name_label->setAlignment(Qt::AlignHCenter);
@@ -28,8 +24,24 @@ void TeamPlayerItemWidget::initLayout()
     m_layout = new QHBoxLayout(this);
     m_layout->setContentsMargins(0, 0, 0, 0);
     m_layout->setSpacing(0);
-    m_layout->addWidget(m_remove_button, 1);
-    m_layout->addWidget(m_player_name_label, 20);
+}
+
+void TeamPlayerItemWidget::updateLayout(bool player_exists)
+{
+    if (player_exists)
+    {
+        initPlayerNameLabel();
+        initRemoveButton();
+        m_layout->addWidget(m_remove_button, 1);
+        m_layout->addWidget(m_player_name_label, 20);
+    }
+    else
+    {
+        initAddButton();
+        initAddPlayerButton();
+        m_layout->addWidget(m_add_button, 1);
+        m_layout->addWidget(m_add_player_button, 20);
+    }
 }
 
 void TeamPlayerItemWidget::initRemoveButton()
@@ -58,47 +70,35 @@ void TeamPlayerItemWidget::initAddPlayerButton()
 
 void TeamPlayerItemWidget::onRemoveClicked()
 {
-    emit removePlayerClickedSignal(m_player->getId());
+    emit removePlayerClickedSignal(m_player_index_in_team);
     if (m_player_name_label)
     {
         delete m_player_name_label;
-        m_player_name_label = nullptr;
     }
     if (m_remove_button)
     {
         delete m_remove_button;
-        m_remove_button = nullptr;
     }
-    initAddButton();
-    initAddPlayerButton();
-
-    m_layout->addWidget(m_add_button, 1);
-    m_layout->addWidget(m_add_player_button, 20);
+    updateLayout(false);
 }
 
 void TeamPlayerItemWidget::onAddPlayerClicked()
 {
-    emit std::shared_ptr<Player> player = addPlayerClickedSignal();
+    emit std::shared_ptr<Player> player = addPlayerClickedSignal(m_player_index_in_team);
     if (player)
     {
         if (m_add_button)
         {
             delete m_add_button;
-            m_add_button = nullptr;
         }
 
         if (m_add_player_button)
         {
             delete m_add_player_button;
-            m_add_player_button = nullptr;
         }
 
         m_player = player;
-        QString player_name = QString::fromStdString(player->getName());
-        initPlayerNameLabel(player_name);
-        initRemoveButton();
 
-        m_layout->addWidget(m_remove_button, 1);
-        m_layout->addWidget(m_player_name_label, 20);
+        updateLayout(true);
     }
 }

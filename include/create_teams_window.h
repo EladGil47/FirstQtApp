@@ -294,7 +294,6 @@ public slots:
         else
         {
             MessageBoxHandler::showMessageBox("Please select more players");
-            // initSelectMorePlayersMessageBox();
         }
     }
 

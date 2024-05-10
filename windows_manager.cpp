@@ -50,6 +50,7 @@ void WindowsManager::initPlayersListWindow(size_t id)
     m_players_list_window = new PlayersListWindow(m_groups_collection->getItem(id));
     QObject::connect(m_players_list_window, &PlayersListWindow::onGoBackButtonClickedSignal, this, &WindowsManager::setToGroupsListWindow);
     QObject::connect(m_players_list_window, &PlayersListWindow::setToCreateTeamsWindowSignal, this, &WindowsManager::setToCreateTeamsWindow);
+    QObject::connect(m_players_list_window, &PlayersListWindow::setToDisplayTeamsWindowSignal, this, &WindowsManager::setToDisplayTeamsWindow);
 }
 
 void WindowsManager::initGroupsListWindow()
@@ -75,9 +76,9 @@ void WindowsManager::initDisplayTeamsWindow(std::shared_ptr<PlayersCollection> p
 
 void WindowsManager::moveWindowToCenter()
 {
-    QScreen *primaryScreen = QGuiApplication::primaryScreen();
-    QRect screenGeometry = primaryScreen->geometry();
-    int x = (screenGeometry.width() - size().width()) / 2;
-    int y = (screenGeometry.height() - size().height()) / 2;
+    QScreen* primaryScreen  = QGuiApplication::primaryScreen();
+    QRect    screenGeometry = primaryScreen->geometry();
+    int      x              = (screenGeometry.width() - size().width()) / 2;
+    int      y              = (screenGeometry.height() - size().height()) / 2;
     move(x, y);
 }
