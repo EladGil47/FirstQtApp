@@ -1,4 +1,3 @@
-// checkable_item_widget.cpp
 #include "checkable_player_item_widget.hpp"
 
 CheckablePlayerItemWidget::CheckablePlayerItemWidget(std::shared_ptr<Player> player)
@@ -28,15 +27,15 @@ Qt::CheckState CheckablePlayerItemWidget::getCheckBoxState()
 
 void CheckablePlayerItemWidget::setupLayout()
 {
-    QHBoxLayout *layout = new QHBoxLayout(this);
+    QHBoxLayout* layout = new QHBoxLayout(this);
     layout->addWidget(m_is_selected_check_box);
     layout->addWidget(m_name_label);
-    QSpacerItem *spacer = new QSpacerItem(0, 0, QSizePolicy::Expanding, QSizePolicy::Fixed);
+    QSpacerItem* spacer = new QSpacerItem(0, 0, QSizePolicy::Expanding, QSizePolicy::Fixed);
     layout->addSpacerItem(spacer);
     layout->setContentsMargins(10, 0, 0, 0);
 }
 
-void CheckablePlayerItemWidget::mousePressEvent(QMouseEvent *event)
+void CheckablePlayerItemWidget::mousePressEvent(QMouseEvent* event)
 {
     if (m_is_click_enabled && event->button() == Qt::LeftButton)
     {
