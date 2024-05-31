@@ -1,5 +1,6 @@
 #include "groups_list_window.h"
 
+#include <QPixmap>
 #include "group_item_widget.h"
 #include "group_input_dialog.hpp"
 
@@ -11,7 +12,8 @@ GroupsListWindow::GroupsListWindow(std::shared_ptr<GroupsCollection> groups_coll
     {
         m_groups_collection = groups_collection;
 
-        initAppNameLabel();
+        // initAppNameLabel();
+        initAppHorLayout();
         initGroupsList();
         initButtonsHorLayout();
 
@@ -22,9 +24,34 @@ GroupsListWindow::GroupsListWindow(std::shared_ptr<GroupsCollection> groups_coll
 void GroupsListWindow::setupLayout()
 {
     QVBoxLayout* layout = new QVBoxLayout(this);
-    layout->addWidget(m_app_name_label);
+    // layout->addWidget(m_app_name_label);
+    layout->addLayout(m_app_name_hor_layout);
     layout->addWidget(m_groups_list);
     layout->addLayout(m_buttons_hor_layout);
+}
+
+void GroupsListWindow::initAppHorLayout()
+{
+    m_app_name_hor_layout = new QHBoxLayout;
+    m_app_name_hor_layout->addStretch(1);
+
+    QPixmap pixmap("./images/soccer_ball.png"); // Assuming the image is in a resource file
+    int     width  = 30;
+    int     height = 30;
+    pixmap         = pixmap.scaled(width, height, Qt::KeepAspectRatio, Qt::SmoothTransformation);
+
+    QLabel* left_soccer_ball_label = new QLabel;
+    left_soccer_ball_label->setPixmap(pixmap);
+    m_app_name_hor_layout->addWidget(left_soccer_ball_label);
+
+    initAppNameLabel();
+    m_app_name_hor_layout->addWidget(m_app_name_label);
+
+    QLabel* right_soccer_ball_label = new QLabel;
+    right_soccer_ball_label->setPixmap(pixmap);
+    m_app_name_hor_layout->addWidget(right_soccer_ball_label);
+
+    m_app_name_hor_layout->addStretch(1);
 }
 
 void GroupsListWindow::initAppNameLabel()

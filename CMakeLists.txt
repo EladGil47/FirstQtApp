@@ -32,7 +32,9 @@ file(GLOB PROJECT_SOURCES
     include/*.hpp
 )
 
-add_executable(${PROJECT_NAME} ${PROJECT_SOURCES})
+qt6_add_resources(RESOURCES resources.qrc)
+
+add_executable(${PROJECT_NAME} ${PROJECT_SOURCES} ${RESOURCES})
 
 link_directories(${CMAKE_SOURCE_DIR}/${DEPS_LIBRARY})
 
@@ -42,12 +44,16 @@ target_compile_options(${PROJECT_NAME} PRIVATE
 
 target_link_libraries(${PROJECT_NAME} PRIVATE
     Qt${QT_VERSION_MAJOR}::Widgets
+    Qt${QT_VERSION_MAJOR}::Core
+    Qt${QT_VERSION_MAJOR}::Gui 
+
     KOHOT_LIB
 )
 target_include_directories(${PROJECT_NAME} PUBLIC
     ${CMAKE_CURRENT_SOURCE_DIR}/include
     ${Qt6Widgets_INCLUDE_DIRS}
 )
+
 
 # CPACK SECTION
 set(CPACK_PACKAGE_NAME "${PROJECT_NAME}")

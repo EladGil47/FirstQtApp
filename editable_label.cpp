@@ -17,9 +17,21 @@ void EditableLabel::createHorLayout()
     m_layout->addWidget(m_editLine);
 }
 
-void EditableLabel::setText(const QString &text)
+void EditableLabel::setText(const QString& text)
 {
     m_label->setText(text);
+}
+
+void EditableLabel::setPixmap(const QPixmap& pixmap)
+{
+    if (pixmap.isNull())
+    {
+        qWarning("Failed to load image");
+    }
+    else
+    {
+        m_label->setPixmap(pixmap);
+    }
 }
 
 void EditableLabel::setEditablity(bool state)
@@ -37,7 +49,7 @@ void EditableLabel::createLabel()
     m_label->setToolTip("Double-click me to edit");
 }
 
-void EditableLabel::setToolTip(const QString &text)
+void EditableLabel::setToolTip(const QString& text)
 {
     m_label->setToolTip(text);
 }
@@ -48,7 +60,7 @@ void EditableLabel::setAlignment(Qt::Alignment alignment)
     m_editLine->setAlignment(alignment);
 }
 
-void EditableLabel::setFont(const QFont &font)
+void EditableLabel::setFont(const QFont& font)
 {
     m_label->setFont(font);
     m_editLine->setFont(font);
@@ -70,7 +82,7 @@ void EditableLabel::createEditLine()
     connect(m_editLine, &QLineEdit::editingFinished, this, &EditableLabel::finishEditing);
 }
 
-void EditableLabel::mouseDoubleClickEvent(QMouseEvent *event)
+void EditableLabel::mouseDoubleClickEvent(QMouseEvent* event)
 {
     if (m_editability)
     {

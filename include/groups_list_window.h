@@ -29,6 +29,7 @@ private:
     void setupLayout();
     void initButtonsHorLayout();
     void initGroupsAmountLabelText();
+    void initAppHorLayout();
 
     std::shared_ptr<GroupsCollection> m_groups_collection;
 
@@ -37,6 +38,7 @@ private:
     EditableLabel*     m_app_name_label;
     LabeledListWidget* m_groups_list;
     QHBoxLayout*       m_buttons_hor_layout;
+    QHBoxLayout*       m_app_name_hor_layout;
 
 public slots:
     void onCreateNewGroupButton();
