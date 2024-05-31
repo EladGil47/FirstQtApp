@@ -1,15 +1,15 @@
 #ifndef FIRST_QT_APP_INCLUDE_WINDOW_MANAGER_H
 #define FIRST_QT_APP_INCLUDE_WINDOW_MANAGER_H
 
-#include <QMainWindow>
 #include <QGuiApplication>
+#include <QMainWindow>
 #include <QScreen>
+#include "create_teams_window.h"
 #include "groups_list_window.h"
 #include "players_list_window.h"
-#include "create_teams_window.h"
+#include "app_common.hpp"
 #include "display_teams_window.hpp"
 #include "groups_collection.hpp"
-#include "app_common.hpp"
 
 class WindowsManager : public QMainWindow
 {
@@ -24,10 +24,11 @@ private slots:
     void setToCreateTeamsWindow(size_t id);
 
 private:
-    GroupsListWindow *m_groups_list_window;
-    PlayersListWindow *m_players_list_window;
-    CreateTeamsWindow *m_create_teams_window;
-    DisplayTeamsWindow *m_display_teams_window;
+    GroupsListWindow*   m_groups_list_window;
+    PlayersListWindow*  m_players_list_window;
+    CreateTeamsWindow*  m_create_teams_window;
+    DisplayTeamsWindow* m_display_teams_window;
+
     std::shared_ptr<GroupsCollection> m_groups_collection;
 
     void setWindow();

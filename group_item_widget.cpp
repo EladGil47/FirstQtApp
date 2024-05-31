@@ -7,7 +7,7 @@ GroupItemWidget::GroupItemWidget(std::shared_ptr<Group> group)
 {
     if (group)
     {
-        m_group = group;
+        m_group       = group;
         m_group_index = static_cast<size_t>(m_group->getId());
 
         initNameLabel();
@@ -37,9 +37,9 @@ void GroupItemWidget::initNameLabel()
 
 void GroupItemWidget::initSizeLabel()
 {
-    QString size = QString::number(m_group->getNumOfPlayers());
+    QString size         = QString::number(m_group->getNumOfPlayers());
     QString size_wrapped = "(" + size + ")";
-    m_size_label = new QLabel(size_wrapped);
+    m_size_label         = new QLabel(size_wrapped);
     m_size_label->setFont(Fonts::GROUP_ITEM_WIDGET_FONT);
 }
 
@@ -66,18 +66,18 @@ void GroupItemWidget::initRemoveButton()
 
 void GroupItemWidget::adjustButtonsSize()
 {
-    QList<QPushButton *> buttons = {m_enter_button, m_create_teams_button, m_remove_button};
+    QList<QPushButton*> buttons = {m_enter_button, m_create_teams_button, m_remove_button};
 
     // Find the maximum width among the buttons
     int max_width = 0;
-    for (QPushButton *button : buttons)
+    for (QPushButton* button : buttons)
     {
         if (button)
             max_width = qMax(max_width, button->sizeHint().width());
     }
 
     // Set the maximum width to all buttons
-    for (QPushButton *button : buttons)
+    for (QPushButton* button : buttons)
     {
         if (button)
         {
@@ -90,10 +90,10 @@ void GroupItemWidget::setupLayout()
 {
     if (m_name_label && m_size_label && m_enter_button && m_create_teams_button && m_remove_button)
     {
-        QHBoxLayout *layout = new QHBoxLayout(this);
+        QHBoxLayout* layout = new QHBoxLayout(this);
         layout->addWidget(m_name_label);
         layout->addWidget(m_size_label);
-        QSpacerItem *spacer = new QSpacerItem(0, 0, QSizePolicy::Expanding, QSizePolicy::Expanding);
+        QSpacerItem* spacer = new QSpacerItem(0, 0, QSizePolicy::Expanding, QSizePolicy::Expanding);
         layout->addSpacerItem(spacer);
         layout->addWidget(m_enter_button);
         layout->addWidget(m_create_teams_button);
@@ -105,7 +105,7 @@ void GroupItemWidget::setupLayout()
     }
 }
 
-void GroupItemWidget::mouseDoubleClickEvent(QMouseEvent *event)
+void GroupItemWidget::mouseDoubleClickEvent(QMouseEvent* event)
 {
     if (event->button() == Qt::LeftButton)
     {
@@ -122,19 +122,21 @@ void GroupItemWidget::onEnterButtonClicked()
 
 void GroupItemWidget::onCreateTeamsButtonClicked()
 {
-    uint16_t minimun_required_players_amount = m_group->getPlayersInTeamAmount() * m_group->getTeamsAmount();
-    uint16_t players_amount = static_cast<uint16_t>(m_group->getNumOfPlayers());
+    // uint16_t minimun_required_players_amount = m_group->getPlayersInTeamAmount() * m_group->getTeamsAmount();
+    // uint16_t players_amount = static_cast<uint16_t>(m_group->getNumOfPlayers());
 
-    if (players_amount >= minimun_required_players_amount)
-    {
-        emit createTeamsButtonClickedSignal(m_group_index);
-    }
-    else
-    {
-        uint16_t required_players_to_add = minimun_required_players_amount - players_amount;
-        QString message = "Please add " + QString::number(required_players_to_add) + " more players to create teams";
-        MessageBoxHandler::showMessageBox(message);
-    }
+    // if (players_amount >= minimun_required_players_amount)
+    // {
+    //     emit createTeamsButtonClickedSignal(m_group_index);
+    // }
+    // else
+    // {
+    //     uint16_t required_players_to_add = minimun_required_players_amount - players_amount;
+    //     QString message = "Please add " + QString::number(required_players_to_add) + " more players to create teams";
+    //     MessageBoxHandler::showMessageBox(message);
+    // }
+
+    emit createTeamsButtonClickedSignal(m_group_index);
 }
 
 void GroupItemWidget::onRemoveButtonClicked()
@@ -142,7 +144,7 @@ void GroupItemWidget::onRemoveButtonClicked()
     emit removeButtonClickedSignal(m_group_index);
 }
 
-void GroupItemWidget::onChangeGroupName(const QString &name)
+void GroupItemWidget::onChangeGroupName(const QString& name)
 {
     emit groupNameChangedSignal(m_group_index, name.toStdString());
 }

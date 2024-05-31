@@ -191,7 +191,6 @@ void PlayersListWindow::onCreateTeamsClicked()
 
     if (players_amount >= minimun_required_players_amount)
     {
-        // Open a dialog
         CreateTeamsOption option;
         option = showDialogWithOptions();
         if (option == CreateTeamsOption::RANDOM)

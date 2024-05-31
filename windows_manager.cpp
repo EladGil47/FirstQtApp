@@ -57,7 +57,10 @@ void WindowsManager::initGroupsListWindow()
 {
     m_groups_list_window = new GroupsListWindow(m_groups_collection);
     QObject::connect(m_groups_list_window, &GroupsListWindow::setToPlayersListWindowSignal, this, &WindowsManager::setToPlayersListWindow);
-    QObject::connect(m_groups_list_window, &GroupsListWindow::setToCreateTeamsWindowSignal, this, &WindowsManager::setToCreateTeamsWindow);
+    QObject::connect(m_groups_list_window, &GroupsListWindow::setToCreateTeamsWindowSignal, this, [this](size_t id) {
+        initPlayersListWindow(id);
+        m_players_list_window->onCreateTeamsClicked();
+    });
 }
 
 void WindowsManager::initCreateTeamsWindow(size_t id)
@@ -71,7 +74,7 @@ void WindowsManager::initDisplayTeamsWindow(std::shared_ptr<PlayersCollection> p
 {
     m_display_teams_window = new DisplayTeamsWindow(players, m_groups_collection->getItem(group_id));
     QObject::connect(m_display_teams_window, &DisplayTeamsWindow::okButtonClickedSignal, this, &WindowsManager::setToGroupsListWindow);
-    QObject::connect(m_display_teams_window, &DisplayTeamsWindow::goBackButtonClickedSignal, this, &WindowsManager::setToCreateTeamsWindow);
+    QObject::connect(m_display_teams_window, &DisplayTeamsWindow::goBackButtonClickedSignal, this, &WindowsManager::setToPlayersListWindow);
 }
 
 void WindowsManager::moveWindowToCenter()
