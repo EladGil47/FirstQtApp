@@ -30,20 +30,20 @@ void PlayerItemWidget::initRemoveButton()
 {
     m_remove_button = new QPushButton("Remove");
     m_remove_button->setFixedSize(Sizes::WIDGET_IN_PLAYER_ITEM_WIDGET);
-    m_remove_button->setStyleSheet(Style::RED_BUTTON_HOR_LAYOUT);
+    m_remove_button->setStyleSheet(Style::DARK_BROWN_BUTTON_HOR_LAYOUT);
     connect(m_remove_button, &QPushButton::clicked, this, &PlayerItemWidget::onRemoveButtonClicked);
 }
 
 void PlayerItemWidget::setupLayout()
 {
-    QHBoxLayout *layout = new QHBoxLayout(this);
+    QHBoxLayout* layout = new QHBoxLayout(this);
     layout->addWidget(m_editable_name_label, 1);
     layout->addWidget(m_rate_label, 1);
     layout->addWidget(m_role_label, 1);
-    QSpacerItem *space_all_to_end = new QSpacerItem(0, 0, QSizePolicy::Expanding, QSizePolicy::Fixed);
+    QSpacerItem* space_all_to_end = new QSpacerItem(0, 0, QSizePolicy::Expanding, QSizePolicy::Fixed);
     layout->addSpacerItem(space_all_to_end);
     layout->addStretch(2);
-    layout->addWidget(m_enter_button);
+    // layout->addWidget(m_enter_button);
     layout->addWidget(m_remove_button);
 }
 
@@ -57,7 +57,7 @@ void PlayerItemWidget::onRemoveButtonClicked()
 {
     emit removeButtonClickedSignal(m_player_index);
 }
-void PlayerItemWidget::onChangePlayerName(const QString &name)
+void PlayerItemWidget::onChangePlayerName(const QString& name)
 {
     std::string player_name = name.toStdString();
     m_player->setName(player_name);

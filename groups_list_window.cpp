@@ -105,11 +105,8 @@ void GroupsListWindow::initCreateNewGroupButton()
     QString text              = "Create new group";
     m_create_new_group_button = new QPushButton(text);
     m_create_new_group_button->setStyleSheet(Style::DARK_BROWN_BUTTON_HOR_LAYOUT);
-    m_create_new_group_button->setSizePolicy(QSizePolicy::Preferred,
-        QSizePolicy::Fixed);
     m_create_new_group_button->setToolTip("Click here to create a new group");
-    connect(m_create_new_group_button, &QPushButton::clicked, this,
-        &GroupsListWindow::onCreateNewGroupButton);
+    connect(m_create_new_group_button, &QPushButton::clicked, this, &GroupsListWindow::onCreateNewGroupButton);
 }
 
 void GroupsListWindow::initList()

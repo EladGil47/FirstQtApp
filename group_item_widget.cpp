@@ -10,6 +10,8 @@ GroupItemWidget::GroupItemWidget(std::shared_ptr<Group> group)
         m_group       = group;
         m_group_index = static_cast<size_t>(m_group->getId());
 
+        setToolTip("Double-click to enter");
+
         initNameLabel();
         initSizeLabel();
         initButtons();
@@ -53,14 +55,17 @@ void GroupItemWidget::initEnterButton()
 void GroupItemWidget::initCreateTeamsButton()
 {
     m_create_teams_button = new QPushButton("Create Teams");
-    m_create_teams_button->setStyleSheet(Style::GREEN_BUTTON_HOR_LAYOUT);
+    m_create_teams_button->setStyleSheet(Style::DARK_BROWN_BUTTON_HOR_LAYOUT);
+    m_create_teams_button->setToolTip("Click to create Teams");
+
     connect(m_create_teams_button, &QPushButton::clicked, this, &GroupItemWidget::onCreateTeamsButtonClicked);
 }
 
 void GroupItemWidget::initRemoveButton()
 {
     m_remove_button = new QPushButton("Remove");
-    m_remove_button->setStyleSheet(Style::RED_BUTTON_HOR_LAYOUT);
+    m_remove_button->setStyleSheet(Style::DARK_BROWN_BUTTON_HOR_LAYOUT);
+    m_remove_button->setToolTip("Click to create Teams");
     connect(m_remove_button, &QPushButton::clicked, this, &GroupItemWidget::onRemoveButtonClicked);
 }
 
@@ -95,7 +100,7 @@ void GroupItemWidget::setupLayout()
         layout->addWidget(m_size_label);
         QSpacerItem* spacer = new QSpacerItem(0, 0, QSizePolicy::Expanding, QSizePolicy::Expanding);
         layout->addSpacerItem(spacer);
-        layout->addWidget(m_enter_button);
+        // layout->addWidget(m_enter_button);
         layout->addWidget(m_create_teams_button);
         layout->addWidget(m_remove_button);
     }
