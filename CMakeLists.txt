@@ -22,6 +22,9 @@ set(CMAKE_AUTORCC ON)
 find_package(QT NAMES Qt6 Qt5 REQUIRED COMPONENTS Widgets)
 find_package(Qt${QT_VERSION_MAJOR} REQUIRED COMPONENTS Widgets)
 
+# Include directories
+configure_file(${CMAKE_SOURCE_DIR}/sqlite/sqlite3.dll ${CMAKE_BINARY_DIR}/sqlite3.dll COPYONLY)
+
 if(TARGET Qt${QT_VERSION_MAJOR}::Widgets)
     message(STATUS "Qt found at: ${Qt${QT_VERSION_MAJOR}_DIR}")
 endif()
@@ -48,10 +51,12 @@ target_link_libraries(${PROJECT_NAME} PRIVATE
     Qt${QT_VERSION_MAJOR}::Gui 
 
     KOHOT_LIB
+    ${CMAKE_BINARY_DIR}/sqlite3.dll
 )
 target_include_directories(${PROJECT_NAME} PUBLIC
     ${CMAKE_CURRENT_SOURCE_DIR}/include
     ${Qt6Widgets_INCLUDE_DIRS}
+    ${PROJECT_SOURCE_DIR}/sqlite
 )
 
 
