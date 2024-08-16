@@ -71,6 +71,31 @@
                 "MIMode": "gdb"
             },
             "visualizerFile": "c:\\Users\\madoritur\\AppData\\Roaming\\Code\\User\\workspaceStorage\\f51c50ec9b083d632c0b630bd9229ed2\\tonka3000.qtvsctools\\qt.natvis.xml"
-        }
+        },
+    {
+        "name": "Gui",
+        "type": "cppdbg",
+        "request": "launch",
+        "program": "${workspaceFolder}/build/KohotQtApp",
+        "args": [
+        ],
+        "stopAtEntry": false,
+        "cwd": "${workspaceFolder}",
+        "environment": [],
+        "externalConsole": false,
+        "MIMode": "gdb",
+        "setupCommands": [
+            {
+                "description": "Enable pretty-printing for gdb",
+                "text": "-enable-pretty-printing",
+                "ignoreFailures": true
+            },
+            {
+                "description": "Set Disassembly Flavor to Intel",
+                "text": "-gdb-set disassembly-flavor intel",
+                "ignoreFailures": true
+            }
+        ]
+    }
     ]
 }

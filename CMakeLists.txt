@@ -32,7 +32,7 @@ file(GLOB PROJECT_SOURCES
     include/*.hpp
 )
 
-qt6_add_resources(RESOURCES resources.qrc)
+qt_add_resources(RESOURCES resources.qrc)
 
 add_executable(${PROJECT_NAME} ${PROJECT_SOURCES} ${RESOURCES})
 
