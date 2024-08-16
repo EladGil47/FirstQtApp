@@ -6,7 +6,7 @@
 #include <QWidget>
 
 #include "app_common.hpp"
-#include "editable_label.h"
+#include "editable_label.hpp"
 #include "player.hpp"
 
 class BasePlayerItemWidget : public QWidget
@@ -16,11 +16,11 @@ class BasePlayerItemWidget : public QWidget
 public:
     enum SetupLayoutOptions : int
     {
-        None = 0x00,
-        NAME = 0x01,
-        RATE = 0x02,
-        ROLE = 0x04,
-        REMOVE = 0x08,
+        None       = 0x00,
+        NAME       = 0x01,
+        RATE       = 0x02,
+        ROLE       = 0x04,
+        REMOVE     = 0x08,
         AllOptions = NAME | RATE | ROLE
     };
 
@@ -28,7 +28,7 @@ public:
     {
         if (player)
         {
-            m_player = player;
+            m_player       = player;
             m_player_index = static_cast<size_t>(player->getId());
         }
     }
@@ -36,7 +36,7 @@ public:
     void setupLayout(int x)
     {
         SetupLayoutOptions option = static_cast<SetupLayoutOptions>(x);
-        QHBoxLayout *layout = new QHBoxLayout(this);
+        QHBoxLayout*       layout = new QHBoxLayout(this);
         if (option & REMOVE)
         {
             initRemoveButton();
@@ -60,19 +60,22 @@ public:
         layout->setContentsMargins(5, 0, 0, 0);
     }
 
-    std::shared_ptr<Player> getPlayer() { return m_player; }
+    std::shared_ptr<Player> getPlayer()
+    {
+        return m_player;
+    }
 
 protected:
     std::shared_ptr<Player> m_player;
 
-    void initNameLabel(const QString &name)
+    void initNameLabel(const QString& name)
     {
         m_name_label = new QLabel;
         m_name_label->setText(name);
         m_name_label->setFont(Fonts::PLAYER_ITEM_WIDGET_FONT);
     }
 
-    void initEditableNameLabel(const QString &name)
+    void initEditableNameLabel(const QString& name)
     {
         m_editable_name_label = new EditableLabel;
         m_editable_name_label->setText(name);
@@ -80,13 +83,13 @@ protected:
         m_editable_name_label->setMaxLength(MaxValues::ITEM_WIDGET_LABEL_NAME);
     }
 
-    void initRateLabel(const QString &rate)
+    void initRateLabel(const QString& rate)
     {
         m_rate_label = new QLabel(rate);
         m_rate_label->setFont(Fonts::PLAYER_ITEM_WIDGET_FONT);
     }
 
-    void initRoleLabel(const QString &role)
+    void initRoleLabel(const QString& role)
     {
         m_role_label = new QLabel(role);
         m_role_label->setFont(Fonts::PLAYER_ITEM_WIDGET_FONT);
@@ -99,16 +102,16 @@ protected:
         m_remove_button->setStyleSheet(
             Style::RED_BACKGROUND_BLACK_BORDER_WHITE_TEXT + "color: white;");
         connect(m_remove_button, &QPushButton::clicked, this,
-                &BasePlayerItemWidget::onRemoveButtonClicked);
+            &BasePlayerItemWidget::onRemoveButtonClicked);
     }
 
-    size_t m_player_index;
-    EditableLabel *m_editable_name_label;
-    QLabel *m_name_label;
-    QLabel *m_rate_label;
-    QLabel *m_role_label;
+    size_t         m_player_index;
+    EditableLabel* m_editable_name_label;
+    QLabel*        m_name_label;
+    QLabel*        m_rate_label;
+    QLabel*        m_role_label;
 
-    QPushButton *m_remove_button;
+    QPushButton* m_remove_button;
 
 private slots:
     void onRemoveButtonClicked()

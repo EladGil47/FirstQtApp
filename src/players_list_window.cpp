@@ -1,7 +1,7 @@
-#include "players_list_window.h"
-#include "player_item_widget.h"
+#include "players_list_window.hpp"
 #include "app_common.hpp"
 #include "player_input_dialog.hpp"
+#include "player_item_widget.hpp"
 
 PlayersListWindow::PlayersListWindow(std::shared_ptr<Group> group)
 {

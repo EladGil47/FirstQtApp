@@ -4,7 +4,6 @@
 #include <QDialog>
 #include <QWidget>
 #include <memory>
-#include "base_list_manager_window.h"
 #include "group.hpp"
 
 #include <QPushButton>

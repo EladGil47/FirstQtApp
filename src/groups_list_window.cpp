@@ -1,8 +1,8 @@
-#include "groups_list_window.h"
+#include "groups_list_window.hpp"
 
 #include <QPixmap>
-#include "group_item_widget.h"
 #include "group_input_dialog.hpp"
+#include "group_item_widget.hpp"
 
 #include "app_common.hpp"
 

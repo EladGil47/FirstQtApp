@@ -1,5 +1,5 @@
 
-#include "player_item_widget.h"
+#include "player_item_widget.hpp"
 #include "app_common.hpp"
 
 #include <QHBoxLayout>

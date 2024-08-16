@@ -7,7 +7,7 @@
 #include "groups_collection.hpp"
 #include "labeled_list_widget.hpp"
 
-#include "editable_label.h"
+#include "editable_label.hpp"
 
 class GroupsListWindow : public QWidget
 {

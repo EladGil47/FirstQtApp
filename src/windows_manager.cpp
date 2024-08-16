@@ -1,4 +1,4 @@
-#include "windows_manager.h"
+#include "windows_manager.hpp"
 
 WindowsManager::WindowsManager(std::shared_ptr<GroupsCollection> groups_collection)
 {
