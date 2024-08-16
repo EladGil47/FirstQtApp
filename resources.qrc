@@ -2,4 +2,7 @@
     <qresource prefix="/images">
         <file>images/soccer_ball.png</file>
     </qresource>
+    <qresource prefix="/music">
+        <file>music/song.mp3</file>
+    </qresource>
 </RCC>
