@@ -1,98 +1,55 @@
-FirstQtApp
 
-FirstQtApp is a Qt-based application developed with CMake. This project demonstrates a basic application structure using the Qt framework, with features like custom UI components and resource management.
-Project Structure
+# FirstQtApp
 
-The project is organized as follows:
+**FirstQtApp** is a Qt-based application designed to manage and display soccer teams, players, and other related functionalities. This project is structured with CMake as the build system, and includes a custom library for handling team and player data.
 
-makefile
+## Project Structure
 
-.
-├── build/                     # Build artifacts and CMake files
-├── Data/                      # Data files (e.g., JSON)
-├── _deps/                     # Project dependencies
-│   ├── KohotLibrary/          # Kohot library sources and headers
-├── images/                    # Image resources
-├── include/                   # Header files for the application
-├── src/                       # Source code for the application
-├── resources.qrc              # Qt resource file
-├── CMakeLists.txt             # CMake configuration file
-└── README.md                  # Project documentation
+- **build/**: Contains generated files from the build process, including object files and CMake configurations.
+- **Data/**: JSON files or other data files used by the application.
+- **_deps/KohotLibrary/**: Custom library for handling teams, players, and other soccer-related data.
+- **images/**: Directory containing image assets like `soccer_ball.png`.
+- **include/**: Header files for the application's classes and functions.
+- **src/**: Source files for the application's implementation.
+- **resources.qrc**: Qt resource file defining the paths to assets such as images.
+- **CMakeLists.txt**: CMake configuration file for building the project.
 
-Key Directories
+## Building the Project
 
-    build/: Contains all generated files after compiling the project. This includes object files, CMake configurations, and other intermediate build files.
+To build the project, follow these steps:
 
-    Data/: Stores external data files required by the application, such as groups.json.
+1. **Navigate to the build directory:**
+   ```bash
+   cd build
+   ```
 
-    _deps/: Holds external dependencies, such as the KohotLibrary, with their respective source and header files.
+2. **Run CMake to configure the project:**
+   ```bash
+   cmake ..
+   ```
 
-    images/: Contains image assets used in the application, such as soccer_ball.png.
+3. **Build the project:**
+   ```bash
+   make
+   ```
 
-    include/: Header files that define the interface for the application's components and features.
+4. **Run the application:**
+   After building, the executable will be in the `build` directory. You can run it with:
+   ```bash
+   .build/FirstQtApp
+   ```
 
-    src/: Source files that implement the application's functionality.
+## Dependencies
 
-Getting Started
-Prerequisites
+The project relies on the following:
 
-    Qt 5.x+: Make sure you have Qt installed.
-    CMake 3.21+: CMake is required to build the project.
-    C++ Compiler: A modern C++ compiler that supports C++17 or later.
+- **Qt**: A cross-platform application development framework.
+- **CMake**: A build system generator.
 
-Building the Project
+## Contributing
 
-    Clone the repository:
+If you wish to contribute to this project, please fork the repository and create a pull request with your changes.
 
-    bash
+## License
 
-git clone https://github.com/yourusername/FirstQtApp.git
-cd FirstQtApp
-
-Create a build directory and run CMake:
-
-bash
-
-mkdir build
-cd build
-cmake ..
-
-Compile the project:
-
-bash
-
-cmake --build .
-
-Run the application:
-
-bash
-
-    ./KohotQtApp
-
-Project Features
-
-    Custom UI Components: Includes various UI widgets like CheckablePlayerItemWidget, EditableLabel, and more.
-    Resource Management: Centralized resource management using resources.qrc.
-    Data Integration: Handles JSON data files to manage groups and players.
-
-Adding Resources
-
-To add new resources (e.g., images), follow these steps:
-
-    Place the new resource in the images/ directory.
-    Update the resources.qrc file to include the new resource:
-
-    xml
-
-    <file>./images/your_new_image.png</file>
-
-    Rebuild the project to include the new resource.
-
-Contributing
-
-Contributions are welcome! If you have suggestions or find any issues, please feel free to open an issue or submit a pull request.
-License
-
-This project is licensed under the MIT License - see the LICENSE file for details.
-
-This README provides a clear overview of your project, how to get started, and the structure. You can modify the sections to fit additional features or instructions specific to your project.
+This project is licensed under the MIT License. See the LICENSE file for more details.
