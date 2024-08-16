@@ -27,7 +27,7 @@ if(TARGET Qt${QT_VERSION_MAJOR}::Widgets)
 endif()
 
 file(GLOB PROJECT_SOURCES
-    *.cpp
+    src/*.cpp
     include/*.h
     include/*.hpp
 )
