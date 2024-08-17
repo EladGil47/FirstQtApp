@@ -1,13 +1,13 @@
 #ifndef FIRST_QT_APP_INCLUDE_GROUP_ITEM_WIDGET_H
 #define FIRST_QT_APP_INCLUDE_GROUP_ITEM_WIDGET_H
 
+#include "editable_label.hpp"
 #include "group.hpp"
-#include "editable_label.h"
 
-#include <QWidget>
+#include <QHBoxLayout>
 #include <QLabel>
 #include <QPushButton>
-#include <QHBoxLayout>
+#include <QWidget>
 
 class GroupItemWidget : public QWidget
 {
@@ -18,7 +18,7 @@ public:
 
 private:
     size_t m_group_index;
-    void mouseDoubleClickEvent(QMouseEvent *event) override;
+    void   mouseDoubleClickEvent(QMouseEvent* event) override;
 
     void initNameLabel();
     void initSizeLabel();
@@ -31,17 +31,17 @@ private:
 
     std::shared_ptr<Group> m_group;
 
-    EditableLabel *m_name_label;
-    QLabel *m_size_label;
-    QPushButton *m_enter_button;
-    QPushButton *m_create_teams_button;
-    QPushButton *m_remove_button;
+    EditableLabel* m_name_label;
+    QLabel*        m_size_label;
+    QPushButton*   m_enter_button;
+    QPushButton*   m_create_teams_button;
+    QPushButton*   m_remove_button;
 
 public slots:
     void onEnterButtonClicked();
     void onCreateTeamsButtonClicked();
     void onRemoveButtonClicked();
-    void onChangeGroupName(const QString &name);
+    void onChangeGroupName(const QString& name);
 
 signals:
     void enterButtonClickedSignal(size_t id);

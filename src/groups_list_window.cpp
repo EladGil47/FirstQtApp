@@ -1,8 +1,9 @@
-#include "groups_list_window.h"
+#include "groups_list_window.hpp"
 
 #include <QPixmap>
-#include "group_item_widget.h"
 #include "group_input_dialog.hpp"
+#include "group_item_widget.hpp"
+#include "resource_paths.hpp"
 
 #include "app_common.hpp"
 
@@ -35,7 +36,7 @@ void GroupsListWindow::initAppHorLayout()
     m_app_name_hor_layout = new QHBoxLayout;
     m_app_name_hor_layout->addStretch(1);
 
-    QPixmap pixmap("./images/soccer_ball.png"); // Assuming the image is in a resource file
+    QPixmap pixmap(resources_path::SOCCER_BALL); // Assuming the image is in a resource file
     int     width  = 30;
     int     height = 30;
     pixmap         = pixmap.scaled(width, height, Qt::KeepAspectRatio, Qt::SmoothTransformation);

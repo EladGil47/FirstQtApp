@@ -1,4 +1,4 @@
-#include "group_item_widget.h"
+#include "group_item_widget.hpp"
 #include "app_common.hpp"
 
 #include <QMouseEvent>

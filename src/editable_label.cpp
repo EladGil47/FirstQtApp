@@ -1,4 +1,4 @@
-#include "editable_label.h"
+#include "editable_label.hpp"
 #include "app_common.hpp"
 
 #include <QMouseEvent>

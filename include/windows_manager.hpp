@@ -4,12 +4,12 @@
 #include <QGuiApplication>
 #include <QMainWindow>
 #include <QScreen>
-#include "create_teams_window.h"
-#include "groups_list_window.h"
-#include "players_list_window.h"
 #include "app_common.hpp"
+#include "create_teams_window.hpp"
 #include "display_teams_window.hpp"
 #include "groups_collection.hpp"
+#include "groups_list_window.hpp"
+#include "players_list_window.hpp"
 
 class WindowsManager : public QMainWindow
 {
