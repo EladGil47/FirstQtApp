@@ -1,11 +1,11 @@
 #ifndef FIRST_QT_APP_INCLUDE_LABELED_LIST_WIDGET_H
 #define FIRST_QT_APP_INCLUDE_LABELED_LIST_WIDGET_H
 
-#include <QWidget>
-#include <QVBoxLayout>
 #include <QHBoxLayout>
-#include <QListWidget>
 #include <QLabel>
+#include <QListWidget>
+#include <QVBoxLayout>
+#include <QWidget>
 
 #include "app_common.hpp"
 
@@ -14,14 +14,14 @@ class LabeledListWidget : public QWidget
     Q_OBJECT
 
 public:
-    QListWidget *m_list;
+    QListWidget* m_list;
 
     LabeledListWidget()
     {
         initLabeledListLayout();
     }
 
-    void addSpacerAboveList(QSpacerItem *spacer)
+    void addSpacerAboveList(QSpacerItem* spacer)
     {
         m_top_labels_layout->addSpacerItem(spacer);
     }
@@ -41,13 +41,13 @@ public:
 
     void removeAllItemsFromList()
     {
-        int item_count = m_list->count();
-        int const FIRST_ROW = 0;
+        int       item_count = m_list->count();
+        int const FIRST_ROW  = 0;
         for (int i = FIRST_ROW; i < item_count; ++i)
         {
             // Each iteration the first elemnt is deleted which means second element becoming first
-            QListWidgetItem *item = m_list->item(FIRST_ROW);
-            QWidget *widget = m_list->itemWidget(item);
+            QListWidgetItem* item   = m_list->item(FIRST_ROW);
+            QWidget*         widget = m_list->itemWidget(item);
             m_list->removeItemWidget(item);
             delete item;
             delete widget;
@@ -55,51 +55,51 @@ public:
     }
 
     // UNUSED
-    void addWidgetToBottom(QWidget *widget)
+    void addWidgetToBottom(QWidget* widget)
     {
         m_labeled_list_layout->addWidget(widget);
     }
-    void addLayoutToBottom(QLayout *layout)
+    void addLayoutToBottom(QLayout* layout)
     {
         m_labeled_list_layout->addLayout(layout);
     }
     // UNUSED
 
     template <typename T>
-    void addItemToList(const T &custom_item)
+    void addItemToList(const T& custom_item)
     {
-        QListWidgetItem *item = new QListWidgetItem(m_list);
+        QListWidgetItem* item = new QListWidgetItem(m_list);
         item->setSizeHint(custom_item->sizeHint());
         m_list->setItemWidget(item, custom_item);
     }
 
     template <typename T>
-    void addWidgetAboveList(T *widget)
+    void addWidgetAboveList(T* widget)
     {
         widget->setFont(Fonts::LIST_LABEL_FONT);
         m_top_labels_layout->addWidget(widget);
     }
 
     template <typename T>
-    void addWidgetBeneathList(T *widget)
+    void addWidgetBeneathList(T* widget)
     {
         widget->setFont(Fonts::LIST_LABEL_FONT);
         m_bottom_labels_layout->addWidget(widget);
     }
 
 private:
-    QVBoxLayout *m_labeled_list_layout;
+    QVBoxLayout* m_labeled_list_layout;
 
     // QListWidget *m_list;
-    QHBoxLayout *m_top_labels_layout;
-    QHBoxLayout *m_bottom_labels_layout;
+    QHBoxLayout* m_top_labels_layout;
+    QHBoxLayout* m_bottom_labels_layout;
 
     void initLabeledListLayout()
     {
         m_labeled_list_layout = new QVBoxLayout(this);
 
-        m_top_labels_layout = new QHBoxLayout;
-        m_list = new QListWidget;
+        m_top_labels_layout    = new QHBoxLayout;
+        m_list                 = new QListWidget;
         m_bottom_labels_layout = new QHBoxLayout;
 
         m_labeled_list_layout->addLayout(m_top_labels_layout);
