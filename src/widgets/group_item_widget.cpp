@@ -65,7 +65,7 @@ void GroupItemWidget::initRemoveButton()
 {
     m_remove_button = new QPushButton("Remove");
     m_remove_button->setStyleSheet(Style::DARK_BROWN_BUTTON_HOR_LAYOUT);
-    m_remove_button->setToolTip("Click to create Teams");
+    m_remove_button->setToolTip("Click to remove team");
     connect(m_remove_button, &QPushButton::clicked, this, &GroupItemWidget::onRemoveButtonClicked);
 }
 

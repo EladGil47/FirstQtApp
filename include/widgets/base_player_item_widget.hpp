@@ -49,8 +49,10 @@ public:
         }
         if (option & RATE)
         {
-            initRateLabel(QString::number(m_player->getRate()));
-            layout->addWidget(m_rate_label, 24);
+            // initRateLabel(QString::number(m_player->getRate()));
+            // layout->addWidget(m_rate_label, 24);
+            initEditableRateLabel(QString::number(m_player->getRate()));
+            layout->addWidget(m_editable_rate_label, 24);
         }
         if (option & ROLE)
         {
@@ -83,11 +85,18 @@ protected:
         m_editable_name_label->setMaxLength(MaxValues::ITEM_WIDGET_LABEL_NAME);
     }
 
-    void initRateLabel(const QString& rate)
+    void initEditableRateLabel(const QString& rate)
     {
-        m_rate_label = new QLabel(rate);
-        m_rate_label->setFont(Fonts::PLAYER_ITEM_WIDGET_FONT);
+        m_editable_rate_label = new EditableLabel(true);
+        m_editable_rate_label->setText(rate);
+        m_editable_rate_label->setFont(Fonts::PLAYER_ITEM_WIDGET_FONT);
     }
+
+    // void initRateLabel(const QString& rate)
+    // {
+    //     m_rate_label = new QLabel(rate);
+    //     m_rate_label->setFont(Fonts::PLAYER_ITEM_WIDGET_FONT);
+    // }
 
     void initRoleLabel(const QString& role)
     {
@@ -108,7 +117,8 @@ protected:
     size_t         m_player_index;
     EditableLabel* m_editable_name_label;
     QLabel*        m_name_label;
-    QLabel*        m_rate_label;
+    // QLabel*        m_rate_label;
+    EditableLabel* m_editable_rate_label;
     QLabel*        m_role_label;
 
     QPushButton* m_remove_button;

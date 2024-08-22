@@ -53,6 +53,8 @@ public slots:
     void onRemoveButton(size_t id);
     void onEnterButton(size_t id);
     void onPlayerNameChanged(uint16_t id, const std::string& name);
+    void onPlayerRateChanged(uint16_t id, double rate);
+
     void setGroupName(const QString& text);
 
 signals:

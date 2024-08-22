@@ -60,6 +60,11 @@ void PlayersListWindow::onPlayerNameChanged(uint16_t id, const std::string& name
     m_group->getPlayersCollectionRef().getItem(static_cast<size_t>(id))->setName(name);
 }
 
+void PlayersListWindow::onPlayerRateChanged(uint16_t id, double rate)
+{
+    m_group->getPlayersCollectionRef().getItem(static_cast<size_t>(id))->setRate(rate);
+}
+
 void PlayersListWindow::setGroupName(const QString& text)
 {
     m_group->setName(text.toStdString());
@@ -218,6 +223,7 @@ void PlayersListWindow::addItemToList(std::shared_ptr<Player> player)
     connect(player_item_widget, &PlayerItemWidget::enterButtonClickedSignal, this, &PlayersListWindow::onEnterButton);
     connect(player_item_widget, &PlayerItemWidget::removeButtonClickedSignal, this, &PlayersListWindow::onRemoveButton);
     connect(player_item_widget, &PlayerItemWidget::playerNameChangedSignal, this, &PlayersListWindow::onPlayerNameChanged);
+    connect(player_item_widget, &PlayerItemWidget::playerRateChangedSignal, this, &PlayersListWindow::onPlayerRateChanged);
 
     m_players_list->addItemToList(player_item_widget);
 }
