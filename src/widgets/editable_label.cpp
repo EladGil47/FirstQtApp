@@ -11,27 +11,28 @@ EditableLabel::EditableLabel(bool is_numeric)
     createHorLayout();
 }
 
+template <typename T>
+void EditableLabel::initializeWidget(std::shared_ptr<T>& widget)
+{
+    widget = std::make_shared<T>();
+    widget->setSizePolicy(m_label->sizePolicy());
+    widget->setFont(m_label->font());
+    widget->setAlignment(m_label->alignment());
+    widget->setVisible(false);
+    connect(widget.get(), &T::editingFinished, this, &EditableLabel::finishEditing);
+}
+
 void EditableLabel::createEditLine()
 {
-    m_edit_line = std::make_shared<QLineEdit>();
+    initializeWidget(m_edit_line);
     m_edit_line->setStyleSheet(Style::TRANSPARENT_STYLESHEET);
-    m_edit_line->setSizePolicy(m_label->sizePolicy());
-    m_edit_line->setFont(m_label->font());
-    m_edit_line->setAlignment(m_label->alignment());
-    m_edit_line->setVisible(false);
-    connect(m_edit_line.get(), &QLineEdit::editingFinished, this, &EditableLabel::finishEditing);
 }
 
 void EditableLabel::createSpinBox()
 {
-    m_spin_box = std::make_shared<QDoubleSpinBox>();
-    m_spin_box->setSizePolicy(m_label->sizePolicy());
-    m_spin_box->setFont(m_label->font());
-    m_spin_box->setAlignment(m_label->alignment());
-    m_spin_box->setRange(0, 7); //TODO:: read it from some settings
+    initializeWidget(m_spin_box);
+    m_spin_box->setRange(0, 7); // TODO: read it from some settings
     m_spin_box->setSingleStep(1);
-    m_spin_box->setVisible(false);
-    connect(m_spin_box.get(), &QDoubleSpinBox::editingFinished, this, &EditableLabel::finishEditing);
 }
 
 void EditableLabel::createHorLayout()
@@ -50,18 +51,6 @@ void EditableLabel::setText(const QString& text)
     m_label->setText(text);
 }
 
-void EditableLabel::setPixmap(const QPixmap& pixmap)
-{
-    if (pixmap.isNull())
-    {
-        qWarning("Failed to load image");
-    }
-    else
-    {
-        m_label->setPixmap(pixmap);
-    }
-}
-
 void EditableLabel::setEditability(bool state)
 {
     m_editability = state;
@@ -73,13 +62,10 @@ void EditableLabel::setEditability(bool state)
 
 void EditableLabel::createLabel()
 {
-    m_label = std::make_shared<QLabel>();
-    m_label->setToolTip("Double-click me to edit");
-}
+    static constexpr const char* TOOL_TIP_MSG = "Double-click me to edit";
 
-void EditableLabel::setToolTip(const QString& text)
-{
-    m_label->setToolTip(text);
+    m_label = std::make_shared<QLabel>();
+    m_label->setToolTip(TOOL_TIP_MSG);
 }
 
 void EditableLabel::setAlignment(Qt::Alignment alignment)

@@ -20,9 +20,7 @@ public:
     void setFont(const QFont& font);
     void setAlignment(Qt::Alignment alignment);
     void setText(const QString& text);
-    void setToolTip(const QString& text);
     void setMaxLength(uint16_t value);
-    void setPixmap(const QPixmap& pixmap);
 
 protected:
     void mouseDoubleClickEvent(QMouseEvent* event) override;
@@ -40,6 +38,9 @@ private:
 
     bool m_editability{true};
     bool m_is_numeric{false};
+
+    template <typename T>
+    void initializeWidget(std::shared_ptr<T>& widget);
 
 public slots:
     void finishEditing();
