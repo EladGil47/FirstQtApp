@@ -7,6 +7,7 @@
 #include <QLineEdit>
 #include <QPixmap>
 #include <QWidget>
+#include <memory>
 
 class EditableLabel : public QWidget
 {
@@ -15,7 +16,7 @@ class EditableLabel : public QWidget
 public:
     EditableLabel(bool is_numeric = false);
 
-    void setEditablity(bool state);
+    void setEditability(bool state);
     void setFont(const QFont& font);
     void setAlignment(Qt::Alignment alignment);
     void setText(const QString& text);
@@ -32,14 +33,13 @@ private:
     void createEditLine();
     void createSpinBox();
 
-    QLabel*         m_label{nullptr};
-    QLineEdit*      m_edit_line{nullptr};
-    QLineEdit*      m_spinbox{nullptr};
-    QHBoxLayout*    m_layout{nullptr};
-    QDoubleSpinBox* m_spin_box{nullptr};
+    std::shared_ptr<QLabel>         m_label;
+    std::shared_ptr<QLineEdit>      m_edit_line;
+    std::shared_ptr<QDoubleSpinBox> m_spin_box;
+    std::shared_ptr<QHBoxLayout>    m_layout;
 
-    bool m_editability = true;
-    bool m_is_numeric  = false;
+    bool m_editability{true};
+    bool m_is_numeric{false};
 
 public slots:
     void finishEditing();
