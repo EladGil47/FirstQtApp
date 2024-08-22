@@ -3,6 +3,7 @@
 
 #include <QDialog>
 #include <QDialogButtonBox>
+#include <QFormLayout>
 #include <QLineEdit>
 #include <QSpinBox>
 
@@ -17,10 +18,11 @@ public:
     int     getPlayersInTeamAmount() const;
 
 private:
-    std::shared_ptr<QLineEdit>        name_line_edit;
-    std::shared_ptr<QSpinBox>         players_in_team_spin_box;
-    std::shared_ptr<QSpinBox>         teams_spin_box;
-    std::shared_ptr<QDialogButtonBox> button_box;
+    std::shared_ptr<QLineEdit>        m_name_line_edit;
+    std::shared_ptr<QSpinBox>         m_players_in_team_spin_box;
+    std::shared_ptr<QSpinBox>         m_teams_spin_box;
+    std::shared_ptr<QDialogButtonBox> m_button_box;
+    std::shared_ptr<QFormLayout>      m_layout;
 };
 
 #endif // FIRST_QT_APP_INCLUDE_GROUP_INPUT_DIALOG_HPP
