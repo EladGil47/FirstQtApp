@@ -4,6 +4,8 @@
 namespace resources_path
 {
 const char* const SOCCER_BALL = "./images/soccer_ball.png";
+const char* const SETTINGS    = "./Data/settings.json";
+
 } // namespace resources_path
 
 #endif // RESOURCE_PATHS_HPP
