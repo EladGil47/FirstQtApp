@@ -29,11 +29,10 @@ void GroupItemWidget::initButtons()
 
 void GroupItemWidget::initNameLabel()
 {
-    QString name = QString::fromStdString(m_group->getName());
-    m_name_label = new EditableLabel;
-    m_name_label->setMaxLength(MaxValues::ITEM_WIDGET_LABEL_NAME);
-    m_name_label->setText(name);
-    m_name_label->setFont(Fonts::GROUP_ITEM_WIDGET_FONT);
+    auto name  = QString::fromStdString(m_group->getName());
+    auto label = std::make_shared<QLabel>(name);
+    label->setFont(Fonts::GROUP_ITEM_WIDGET_FONT);
+    m_name_label = new EditableLabel(label);
     connect(m_name_label, &EditableLabel::finishEditingSig, this, &GroupItemWidget::onChangeGroupName);
 }
 

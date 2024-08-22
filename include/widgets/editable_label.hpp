@@ -5,7 +5,6 @@
 #include <QHBoxLayout>
 #include <QLabel>
 #include <QLineEdit>
-#include <QPixmap>
 #include <QWidget>
 #include <memory>
 
@@ -14,19 +13,12 @@ class EditableLabel : public QWidget
     Q_OBJECT
 
 public:
-    EditableLabel(bool is_numeric = false);
-
+    EditableLabel(std::shared_ptr<QLabel> m_label, bool is_numeric = false);
     void setEditability(bool state);
-    void setFont(const QFont& font);
-    void setAlignment(Qt::Alignment alignment);
-    void setText(const QString& text);
-    void setMaxLength(uint16_t value);
-
-protected:
-    void mouseDoubleClickEvent(QMouseEvent* event) override;
 
 private:
-    void createLabel();
+    void mouseDoubleClickEvent(QMouseEvent* event) override;
+
     void createHorLayout();
     void createEditLine();
     void createSpinBox();

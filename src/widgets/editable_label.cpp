@@ -3,12 +3,18 @@
 
 #include <QMouseEvent>
 
-EditableLabel::EditableLabel(bool is_numeric)
+EditableLabel::EditableLabel(std::shared_ptr<QLabel> label, bool is_numeric)
     : m_is_numeric(is_numeric)
 {
-    createLabel();
-    m_is_numeric ? createSpinBox() : createEditLine();
-    createHorLayout();
+    if (label)
+    {
+        static constexpr const char* TOOL_TIP_MSG = "Double-click me to edit";
+
+        m_label = label;
+        m_label->setToolTip(TOOL_TIP_MSG);
+        m_is_numeric ? createSpinBox() : createEditLine();
+        createHorLayout();
+    }
 }
 
 template <typename T>
@@ -26,6 +32,7 @@ void EditableLabel::createEditLine()
 {
     initializeWidget(m_edit_line);
     m_edit_line->setStyleSheet(Style::TRANSPARENT_STYLESHEET);
+    m_edit_line->setMaxLength(MaxValues::ITEM_WIDGET_LABEL_NAME);
 }
 
 void EditableLabel::createSpinBox()
@@ -46,11 +53,6 @@ void EditableLabel::createHorLayout()
         m_layout->addWidget(m_spin_box.get());
 }
 
-void EditableLabel::setText(const QString& text)
-{
-    m_label->setText(text);
-}
-
 void EditableLabel::setEditability(bool state)
 {
     m_editability = state;
@@ -58,34 +60,6 @@ void EditableLabel::setEditability(bool state)
     {
         m_label->setToolTip(nullptr);
     }
-}
-
-void EditableLabel::createLabel()
-{
-    static constexpr const char* TOOL_TIP_MSG = "Double-click me to edit";
-
-    m_label = std::make_shared<QLabel>();
-    m_label->setToolTip(TOOL_TIP_MSG);
-}
-
-void EditableLabel::setAlignment(Qt::Alignment alignment)
-{
-    m_label->setAlignment(alignment);
-    if (m_edit_line)
-        m_edit_line->setAlignment(alignment);
-}
-
-void EditableLabel::setFont(const QFont& font)
-{
-    m_label->setFont(font);
-    if (m_edit_line)
-        m_edit_line->setFont(font);
-}
-
-void EditableLabel::setMaxLength(uint16_t value)
-{
-    if (m_edit_line)
-        m_edit_line->setMaxLength(value);
 }
 
 void EditableLabel::mouseDoubleClickEvent(QMouseEvent* event)

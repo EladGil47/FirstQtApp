@@ -57,11 +57,13 @@ void GroupsListWindow::initAppHorLayout()
 
 void GroupsListWindow::initAppNameLabel()
 {
-    m_app_name_label = new EditableLabel;
-    m_app_name_label->setText("Welcome To Kohot");
+    static constexpr const char* WELCOME_MSG = "Welcome To Kohot";
+
+    auto label = std::make_shared<QLabel>(WELCOME_MSG);
+    label->setFont(Fonts::HEADER_LABEL_FONT);
+    label->setAlignment(Qt::AlignHCenter);
+    m_app_name_label = new EditableLabel(label);
     m_app_name_label->setEditability(false);
-    m_app_name_label->setFont(Fonts::HEADER_LABEL_FONT);
-    m_app_name_label->setAlignment(Qt::AlignHCenter);
 }
 
 void GroupsListWindow::initGroupsList()

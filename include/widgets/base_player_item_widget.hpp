@@ -79,17 +79,16 @@ protected:
 
     void initEditableNameLabel(const QString& name)
     {
-        m_editable_name_label = new EditableLabel;
-        m_editable_name_label->setText(name);
-        m_editable_name_label->setFont(Fonts::PLAYER_ITEM_WIDGET_FONT);
-        m_editable_name_label->setMaxLength(MaxValues::ITEM_WIDGET_LABEL_NAME);
+        std::shared_ptr<QLabel> label = std::make_shared<QLabel>(name);
+        label->setFont(Fonts::PLAYER_ITEM_WIDGET_FONT);
+        m_editable_name_label = new EditableLabel(label);
     }
 
     void initEditableRateLabel(const QString& rate)
     {
-        m_editable_rate_label = new EditableLabel(true);
-        m_editable_rate_label->setText(rate);
-        m_editable_rate_label->setFont(Fonts::PLAYER_ITEM_WIDGET_FONT);
+        std::shared_ptr<QLabel> label = std::make_shared<QLabel>(rate);
+        label->setFont(Fonts::PLAYER_ITEM_WIDGET_FONT);
+        m_editable_rate_label = new EditableLabel(label, true);
     }
 
     // void initRateLabel(const QString& rate)

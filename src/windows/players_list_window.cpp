@@ -27,11 +27,11 @@ void PlayersListWindow::initPlayersList()
 
 void PlayersListWindow::initGroupNameLabel()
 {
-    m_group_label_name = new EditableLabel;
-    m_group_label_name->setFont(Fonts::HEADER_LABEL_FONT);
-    m_group_label_name->setAlignment(Qt::AlignHCenter);
-    QString m_header_label_text = QString::fromStdString(m_group->getName());
-    m_group_label_name->setText(m_header_label_text);
+    auto m_header_label_text = QString::fromStdString(m_group->getName());
+    auto label               = std::make_shared<QLabel>(m_header_label_text);
+    label->setFont(Fonts::HEADER_LABEL_FONT);
+    label->setAlignment(Qt::AlignHCenter);
+    m_group_label_name = new EditableLabel(label);
     connect(m_group_label_name, &EditableLabel::finishEditingSig, this, &PlayersListWindow::setGroupName);
 }
 
