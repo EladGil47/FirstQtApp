@@ -182,7 +182,7 @@ public:
     }
 };
 
-namespace Settings
+namespace ui_settings
 {
 const QString WINDOW_TITLE_TEXT = "Kohot";
 
@@ -198,7 +198,7 @@ const QString WINDOWS_COLOR             = QtObjects::QMAIN_WINDOW + "{" + Style:
 const QString DIALOGS_COLOR             = QtObjects::QDIALOG + "{" + Style::OFFWHITE_BACKGROUND + "}";
 const QString MESSAGES_BOX_COLOR        = QtObjects::QMESSAGEBOX + "{" + Style::OFFWHITE_BACKGROUND + "}";
 const QString BOTTOM_BUTTONS_LINE_COLOR = Style::DARK_BROWN_BUTTON_HOR_LAYOUT;
-} // namespace Settings
+} // namespace ui_settings
 
 namespace Fonts
 {
@@ -247,7 +247,7 @@ public:
         QMessageBox messageBox;
         messageBox.setWindowTitle("Warning");
         messageBox.setIcon(QMessageBox::Warning);
-        messageBox.setStyleSheet(Settings::MESSAGES_BOX_COLOR);
+        messageBox.setStyleSheet(ui_settings::MESSAGES_BOX_COLOR);
         messageBox.setFont(Fonts::PLAYER_ITEM_WIDGET_FONT);
 
         messageBox.setText(message_text);

@@ -81,21 +81,21 @@ void PlayersListWindow::initList()
 void PlayersListWindow::initCreateNewPlayerButton()
 {
     m_create_new_player_button = new QPushButton("Create new player", this);
-    m_create_new_player_button->setStyleSheet(Settings::BOTTOM_BUTTONS_LINE_COLOR);
+    m_create_new_player_button->setStyleSheet(ui_settings::BOTTOM_BUTTONS_LINE_COLOR);
     connect(m_create_new_player_button, &QPushButton::clicked, this, &PlayersListWindow::onCreateNewPlayerButton);
 }
 
 void PlayersListWindow::initCreateTeamsButton()
 {
     m_create_teams_button = new QPushButton("Create teams", this);
-    m_create_teams_button->setStyleSheet(Settings::BOTTOM_BUTTONS_LINE_COLOR);
+    m_create_teams_button->setStyleSheet(ui_settings::BOTTOM_BUTTONS_LINE_COLOR);
     connect(m_create_teams_button, &QPushButton::clicked, this, &PlayersListWindow::onCreateTeamsClicked);
 }
 
 void PlayersListWindow::initGoBackButton()
 {
     m_go_back_button = new QPushButton("Go back", this);
-    m_go_back_button->setStyleSheet(Settings::BOTTOM_BUTTONS_LINE_COLOR);
+    m_go_back_button->setStyleSheet(ui_settings::BOTTOM_BUTTONS_LINE_COLOR);
     connect(m_go_back_button, &QPushButton::clicked, this, &PlayersListWindow::onGoBackButton);
 }
 
@@ -137,7 +137,7 @@ void PlayersListWindow::setupLayout()
 void PlayersListWindow::onCreateNewPlayerButton()
 {
     PlayerInputDialog dialog;
-    dialog.setStyleSheet(Settings::DIALOGS_COLOR);
+    dialog.setStyleSheet(ui_settings::DIALOGS_COLOR);
     if (dialog.exec() == QDialog::Accepted)
     {
         QString name = dialog.getPlayerName();
@@ -170,7 +170,7 @@ CreateTeamsOption showDialogWithOptions()
     dialog.setWindowTitle("Kohot");
     dialog.setText("Choose an option:");
     dialog.setIcon(QMessageBox::Question);
-    dialog.setStyleSheet(Settings::MESSAGES_BOX_COLOR);
+    dialog.setStyleSheet(ui_settings::MESSAGES_BOX_COLOR);
     dialog.setFont(Fonts::PLAYER_ITEM_WIDGET_FONT);
 
     QPushButton* manual_button = dialog.addButton("Manually", QMessageBox::ActionRole);

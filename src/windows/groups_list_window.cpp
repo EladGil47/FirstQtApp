@@ -140,7 +140,7 @@ void GroupsListWindow::addGroupItemToList(std::shared_ptr<Group> group)
 void GroupsListWindow::onCreateNewGroupButton()
 {
     GroupInputDialog group_input_dialog(this);
-    group_input_dialog.setStyleSheet(Settings::DIALOGS_COLOR);
+    group_input_dialog.setStyleSheet(ui_settings::DIALOGS_COLOR);
     if (group_input_dialog.exec() == QDialog::Accepted)
     {
         QString groupName       = group_input_dialog.getGroupName();

@@ -37,11 +37,11 @@ void WindowsManager::setToCreateTeamsWindow(size_t id)
 
 void WindowsManager::setWindow()
 {
-    QSize window_size(Settings::WINDOW_WIDTH, Settings::WINDOW_HEIGHT);
+    QSize window_size(ui_settings::WINDOW_WIDTH, ui_settings::WINDOW_HEIGHT);
     resize(window_size);
     setMinimumSize(window_size);
-    setWindowTitle(Settings::WINDOW_TITLE_TEXT);
-    setStyleSheet(Settings::WINDOWS_COLOR);
+    setWindowTitle(ui_settings::WINDOW_TITLE_TEXT);
+    setStyleSheet(ui_settings::WINDOWS_COLOR);
     moveWindowToCenter();
 }
 

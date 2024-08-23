@@ -53,14 +53,14 @@ void DisplayTeamsWindow::initTeamsHorLayout()
 void DisplayTeamsWindow::initGoBackButton()
 {
     m_go_back_button = new QPushButton("Go Back");
-    m_go_back_button->setStyleSheet(Settings::BOTTOM_BUTTONS_LINE_COLOR);
+    m_go_back_button->setStyleSheet(ui_settings::BOTTOM_BUTTONS_LINE_COLOR);
     connect(m_go_back_button, &QPushButton::clicked, this, &DisplayTeamsWindow::onGoBackButton);
 }
 
 void DisplayTeamsWindow::initOkButton()
 {
     m_ok_button = new QPushButton("OK");
-    m_ok_button->setStyleSheet(Settings::BOTTOM_BUTTONS_LINE_COLOR);
+    m_ok_button->setStyleSheet(ui_settings::BOTTOM_BUTTONS_LINE_COLOR);
     connect(m_ok_button, &QPushButton::clicked, this, &DisplayTeamsWindow::onOkButton);
 }
 
