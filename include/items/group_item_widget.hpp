@@ -19,8 +19,11 @@ public:
     GroupItemWidget(std::shared_ptr<Group> group = nullptr);
 
 private:
-    size_t m_group_index;
-    void   mouseDoubleClickEvent(QMouseEvent* event) override;
+    std::shared_ptr<Group>       m_group;
+    size_t                       m_group_index;
+    void                         mouseDoubleClickEvent(QMouseEvent* event) override;
+    std::unique_ptr<QPushButton> createButton(const QString& text, const QString& style, const QString& tooltip);
+    std::unique_ptr<QLabel>      createLabel(const QString& text);
 
     void initNameLabel();
     void initSizeLabel();
@@ -28,19 +31,17 @@ private:
 
     void adjustButtonsSize();
     void initButtons();
-    void initEnterButton();
+    // void initEnterButton();
     void initCreateTeamsButton();
     void initRemoveButton();
     void setupLayout();
 
-    std::shared_ptr<Group> m_group;
-
     std::unique_ptr<EditableLabel> m_name_label;
     std::unique_ptr<QLabel>        m_size_label;
     std::unique_ptr<QLabel>        m_info_label;
-    std::unique_ptr<QPushButton>   m_enter_button;
-    std::unique_ptr<QPushButton>   m_create_teams_button;
-    std::unique_ptr<QPushButton>   m_remove_button;
+    // std::unique_ptr<QPushButton>   m_enter_button;
+    std::unique_ptr<QPushButton> m_create_teams_button;
+    std::unique_ptr<QPushButton> m_remove_button;
 
 public slots:
     void onEnterButtonClicked();
