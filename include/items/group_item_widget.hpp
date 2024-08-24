@@ -22,6 +22,8 @@ private:
 
     void initNameLabel();
     void initSizeLabel();
+    void initInfoLabel();
+
     void adjustButtonsSize();
     void initButtons();
     void initEnterButton();
@@ -33,6 +35,7 @@ private:
 
     EditableLabel* m_name_label;
     QLabel*        m_size_label;
+    QLabel*        m_info_label;
     QPushButton*   m_enter_button;
     QPushButton*   m_create_teams_button;
     QPushButton*   m_remove_button;

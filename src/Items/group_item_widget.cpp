@@ -14,6 +14,7 @@ GroupItemWidget::GroupItemWidget(std::shared_ptr<Group> group)
 
         initNameLabel();
         initSizeLabel();
+        initInfoLabel();
         initButtons();
         setupLayout();
     }
@@ -38,10 +39,20 @@ void GroupItemWidget::initNameLabel()
 
 void GroupItemWidget::initSizeLabel()
 {
-    QString size         = QString::number(m_group->getNumOfPlayers());
-    QString size_wrapped = "(" + size + ")";
-    m_size_label         = new QLabel(size_wrapped);
+    auto size         = QString::number(m_group->getNumOfPlayers());
+    auto size_wrapped = "(" + size + ")";
+    m_size_label      = new QLabel(size_wrapped);
     m_size_label->setFont(Fonts::GROUP_ITEM_WIDGET_FONT);
+}
+
+void GroupItemWidget::initInfoLabel()
+{
+    auto teams           = QString::number(m_group->getTeamsAmount());
+    auto players_in_team = QString::number(m_group->getPlayersInTeamAmount());
+
+    auto info_text = teams + " Teams of " + players_in_team + " Players";
+    m_info_label   = new QLabel(info_text);
+    m_info_label->setFont(Fonts::GROUP_ITEM_WIDGET_FONT);
 }
 
 void GroupItemWidget::initEnterButton()
@@ -92,13 +103,19 @@ void GroupItemWidget::adjustButtonsSize()
 
 void GroupItemWidget::setupLayout()
 {
-    if (m_name_label && m_size_label && m_enter_button && m_create_teams_button && m_remove_button)
+    if (m_name_label && m_size_label && m_info_label && m_create_teams_button && m_remove_button)
     {
+        m_name_label->setFixedWidth(200);
+        m_size_label->setFixedWidth(100);
+        m_info_label->setFixedWidth(400);
+
         QHBoxLayout* layout = new QHBoxLayout(this);
         layout->addWidget(m_name_label);
         layout->addWidget(m_size_label);
-        QSpacerItem* spacer = new QSpacerItem(0, 0, QSizePolicy::Expanding, QSizePolicy::Expanding);
-        layout->addSpacerItem(spacer);
+        layout->addWidget(m_info_label);
+
+        layout->addStretch();
+
         // layout->addWidget(m_enter_button);
         layout->addWidget(m_create_teams_button);
         layout->addWidget(m_remove_button);
@@ -126,20 +143,6 @@ void GroupItemWidget::onEnterButtonClicked()
 
 void GroupItemWidget::onCreateTeamsButtonClicked()
 {
-    // uint16_t minimun_required_players_amount = m_group->getPlayersInTeamAmount() * m_group->getTeamsAmount();
-    // uint16_t players_amount = static_cast<uint16_t>(m_group->getNumOfPlayers());
-
-    // if (players_amount >= minimun_required_players_amount)
-    // {
-    //     emit createTeamsButtonClickedSignal(m_group_index);
-    // }
-    // else
-    // {
-    //     uint16_t required_players_to_add = minimun_required_players_amount - players_amount;
-    //     QString message = "Please add " + QString::number(required_players_to_add) + " more players to create teams";
-    //     MessageBoxHandler::showMessageBox(message);
-    // }
-
     emit createTeamsButtonClickedSignal(m_group_index);
 }
 

@@ -58,6 +58,8 @@ target_include_directories(${PROJECT_NAME} PUBLIC
     ${CMAKE_CURRENT_SOURCE_DIR}/include/windows
     ${CMAKE_CURRENT_SOURCE_DIR}/include/common
     ${CMAKE_CURRENT_SOURCE_DIR}/include/dialogs
+    ${CMAKE_CURRENT_SOURCE_DIR}/include/items
+
 
     ${Qt${QT_VERSION_MAJOR}Widgets_INCLUDE_DIRS}
 )
