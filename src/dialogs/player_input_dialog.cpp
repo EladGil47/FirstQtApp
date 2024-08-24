@@ -1,8 +1,9 @@
 #include "player_input_dialog.hpp"
 #include <QDialogButtonBox>
 #include <QFormLayout>
-
 #include <QMessageBox>
+
+#include "settings.hpp"
 
 constexpr const char* WINDOW_TITLE = "Create new player";
 constexpr const char* NAME_LABEL   = "Name:";
@@ -19,7 +20,9 @@ PlayerInputDialog::PlayerInputDialog(QWidget* parent)
 {
     setWindowTitle(WINDOW_TITLE);
 
-    m_rate_spin_box->setRange(0, 7);
+    m_rate_spin_box->setRange(
+        Settings::getPlayerRateRange()[0],
+        Settings::getPlayerRateRange()[1]);
     m_rate_spin_box->setSingleStep(1);
 
     m_role_combo_box->addItem(BALLER_LABEL);
