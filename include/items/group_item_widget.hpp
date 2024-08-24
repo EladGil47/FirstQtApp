@@ -9,6 +9,8 @@
 #include <QPushButton>
 #include <QWidget>
 
+#include <memory>
+
 class GroupItemWidget : public QWidget
 {
     Q_OBJECT
@@ -33,12 +35,12 @@ private:
 
     std::shared_ptr<Group> m_group;
 
-    EditableLabel* m_name_label;
-    QLabel*        m_size_label;
-    QLabel*        m_info_label;
-    QPushButton*   m_enter_button;
-    QPushButton*   m_create_teams_button;
-    QPushButton*   m_remove_button;
+    std::unique_ptr<EditableLabel> m_name_label;
+    std::unique_ptr<QLabel>        m_size_label;
+    std::unique_ptr<QLabel>        m_info_label;
+    std::unique_ptr<QPushButton>   m_enter_button;
+    std::unique_ptr<QPushButton>   m_create_teams_button;
+    std::unique_ptr<QPushButton>   m_remove_button;
 
 public slots:
     void onEnterButtonClicked();

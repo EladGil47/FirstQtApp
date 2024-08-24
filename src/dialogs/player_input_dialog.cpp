@@ -25,8 +25,7 @@ PlayerInputDialog::PlayerInputDialog(QWidget* parent)
         Settings::getPlayerRateRange()[1]);
     m_rate_spin_box->setSingleStep(1);
 
-    m_role_combo_box->addItem(BALLER_LABEL);
-    m_role_combo_box->addItem(GK_LABEL);
+    m_role_combo_box->addItems({BALLER_LABEL, GK_LABEL});
 
     QDialogButtonBox* buttonBox = new QDialogButtonBox(QDialogButtonBox::Ok | QDialogButtonBox::Cancel, this);
     connect(buttonBox, &QDialogButtonBox::accepted, this, &PlayerInputDialog::onAccepted);
