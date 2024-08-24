@@ -2,18 +2,16 @@
 
 #include "kohot.hpp"
 #include "resource_paths.hpp"
+
 #include "settings.hpp"
-#include "static_settings.hpp"
 #include "windows_manager.hpp"
 
-int main(int argc, char* argv[])
+int32_t main(int32_t argc, char* argv[])
 {
-    int ret_val = EXIT_SUCCESS;
+    int32_t ret_val = EXIT_SUCCESS;
 
     Kohot kohot;
     auto  groups_collection = kohot.getGroupsCollection();
-    auto  settings          = kohot.getSettings();
-    StaticSettings::init(settings);
 
     QApplication a(argc, argv);
     a.setWindowIcon(QIcon(resources_path::SOCCER_BALL));

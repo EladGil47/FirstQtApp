@@ -14,8 +14,8 @@ class GroupInputDialog : public QDialog
 public:
     GroupInputDialog(QWidget* parent = nullptr);
     QString getGroupName() const;
-    int     getTeamsAmount() const;
-    int     getPlayersInTeamAmount() const;
+    int32_t getTeamsAmount() const;
+    int32_t getPlayersInTeamAmount() const;
 
 private:
     std::shared_ptr<QLineEdit>        m_name_line_edit;

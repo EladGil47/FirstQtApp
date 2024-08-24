@@ -1,7 +1,7 @@
 #include "group_input_dialog.hpp"
 
 #include "resource_paths.hpp"
-#include "static_settings.hpp"
+#include "settings.hpp"
 
 namespace
 {
@@ -19,13 +19,13 @@ GroupInputDialog::GroupInputDialog(QWidget* parent)
     m_name_line_edit = std::make_shared<QLineEdit>(this);
 
     m_teams_spin_box = std::make_shared<QSpinBox>(this);
-    int teamsMin     = StaticSettings::team_range[0];
-    int teamsMax     = StaticSettings::team_range[1];
+    int32_t teamsMin = Settings::getTeamsRange()[0];
+    int32_t teamsMax = Settings::getTeamsRange()[1];
     m_teams_spin_box->setRange(teamsMin, teamsMax);
 
     m_players_in_team_spin_box = std::make_shared<QSpinBox>(this);
-    int playersMin             = StaticSettings::players_in_team_range[0];
-    int playersMax             = StaticSettings::players_in_team_range[1];
+    int32_t playersMin         = Settings::getPlayersInTeamRange()[0];
+    int32_t playersMax         = Settings::getPlayersInTeamRange()[1];
     m_players_in_team_spin_box->setRange(playersMin, playersMax);
 
     m_button_box = std::make_shared<QDialogButtonBox>(QDialogButtonBox::Ok | QDialogButtonBox::Cancel, this);
@@ -45,12 +45,12 @@ QString GroupInputDialog::getGroupName() const
     return m_name_line_edit->text();
 }
 
-int GroupInputDialog::getTeamsAmount() const
+int32_t GroupInputDialog::getTeamsAmount() const
 {
     return m_teams_spin_box->value();
 }
 
-int GroupInputDialog::getPlayersInTeamAmount() const
+int32_t GroupInputDialog::getPlayersInTeamAmount() const
 {
     return m_players_in_team_spin_box->value();
 }
