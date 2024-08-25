@@ -5,6 +5,7 @@
 #include <QLabel>
 #include <QPushButton>
 #include <QWidget>
+#include <memory>
 #include "player.hpp"
 
 class TeamPlayerItemWidget : public QWidget
@@ -22,14 +23,13 @@ private slots:
     void onAddPlayerClicked();
 
 private:
-    QLabel*                 m_player_name_label;
-    QPushButton*            m_remove_button;
-    QHBoxLayout*            m_layout;
-    QPushButton*            m_add_button;
-    QPushButton*            m_add_player_button;
-    std::shared_ptr<Player> m_player;
-
-    uint16_t m_player_index_in_team;
+    std::unique_ptr<QLabel>      m_player_name_label;
+    std::unique_ptr<QPushButton> m_remove_button;
+    std::unique_ptr<QHBoxLayout> m_layout;
+    std::unique_ptr<QPushButton> m_add_button;
+    std::unique_ptr<QPushButton> m_add_player_button;
+    uint16_t                     m_player_index_in_team;
+    std::shared_ptr<Player>      m_player;
 
     void initPlayerNameLabel();
     void initRemoveButton();
@@ -37,6 +37,7 @@ private:
     void updateLayout(bool player_exists);
     void initAddPlayerButton();
     void initAddButton();
+    void clearLayout();
 };
 
 #endif // FIRST_QT_APP_INCLUDE_TEAM_PLAYER_ITEM_WIDGET_H
