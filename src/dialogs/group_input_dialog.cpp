@@ -1,18 +1,20 @@
 #include "group_input_dialog.hpp"
 
-#include "resource_paths.hpp"
+#include "message_box_util.hpp"
 #include "settings.hpp"
 
-#include <QMessageBox>
+namespace labels
+{
+constexpr const char* NAME            = "Name:";
+constexpr const char* TEAMS           = "Teams:";
+constexpr const char* PLAYERS_IN_TEAM = "Players in team:";
 
-static constexpr const char* WINDOW_TITLE          = "Create new group";
-static constexpr const char* LABEL_NAME            = "Name:";
-static constexpr const char* LABEL_TEAMS           = "Teams:";
-static constexpr const char* LABEL_PLAYERS_IN_TEAM = "Players in team:";
+} // namespace labels
 
 GroupInputDialog::GroupInputDialog(QWidget* parent)
     : QDialog(parent)
 {
+    static constexpr const char* WINDOW_TITLE = "Create new group";
     setWindowTitle(WINDOW_TITLE);
 
     m_name_line_edit = std::make_unique<QLineEdit>(this);
@@ -30,9 +32,9 @@ GroupInputDialog::GroupInputDialog(QWidget* parent)
     m_button_box = std::make_unique<QDialogButtonBox>(QDialogButtonBox::Ok | QDialogButtonBox::Cancel, this);
 
     m_layout = std::make_unique<QFormLayout>(this);
-    m_layout->addRow(LABEL_NAME, m_name_line_edit.get());
-    m_layout->addRow(LABEL_TEAMS, m_teams_spin_box.get());
-    m_layout->addRow(LABEL_PLAYERS_IN_TEAM, m_players_in_team_spin_box.get());
+    m_layout->addRow(labels::NAME, m_name_line_edit.get());
+    m_layout->addRow(labels::TEAMS, m_teams_spin_box.get());
+    m_layout->addRow(labels::PLAYERS_IN_TEAM, m_players_in_team_spin_box.get());
     m_layout->addWidget(m_button_box.get());
 
     connect(m_button_box.get(), &QDialogButtonBox::accepted, this, &GroupInputDialog::onAccepted);
@@ -63,7 +65,7 @@ void GroupInputDialog::onAccepted()
     else
     {
         static constexpr const char* ERROR_MESSAGE = "Name cannot be empty.";
-        QMessageBox::warning(this, WINDOW_TITLE, ERROR_MESSAGE);
+        MessageBoxUtil::show(ERROR_MESSAGE, MessageBoxUtil::Type::Critical);
     }
 }
 

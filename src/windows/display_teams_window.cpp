@@ -3,6 +3,7 @@
 #include <QVBoxLayout>
 #include <set>
 #include "app_common.hpp"
+#include "message_box_util.hpp"
 #include "search_widget.hpp"
 #include "teams_creator.hpp"
 
@@ -145,7 +146,9 @@ void DisplayTeamsWindow::onOkButton()
     if (hasDuplicates())
     {
         is_ok_valid = false;
-        MessageBoxHandler::showMessageBox("Same player can not appear twice");
+
+        static constexpr const char* MESSAGE = "Same player can not appear twice";
+        MessageBoxUtil::show(MESSAGE, MessageBoxUtil::Type::Warning);
     }
     else
     {
@@ -154,7 +157,10 @@ void DisplayTeamsWindow::onOkButton()
             if (team->getNumOfPlayers() != static_cast<size_t>(m_group->getPlayersInTeamAmount()))
             {
                 is_ok_valid = false;
-                MessageBoxHandler::showMessageBox("Please fill all teams");
+
+                static constexpr const char* MESSAGE = "Please fill all teams";
+                MessageBoxUtil::show(MESSAGE, MessageBoxUtil::Type::Warning);
+
                 break;
             }
         }

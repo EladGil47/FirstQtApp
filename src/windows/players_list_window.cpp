@@ -1,5 +1,6 @@
 #include "players_list_window.hpp"
 #include "app_common.hpp"
+#include "message_box_util.hpp"
 #include "player_input_dialog.hpp"
 #include "player_item_widget.hpp"
 
@@ -213,7 +214,7 @@ void PlayersListWindow::onCreateTeamsClicked()
     {
         uint16_t required_players_to_add = minimun_required_players_amount - players_amount;
         QString  message                 = "Please add " + QString::number(required_players_to_add) + " more players to create teams";
-        MessageBoxHandler::showMessageBox(message);
+        MessageBoxUtil::show(message, MessageBoxUtil::Type::Warning);
     }
 }
 

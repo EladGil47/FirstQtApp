@@ -3,6 +3,31 @@
 #include "app_common.hpp"
 #include "team_player_item_widget.hpp"
 
+class ListStyles
+{
+private:
+    std::vector<QString> m_team_colors = {
+        Style::GREEN_LIST,
+        Style::BLUE_LIST,
+        Style::ORANGE_LIST,
+        Style::RED_LIST};
+
+public:
+    QString getColoredListStyle(std::uint16_t index)
+    {
+        QString ret_val;
+        if (index < m_team_colors.size())
+        {
+            ret_val = m_team_colors[index];
+        }
+        else
+        {
+            throw std::out_of_range("Index out of range");
+        }
+        return ret_val;
+    }
+};
+
 TeamList::TeamList(std::shared_ptr<Team> team)
 {
     ListStyles list_styles;

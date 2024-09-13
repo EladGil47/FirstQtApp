@@ -1,11 +1,10 @@
 #include "player_input_dialog.hpp"
 #include <QDialogButtonBox>
 #include <QFormLayout>
-#include <QMessageBox>
 
+#include "message_box_util.hpp"
 #include "settings.hpp"
 
-constexpr const char* WINDOW_TITLE = "Create new player";
 constexpr const char* NAME_LABEL   = "Name:";
 constexpr const char* RATE_LABEL   = "Rate:";
 constexpr const char* ROLE_LABEL   = "Role:";
@@ -18,6 +17,7 @@ PlayerInputDialog::PlayerInputDialog(QWidget* parent)
       m_rate_spin_box(std::make_unique<QDoubleSpinBox>(this)),
       m_role_combo_box(std::make_unique<QComboBox>(this))
 {
+    static constexpr const char* WINDOW_TITLE = "Create new player";
     setWindowTitle(WINDOW_TITLE);
 
     m_rate_spin_box->setRange(
@@ -62,8 +62,8 @@ void PlayerInputDialog::onAccepted()
     }
     else
     {
-        static constexpr const char* ERROR_MESSAGE = "Name cannot be empty.";
-        QMessageBox::warning(this, WINDOW_TITLE, ERROR_MESSAGE);
+        static constexpr const char* MESSAGE = "Name cannot be empty.";
+        MessageBoxUtil::show(MESSAGE, MessageBoxUtil::Type::Critical);
     }
 }
 

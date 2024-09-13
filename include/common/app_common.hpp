@@ -6,7 +6,7 @@
 #include <QSize>
 #include <QString>
 
-#include <memory>
+#include "fonts.hpp"
 
 enum class COLOR
 {
@@ -64,11 +64,6 @@ const QString QDIALOG      = "QDialog";
 const QString QMESSAGEBOX  = "QMessageBox";
 
 } // namespace QtObjects
-
-namespace Common
-{
-const QString FONT_FAMILY_NAME = "Segoe UI";
-}
 
 namespace Sizes
 {
@@ -157,58 +152,13 @@ const QString YELLOW_LIST = "QListWidget {" + CssKeys::BACKGROUND_COLOR + Colors
 
 } // namespace Style
 
-class ListStyles
-{
-private:
-    std::vector<QString> m_team_colors = {
-        Style::GREEN_LIST,
-        Style::BLUE_LIST,
-        Style::ORANGE_LIST,
-        Style::RED_LIST};
-
-public:
-    QString getColoredListStyle(std::uint16_t index)
-    {
-        QString ret_val;
-        if (index < m_team_colors.size())
-        {
-            ret_val = m_team_colors[index];
-        }
-        else
-        {
-            throw std::out_of_range("Index out of range");
-        }
-        return ret_val;
-    }
-};
-
 namespace ui_settings
 {
-const QString WINDOW_TITLE_TEXT = "Kohot";
-
-const QString FONT_FAMILY_NAME = "Segoe UI";
-
-const int WINDOW_WIDTH  = 1200;
-const int WINDOW_HEIGHT = 640;
-
-const int POP_UP_WINDOW_WIDTH  = 400;
-const int POP_UP_WINDOW_HEIGHT = 200;
-
 const QString WINDOWS_COLOR             = QtObjects::QMAIN_WINDOW + "{" + Style::OFFWHITE_BACKGROUND + "}";
 const QString DIALOGS_COLOR             = QtObjects::QDIALOG + "{" + Style::OFFWHITE_BACKGROUND + "}";
 const QString MESSAGES_BOX_COLOR        = QtObjects::QMESSAGEBOX + "{" + Style::OFFWHITE_BACKGROUND + "}";
 const QString BOTTOM_BUTTONS_LINE_COLOR = Style::DARK_BROWN_BUTTON_HOR_LAYOUT;
 } // namespace ui_settings
-
-namespace Fonts
-{
-const QFont SMALL_FONT              = QFont(Common::FONT_FAMILY_NAME, 8, QFont::Bold);
-const QFont PLAYER_ITEM_WIDGET_FONT = QFont(Common::FONT_FAMILY_NAME, 12, QFont::Bold);
-const QFont GROUP_ITEM_WIDGET_FONT  = QFont(Common::FONT_FAMILY_NAME, 14, QFont::Bold);
-const QFont LIST_LABEL_FONT         = QFont(Common::FONT_FAMILY_NAME, 18, QFont::Bold);
-const QFont HEADER_LABEL_FONT       = QFont(Common::FONT_FAMILY_NAME, 22, QFont::Bold);
-const QFont LARGE_FONT              = QFont(Common::FONT_FAMILY_NAME, 30, QFont::Bold);
-} // namespace Fonts
 
 namespace MaxValues
 {
@@ -236,25 +186,5 @@ void checkNotNull(std::shared_ptr<T> object, const QString& object_name)
     }
 }
 } // namespace Functions
-
-#include <QMessageBox>
-
-class MessageBoxHandler
-{
-public:
-    static void showMessageBox(QString message_text)
-    {
-        QMessageBox messageBox;
-        messageBox.setWindowTitle("Warning");
-        messageBox.setIcon(QMessageBox::Warning);
-        messageBox.setStyleSheet(ui_settings::MESSAGES_BOX_COLOR);
-        messageBox.setFont(Fonts::PLAYER_ITEM_WIDGET_FONT);
-
-        messageBox.setText(message_text);
-
-        messageBox.setStandardButtons(QMessageBox::Ok);
-        messageBox.exec();
-    }
-};
 
 #endif // FIRST_QT_APP_INCLUDE_APP_COMMON_H

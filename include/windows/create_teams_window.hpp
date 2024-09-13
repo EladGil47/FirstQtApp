@@ -13,6 +13,8 @@
 
 #include "labeled_list_widget.hpp"
 
+#include "message_box_util.hpp"
+
 #include <random>
 #include <set>
 
@@ -292,7 +294,8 @@ public slots:
         }
         else
         {
-            MessageBoxHandler::showMessageBox("Please select more players");
+            static constexpr const char* MESSAGE = "Please select more players";
+            MessageBoxUtil::show(MESSAGE, MessageBoxUtil::Type::Warning);
         }
     }
 

@@ -37,10 +37,15 @@ void WindowsManager::setToCreateTeamsWindow(size_t id)
 
 void WindowsManager::setWindow()
 {
-    QSize window_size(ui_settings::WINDOW_WIDTH, ui_settings::WINDOW_HEIGHT);
+    const QString WINDOW_TITLE_TEXT = "Kohot";
+
+    const int WINDOW_WIDTH  = 1200;
+    const int WINDOW_HEIGHT = 640;
+
+    QSize window_size(WINDOW_WIDTH, WINDOW_HEIGHT);
     resize(window_size);
     setMinimumSize(window_size);
-    setWindowTitle(ui_settings::WINDOW_TITLE_TEXT);
+    setWindowTitle(WINDOW_TITLE_TEXT);
     setStyleSheet(ui_settings::WINDOWS_COLOR);
     moveWindowToCenter();
 }
