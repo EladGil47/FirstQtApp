@@ -1,15 +1,25 @@
 #include "player_input_dialog.hpp"
-#include <QDialogButtonBox>
-#include <QFormLayout>
 
 #include "message_box_util.hpp"
 #include "settings.hpp"
 
-constexpr const char* NAME_LABEL   = "Name:";
-constexpr const char* RATE_LABEL   = "Rate:";
-constexpr const char* ROLE_LABEL   = "Role:";
-constexpr const char* BALLER_LABEL = "Baller";
-constexpr const char* GK_LABEL     = "GK";
+#include <QDialogButtonBox>
+#include <QFormLayout>
+
+namespace labels
+{
+constexpr const char* NAME = "Name:";
+constexpr const char* RATE = "Rate:";
+constexpr const char* ROLE = "Role:";
+
+} // namespace labels
+
+namespace role_options
+{
+constexpr const char* BALLER = "Baller";
+constexpr const char* GK     = "GK";
+
+} // namespace role_options
 
 PlayerInputDialog::PlayerInputDialog(QWidget* parent)
     : QDialog(parent),
@@ -25,16 +35,16 @@ PlayerInputDialog::PlayerInputDialog(QWidget* parent)
         Settings::getPlayerRateRange()[1]);
     m_rate_spin_box->setSingleStep(1);
 
-    m_role_combo_box->addItems({BALLER_LABEL, GK_LABEL});
+    m_role_combo_box->addItems({role_options::BALLER, role_options::GK});
 
     QDialogButtonBox* buttonBox = new QDialogButtonBox(QDialogButtonBox::Ok | QDialogButtonBox::Cancel, this);
     connect(buttonBox, &QDialogButtonBox::accepted, this, &PlayerInputDialog::onAccepted);
     connect(buttonBox, &QDialogButtonBox::rejected, this, &PlayerInputDialog::reject);
 
     QFormLayout* form_layout = new QFormLayout(this);
-    form_layout->addRow(NAME_LABEL, m_name_line_edit.get());
-    form_layout->addRow(RATE_LABEL, m_rate_spin_box.get());
-    form_layout->addRow(ROLE_LABEL, m_role_combo_box.get());
+    form_layout->addRow(labels::NAME, m_name_line_edit.get());
+    form_layout->addRow(labels::RATE, m_rate_spin_box.get());
+    form_layout->addRow(labels::ROLE, m_role_combo_box.get());
 
     form_layout->addWidget(buttonBox);
 }
