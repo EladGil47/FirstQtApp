@@ -114,7 +114,7 @@ void GroupsListWindow::initCreateNewGroupButton()
 
 void GroupsListWindow::initList()
 {
-    for (std::shared_ptr<Group> group : m_groups_collection->getCollectionRef())
+    for (std::shared_ptr<Group> group : m_groups_collection->getCollection())
     {
         addGroupItemToList(group);
     }

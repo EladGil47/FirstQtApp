@@ -57,12 +57,12 @@ void PlayersListWindow::initPlayersAmountLabelText()
 
 void PlayersListWindow::onPlayerNameChanged(uint16_t id, const std::string& name)
 {
-    m_group->getPlayersCollectionRef().getItem(static_cast<size_t>(id))->setName(name);
+    m_group->setNameById(id, name);
 }
 
 void PlayersListWindow::onPlayerRateChanged(uint16_t id, double rate)
 {
-    m_group->getPlayersCollectionRef().getItem(static_cast<size_t>(id))->setRate(rate);
+    m_group->setRateById(id, rate);
 }
 
 void PlayersListWindow::setGroupName(const QString& text)
@@ -72,7 +72,7 @@ void PlayersListWindow::setGroupName(const QString& text)
 
 void PlayersListWindow::initList()
 {
-    for (std::shared_ptr<Player> player : m_group->getPlayersCollectionRef().getCollectionRef())
+    for (std::shared_ptr<Player> player : m_group->getPlayersCollection().getCollection())
     {
         addItemToList(player);
     }
@@ -151,7 +151,7 @@ void PlayersListWindow::onCreateNewPlayerButton()
         config.id   = static_cast<uint16_t>(m_group->getNumOfPlayers());
 
         std::shared_ptr<Player> new_player = std::make_shared<Player>(config);
-        m_group->getPlayersCollectionRef().addItem(new_player);
+        m_group->addPlayerToCollection(new_player);
         addItemToList(new_player);
         initPlayersAmountLabelText();
     }
@@ -230,12 +230,12 @@ void PlayersListWindow::addItemToList(std::shared_ptr<Player> player)
 
 void PlayersListWindow::onRemoveButton(size_t id)
 {
-    m_group->getPlayersCollectionRef().deleteItem(id);
+    m_group->deletePlayerFromCollectionById(id);
     QListWidgetItem* itemToRemove = m_players_list->m_list->takeItem(id);
     delete itemToRemove;
     for (size_t index = id; index < m_group->getNumOfPlayers(); index++)
     {
-        m_group->getPlayersCollectionRef().getItem(index)->setId(static_cast<uint16_t>(index));
+        m_group->setIdById(index, static_cast<uint16_t>(index));
     }
     m_players_list->removeAllItemsFromList();
     initList();

@@ -160,7 +160,7 @@ public:
 
     void addAllPlayersToCheckablePlayersList()
     {
-        for (std::shared_ptr<Player> player : m_group->getPlayersCollectionRef().getCollectionRef())
+        for (std::shared_ptr<Player> player : m_group->getPlayersCollection().getCollection())
         {
             addPlayerToCheckablePlayersList(player);
         }
@@ -350,7 +350,7 @@ public slots:
                 {
                     uncheckAll();
                 }
-                random_label->setText("Auto fil");
+                random_label->setText("Auto fill");
                 m_random_select_check_box->setToolTip("Press to Auto fill");
                 break;
             }
