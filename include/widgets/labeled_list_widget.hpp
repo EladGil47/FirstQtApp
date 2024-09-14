@@ -102,6 +102,8 @@ private:
         m_list                 = new QListWidget;
         m_bottom_labels_layout = new QHBoxLayout;
 
+        m_list->setStyleSheet(Style::LIST);
+
         m_labeled_list_layout->addLayout(m_top_labels_layout);
         m_labeled_list_layout->addWidget(m_list);
         m_labeled_list_layout->addLayout(m_bottom_labels_layout);

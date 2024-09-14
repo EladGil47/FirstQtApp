@@ -19,26 +19,28 @@ public:
     void changeGroupName(uint16_t id, const std::string& name);
 
 private:
+    static constexpr const char* CREATE_NEW_GROUP_BUTTON_TEXT = "Create new group";
+
     void initGroupsAmountLabel();
-    void setGroupsAmountLabelText();
+    void updateGroupsAmountLabel();
     void addGroupItemToList(std::shared_ptr<Group> group);
     void initCreateNewGroupButton();
     void initList();
     void initAppNameLabel();
     void initGroupsList();
     void setupLayout();
-    void initButtonsHorLayout();
-    void initGroupsAmountLabelText();
+    void setupButtonsHorLayout();
     void initAppHorLayout();
 
-    std::shared_ptr<GroupsCollection> m_groups_collection;
+    std::shared_ptr<GroupsCollection>  m_groups_collection;
+    std::unique_ptr<QHBoxLayout>       m_app_name_hor_layout;
+    std::unique_ptr<LabeledListWidget> m_groups_list;
+    std::unique_ptr<QPushButton>       m_create_new_group_button;
+    std::unique_ptr<QHBoxLayout>       m_buttons_hor_layout;
 
-    QPushButton*       m_create_new_group_button;
-    QLabel*            m_groups_amount_label;
-    EditableLabel*     m_app_name_label;
-    LabeledListWidget* m_groups_list;
-    QHBoxLayout*       m_buttons_hor_layout;
-    QHBoxLayout*       m_app_name_hor_layout;
+    std::unique_ptr<EditableLabel> m_app_name_label;
+
+    std::unique_ptr<QLabel> m_groups_amount_label;
 
 public slots:
     void onCreateNewGroupButton();
