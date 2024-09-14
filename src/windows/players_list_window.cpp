@@ -138,7 +138,6 @@ void PlayersListWindow::setupLayout()
 void PlayersListWindow::onCreateNewPlayerButton()
 {
     PlayerInputDialog dialog;
-    dialog.setStyleSheet(ui_settings::DIALOGS_COLOR);
     if (dialog.exec() == QDialog::Accepted)
     {
         QString name = dialog.getPlayerName();

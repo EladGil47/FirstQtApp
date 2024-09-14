@@ -1,10 +1,8 @@
 #include "player_input_dialog.hpp"
 
+#include "app_common.hpp"
 #include "message_box_util.hpp"
 #include "settings.hpp"
-
-#include <QDialogButtonBox>
-#include <QFormLayout>
 
 namespace labels
 {
@@ -27,8 +25,8 @@ PlayerInputDialog::PlayerInputDialog(QWidget* parent)
       m_rate_spin_box(std::make_unique<QDoubleSpinBox>(this)),
       m_role_combo_box(std::make_unique<QComboBox>(this))
 {
-    static constexpr const char* WINDOW_TITLE = "Create new player";
     setWindowTitle(WINDOW_TITLE);
+    setStyleSheet(ui_settings::DIALOGS_COLOR);
 
     m_rate_spin_box->setRange(
         Settings::getPlayerRateRange()[0],
@@ -37,16 +35,16 @@ PlayerInputDialog::PlayerInputDialog(QWidget* parent)
 
     m_role_combo_box->addItems({role_options::BALLER, role_options::GK});
 
-    QDialogButtonBox* buttonBox = new QDialogButtonBox(QDialogButtonBox::Ok | QDialogButtonBox::Cancel, this);
-    connect(buttonBox, &QDialogButtonBox::accepted, this, &PlayerInputDialog::onAccepted);
-    connect(buttonBox, &QDialogButtonBox::rejected, this, &PlayerInputDialog::reject);
+    m_button_box = std::make_unique<QDialogButtonBox>(QDialogButtonBox::Ok | QDialogButtonBox::Cancel, this);
+    connect(m_button_box.get(), &QDialogButtonBox::accepted, this, &PlayerInputDialog::onAccepted);
+    connect(m_button_box.get(), &QDialogButtonBox::rejected, this, &PlayerInputDialog::reject);
 
-    QFormLayout* form_layout = new QFormLayout(this);
-    form_layout->addRow(labels::NAME, m_name_line_edit.get());
-    form_layout->addRow(labels::RATE, m_rate_spin_box.get());
-    form_layout->addRow(labels::ROLE, m_role_combo_box.get());
+    m_form_layout = std::make_unique<QFormLayout>(this);
+    m_form_layout->addRow(labels::NAME, m_name_line_edit.get());
+    m_form_layout->addRow(labels::RATE, m_rate_spin_box.get());
+    m_form_layout->addRow(labels::ROLE, m_role_combo_box.get());
 
-    form_layout->addWidget(buttonBox);
+    m_form_layout->addWidget(m_button_box.get());
 }
 
 QString PlayerInputDialog::getPlayerName() const
@@ -66,18 +64,21 @@ double PlayerInputDialog::getPlayerRate() const
 
 void PlayerInputDialog::onAccepted()
 {
-    if (validateInput())
+    bool is_valid = validateInput();
+    if (is_valid)
     {
         accept();
-    }
-    else
-    {
-        static constexpr const char* MESSAGE = "Name cannot be empty.";
-        MessageBoxUtil::show(MESSAGE, MessageBoxUtil::Type::Critical);
     }
 }
 
 bool PlayerInputDialog::validateInput() const
 {
-    return !m_name_line_edit->text().isEmpty();
+    bool is_valid = !m_name_line_edit->text().isEmpty();
+    if (!is_valid)
+    {
+        static constexpr const char* MESSAGE = "Name cannot be empty.";
+        MessageBoxUtil::show(MESSAGE, MessageBoxUtil::Type::Critical);
+    }
+
+    return is_valid;
 }

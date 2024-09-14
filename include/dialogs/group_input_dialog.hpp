@@ -19,13 +19,16 @@ public:
     int32_t getPlayersInTeamAmount() const;
 
 private:
-    std::unique_ptr<QLineEdit>        m_name_line_edit;
-    std::unique_ptr<QSpinBox>         m_players_in_team_spin_box;
-    std::unique_ptr<QSpinBox>         m_teams_spin_box;
+    std::unique_ptr<QLineEdit> m_name_line_edit;
+    std::unique_ptr<QSpinBox>  m_teams_spin_box;
+    std::unique_ptr<QSpinBox>  m_players_in_team_spin_box;
+
     std::unique_ptr<QDialogButtonBox> m_button_box;
-    std::unique_ptr<QFormLayout>      m_layout;
+    std::unique_ptr<QFormLayout>      m_form_layout;
 
     bool validateInput() const;
+
+    static constexpr const char* WINDOW_TITLE = "Create new group";
 
 private slots:
     void onAccepted();
