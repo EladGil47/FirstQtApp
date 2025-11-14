@@ -154,10 +154,14 @@ void GroupsListWindow::onRemoveGroupButton(size_t id)
     m_groups_collection->deleteItem(id);
     auto item_to_remove = m_groups_list->m_list->takeItem(id);
     delete item_to_remove;
+
+    //updateGroupIdsAfterRemoval
     for (size_t index = id; index < m_groups_collection->getSize(); index++)
     {
         m_groups_collection->getItem(index)->setId(static_cast<uint16_t>(index));
     }
+
+    // Refresh list
     m_groups_list->removeAllItemsFromList();
     initList();
 }

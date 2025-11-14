@@ -93,7 +93,7 @@ QStringList* DisplayTeamsWindow::getGroupPlayersNames()
 {
     QStringList* m_group_players_names = new QStringList;
 
-    for (const std::string player_name : m_group->getPlayersCollection().getPlayersNames())
+    for (const std::string& player_name : m_group->getPlayersCollection().getPlayersNames())
     {
         m_group_players_names->append(QString::fromStdString(player_name));
     }
